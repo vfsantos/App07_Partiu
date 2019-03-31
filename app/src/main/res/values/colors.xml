@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F8B864</color>
+    <color name="colorPrimaryDark">#E9A64E</color>
+    <color name="colorAccent">#F8B864</color>
+    <color name="colorBackground">#1d1d1d</color>
+    <color name="colorFont">#FFFFFF</color>
+    <color name="colorFontDark">#212121</color>
+    <color name="colorFontPrimary">#F8B864</color>
+
+    <color name="colorTextInputLayoutBackground">#414141</color>
+    <color name="colorTextInputLayoutStroke">#414141</color>
+</resources>
