@@ -60,7 +60,7 @@ public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer 
         ViewHolder viewHolder = (ViewHolder)view.getTag();
         viewHolder.getDataEntrada().setText(String.format("",comandas[position].getDataEntrada()));
         viewHolder.getCodigoComanda().setText(comandas[position].getCodigoComanda());
-        viewHolder.getValorTotalComanda().setText(String.format("",comandas[position].getValorTotalComanda()));
+        viewHolder.getValorTotalComanda().setText(String.format("Total da comanda R$ ",comandas[position].getValorTotalComanda()));
 
 
         return view;

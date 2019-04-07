@@ -1,10 +1,12 @@
 package br.com.app07_partiu.Activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,11 +23,10 @@ import br.com.app07_partiu.R;
 
 public class ListaComandasGarcomActivity extends AppCompatActivity {
 
-    public ArrayList<Comanda> comandaGarcomModel;
-    public static final String COMANDA = "br.usjt.desmob.geodata.pais";
+    public static final String COMANDA = "br.com.app07_partiu.Model.comanda";
+    private AlertDialog alerta;
     Activity atividade;
     Comanda[] comandas;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +58,39 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                // manda para a tela de detalhe
+                /* manda para a tela de detalhe
                 Intent intent = new Intent(atividade, DetalhesComandaGarcomActivity.class);
                 intent.putExtra(COMANDA, comandas[position]);
 
                 startActivity(intent);
+                */
+
+                //mensagem informando que a funcionalidade estara disponível em breve
+                alertProximaSprint();
 
             }
 
         });
 
+    }
+
+    private void alertProximaSprint(){
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle(R.string.title_alert_disponivel_em_breve);
+        //define a mensagem
+        builder.setMessage(R.string.subtitle1_alert_disponivel_em_breve);
+        //define um botão como positivo
+        builder.setPositiveButton(R.string.btn_alert_ok_entendi, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 
 }

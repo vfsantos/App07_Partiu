@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -46,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     public Intent intent;
 
 
-    public static final String URL = "https://xpto";
-    public static final String COMANDAS = "br.com.app07_partiu.camandas";
-    public static final String ESTABELECIMENTOS = "br.com.app07_partiu.camandas";
+    public static final String URL = "http://10.0.2.2:3000/comandas";
+    public static final String COMANDAS = "br.com.app07_partiu.comandas";
+    public static final String ESTABELECIMENTOS = "br.com.app07_partiu.comandas";
 
     //Array
     Comanda[] comandas;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     Context contexto;
 
+    //Progressbar
+    ProgressBar progressBarTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
         buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
         buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
+
+        //progressBar
+        progressBarTime = (ProgressBar)findViewById(R.id.progress_bar_time);
+        progressBarTime.setVisibility(View.INVISIBLE);
 
         contexto = this;
 
@@ -160,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                                                   public void run() {
                                                       intent.putExtra(COMANDAS, comandas);
                                                       startActivity(intent);
+                                                      progressBarTime.setVisibility(View.INVISIBLE);
                                                   }
                                               }
                                 );
@@ -174,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Código abaixo é referente a parte de recomendação e nesse primeiro momento não deve ser considerado
 
     /*
     public void listarEstabelecimentosEmAlta(View view) {

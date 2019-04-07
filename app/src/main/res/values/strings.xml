@@ -80,6 +80,9 @@
     <string name="title_alert_codigo_comanda_invalido">OPS! Algo esta errado</string>
     <string name="subtitle1_alert_codigo_comanda_invalido">Por favor digite o código da comanda para continuar</string>
 
+    <string name="title_alert_disponivel_em_breve">Em breve!</string>
+    <string name="subtitle1_alert_disponivel_em_breve">Essa funcionalidade está disponível a partir da próxima Sprint. Agradecemos a compreensão</string>
+
     <string name="erro_login_email">Preencha com seu e-mail</string>
     <string name="erro_login_senha">Sua senha deve possuir mínimo 8 caracteres.</string>
     <string name="title_activity_visualizar_comanda">VisualizarComandaActivity</string>

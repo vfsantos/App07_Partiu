@@ -37,13 +37,48 @@ public class GarcomNetwork {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Comanda comanda = new Comanda();
 
-                comanda.setId(item.getInt("id"));
-                comanda.setCodigoComanda(item.getString("codigocomanda"));
-                comanda.setMesa(item.getInt("mesa"));
-                comanda.setStatus(item.getString("status"));
-                //comanda.setDataEntrada(item.getString(""));
-                //comanda.setDataSaida();
-                comanda.setValorTotalComanda(item.getDouble("valortotalcomanda"));
+                try {
+                    comanda.setId(item.getInt("id"));
+                } catch (Exception e){
+                    comanda.setId(0);
+                }
+
+                try {
+                    comanda.setCodigoComanda(item.getString("codigocomanda"));
+                } catch (Exception e){
+                    comanda.setCodigoComanda("erro no carregamento");
+                }
+
+                try {
+                    comanda.setMesa(item.getInt("mesa"));
+                } catch (Exception e){
+                    comanda.setMesa(0);
+                }
+
+                try {
+                    comanda.setStatus(item.getString("status"));
+                } catch (Exception e){
+                    comanda.setStatus("erro no carregamento");
+                }
+                /*
+                try {
+                    comanda.setDataEntrada(item.getString("dataentrada"));
+                } catch (Exception e){
+                    comanda.setDataEntrada("erro no carregamento");
+                }
+
+                try {
+                    comanda.setDataSaida(item.getString("datasaida"));
+                } catch (Exception e){
+                    comanda.setDataSaida("erro no carregamento");
+                }
+                */
+
+                try {
+                    comanda.setValorTotalComanda(item.getDouble("valortotalcomanda"));
+                } catch (Exception e){
+                    comanda.setValorTotalComanda(0.00);
+                }
 
                 comandas.add(comanda);
             }
