@@ -14,6 +14,7 @@
     <string name="btn_salvar_e_continuar">salvar_e_continuar</string>
     <string name="btn_confirmar">confirmar</string>
     <string name="btn_esqueceu_sua_senha">esqueceu sua senha?</string>
+    <string name="btn_alert_ok_entendi">Ok, entendi</string>
 
     <string name="link_esqueceu_sua_senha">esqueceu sua senha?</string>
     <string name="link_precisa_de_ajuda">precisa de ajuda?</string>
@@ -45,8 +46,8 @@
     <string name="text1_erro3">Não foi possível recuper sua senha.
         Tente novamente mais tarde</string>
 
-    <string name="title_comanda_codigo_da_mesa">código da mesa</string>
-    <string name="text1_comanda_codigo_da_mesa">digite o código da mesa para entrar na comanda</string>
+    <string name="title_comanda_codigo_da_mesa">código da comanda</string>
+    <string name="text1_comanda_codigo_da_mesa">digite o código da comanda para entrar na comanda</string>
 
     <string name="title_comanda_vazia">comada vazia :(</string>
     <string name="text1_comanda_vazia">ainda não foram lançados nehum item nessa comanda</string>
@@ -70,6 +71,19 @@
     <string name="title_activity_erro_coneccao">ErroConeccaoActivity</string>
     <string name="title_activity_esqueceu_sua_senha">EsqueceuSuaSenhaActivity</string>
     <string name="title_activity_splash_screen_acitivy">SplashScreenAcitivy</string>
+    <string name="title_activity_codigo_comanda">CodigoComandaActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_comanda_activiy">ComandaActiviy</string>
+
+    <string name="title_alert_codigo_comanda_invalido">OPS! Algo esta errado</string>
+    <string name="subtitle1_alert_codigo_comanda_invalido">Por favor digite o código da comanda para continuar</string>
+
+    <string name="erro_login_email">Preencha com seu e-mail</string>
+    <string name="erro_login_senha">Sua senha deve possuir mínimo 8 caracteres.</string>
+    <string name="title_activity_visualizar_comanda">VisualizarComandaActivity</string>
+    <string name="title_activity_detalhes_comanda_garcom">DetalhesComandaGarcomActivity</string>
 
 
 </resources>

@@ -1,9 +1,11 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+
+import br.com.app07_partiu.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

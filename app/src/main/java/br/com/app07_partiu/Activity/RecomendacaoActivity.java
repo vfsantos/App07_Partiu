@@ -1,26 +1,22 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import br.com.app07_partiu.Model.Estabelecimento;
+import br.com.app07_partiu.R;
+import br.com.app07_partiu.RecomendacaoRecyclerViewAdapter;
 
 public class RecomendacaoActivity extends AppCompatActivity {
 
@@ -48,7 +44,7 @@ public class RecomendacaoActivity extends AppCompatActivity {
         atividade = this;
         Intent intent = getIntent();
 
-        estabelecimentos = (Estabelecimento[]) intent.getSerializableExtra(MainActivity.ESTABELECIMENTO);
+        //estabelecimentos = (Estabelecimento[]) intent.getSerializableExtra(MainActivity.ESTABELECIMENTO);
 
 
         ListView listViewEmAlta = (ListView) findViewById(R.id.recycler_em_alta);

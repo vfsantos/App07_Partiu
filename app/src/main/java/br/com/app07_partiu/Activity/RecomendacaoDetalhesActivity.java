@@ -1,4 +1,4 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class EsqueceuSuaSenhaActivity extends AppCompatActivity {
+import br.com.app07_partiu.R;
+
+public class RecomendacaoDetalhesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_esqueceu_sua_senha);
+        setContentView(R.layout.activity_recomendacao_detalhes);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

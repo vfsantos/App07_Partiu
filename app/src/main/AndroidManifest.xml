@@ -13,31 +13,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".EsqueceuSuaSenhaActivity"
-            android:label="@string/title_activity_esqueceu_sua_senha"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity
-            android:name=".ErroConeccaoActivity"
-            android:label="@string/title_activity_erro_coneccao"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity
-            android:name=".RecomendacaoDetalhesActivity"
-            android:label="@string/title_activity_recomendacao_detalhes"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity
-            android:name=".RecomendacaoActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CadastroActivity"
-            android:label="@string/title_activity_cadastro"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:name=".Activity.DetalhesComandaGarcomActivity"
+            android:label="@string/title_activity_detalhes_comanda_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".Activity.ListaComandasGarcomActivity"
+            android:label="@string/title_activity_visualizar_comanda"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.ComandaActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CodigoComandaClienteActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.EsqueceuSuaSenhaActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.ErroConeccaoActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.RecomendacaoDetalhesActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.RecomendacaoActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.SplashScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

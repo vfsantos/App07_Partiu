@@ -1,90 +1,138 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.Toolbar;
-import android.telecom.RemoteConference;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.sql.BatchUpdateException;
+
+import br.com.app07_partiu.Model.Estabelecimento;
+import br.com.app07_partiu.Network.GarcomNetwork;
+import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView imgeViewLogo;
+    //ImageView
+    private ImageView imageViewLogo;
     private ImageView imageViewOu;
-    private AppCompatEditText editTextEmail;
+
+    //EditText
+    private EditText editTextEmail;
     private EditText editTextSenha;
+
+    //TextInputLayout
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutSenha;
+
+    //Button
     private Button buttonEntrar;
     private Button buttonCadastrese;
     private Button buttonEsqueceuSuaSenha;
-    public Intent intentLogin;
+
+    //Intent
+    public Intent intentErro;
+    public Intent intentCodigoComandaCliente;
     public Intent intentCadastro;
     public Intent intentEsqueceuSuaSenha;
+    public Intent intentListaComandasGarcom;
+    public Intent intent;
 
 
     public static final String URL = "https://xpto";
-    public static final String ESTABELECIMENTO = "br.com.app07_partiu.estabelcimentos";
-    public String categoria = "all";
+    public static final String COMANDAS = "br.com.app07_partiu.camandas";
+    public static final String ESTABELECIMENTOS = "br.com.app07_partiu.camandas";
 
-    public Estabelecimento[] estabelecimentos;
-    public Intent intent;
-    public ProgressBar timer;
+    //Array
+    Comanda[] comandas;
+    Estabelecimento[] estabelecimentos;
+
+    Context contexto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imgeViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
+        //imageView
+        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
         imageViewOu = (ImageView) findViewById(R.id.image_view_ou);
-        editTextEmail = (AppCompatEditText) findViewById(R.id.edit_text_login_email);
-        editTextSenha = (AppCompatEditText) findViewById(R.id.edit_text_login_senha);
+
+        //editText
+        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
+        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
+
+        //textInputLayout
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
         textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
+
+        //button
         buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
         buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
         buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
 
+        contexto = this;
+
     }
 
-    public void validateForm() {
-        if(editTextEmail.getText().toString().isEmpty()) {
+    public void validarLogin() {
+        String email = editTextEmail.getText().toString();
+        String senha = editTextSenha.getText().toString();
+
+        if(email.isEmpty()) {
             textInputLayoutEmail.setErrorEnabled(true);
             textInputLayoutEmail.setError("Preencha com seu e-mail");
         } else {
             textInputLayoutEmail.setErrorEnabled(false);
+
+            if(senha.isEmpty() || senha.length() > 8) {
+                textInputLayoutSenha.setErrorEnabled(true);
+                textInputLayoutSenha.setError("Sua senha deve possuir mínimo 8 caracteres.");
+            } else {
+                textInputLayoutSenha.setErrorEnabled(false);
+                validarUsuario(email, senha);
+
+            }
+        }
+    }
+
+    public void validarUsuario(String email, String senha) {
+        String emailCliente = "cliente@gmail.com";
+        String emailGarcom = "garcom@gmail.com";
+        String senhaCliente = "teste1";
+        String senhaGarcom = "teste2";
+
+        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
+            textInputLayoutEmail.setErrorEnabled(false);
+            intentCodigoComandaCliente = new Intent(MainActivity.this, CodigoComandaClienteActivity.class);
+            startActivity(intentCodigoComandaCliente);
+        } else {
+            textInputLayoutEmail.setErrorEnabled(true);
+            textInputLayoutEmail.setError("Usuário invalido");
         }
 
-        if(editTextSenha.getText().toString().isEmpty()) {
-            textInputLayoutSenha.setErrorEnabled(true);
-            textInputLayoutSenha.setError("Preencha com sua senha");
+        if(email.equals(emailGarcom) && senha.equals(senhaGarcom)){
+            textInputLayoutEmail.setErrorEnabled(false);
+            listarComandas();
+
         } else {
-            textInputLayoutSenha.setErrorEnabled(false);
+            textInputLayoutEmail.setErrorEnabled(true);
+            textInputLayoutEmail.setError("Usuário invalido");
         }
 
     }
 
     public void onClickButtonLoginEntrar (View view) {
-        validateForm();
+        validarLogin();
+
     }
 
     public void onClickButtonLoginCadastrarse (View view) {
@@ -96,6 +144,36 @@ public class MainActivity extends AppCompatActivity {
         intentEsqueceuSuaSenha = new Intent(MainActivity.this, EsqueceuSuaSenhaActivity.class);
         startActivity(intentEsqueceuSuaSenha);
     }
+
+    public void listarComandas() {
+        intent = new Intent(this, ListaComandasGarcomActivity.class);
+        if(GarcomNetwork.isConnected(this)) {
+            new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                comandas = GarcomNetwork.buscarComandas(URL);
+                                //insere no banco o que conseguiu
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      intent.putExtra(COMANDAS, comandas);
+                                                      startActivity(intent);
+                                                  }
+                                              }
+                                );
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+        } else {
+            Toast.makeText(this, "Rede inativa. Usando armazenamento local.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     /*
     public void listarEstabelecimentosEmAlta(View view) {
@@ -128,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    */
+
 
     public void listarEstabelecimentosSugestaoParaVoce(View view) {
         intent = new Intent(this, RecomendacaoActivity.class);
@@ -189,6 +267,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intentCadastro);
         }
     }
-
+*/
 
 }

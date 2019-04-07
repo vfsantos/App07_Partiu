@@ -1,4 +1,4 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import br.com.app07_partiu.R;
 
 public class CadastroActivity extends AppCompatActivity {
 

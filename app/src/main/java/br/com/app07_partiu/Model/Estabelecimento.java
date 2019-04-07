@@ -1,4 +1,4 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Model;
 
 import java.io.Serializable;
 import java.text.Collator;
