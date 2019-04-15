@@ -8,6 +8,7 @@
     <color name="colorFontDark">#212121</color>
     <color name="colorFontPrimary">#F8B864</color>
     <color name="colorError">#9932CC</color>
+    <color name="colorToolbarSecundary">#262A2D</color>
 
     <color name="colorTextInputLayoutBackground">#414141</color>
     <color name="colorTextInputLayoutStroke">#414141</color>

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import br.com.app07_partiu.Model.Comanda;
@@ -33,61 +34,124 @@ public class GarcomNetwork {
 
         try {
             JSONArray vetor = new JSONArray(resultado);
-            for(int i = 0; i < vetor.length(); i++){
+            for(int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Comanda comanda = new Comanda();
 
+                //pegar os itens do json e atribui a um objeto comanda
                 try {
                     comanda.setId(item.getInt("id"));
-                } catch (Exception e){
-                    comanda.setId(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 try {
                     comanda.setCodigoComanda(item.getString("codigocomanda"));
-                } catch (Exception e){
-                    comanda.setCodigoComanda("erro no carregamento");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 try {
                     comanda.setMesa(item.getInt("mesa"));
-                } catch (Exception e){
-                    comanda.setMesa(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setDataEntrada(Timestamp.valueOf(item.getString("dataentrada")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setDataSaida(Timestamp.valueOf(item.getString("datasaida")));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 try {
                     comanda.setStatus(item.getString("status"));
-                } catch (Exception e){
-                    comanda.setStatus("erro no carregamento");
-                }
-                /*
-                try {
-                    comanda.setDataEntrada(item.getString("dataentrada"));
-                } catch (Exception e){
-                    comanda.setDataEntrada("erro no carregamento");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-                try {
-                    comanda.setDataSaida(item.getString("datasaida"));
-                } catch (Exception e){
-                    comanda.setDataSaida("erro no carregamento");
-                }
-                */
-
-                try {
-                    comanda.setValorTotalComanda(item.getDouble("valortotalcomanda"));
-                } catch (Exception e){
-                    comanda.setValorTotalComanda(0.00);
-                }
-
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
                 comandas.add(comanda);
+
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
             throw new IOException(e);
         }
 
         return comandas.toArray(new Comanda[0]);
+    }
+
+    public static Comanda gerarNovaComanda(String url, int mesa) throws  IOException {
+
+        //converte o número da mesa de int para sprint para poder concatenar na url
+        String numeroMesa = String.valueOf(mesa);
+        String urlGerarSenha = url+"gera_nova_comanda?numeromesa="+numeroMesa;
+        OkHttpClient client = new OkHttpClient();
+        Comanda comanda = new Comanda();
+
+        Request request = new Request.Builder()
+                .url(urlGerarSenha)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String  resultado =  response.body().string();
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for(int i = 0; i < vetor.length(); i++){
+                JSONObject item = (JSONObject) vetor.get(i);
+
+                try {
+                    comanda.setId(item.getInt("id"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setCodigoComanda(item.getString("codigoComanda"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setMesa(item.getInt("mesa"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setDataEntrada(Timestamp.valueOf(item.getString("dataEntrada")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setDataSaida(Timestamp.valueOf(item.getString("dataSaida")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    comanda.setStatus(item.getString("status"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw  new IOException(e);
+        }
+
+        return comanda;
     }
 
     public static boolean isConnected(Context context){

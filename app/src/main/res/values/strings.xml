@@ -14,7 +14,9 @@
     <string name="btn_salvar_e_continuar">salvar_e_continuar</string>
     <string name="btn_confirmar">confirmar</string>
     <string name="btn_esqueceu_sua_senha">esqueceu sua senha?</string>
-    <string name="btn_alert_ok_entendi">Ok, entendi</string>
+    <string name="btn_alert_criar_comanda">criar comanda</string>
+    <string name="btn_alert_cancelar">cancelar</string>
+    <string name="btn_alert_ok_entendi">Ok, entendi!</string>
 
     <string name="link_esqueceu_sua_senha">esqueceu sua senha?</string>
     <string name="link_precisa_de_ajuda">precisa de ajuda?</string>
@@ -80,6 +82,9 @@
     <string name="title_alert_codigo_comanda_invalido">OPS! Algo esta errado</string>
     <string name="subtitle1_alert_codigo_comanda_invalido">Por favor digite o código da comanda para continuar</string>
 
+    <string name="title_alert_criar_comanda">Selecione a mesa para gerar um nova comanda:</string>
+    <string name="subtitle1_alert_selecione_numero_mesa">Insirá o número da mesa para criar a comanda</string>
+
     <string name="title_alert_disponivel_em_breve">Em breve!</string>
     <string name="subtitle1_alert_disponivel_em_breve">Essa funcionalidade está disponível a partir da próxima Sprint. Agradecemos a compreensão</string>
 
@@ -87,6 +92,7 @@
     <string name="erro_login_senha">Sua senha deve possuir mínimo 8 caracteres.</string>
     <string name="title_activity_visualizar_comanda">VisualizarComandaActivity</string>
     <string name="title_activity_detalhes_comanda_garcom">DetalhesComandaGarcomActivity</string>
+    <string name="title_activity_comanda_vazia_garcom">ComandaVaziaGarcomActivity</string>
 
 
 </resources>

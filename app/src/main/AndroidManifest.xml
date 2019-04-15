@@ -16,9 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".ComandaVaziaGarcomActivity"
+            android:label="@string/title_activity_comanda_vazia_garcom"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".Activity.DetalhesComandaGarcomActivity"
             android:label="@string/title_activity_detalhes_comanda_garcom"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ListaComandasGarcomActivity"
             android:label="@string/title_activity_visualizar_comanda"
