@@ -12,16 +12,13 @@
         android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
-            app:titleTextColor="@color/colorBackground"
-            android:textAlignment="center"
-            />
+            android:layout_height="wrap_content"
+            android:theme="@style/AlertDialog.AppCompat"></android.support.v7.widget.Toolbar>
+
 
     </android.support.design.widget.AppBarLayout>
+
 
     <include layout="@layout/content_codigo_comanda_cliente" />
 

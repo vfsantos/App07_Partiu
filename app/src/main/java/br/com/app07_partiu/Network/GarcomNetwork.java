@@ -2,6 +2,7 @@ package br.com.app07_partiu.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -153,6 +154,47 @@ public class GarcomNetwork {
 
         return comanda;
     }
+
+    /* em desenvolvimento
+    public static ArrayAdapter<String> buscarMesas(String url) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<String> numeroMesas = new ArrayList<>();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        String resultado = response.body().string();
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for(int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                String numeroMesa = null;
+
+                //pegar os itens do json e atribui a um objeto comanda
+                try {
+                    numeroMesa = String.valueOf(item.getInt("numeromesa"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                numeroMesas.add(numeroMesa);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new IOException(e);
+        }
+
+        return numeroMesas.toArray(new String[0]);
+    }
+
+    */
 
     public static boolean isConnected(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager)

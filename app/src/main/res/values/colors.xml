@@ -12,4 +12,6 @@
 
     <color name="colorTextInputLayoutBackground">#414141</color>
     <color name="colorTextInputLayoutStroke">#414141</color>
+
+    <color name="colorTransparente">#414141</color>
 </resources>

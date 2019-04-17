@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
 import br.com.app07_partiu.Network.GarcomNetwork;
 import br.com.app07_partiu.Model.Comanda;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     //Array
     Comanda[] comandas;
     Estabelecimento[] estabelecimentos;
+    ComandaConvertView[] comandaConvertView;
 
     Context contexto;
 
@@ -154,13 +156,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void listarComandas() {
         intent = new Intent(this, ListaComandasGarcomActivity.class);
+
         if(GarcomNetwork.isConnected(this)) {
+            progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 comandas = GarcomNetwork.buscarComandas(URL);
+
                                 //insere no banco o que conseguiu
                                 runOnUiThread(new Runnable() {
                                                   @Override
@@ -181,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
 
     //Código abaixo é referente a parte de recomendação e nesse primeiro momento não deve ser considerado
 

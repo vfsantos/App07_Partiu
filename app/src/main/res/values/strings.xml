@@ -94,5 +94,9 @@
     <string name="title_activity_detalhes_comanda_garcom">DetalhesComandaGarcomActivity</string>
     <string name="title_activity_comanda_vazia_garcom">ComandaVaziaGarcomActivity</string>
 
+    <string name="bottom_navagation_recomendacao">recomendação</string>
+    <string name="bottom_navagation_comanda">comanda</string>
+    <string name="bottom_navagation_perfil">perfil</string>
+
 
 </resources>

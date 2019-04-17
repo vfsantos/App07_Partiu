@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_recomendacao"
+        android:title="@string/bottom_navagation_recomendacao"
+        android:icon="@drawable/ic_action_add_recomandacao" />
+
+    <item
+        android:id="@+id/menu_comanda"
+        android:title="@string/bottom_navagation_comanda"
+        android:icon="@drawable/ic_action_comanda" />
+
+    <item
+        android:id="@+id/menu_perfil"
+        android:title="@string/bottom_navagation_perfil"
+        android:icon="@drawable/ic_action_perfil" />
+
+</menu>

@@ -3,6 +3,7 @@ package br.com.app07_partiu.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     private Button buttonEntrarComanda;
     public Intent intentComanda;
     private AlertDialog alerta;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
         textViewDescricao = (TextView) findViewById(R.id.text_view_codigo_comanda_descricao);
         editTextCodigoComanda = (EditText) findViewById(R.id.edit_texte_codigo_comanda_codigo);
         buttonEntrarComanda = (Button) findViewById(R.id.button_codigo_comanda_entrar);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom);
     }
 
     public void validateForm() {
