@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,12 +13,16 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.GarcomNetwork;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,14 +51,18 @@ public class MainActivity extends AppCompatActivity {
     public Intent intentEsqueceuSuaSenha;
     public Intent intentListaComandasGarcom;
     public Intent intent;
+    public Intent intentLoginGarcom;
+    public Intent intentLoginCliente;
 
 
-    public static final String URL = "http://10.0.2.2:3000/comandas";
+    public static final String URL = "http://192.168.50.102:8080/partiu";
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
     public static final String ESTABELECIMENTOS = "br.com.app07_partiu.comandas";
+    public static final String USUARIO = "br.com.app07_partiu.usuario";
 
     //Array
     Comanda[] comandas;
+    Usuario usuario;
     Estabelecimento[] estabelecimentos;
     ComandaConvertView[] comandaConvertView;
 
@@ -61,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Progressbar
     ProgressBar progressBarTime;
+
+    private final boolean testeGarcom = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
         contexto = this;
 
+        if (testeGarcom){
+            editTextEmail.setText("benjamin@gmail.com");
+            editTextSenha.setText("123");
+        }
+
+
     }
 
     public void validarLogin() {
@@ -114,28 +131,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void validarUsuario(String email, String senha) {
-        String emailCliente = "cliente@gmail.com";
-        String emailGarcom = "garcom@gmail.com";
-        String senhaCliente = "teste1";
-        String senhaGarcom = "teste2";
-
-        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
-            textInputLayoutEmail.setErrorEnabled(false);
-            intentCodigoComandaCliente = new Intent(MainActivity.this, CodigoComandaClienteActivity.class);
-            startActivity(intentCodigoComandaCliente);
-        } else {
-            textInputLayoutEmail.setErrorEnabled(true);
-            textInputLayoutEmail.setError("Usuário invalido");
-        }
-
-        if(email.equals(emailGarcom) && senha.equals(senhaGarcom)){
-            textInputLayoutEmail.setErrorEnabled(false);
-            listarComandas();
-
-        } else {
-            textInputLayoutEmail.setErrorEnabled(true);
-            textInputLayoutEmail.setError("Usuário invalido");
-        }
+        login(email,senha);
+//        String emailCliente = "cliente@gmail.com";
+//        String emailGarcom = "garcom@gmail.com";
+//        String senhaCliente = "teste1";
+//        String senhaGarcom = "teste2";
+//
+//
+//
+//        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
+//            textInputLayoutEmail.setErrorEnabled(false);
+//            intentCodigoComandaCliente = new Intent(MainActivity.this, CodigoComandaClienteActivity.class);
+//            startActivity(intentCodigoComandaCliente);
+//        } else {
+//            textInputLayoutEmail.setErrorEnabled(true);
+//            textInputLayoutEmail.setError("Usuário invalido");
+//        }
+//
+//        if(email.equals(emailGarcom) && senha.equals(senhaGarcom)){
+//            textInputLayoutEmail.setErrorEnabled(false);
+////            listarComandas();
+//
+//        } else {
+//            textInputLayoutEmail.setErrorEnabled(true);
+//            textInputLayoutEmail.setError("Usuário invalido");
+//        }
 
     }
 
@@ -154,25 +174,80 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentEsqueceuSuaSenha);
     }
 
-    public void listarComandas() {
-        intent = new Intent(this, ListaComandasGarcomActivity.class);
+    public void login(final String email, final String senha) {
+        //intentLoginGarcom = new Intent(this, ListaComandasGarcomActivity.class);
+        intentLoginCliente = new Intent(this, CodigoComandaClienteActivity.class);
 
-        if(GarcomNetwork.isConnected(this)) {
-            progressBarTime.setVisibility(View.VISIBLE);
+        if(UsuarioNetwork.isConnected(this)) {
+
+            //TODO consertar progressBarTime
+            //progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                comandas = GarcomNetwork.buscarComandas(URL);
+                                usuario = UsuarioNetwork.login(URL, email, senha);
+                                Log.d("TESTES", usuario.toString());
 
-                                //insere no banco o que conseguiu
+
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      if (usuario.getTipo().equals("garcom")){
+                                                          //intentLoginGarcom.putExtra(USUARIO, usuario);
+                                                          //startActivity(intentLoginGarcom);
+                                                          listarComandas(usuario);
+                                                      }else{
+                                                          intentLoginCliente.putExtra(USUARIO, usuario);
+                                                          startActivity(intentLoginCliente);
+                                                      }
+
+                                                      //progressBarTime.setVisibility(View.INVISIBLE);
+
+                                                  }
+                                              }
+                                );
+                            } catch (IOException e) {
+                                e.printStackTrace();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.e("TESTES", "Retornou 'Usuario Inválido!'");
+                                runOnUiThread(new Runnable(){
+                                    public void run() {
+                                        Toast.makeText(contexto, "Usuario Inválido!",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
+
+
+        } else {
+            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void listarComandas(final Usuario garcom) {
+        intent = new Intent(this, ListaComandasGarcomActivity.class);
+
+            //progressBarTime.setVisibility(View.VISIBLE);
+            new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                comandas = GarcomNetwork.buscarComandas(URL, garcom.getId(), 'A');
+
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
                                                       intent.putExtra(COMANDAS, comandas);
+                                                      intent.putExtra(USUARIO, garcom);
                                                       startActivity(intent);
-                                                      progressBarTime.setVisibility(View.INVISIBLE);
+                                                      //progressBarTime.setVisibility(View.INVISIBLE);
                                                   }
                                               }
                                 );
@@ -181,10 +256,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }).start();
-        } else {
-            Toast.makeText(this, "Rede inativa. Usando armazenamento local.",
-                    Toast.LENGTH_SHORT).show();
-        }
+
     }
 
 

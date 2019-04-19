@@ -10,8 +10,8 @@ public class Comanda implements Serializable, Comparable {
     private String codigoComanda;
     private int mesa;
     private String status;
-    private Date dataEntrada;
-    private Date dataSaida;
+    private String dataEntrada;
+    private String dataSaida;
     private double valorTotalComanda;
 
     public int getId() {
@@ -46,19 +46,19 @@ public class Comanda implements Serializable, Comparable {
         this.status = status;
     }
 
-    public Date getDataEntrada() {
+    public String getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
+    public void setDataEntrada(String dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public Date getDataSaida() {
+    public String getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(Date dataSaida) {
+    public void setDataSaida(String dataSaida) {
         this.dataSaida = dataSaida;
     }
 

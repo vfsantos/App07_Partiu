@@ -2,6 +2,7 @@ package br.com.app07_partiu.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
@@ -19,11 +20,28 @@ import okhttp3.Response;
 
 public class GarcomNetwork {
 
+/*
+        [
+{
+        "id": 0,
+        "codigo": "OSA03",
+        "status": "A",
+        "mesa": 3,
+        "dtaEntrada": "15/04/2019"
+    },
+    {
+        "id": 0,
+        "codigo": "OSA02",
+        "status": "A",
+        "mesa": 2,
+        "dtaEntrada": "15/04/2019"
+    }
+        ]*/
 
-
-    public static Comanda[] buscarComandas(String url) throws IOException {
+    public static Comanda[] buscarComandas(String url, int idGarcom, char status) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<Comanda> comandas = new ArrayList<>();
+        url += "/getComandasByStatusAndId?idGarcom=" + idGarcom + "&status=" + status;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -33,50 +51,23 @@ public class GarcomNetwork {
 
         String resultado = response.body().string();
 
+
         try {
             JSONArray vetor = new JSONArray(resultado);
-            for(int i = 0; i < vetor.length(); i++) {
+            for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Comanda comanda = new Comanda();
 
                 //pegar os itens do json e atribui a um objeto comanda
-                try {
-                    comanda.setId(item.getInt("id"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setCodigoComanda(item.getString("codigocomanda"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setMesa(item.getInt("mesa"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setDataEntrada(Timestamp.valueOf(item.getString("dataentrada")));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setDataSaida(Timestamp.valueOf(item.getString("datasaida")));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setStatus(item.getString("status"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                comanda.setId(item.getInt("id"));
+                comanda.setCodigoComanda(item.getString("codigo"));
+                comanda.setStatus(item.getString("status"));
+                comanda.setMesa(item.getInt("mesa"));
+                comanda.setDataEntrada(item.getString("dtaEntrada"));
+                //comanda.setDataSaida(item.getString("dtaSaida"));
 
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
+                Log.d("TESTES", comanda.toString());
                 comandas.add(comanda);
 
             }
@@ -89,11 +80,11 @@ public class GarcomNetwork {
         return comandas.toArray(new Comanda[0]);
     }
 
-    public static Comanda gerarNovaComanda(String url, int mesa) throws  IOException {
+    public static Comanda gerarNovaComanda(String url, int mesa) throws IOException {
 
         //converte o número da mesa de int para sprint para poder concatenar na url
         String numeroMesa = String.valueOf(mesa);
-        String urlGerarSenha = url+"gera_nova_comanda?numeromesa="+numeroMesa;
+        String urlGerarSenha = url + "gera_nova_comanda?numeromesa=" + numeroMesa;
         OkHttpClient client = new OkHttpClient();
         Comanda comanda = new Comanda();
 
@@ -102,11 +93,11 @@ public class GarcomNetwork {
                 .build();
 
         Response response = client.newCall(request).execute();
-        String  resultado =  response.body().string();
+        String resultado = response.body().string();
 
         try {
             JSONArray vetor = new JSONArray(resultado);
-            for(int i = 0; i < vetor.length(); i++){
+            for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
 
                 try {
@@ -128,13 +119,13 @@ public class GarcomNetwork {
                 }
 
                 try {
-                    comanda.setDataEntrada(Timestamp.valueOf(item.getString("dataEntrada")));
+                    comanda.setDataEntrada(item.getString("dataEntrada"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 try {
-                    comanda.setDataSaida(Timestamp.valueOf(item.getString("dataSaida")));
+                    comanda.setDataSaida(item.getString("dataSaida"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -149,7 +140,7 @@ public class GarcomNetwork {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            throw  new IOException(e);
+            throw new IOException(e);
         }
 
         return comanda;
@@ -196,7 +187,7 @@ public class GarcomNetwork {
 
     */
 
-    public static boolean isConnected(Context context){
+    public static boolean isConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null &&

@@ -1,7 +1,5 @@
 package br.com.app07_partiu.Model;
 
-import java.util.Date;
-
 public class ComandaConvertView {
 
     private String codigoComanda;

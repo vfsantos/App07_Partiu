@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,7 @@ import br.com.app07_partiu.Activity.MainActivity;
 import br.com.app07_partiu.ComandaGarcomAdapter;
 import br.com.app07_partiu.ComandaVaziaGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.GarcomNetwork;
 import br.com.app07_partiu.R;
 
@@ -55,6 +57,8 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
     //int
     private int mesa;
 
+    private Usuario garcom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,7 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        garcom = (Usuario) intent.getSerializableExtra(MainActivity.USUARIO);
         comandas = (Comanda[]) intent.getSerializableExtra(MainActivity.COMANDAS);
         alertaNumeroMesa = new AlertDialog.Builder(this);
 
