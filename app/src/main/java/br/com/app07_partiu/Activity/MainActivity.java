@@ -19,9 +19,11 @@ import java.io.IOException;
 
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
+import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.GarcomNetwork;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
@@ -59,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
     public static final String ESTABELECIMENTOS = "br.com.app07_partiu.comandas";
     public static final String USUARIO = "br.com.app07_partiu.usuario";
+    public static final String RESTAURANTE = "br.com.app07_partiu.restaurante";
 
     //Array
     Comanda[] comandas;
-    Usuario usuario;
     Estabelecimento[] estabelecimentos;
     ComandaConvertView[] comandaConvertView;
 
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBarTime;
 
     private final boolean testeGarcom = true;
+    Usuario usuario;
+    Restaurante restaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         if(UsuarioNetwork.isConnected(this)) {
 
             //TODO consertar progressBarTime
+            //TODO parte Cliente
             //progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
@@ -197,13 +202,14 @@ public class MainActivity extends AppCompatActivity {
                                                       if (usuario.getTipo().equals("garcom")){
                                                           //intentLoginGarcom.putExtra(USUARIO, usuario);
                                                           //startActivity(intentLoginGarcom);
-                                                          listarComandas(usuario);
+                                                          getRestauranteByIdGarcom(usuario);
                                                       }else{
                                                           intentLoginCliente.putExtra(USUARIO, usuario);
                                                           startActivity(intentLoginCliente);
+                                                          //progressBarTime.setVisibility(View.INVISIBLE);
                                                       }
 
-                                                      //progressBarTime.setVisibility(View.INVISIBLE);
+
 
                                                   }
                                               }
@@ -230,10 +236,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void listarComandas(final Usuario garcom) {
+    public void listarComandas(final Usuario garcom, final Restaurante restaurante) {
         intent = new Intent(this, ListaComandasGarcomActivity.class);
-
-            //progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
                         @Override
@@ -244,9 +248,11 @@ public class MainActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
+                                                      intent.putExtra(RESTAURANTE, restaurante);
                                                       intent.putExtra(COMANDAS, comandas);
                                                       intent.putExtra(USUARIO, garcom);
                                                       startActivity(intent);
+                                                      //TODO consertar progressBarTime
                                                       //progressBarTime.setVisibility(View.INVISIBLE);
                                                   }
                                               }
@@ -256,6 +262,31 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }).start();
+
+    }
+
+    public void getRestauranteByIdGarcom(final Usuario garcom) {
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            restaurante = RestauranteNetwork.getRestauranteByIdGarcom(URL, garcom.getId());
+
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  listarComandas(garcom, restaurante);
+                                              }
+                                          }
+                            );
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
 
     }
 

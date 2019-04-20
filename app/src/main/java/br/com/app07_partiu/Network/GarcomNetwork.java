@@ -80,11 +80,19 @@ public class GarcomNetwork {
         return comandas.toArray(new Comanda[0]);
     }
 
-    public static Comanda gerarNovaComanda(String url, int mesa) throws IOException {
+    public static Comanda createComanda(String url, int idGarcom, int mesa) throws IOException, JSONException {
+
+        /*{
+            "id": 9,
+                "codigo": "OSA12",
+                "status": "A",
+                "mesa": 12,
+                "dtaEntrada": "19/04/2019"
+        }*/
 
         //converte o número da mesa de int para sprint para poder concatenar na url
         String numeroMesa = String.valueOf(mesa);
-        String urlGerarSenha = url + "gera_nova_comanda?numeromesa=" + numeroMesa;
+        String urlGerarSenha = url + "/createComanda?idGarcom=" + idGarcom + "&mesa=" + mesa;
         OkHttpClient client = new OkHttpClient();
         Comanda comanda = new Comanda();
 
@@ -94,56 +102,21 @@ public class GarcomNetwork {
 
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-
+        Log.d("TESTES", resultado);
+        JSONObject object = new JSONObject(resultado);
         try {
-            JSONArray vetor = new JSONArray(resultado);
-            for (int i = 0; i < vetor.length(); i++) {
-                JSONObject item = (JSONObject) vetor.get(i);
+            comanda.setId(object.getInt("id"));
+            comanda.setCodigoComanda(object.getString("codigo"));
+            comanda.setStatus(object.getString("status"));
+            comanda.setMesa(object.getInt("mesa"));
+            comanda.setDataEntrada(object.getString("dataEntrada"));
+            comanda.setDataSaida(object.getString("dataSaida"));
+            return comanda;
 
-                try {
-                    comanda.setId(item.getInt("id"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setCodigoComanda(item.getString("codigoComanda"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setMesa(item.getInt("mesa"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setDataEntrada(item.getString("dataEntrada"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setDataSaida(item.getString("dataSaida"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    comanda.setStatus(item.getString("status"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
         } catch (JSONException e) {
             e.printStackTrace();
-            throw new IOException(e);
+            return null;
         }
-
-        return comanda;
     }
 
     /* em desenvolvimento

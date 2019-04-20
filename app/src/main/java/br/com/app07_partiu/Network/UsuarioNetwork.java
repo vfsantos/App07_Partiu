@@ -33,7 +33,6 @@ public class UsuarioNetwork {
 
     public static Usuario login(String url, String email, String senha) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
-        ArrayList<Comanda> comandas = new ArrayList<>();
         url += "/login?email=" + email + "&senha=" + senha;
 
         Request request = new Request.Builder()

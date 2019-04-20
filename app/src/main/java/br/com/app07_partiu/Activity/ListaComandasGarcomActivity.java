@@ -1,41 +1,37 @@
 package br.com.app07_partiu.Activity;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import org.json.JSONException;
 
-import br.com.app07_partiu.Activity.DetalhesComandaGarcomActivity;
-import br.com.app07_partiu.Activity.MainActivity;
+import java.io.IOException;
+
 import br.com.app07_partiu.ComandaGarcomAdapter;
 import br.com.app07_partiu.ComandaVaziaGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.GarcomNetwork;
 import br.com.app07_partiu.R;
 
 public class ListaComandasGarcomActivity extends AppCompatActivity {
 
-    public static final String URL = "http://10.0.2.2:3000/comandas";
-    public static final String COMANDA = "br.com.app07_partiu.Model.comanda";
+    public static final String URL = "http://192.168.50.102:8080/partiu";
+    public static final String COMANDA = "br.com.app07_partiu.ListaComandasGarcomActivity.comanda";
 
     //AlertDialog / Buider
     private AlertDialog alertaProximaSprint;
@@ -49,15 +45,18 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
 
     //Objeto
     Comanda[] comandas;
+    Restaurante restaurante;
 
     //String
-    private String[] s = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    private String[] mesas;
     private String resultado;
 
     //int
     private int mesa;
 
     private Usuario garcom;
+
+    private Context context;
 
 
     @Override
@@ -74,11 +73,19 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
                 alertNovaComanda();
             }
         });
-
+        context = this;
         Intent intent = getIntent();
 
         garcom = (Usuario) intent.getSerializableExtra(MainActivity.USUARIO);
         comandas = (Comanda[]) intent.getSerializableExtra(MainActivity.COMANDAS);
+        restaurante = (Restaurante) intent.getSerializableExtra(MainActivity.RESTAURANTE);
+
+        String[] sTemp= new String[restaurante.getQtdMesas()];
+        for(int i = 0; i<restaurante.getQtdMesas(); i++){
+            sTemp[i] = String.valueOf(i+1);
+        }
+        mesas = sTemp;
+
         alertaNumeroMesa = new AlertDialog.Builder(this);
 
         ListView listView = (ListView) findViewById(R.id.list_view_comandas);
@@ -112,13 +119,13 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
         //Cria o gerador do AlertDialog
         alertaNumeroMesa = new AlertDialog.Builder(this);
         //define o titulo
-        alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda).setItems(s, new DialogInterface.OnClickListener() {
+        alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda).setItems(mesas, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 mesa = which;
             }
         });
 
-        alertaNumeroMesa.setSingleChoiceItems(s, -1, new DialogInterface.OnClickListener() {
+        alertaNumeroMesa.setSingleChoiceItems(mesas, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -192,13 +199,13 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
 
     //criar nova comanda
     public void criarComanda(final int mesa) {
-        intentNovaComanda = new Intent(ListaComandasGarcomActivity.this, ComandaVaziaGarcomActivity.class);
+        intentNovaComanda = new Intent(context, ComandaVaziaGarcomActivity.class);
         if(GarcomNetwork.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        GarcomNetwork.gerarNovaComanda(URL, mesa);
+                        GarcomNetwork.createComanda(URL,garcom.getId(), mesa);
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
@@ -209,11 +216,13 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
                         );
                     } catch (IOException e)  {
                         e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
             }).start();
         } else {
-            Toast.makeText(this, "Rede inativa.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
