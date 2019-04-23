@@ -12,15 +12,16 @@ import android.widget.TextView;
 import java.util.Hashtable;
 
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.ComandaConvertView;
 
 public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer {
-    private Comanda[] comandas;
+    private ComandaConvertView[] comandas;
     private Activity activity;
     Object[] sectionHeaders;
     Hashtable<Integer, Integer> positionForSectionMap;
     Hashtable<Integer, Integer> sectionForPositionMap;
 
-    public ComandaGarcomAdapter(Comanda[] comandas, Activity activity) {
+    public ComandaGarcomAdapter(ComandaConvertView[] comandas, Activity activity) {
         this.comandas = comandas;
         this.activity = activity;
         sectionHeaders = SectionIndexBuilder.buildSectionHeaders(comandas);
@@ -49,18 +50,28 @@ public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer 
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.linha_comanda_garcom, parent, false);
-            TextView textViewDataEntrada = (TextView) view.findViewById(R.id.text_view_data_entrada);
-            TextView textViewCodigoComanda = (TextView) view.findViewById(R.id.text_view_codigo_comanda);
-            TextView textViewValorTotalComanda = (TextView) view.findViewById(R.id.text_view_valor_total_comanda);
-            ViewHolder viewHolder = new ViewHolder(textViewDataEntrada, textViewCodigoComanda, textViewValorTotalComanda);
+            view = inflater.inflate(R.layout.item_comanda_garcom, parent, false);
+            TextView textViewCodigoComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_codigo_comanda);
+            TextView textViewTotalComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_total_comanda);
+            TextView textViewTotalComandaValor = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_tota_comanda_valor);
+            TextView textViewPessoasComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda);
+            TextView textViewPessoasComandaGarcomNumero = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda_numero);
+            TextView textViewMesa = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_mesa);
+            TextView textViewMesaNumero = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_mesa_numero);
+            TextView textViewHora = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_hora);
+            ViewHolder viewHolder = new ViewHolder(textViewCodigoComanda, textViewTotalComanda,textViewTotalComandaValor,
+                    textViewPessoasComanda, textViewPessoasComandaGarcomNumero, textViewMesa, textViewMesaNumero, textViewHora);
             view.setTag(viewHolder);
         }
 
+
+
         ViewHolder viewHolder = (ViewHolder)view.getTag();
-        viewHolder.getDataEntrada().setText(String.format("",comandas[position].getDataEntrada()));
-        viewHolder.getCodigoComanda().setText(comandas[position].getCodigoComanda());
-        viewHolder.getValorTotalComanda().setText(String.format("Total da comanda R$ ",comandas[position].getValorTotalComanda()));
+        viewHolder.getTextViewCodigoComanda().setText(comandas[position].getCodigoComanda());
+        viewHolder.getTextViewTotalComandaValor().setText(comandas[position].getValorTotalComanda());
+        viewHolder.getTextViewMesaNumero().setText(comandas[position].getMesa());
+        viewHolder.getTextViewPessoasComandaGarcomNumero().setText(comandas[position].getPessoasComanda());
+        viewHolder.getTextViewHora().setText(comandas[position].getDataEntrada());
 
 
         return view;

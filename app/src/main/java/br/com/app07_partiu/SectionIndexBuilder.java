@@ -5,13 +5,14 @@ import java.util.Hashtable;
 import java.util.TreeSet;
 
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.ComandaConvertView;
 
 public class SectionIndexBuilder {
     //cria um array de cabeçalhos de seção; países devem estar ordenados por nome
-    public static Object[] buildSectionHeaders(Comanda[] comandas){
+    public static Object[] buildSectionHeaders(ComandaConvertView[] comandas){
         ArrayList<String> resultado = new ArrayList<>();
         TreeSet<String> usados = new TreeSet<>();
-        for(Comanda comanda:comandas){
+        for(ComandaConvertView comanda:comandas){
             String letra = comanda.getCodigoComanda().substring(0,1);
             if((!usados.contains(letra))){
                 resultado.add(letra);
@@ -21,7 +22,7 @@ public class SectionIndexBuilder {
         return resultado.toArray(new Object[0]);
     }
     //cria uma mapa para responder: posicao --> secao de dados ordenados pelo nome
-    public static Hashtable<Integer, Integer> buildSectionForPositionMap(Comanda[] comandas){
+    public static Hashtable<Integer, Integer> buildSectionForPositionMap(ComandaConvertView[] comandas){
         Hashtable<Integer, Integer> resultados = new Hashtable<>();
         TreeSet<String> usados = new TreeSet<>();
 
@@ -40,7 +41,7 @@ public class SectionIndexBuilder {
     }
 
     //cria uma mapa para responder: secao --> posicao de dados ordenados pelo nome
-    public static Hashtable<Integer, Integer> buildPositionForSectionMap(Comanda[] comandas){
+    public static Hashtable<Integer, Integer> buildPositionForSectionMap(ComandaConvertView[] comandas){
         Hashtable<Integer, Integer> resultados = new Hashtable<>();
         TreeSet<String> usados = new TreeSet<>();
 

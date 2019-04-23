@@ -56,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
     public Intent intentLoginGarcom;
     public Intent intentLoginCliente;
 
-
-    public static final String URL = "http://192.168.50.102:8080/partiu";
+    //public static final String URL = "http://10.0.2.2:8080/partiu";
+    public static final String URL = "http://192.168.43.193:8080/partiu";
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
     public static final String ESTABELECIMENTOS = "br.com.app07_partiu.comandas";
     public static final String USUARIO = "br.com.app07_partiu.usuario";
     public static final String RESTAURANTE = "br.com.app07_partiu.restaurante";
 
     //Array
-    Comanda[] comandas;
+    ComandaConvertView[] comandas;
     Estabelecimento[] estabelecimentos;
     ComandaConvertView[] comandaConvertView;
 
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(final String email, final String senha) {
-        //intentLoginGarcom = new Intent(this, ListaComandasGarcomActivity.class);
+        intentLoginGarcom = new Intent(this, ListaComandasGarcomActivity.class);
         intentLoginCliente = new Intent(this, CodigoComandaClienteActivity.class);
 
         if(UsuarioNetwork.isConnected(this)) {

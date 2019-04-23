@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ComandaVaziaGarcomActivity"
-            android:label="@string/title_activity_comanda_vazia_garcom"
+            android:name=".Activity.ListaItensLancarComandaGarcomStepSelecionarActivity"
+            android:label="@string/title_activity_lista_itens_lancar_comanda_garcom_step_selecionar"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
         <activity
-            android:name=".Activity.DetalhesComandaGarcomActivity"
-            android:label="@string/title_activity_detalhes_comanda_garcom"
+            android:name=".ComandaVaziaGarcomActivity"
+            android:label="@string/title_activity_comanda_vazia_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ListaComandasGarcomActivity"

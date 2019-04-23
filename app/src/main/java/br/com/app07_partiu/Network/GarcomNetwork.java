@@ -14,33 +14,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.ComandaConvertView;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class GarcomNetwork {
 
-/*
-        [
-{
-        "id": 0,
-        "codigo": "OSA03",
-        "status": "A",
-        "mesa": 3,
-        "dtaEntrada": "15/04/2019"
-    },
-    {
-        "id": 0,
-        "codigo": "OSA02",
-        "status": "A",
-        "mesa": 2,
-        "dtaEntrada": "15/04/2019"
-    }
-        ]*/
-
-    public static Comanda[] buscarComandas(String url, int idGarcom, char status) throws IOException {
+    public static ComandaConvertView[] buscarComandas(String url, int idGarcom, char status) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        ArrayList<Comanda> comandas = new ArrayList<>();
+        ArrayList<ComandaConvertView> comandas = new ArrayList<>();
         url += "/getComandasByStatusAndId?idGarcom=" + idGarcom + "&status=" + status;
 
         Request request = new Request.Builder()
@@ -57,6 +40,7 @@ public class GarcomNetwork {
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Comanda comanda = new Comanda();
+                ComandaConvertView comandaConvertView = new ComandaConvertView();
 
                 //pegar os itens do json e atribui a um objeto comanda
                 comanda.setId(item.getInt("id"));
@@ -68,7 +52,16 @@ public class GarcomNetwork {
 
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
                 Log.d("TESTES", comanda.toString());
-                comandas.add(comanda);
+
+                comandaConvertView.setCodigoComanda(comanda.getCodigoComanda());
+                comandaConvertView.setValorTotalComanda("120,00");
+                comandaConvertView.setMesa(String.valueOf(comanda.getMesa()));
+                comandaConvertView.setDataEntrada(comanda.getDataEntrada());
+                //comandaConvertView.setDataSaida(comanda.getDataSaida());
+                comandaConvertView.setStatus(String.valueOf(comanda.getStatus()));
+
+
+                comandas.add(comandaConvertView);
 
             }
 
@@ -77,18 +70,10 @@ public class GarcomNetwork {
             throw new IOException(e);
         }
 
-        return comandas.toArray(new Comanda[0]);
+        return comandas.toArray(new ComandaConvertView[0]);
     }
 
     public static Comanda createComanda(String url, int idGarcom, int mesa) throws IOException, JSONException {
-
-        /*{
-            "id": 9,
-                "codigo": "OSA12",
-                "status": "A",
-                "mesa": 12,
-                "dtaEntrada": "19/04/2019"
-        }*/
 
         //converte o número da mesa de int para sprint para poder concatenar na url
         String numeroMesa = String.valueOf(mesa);

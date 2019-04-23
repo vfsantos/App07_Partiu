@@ -4,35 +4,90 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewHolder {
-    TextView dataEntrada, codigoComanda, valorTotalComanda;
+    public TextView textViewCodigoComanda;
+    public TextView textViewTotalComanda;
+    public TextView textViewTotalComandaValor;
+    public TextView textViewPessoasComanda;
+    public TextView textViewPessoasComandaGarcomNumero;
+    public TextView textViewMesa;
+    public TextView textViewMesaNumero;
+    public TextView textViewHora;
 
-    public ViewHolder(TextView dataEntrada, TextView codigoComanda, TextView valorTotalComanda) {
-        this.dataEntrada = dataEntrada;
-        this.codigoComanda = codigoComanda;
-        this.valorTotalComanda = valorTotalComanda;
+
+    public ViewHolder(TextView textViewCodigoComanda, TextView textViewTotalComanda, TextView textViewTotalComandaValor,
+                      TextView textViewPessoasComanda, TextView textViewPessoasComandaGarcomNumero,
+                      TextView textViewMesa, TextView textViewMesaNumero, TextView textViewHora) {
+        this.textViewCodigoComanda = textViewCodigoComanda;
+        this.textViewTotalComanda = textViewTotalComanda;
+        this.textViewTotalComandaValor = textViewTotalComandaValor;
+        this.textViewPessoasComanda = textViewPessoasComanda;
+        this.textViewPessoasComandaGarcomNumero = textViewPessoasComandaGarcomNumero;
+        this.textViewMesa = textViewMesa;
+        this.textViewMesaNumero = textViewMesaNumero;
+        this.textViewHora = textViewHora;
     }
 
-    public TextView getDataEntrada() {
-        return dataEntrada;
+    public TextView getTextViewCodigoComanda() {
+        return textViewCodigoComanda;
     }
 
-    public void setDataEntrada(TextView dataEntrada) {
-        this.dataEntrada = dataEntrada;
+    public void setTextViewCodigoComanda(TextView textViewCodigoComanda) {
+        this.textViewCodigoComanda = textViewCodigoComanda;
     }
 
-    public TextView getCodigoComanda() {
-        return codigoComanda;
+    public TextView getTextViewTotalComanda() {
+        return textViewTotalComanda;
     }
 
-    public void setCodigoComanda(TextView codigoComanda) {
-        this.codigoComanda = codigoComanda;
+    public void setTextViewTotalComanda(TextView textViewTotalComanda) {
+        this.textViewTotalComanda= textViewTotalComanda;
     }
 
-    public TextView getValorTotalComanda() {
-        return valorTotalComanda;
+    public TextView getTextViewTotalComandaValor() {
+        return textViewTotalComandaValor;
     }
 
-    public void setValorTotalComanda(TextView valorTotalComanda) {
-        this.valorTotalComanda = valorTotalComanda;
+    public void setTextViewTotalComandaValor(TextView textViewTotalComandaValor) {
+        this.textViewCodigoComanda = textViewTotalComandaValor;
+    }
+
+    public TextView getTextViewPessoasComanda() {
+        return textViewPessoasComanda;
+    }
+
+    public void setTextViewPessoasComanda(TextView textViewPessoasComanda) {
+        this.textViewPessoasComanda = textViewPessoasComanda;
+    }
+
+    public TextView getTextViewPessoasComandaGarcomNumero() {
+        return textViewPessoasComandaGarcomNumero;
+    }
+
+    public void setTextViewPessoasComandaGarcomNumero(TextView textViewPessoasComandaGarcomNumero) {
+        this.textViewPessoasComandaGarcomNumero = textViewPessoasComandaGarcomNumero;
+    }
+
+    public TextView getTextViewMesa() {
+        return textViewMesa;
+    }
+
+    public void setTextViewMesa(TextView textViewMesa) {
+        this.textViewMesa = textViewMesa;
+    }
+
+    public TextView getTextViewMesaNumero() {
+        return textViewMesaNumero;
+    }
+
+    public void setTextViewMesaNumero(TextView textViewMesaNumero) {
+        this.textViewMesaNumero = textViewMesaNumero;
+    }
+
+    public TextView getTextViewHora() {
+        return textViewHora;
+    }
+
+    public void setTextViewHora(TextView textViewHora) {
+        this.textViewHora = textViewHora;
     }
 }

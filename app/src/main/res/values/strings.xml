@@ -98,5 +98,24 @@
     <string name="bottom_navagation_comanda">comanda</string>
     <string name="bottom_navagation_perfil">perfil</string>
 
+    <!-- Item comanda garcom -->
+    <string name="item_comanda_garcom_total_comanda">total da comandada: </string>
+    <string name="item_comanda_garcom_pessoas_comanda">pessoas na comanda: </string>
+    <string name="item_comanda_garcom_mesa">mesa: </string>
+
+    <!-- FAB extended -->
+    <string name="fab_extended_comanda">comanda</string>
+    <string name="fab_extended_cardapio">cardápio</string>
+
+    <!-- Step lançar item -->
+    <string name="lancar_item_comanda_garcom_step_selecionar">Selecionar itens:</string>
+
+    <!-- Button -->
+    <string name="button_continuar_lancar_item_comanda_garcom_step_selecionar">continuar</string>
+    <string name="button_confirmar_lancar_item_comanda_garcom_step_selecionar">confirmar</string>
+    <string name="title_activity_lista_itens_lancar_comanda_garcom_step_selecionar">
+        ListaItensLancarComandaGarcomStepSelecionarActivity
+    </string>
+
 
 </resources>

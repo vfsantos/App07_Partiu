@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F8B864</color>
-    <color name="colorPrimaryDark">#E9A64E</color>
+    <color name="colorPrimary">#383838</color>
+    <color name="colorPrimaryDark">#383838</color>
     <color name="colorAccent">#F8B864</color>
-    <color name="colorBackground">#1d1d1d</color>
+    <color name="colorBackground">#383838</color>
     <color name="colorFont">#FFFFFF</color>
-    <color name="colorFontDark">#212121</color>
+    <color name="colorFontDark">#383838</color>
     <color name="colorFontPrimary">#F8B864</color>
     <color name="colorError">#9932CC</color>
-    <color name="colorToolbarSecundary">#262A2D</color>
+    <color name="colorToolbarSecundary">#383838</color>
 
     <color name="colorTextInputLayoutBackground">#414141</color>
     <color name="colorTextInputLayoutStroke">#414141</color>
 
     <color name="colorTransparente">#414141</color>
+
+    <!-- garcom_comanda_item_comanda / ativa -->
+    <color name="garcom_comanda_item_background">#FFFFFF</color>
+    <color name="garcom_comanda_item_titulo_codigo_comanda">#F8B864</color>
+    <color name="garcom_comanda_item_valor_total">#767676</color>
+    <color name="garcom_comanda_item_pessoas_na_mesa">#767676</color>
+    <color name="garcom_comanda_item_mesa">#767676</color>
+    <color name="garcom_comanda_item_hora_de_chagada">#767676</color>
+
+    <!-- garcom_comanda_item_comanda / desativada -->
+    <color name="garcom_comanda_item_background_desativada">#4D4D4D</color>
+    <color name="garcom_comanda_item_titulo_codigo_comanda_desativada">#767676</color>
+    <color name="garcom_comanda_item_valor_total_desativada">#767676</color>
+    <color name="garcom_comanda_item_pessoas_na_mesa_desativada">#767676</color>
+    <color name="garcom_comanda_item_mesa_desativada">#767676</color>
+    <color name="garcom_comanda_item_hora_de_chagada_desativada">#767676</color>
+
+    <color name="background_footer_button">#F6F6F6</color>
 </resources>
