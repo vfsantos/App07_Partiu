@@ -12,17 +12,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import org.json.JSONException;
-
 import java.io.IOException;
 
+import br.com.app07_partiu.Activity.Cliente.CadastroActivity;
+import br.com.app07_partiu.Activity.Cliente.CodigoComandaClienteActivity;
+import br.com.app07_partiu.Activity.Cliente.EsqueceuSuaSenhaActivity;
+import br.com.app07_partiu.Activity.Garcom.ListaComandasGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
-import br.com.app07_partiu.Network.GarcomNetwork;
-import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
@@ -56,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
     public Intent intentLoginGarcom;
     public Intent intentLoginCliente;
 
-    //public static final String URL = "http://10.0.2.2:8080/partiu";
-    public static final String URL = "http://192.168.43.193:8080/partiu";
+    //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    //public static final String URL = "http://192.168.43.193:8080/partiu"; //
+    public static final String URL = "http://10.71.204.149/partiu";
+
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
-    public static final String ESTABELECIMENTOS = "br.com.app07_partiu.comandas";
     public static final String USUARIO = "br.com.app07_partiu.usuario";
     public static final String RESTAURANTE = "br.com.app07_partiu.restaurante";
 
@@ -77,45 +79,48 @@ public class MainActivity extends AppCompatActivity {
     Usuario usuario;
     Restaurante restaurante;
 
+    //String
+    private String email;
+    private String senha;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //imageView
+        //ImageView
         imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
         imageViewOu = (ImageView) findViewById(R.id.image_view_ou);
 
-        //editText
+        //EditText
         editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
         editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
 
-        //textInputLayout
+        //TextInputLayout
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
         textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
 
-        //button
+        //Button
         buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
         buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
         buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
 
-        //progressBar
+        //ProgressBar
         progressBarTime = (ProgressBar)findViewById(R.id.progress_bar_time);
         progressBarTime.setVisibility(View.INVISIBLE);
 
         contexto = this;
 
+        //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
             editTextEmail.setText("benjamin@gmail.com");
             editTextSenha.setText("123");
         }
-
-
     }
 
     public void validarLogin() {
-        String email = editTextEmail.getText().toString();
-        String senha = editTextSenha.getText().toString();
+        email = editTextEmail.getText().toString();
+        senha = editTextSenha.getText().toString();
 
         if(email.isEmpty()) {
             textInputLayoutEmail.setErrorEnabled(true);
@@ -128,57 +133,16 @@ public class MainActivity extends AppCompatActivity {
                 textInputLayoutSenha.setError("Sua senha deve possuir mínimo 8 caracteres.");
             } else {
                 textInputLayoutSenha.setErrorEnabled(false);
-                validarUsuario(email, senha);
+                login(email, senha);
 
             }
         }
     }
 
-    public void validarUsuario(String email, String senha) {
-        login(email,senha);
-//        String emailCliente = "cliente@gmail.com";
-//        String emailGarcom = "garcom@gmail.com";
-//        String senhaCliente = "teste1";
-//        String senhaGarcom = "teste2";
-//
-//
-//
-//        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
-//            textInputLayoutEmail.setErrorEnabled(false);
-//            intentCodigoComandaCliente = new Intent(MainActivity.this, CodigoComandaClienteActivity.class);
-//            startActivity(intentCodigoComandaCliente);
-//        } else {
-//            textInputLayoutEmail.setErrorEnabled(true);
-//            textInputLayoutEmail.setError("Usuário invalido");
-//        }
-//
-//        if(email.equals(emailGarcom) && senha.equals(senhaGarcom)){
-//            textInputLayoutEmail.setErrorEnabled(false);
-////            listarComandas();
-//
-//        } else {
-//            textInputLayoutEmail.setErrorEnabled(true);
-//            textInputLayoutEmail.setError("Usuário invalido");
-//        }
+    public void login(String email, String senha){
+        final String enderecoEmailUsuario = email;
+        final String senhaUsuario = senha;
 
-    }
-
-    public void onClickButtonLoginEntrar (View view) {
-        validarLogin();
-
-    }
-
-    public void onClickButtonLoginCadastrarse (View view) {
-        intentCadastro = new Intent(MainActivity.this, CadastroActivity.class);
-        startActivity(intentCadastro);
-    }
-
-    public void onClickButtonLoginEsqueceuSuaSenha (View view) {
-        intentEsqueceuSuaSenha = new Intent(MainActivity.this, EsqueceuSuaSenhaActivity.class);
-        startActivity(intentEsqueceuSuaSenha);
-    }
-
-    public void login(final String email, final String senha) {
         intentLoginGarcom = new Intent(this, ListaComandasGarcomActivity.class);
         intentLoginCliente = new Intent(this, CodigoComandaClienteActivity.class);
 
@@ -192,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                usuario = UsuarioNetwork.login(URL, email, senha);
+                                usuario = UsuarioNetwork.login(URL, enderecoEmailUsuario, senhaUsuario);
                                 Log.d("TESTES", usuario.toString());
 
 
@@ -200,17 +164,14 @@ public class MainActivity extends AppCompatActivity {
                                                   @Override
                                                   public void run() {
                                                       if (usuario.getTipo().equals("garcom")){
-                                                          //intentLoginGarcom.putExtra(USUARIO, usuario);
-                                                          //startActivity(intentLoginGarcom);
+                                                          intentLoginGarcom.putExtra(USUARIO, usuario);
+                                                          startActivity(intentLoginGarcom);
                                                           getRestauranteByIdGarcom(usuario);
                                                       }else{
                                                           intentLoginCliente.putExtra(USUARIO, usuario);
                                                           startActivity(intentLoginCliente);
                                                           //progressBarTime.setVisibility(View.INVISIBLE);
                                                       }
-
-
-
                                                   }
                                               }
                                 );
@@ -236,6 +197,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void onClickButtonLoginEntrar (View view) {
+        validarLogin();
+
+    }
+
+    public void onClickButtonLoginCadastrarse (View view) {
+        intentCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+        startActivity(intentCadastro);
+    }
+
+    public void onClickButtonLoginEsqueceuSuaSenha (View view) {
+        intentEsqueceuSuaSenha = new Intent(MainActivity.this, EsqueceuSuaSenhaActivity.class);
+        startActivity(intentEsqueceuSuaSenha);
+    }
+
+
+
+
     public void listarComandas(final Usuario garcom, final Restaurante restaurante) {
         intent = new Intent(this, ListaComandasGarcomActivity.class);
             new Thread(
@@ -243,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                comandas = GarcomNetwork.buscarComandas(URL, garcom.getId(), 'A');
+                                comandas = ComandaNetwork.buscarComandas(URL, garcom.getId(), 'A');
 
                                 runOnUiThread(new Runnable() {
                                                   @Override
@@ -386,5 +366,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 */
+
+     /* public void validarUsuario(String email, String senha) {
+        login(email,senha);
+//        String emailCliente = "cliente@gmail.com";
+//        String emailGarcom = "garcom@gmail.com";
+//        String senhaCliente = "teste1";
+//        String senhaGarcom = "teste2";
+//
+//
+//
+//        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
+//            textInputLayoutEmail.setErrorEnabled(false);
+//            intentCodigoComandaCliente = new Intent(MainActivity.this, CodigoComandaClienteActivity.class);
+//            startActivity(intentCodigoComandaCliente);
+//        } else {
+//            textInputLayoutEmail.setErrorEnabled(true);
+//            textInputLayoutEmail.setError("Usuário invalido");
+//        }
+//
+//        if(email.equals(emailGarcom) && senha.equals(senhaGarcom)){
+//            textInputLayoutEmail.setErrorEnabled(false);
+////            listarComandas();
+//
+//        } else {
+//            textInputLayoutEmail.setErrorEnabled(true);
+//            textInputLayoutEmail.setError("Usuário invalido");
+//        }
+    }*/
 
 }

@@ -1,4 +1,4 @@
-package br.com.app07_partiu.Activity;
+package br.com.app07_partiu.Activity.Cliente;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

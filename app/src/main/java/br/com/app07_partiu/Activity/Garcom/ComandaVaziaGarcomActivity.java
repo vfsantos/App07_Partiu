@@ -1,4 +1,4 @@
-package br.com.app07_partiu.Activity;
+package br.com.app07_partiu.Activity.Garcom;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,12 +9,12 @@ import android.view.View;
 
 import br.com.app07_partiu.R;
 
-public class RecomendacaoDetalhesActivity extends AppCompatActivity {
+public class ComandaVaziaGarcomActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recomendacao_detalhes);
+        setContentView(R.layout.activity_comanda_vazia_garcom);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

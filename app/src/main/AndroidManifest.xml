@@ -16,15 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".Activity.ListaItensLancarComandaGarcomStepSelecionarActivity"
+            android:name=".Activity.Garcom.ListaItensLancarComandaGarcomStepSelecionarActivity"
             android:label="@string/title_activity_lista_itens_lancar_comanda_garcom_step_selecionar"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
         <activity
-            android:name=".ComandaVaziaGarcomActivity"
+            android:name=".Activity.Garcom.ComandaVaziaGarcomActivity"
             android:label="@string/title_activity_comanda_vazia_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.ListaComandasGarcomActivity"
+            android:name=".Activity.Garcom.ListaComandasGarcomActivity"
             android:label="@string/title_activity_visualizar_comanda"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
@@ -32,11 +32,11 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.CodigoComandaClienteActivity"
+            android:name=".Activity.Cliente.CodigoComandaClienteActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.EsqueceuSuaSenhaActivity"
+            android:name=".Activity.Cliente.EsqueceuSuaSenhaActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
@@ -44,15 +44,15 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.RecomendacaoDetalhesActivity"
+            android:name=".Activity.Cliente.RecomendacaoDetalhesActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.RecomendacaoActivity"
+            android:name=".Activity.Cliente.RecomendacaoActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.CadastroActivity"
+            android:name=".Activity.Cliente.CadastroActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -60,7 +60,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.SplashScreenActivity"
+            android:name=".Activity.Cliente.SplashScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
