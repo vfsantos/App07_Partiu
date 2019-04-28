@@ -16,9 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".Activity.PedidoFinalizadoGarcom"
+            android:label="@string/title_activity_pedido_finalizado_garcom"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".Activity.PedidoConfirmacaoGarcomActivity"
             android:label="@string/title_activity_pedido_confirmacao_garcom"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.PedidoSelecaoGarcomActivity.PedidoSelecaoGarcomActivity"
             android:label="@string/title_activity_lista_itens_lancar_comanda_garcom_step_selecionar"

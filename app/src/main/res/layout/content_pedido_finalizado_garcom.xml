@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.PedidoFinalizadoGarcom"
+    tools:showIn="@layout/activity_pedido_finalizado_garcom"
+    android:background="@color/chumbo_100">
+
+
+    <Button
+        android:id="@+id/button_fechar_pedidoFinalizadoGarcom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_primary"
+        android:text="@string/button_fechar_pedidofinalizadogarcom"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_text1_pedidoFinalizadoGarcom"
+        android:layout_width="270dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="176dp"
+        android:text="@string/text1_pedidofinalizadogarcom"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_pedidoFinalizadoGarcom" />
+
+    <ImageView
+        android:id="@+id/imageView_pedidoFinalizadoGarcom"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar_pedidoFinalizadoGarcom"
+        app:srcCompat="@drawable/ic_img_beer" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_pedidoFinalizadoGarcom"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:max="100"
+        android:progress="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_text2_pedidoFinalizadoGarcom"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/text2_pedidofinalizadogarcom"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.324"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_text1_pedidoFinalizadoGarcom" />
+
+</android.support.constraint.ConstraintLayout>

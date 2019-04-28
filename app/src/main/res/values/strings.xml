@@ -117,6 +117,12 @@
         ListaItensLancarComandaGarcomStepSelecionarActivity
     </string>
     <string name="title_activity_pedido_confirmacao_garcom">PedidoConfirmacaoGarcomActivity</string>
+    <string name="title_activity_pedido_finalizado_garcom">PedidoFinalizadoGarcom</string>
+
+    <!-- PedidoConcluidoGarcom -->
+    <string name="text1_pedidofinalizadogarcom">Isso ai!</string>
+    <string name="text2_pedidofinalizadogarcom">Itens lançados com sucesso</string>
+    <string name="button_fechar_pedidofinalizadogarcom">fechar</string>
 
 
 </resources>
