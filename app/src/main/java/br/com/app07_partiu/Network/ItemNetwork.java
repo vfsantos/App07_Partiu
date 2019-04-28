@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
+import br.com.app07_partiu.Model.ItemConvertView;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,59 +23,55 @@ import okhttp3.Response;
 
 public class ItemNetwork {
 
-    public static List<Item> buscarItensCardapio(String url) throws IOException, JSONException {
-
-        //converte o número da mesa de int para string para poder concatenar na url
-        String urlGetItem = url + "/getPedidosComanda?idComanda=" + idComanda;
+    public static ItemConvertView[] getItensCardapio(String url) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        List<Item> itens = new ArrayList<Item>();
+        ArrayList<ItemConvertView> itens = new ArrayList<>();
+        url += "/buscarItensCardapio";
 
         Request request = new Request.Builder()
-                .url(urlGetItem)
+                .url(url)
                 .build();
 
         Response response = client.newCall(request).execute();
+
         String resultado = response.body().string();
-        Log.d("TESTES", resultado);
+
 
         try {
             JSONArray vetor = new JSONArray(resultado);
             for (int i = 0; i < vetor.length(); i++) {
-                JSONObject obj = (JSONObject) vetor.get(i);
-                Item item = new Item();
-                item.setId(obj.getInt("id"));
-                item.setCnpjRestaurante(obj.getLong("cnpjRestaurante"));
-                item.setCategoria(obj.getString("categoria"));
-                item.setNome(obj.getString("nome"));
-                item.setTipo(obj.getString("tipo"));
-                item.setValor(obj.getDouble("valor"));
-                item.setStatus(obj.getString("status"));
-                Usuario usuario = new Usuario();
-                usuario.setId(obj.getJSONObject("usuario").getInt("id"));
-                usuario.setTipo(obj.getJSONObject("tipo").getString("tipo"));
-                usuario.setCpf(obj.getJSONObject("cpf").getLong("cpf"));
-                usuario.setNome(obj.getJSONObject("nome").getString("nome"));
-                usuario.setDta_nascimento(obj.getJSONObject("dta_nascimento").getString("dta_nascimento"));
-                usuario.setEmail(obj.getJSONObject("email").getString("email"));
-                usuario.setDdd(obj.getJSONObject("ddd").getInt("ddd"));
-                usuario.setTelefone(obj.getJSONObject("telefone").getInt("telefone"));
-                usuario.setGenero((obj.getJSONObject("genero").getString("genero")).charAt(0));
-                usuario.setSenha(obj.getJSONObject("senha").getString("senha"));
-                item.setUsuario(usuario);
-                item.setIdPedido(obj.getInt("idPedido"));
-                item.setPorc_desconto(obj.getDouble("porc_desconto"));
-                item.setIdComanda(obj.getString("idComanda"));
-                item.setData(obj.getString("data"));
-                item.setStatusPedido(obj.getString("statusPedido"));
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item itemCardapio = new Item();
+                ItemConvertView itemConvertView = new ItemConvertView();
 
-                itens.add(item);
+                //pegar os itens do json e atribui a um objeto itemCardápio
+                itemCardapio.setId(item.getInt("id"));
+                itemCardapio.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                itemCardapio.setCategoria(item.getString("categoria"));
+                itemCardapio.setNome(item.getString("nome"));
+                itemCardapio.setTipo(item.getString("tipo"));
+                itemCardapio.setValor(item.getDouble("valor"));
+                itemCardapio.setStatus(item.getString("status"));
+
+                //adiciona cada objeto comanda recebido em um arraylist de itens
+                Log.d("TESTES", item.toString());
+
+                itemConvertView.setId(itemCardapio.getId());
+                itemConvertView.setCategoria(itemCardapio.getCategoria());
+                itemConvertView.setNome(itemCardapio.getNome());
+                itemConvertView.setValor(String.valueOf(itemCardapio.getValor()));
+                itemConvertView.setTipo(itemCardapio.getTipo());
+
+                itens.add(itemConvertView);
 
             }
-            return itens;
-        }catch (JSONException e) {
+
+        } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            throw new IOException(e);
         }
+
+        return itens.toArray(new ItemConvertView[0]);
     }
 
     public static boolean isConnected(Context context) {

@@ -11,32 +11,32 @@ import android.widget.TextView;
 
 import java.util.Hashtable;
 
-import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.ItemConvertView;
 import br.com.app07_partiu.R;
 
 public class PedidoSelecaoGarcomAdapter extends BaseAdapter implements SectionIndexer {
-    private ComandaConvertView[] comandas;
+    private ItemConvertView[] itens;
     private Activity activity;
     Object[] sectionHeaders;
     Hashtable<Integer, Integer> positionForSectionMap;
     Hashtable<Integer, Integer> sectionForPositionMap;
 
-    public PedidoSelecaoGarcomAdapter(ComandaConvertView[] comandas, Activity activity) {
-        this.comandas = comandas;
+    public PedidoSelecaoGarcomAdapter(ItemConvertView[] itens, Activity activity) {
+        this.itens = itens;
         this.activity = activity;
-        sectionHeaders = PedidoSelecaoGarcomSectionIndexBuilder.buildSectionHeaders(comandas);
-        positionForSectionMap = PedidoSelecaoGarcomSectionIndexBuilder.buildPositionForSectionMap(comandas);
-        sectionForPositionMap = PedidoSelecaoSectionIndexBuilder.buildSectionForPositionMap(comandas);
+        sectionHeaders = PedidoSelecaoGarcomSectionIndexBuilder.buildSectionHeaders(itens);
+        positionForSectionMap = PedidoSelecaoGarcomSectionIndexBuilder.buildPositionForSectionMap(itens);
+        sectionForPositionMap = PedidoSelecaoGarcomSectionIndexBuilder.buildSectionForPositionMap(itens);
     }
 
     @Override
     public int getCount() {
-        return comandas.length;
+        return itens.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return comandas[position];
+        return itens[position];
     }
 
     @Override
@@ -53,14 +53,13 @@ public class PedidoSelecaoGarcomAdapter extends BaseAdapter implements SectionIn
             view = inflater.inflate(R.layout.itemlistview_pedidoselecao, parent, false);
             TextView textViewProduto = (TextView) view.findViewById(R.id.textView_produto_pedidoSelecao);
             TextView textViewValor = (TextView) view.findViewById(R.id.textView_valor_pedidoSelecao);
-            HomeGarcomViewHolder viewHolder = new HomeGarcomViewHolder(textViewProduto, textViewValor);
+            PedidoSelecaoGarcomViewHolder viewHolder = new PedidoSelecaoGarcomViewHolder(textViewProduto, textViewValor);
             view.setTag(viewHolder);
         }
 
-        PedidoSelecaoViewHolder viewHolder = (PedidoSlecaoViewHolder)view.getTag();
-        viewHolder.getTextViewCodigoComanda().setText(comandas[position].getCodigoComanda());
-        viewHolder.getTextViewTotalComandaValor().setText(comandas[position].getValorTotalComanda());
-        viewHolder.getTextViewMesaNumero().setText(comandas[position].getMesa());
+        PedidoSelecaoGarcomViewHolder viewHolder = (PedidoSelecaoGarcomViewHolder)view.getTag();
+        viewHolder.getTextViewProduto().setText(itens[position].getNome());
+        viewHolder.getTextViewValor().setText(itens[position].getValor());
 
 
         return view;

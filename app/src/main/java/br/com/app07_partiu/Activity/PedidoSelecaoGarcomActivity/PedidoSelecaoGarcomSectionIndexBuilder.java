@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.TreeSet;
 
-import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.ItemConvertView;
 
 public class PedidoSelecaoGarcomSectionIndexBuilder {
 
     //cria um array de cabeçalhos de seção; países devem estar ordenados por nome
-    public static Object[] buildSectionHeaders(ComandaConvertView[] comandas){
+    public static Object[] buildSectionHeaders(ItemConvertView[] items){
         ArrayList<String> resultado = new ArrayList<>();
         TreeSet<String> usados = new TreeSet<>();
-        for(ComandaConvertView comanda:comandas){
-            String letra = comanda.getCodigoComanda().substring(0,1);
+        for(ItemConvertView item:items){
+            String letra = item.getNome().substring(0,1);
             if((!usados.contains(letra))){
                 resultado.add(letra);
             }
@@ -22,14 +22,14 @@ public class PedidoSelecaoGarcomSectionIndexBuilder {
         return resultado.toArray(new Object[0]);
     }
     //cria uma mapa para responder: posicao --> secao de dados ordenados pelo nome
-    public static Hashtable<Integer, Integer> buildSectionForPositionMap(ComandaConvertView[] comandas){
+    public static Hashtable<Integer, Integer> buildSectionForPositionMap(ItemConvertView[] items){
         Hashtable<Integer, Integer> resultados = new Hashtable<>();
         TreeSet<String> usados = new TreeSet<>();
 
         int secao = -1;
 
-        for(int i = 0; i < comandas.length; i++){
-            String letra = comandas[i].getCodigoComanda().substring(0,1);
+        for(int i = 0; i < items.length; i++){
+            String letra = items[i].getNome().substring(0,1);
 
             if(!usados.contains(letra)){
                 secao++;
@@ -41,14 +41,14 @@ public class PedidoSelecaoGarcomSectionIndexBuilder {
     }
 
     //cria uma mapa para responder: secao --> posicao de dados ordenados pelo nome
-    public static Hashtable<Integer, Integer> buildPositionForSectionMap(ComandaConvertView[] comandas){
+    public static Hashtable<Integer, Integer> buildPositionForSectionMap(ItemConvertView[] items){
         Hashtable<Integer, Integer> resultados = new Hashtable<>();
         TreeSet<String> usados = new TreeSet<>();
 
         int secao = -1;
 
-        for(int i = 0; i < comandas.length; i++){
-            String letra = comandas[i].getCodigoComanda().substring(0,1);
+        for(int i = 0; i < items.length; i++){
+            String letra = items[i].getNome().substring(0,1);
 
             if(!usados.contains(letra)){
                 secao++;
