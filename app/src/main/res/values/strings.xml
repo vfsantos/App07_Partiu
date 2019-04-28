@@ -123,6 +123,7 @@
     <string name="text1_pedidofinalizadogarcom">Isso ai!</string>
     <string name="text2_pedidofinalizadogarcom">Itens lançados com sucesso</string>
     <string name="button_fechar_pedidofinalizadogarcom">fechar</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 
 
 </resources>

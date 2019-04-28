@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.SplashScreenActivity"
-    tools:showIn="@layout/activity_splash_screen_acitivy"
+    tools:context=".Activity.LoadingActivity"
+    tools:showIn="@layout/activity_loading"
     android:background="@drawable/background">
 
     <ImageView
-        android:id="@+id/image_view_login_logo"
+        android:id="@+id/imageView_logo_loading"
         android:layout_width="157dp"
         android:layout_height="73dp"
         android:layout_alignParentBottom="true"
@@ -20,5 +20,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.423"
         app:srcCompat="@drawable/logo" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_loading"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="190dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_login_logo" />
 
 </android.support.constraint.ConstraintLayout>
