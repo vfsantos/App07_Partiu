@@ -1,4 +1,4 @@
-package br.com.app07_partiu.Activity.Cliente;
+package br.com.app07_partiu.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,18 +18,14 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.app07_partiu.Activity.ComandaActivity;
-import br.com.app07_partiu.Activity.Garcom.ListaComandasGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
-
-import static br.com.app07_partiu.Activity.MainActivity.USUARIO;
 
 public class CodigoComandaClienteActivity extends AppCompatActivity {
 

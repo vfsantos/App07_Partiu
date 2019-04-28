@@ -1,4 +1,4 @@
-package br.com.app07_partiu.Activity.Cliente;
+package br.com.app07_partiu.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -44,7 +44,7 @@ public class RecomendacaoActivity extends AppCompatActivity {
         atividade = this;
         Intent intent = getIntent();
 
-        //estabelecimentos = (Estabelecimento[]) intent.getSerializableExtra(MainActivity.ESTABELECIMENTO);
+        //estabelecimentos = (Estabelecimento[]) intent.getSerializableExtra(LoginActivity.ESTABELECIMENTO);
 
 
         ListView listViewEmAlta = (ListView) findViewById(R.id.recycler_em_alta);

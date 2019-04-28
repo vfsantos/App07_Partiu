@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.ComandaVaziaGarcomActivity"
-    tools:showIn="@layout/activity_comanda_vazia_garcom">
+    tools:context=".Activity.PedidoConfirmacaoGarcomActivity"
+    tools:showIn="@layout/activity_pedido_confirmacao_garcom">
 
 </android.support.constraint.ConstraintLayout>

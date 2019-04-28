@@ -1,4 +1,4 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity.HomeGarcomActivity;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 
-public class SectionIndexBuilder {
+public class HomeGarcomSectionIndexBuilder {
     //cria um array de cabeçalhos de seção; países devem estar ordenados por nome
     public static Object[] buildSectionHeaders(ComandaConvertView[] comandas){
         ArrayList<String> resultado = new ArrayList<>();

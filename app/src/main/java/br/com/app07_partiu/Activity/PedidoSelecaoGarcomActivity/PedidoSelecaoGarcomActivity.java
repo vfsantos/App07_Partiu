@@ -1,11 +1,8 @@
-package br.com.app07_partiu.Activity.Garcom;
+package br.com.app07_partiu.Activity.PedidoSelecaoGarcomActivity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -13,7 +10,7 @@ import android.widget.TextView;
 
 import br.com.app07_partiu.R;
 
-public class ListaItensLancarComandaGarcomStepSelecionarActivity extends AppCompatActivity {
+public class PedidoSelecaoGarcomActivity extends AppCompatActivity {
 
     private ProgressBar progressBarSterSelecionar;
     private TextView textViewSelecionarItem;
@@ -23,7 +20,7 @@ public class ListaItensLancarComandaGarcomStepSelecionarActivity extends AppComp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_itens_lancar_comanda_garcom_step_selecionar);
+        setContentView(R.layout.activity_pedido_selecao_garcom);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -32,4 +32,9 @@
     <color name="garcom_comanda_item_hora_de_chagada_desativada">#767676</color>
 
     <color name="background_footer_button">#F6F6F6</color>
+
+    <color name="branco">#FFFFFF</color>
+    <color name="chumbo_100">#383838</color>
+    <color name="chumbo_50">#848484</color>
+    <color name="mostarda_100">#E9A64E</color>
 </resources>

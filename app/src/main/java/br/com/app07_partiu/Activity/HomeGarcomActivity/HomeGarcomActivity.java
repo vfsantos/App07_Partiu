@@ -1,4 +1,4 @@
-package br.com.app07_partiu.Activity.Garcom;
+package br.com.app07_partiu.Activity.HomeGarcomActivity;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -17,18 +17,18 @@ import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
 
-import br.com.app07_partiu.Activity.Garcom.ComandaVaziaGarcomActivity;
-import br.com.app07_partiu.Activity.MainActivity;
-import br.com.app07_partiu.ComandaGarcomAdapter;
+import br.com.app07_partiu.Activity.ComandaVaziaGarcomActivity;
+import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.R;
 
-public class ListaComandasGarcomActivity extends AppCompatActivity {
+public class HomeGarcomActivity extends AppCompatActivity {
 
-    public static final String URL = "http://192.168.200.2:8080/partiu";
+    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    //public static final String URL = "http://192.168.200.2:8080/partiu";
     //public static final String URL = "http://192.168.43.193:8080/partiu";
     public static final String COMANDA = "br.com.app07_partiu.comanda";
 
@@ -60,7 +60,7 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_comandas_garcom);
+        setContentView(R.layout.activity_home_garcom);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -78,7 +78,7 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
         context = this;
 
         //Recebe objeto comanda, usuário e restaurante da mainActivity
-        comandas = (ComandaConvertView[]) intentComanda.getSerializableExtra(MainActivity.COMANDAS);
+        comandas = (ComandaConvertView[]) intentComanda.getSerializableExtra(LoginActivity.COMANDAS);
 
 
         String[] sTemp= new String[restaurante.getQtdMesas()];
@@ -90,7 +90,7 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
 
         //ListView comandas do cargom
         ListView listView = (ListView) findViewById(R.id.list_view_comanda_garcom);
-        ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(comandas, this);
+        HomeGarcomAdapter adapter = new HomeGarcomAdapter(comandas, this);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,7 +125,7 @@ public class ListaComandasGarcomActivity extends AppCompatActivity {
             public void onClick(DialogInterface arg0, int arg1) {
 
                 //Rebebe objeto usuario
-                garcom = (Usuario) intentUsuario.getSerializableExtra(MainActivity.USUARIO);
+                garcom = (Usuario) intentUsuario.getSerializableExtra(LoginActivity.USUARIO);
 
                 //Solicita a criação de uam comanda nova
                 criarComanda(garcom.getId(), numeroDaMesa);

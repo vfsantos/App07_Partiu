@@ -116,6 +116,7 @@
     <string name="title_activity_lista_itens_lancar_comanda_garcom_step_selecionar">
         ListaItensLancarComandaGarcomStepSelecionarActivity
     </string>
+    <string name="title_activity_pedido_confirmacao_garcom">PedidoConfirmacaoGarcomActivity</string>
 
 
 </resources>

@@ -15,10 +15,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
 
-import br.com.app07_partiu.Activity.Cliente.CadastroActivity;
-import br.com.app07_partiu.Activity.Cliente.CodigoComandaClienteActivity;
-import br.com.app07_partiu.Activity.Cliente.EsqueceuSuaSenhaActivity;
-import br.com.app07_partiu.Activity.Garcom.ListaComandasGarcomActivity;
+import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
 import br.com.app07_partiu.Model.Restaurante;
@@ -28,7 +25,7 @@ import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     //ImageView
     private ImageView imageViewLogo;
@@ -57,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
     public Intent intentLoginGarcom;
     public Intent intentLoginCliente;
 
-    //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
     //public static final String URL = "http://192.168.43.193:8080/partiu"; //
-    public static final String URL = "http://10.71.204.149/partiu";
+    //public static final String URL = "http://10.71.204.149/partiu";
 
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
     public static final String USUARIO = "br.com.app07_partiu.usuario";
@@ -86,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         //ImageView
         imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         final String enderecoEmailUsuario = email;
         final String senhaUsuario = senha;
 
-        intentLoginGarcom = new Intent(this, ListaComandasGarcomActivity.class);
+        intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
         intentLoginCliente = new Intent(this, CodigoComandaClienteActivity.class);
 
         if(UsuarioNetwork.isConnected(this)) {
@@ -204,12 +201,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickButtonLoginCadastrarse (View view) {
-        intentCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+        intentCadastro = new Intent(LoginActivity.this, CadastroClienteActivity.class);
         startActivity(intentCadastro);
     }
 
     public void onClickButtonLoginEsqueceuSuaSenha (View view) {
-        intentEsqueceuSuaSenha = new Intent(MainActivity.this, EsqueceuSuaSenhaActivity.class);
+        intentEsqueceuSuaSenha = new Intent(LoginActivity.this, EsqueceuSuaSenhaActivity.class);
         startActivity(intentEsqueceuSuaSenha);
     }
 
@@ -217,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void listarComandas(final Usuario garcom, final Restaurante restaurante) {
-        intent = new Intent(this, ListaComandasGarcomActivity.class);
+        intent = new Intent(this, HomeGarcomActivity.class);
             new Thread(
                     new Runnable() {
                         @Override
@@ -299,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }).start();
         } else {
-            intentCadastro = new Intent(MainActivity.this, ErroConeccaoActivity.class);
+            intentCadastro = new Intent(LoginActivity.this, ErroConeccaoActivity.class);
             startActivity(intentCadastro);
         }
     }
@@ -331,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }).start();
         } else {
-            intentCadastro = new Intent(MainActivity.this, ErroConeccaoActivity.class);
+            intentCadastro = new Intent(LoginActivity.this, ErroConeccaoActivity.class);
             startActivity(intentCadastro);
         }
     }
@@ -361,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }).start();
         } else {
-            intentCadastro = new Intent(MainActivity.this, ErroConeccaoActivity.class);
+            intentCadastro = new Intent(LoginActivity.this, ErroConeccaoActivity.class);
             startActivity(intentCadastro);
         }
     }
@@ -378,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
 //            textInputLayoutEmail.setErrorEnabled(false);
-//            intentCodigoComandaCliente = new Intent(MainActivity.this, CodigoComandaClienteActivity.class);
+//            intentCodigoComandaCliente = new Intent(LoginActivity.this, CodigoComandaClienteActivity.class);
 //            startActivity(intentCodigoComandaCliente);
 //        } else {
 //            textInputLayoutEmail.setErrorEnabled(true);

@@ -1,9 +1,9 @@
-package br.com.app07_partiu;
+package br.com.app07_partiu.Activity.HomeGarcomActivity;
 
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ViewHolder {
+public class HomeGarcomViewHolder {
     public TextView textViewCodigoComanda;
     public TextView textViewTotalComanda;
     public TextView textViewTotalComandaValor;
@@ -14,9 +14,9 @@ public class ViewHolder {
     public TextView textViewHora;
 
 
-    public ViewHolder(TextView textViewCodigoComanda, TextView textViewTotalComanda, TextView textViewTotalComandaValor,
-                      TextView textViewPessoasComanda, TextView textViewPessoasComandaGarcomNumero,
-                      TextView textViewMesa, TextView textViewMesaNumero, TextView textViewHora) {
+    public HomeGarcomViewHolder(TextView textViewCodigoComanda, TextView textViewTotalComanda, TextView textViewTotalComandaValor,
+                                TextView textViewPessoasComanda, TextView textViewPessoasComandaGarcomNumero,
+                                TextView textViewMesa, TextView textViewMesaNumero, TextView textViewHora) {
         this.textViewCodigoComanda = textViewCodigoComanda;
         this.textViewTotalComanda = textViewTotalComanda;
         this.textViewTotalComandaValor = textViewTotalComandaValor;
