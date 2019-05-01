@@ -3,10 +3,13 @@ package br.com.app07_partiu.Activity.PedidoSelecaoGarcomActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.app07_partiu.R;
 
@@ -16,12 +19,13 @@ public class PedidoSelecaoGarcomActivity extends AppCompatActivity {
     private TextView textViewSelecionarItem;
     private ListView listViewItensCardapio;
     private Button buttonContinuar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_selecao_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         progressBarSterSelecionar = (ProgressBar) findViewById(R.id.progress_bar_lancar_item_comanda_garcom_step_selecionar);
@@ -31,4 +35,27 @@ public class PedidoSelecaoGarcomActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_menu_busca: {
+                Toast.makeText(this, "buscar", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+            case R.id.item_menu_notificacao: {
+                Toast.makeText(this, "notificação", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

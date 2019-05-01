@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="busca"
+        android:id="@+id/item_menu_busca"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_search"/>
+
+    <item android:title="notificacao"
+        android:id="@+id/item_menu_notificacao"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_notifications"/>
+
+</menu>
