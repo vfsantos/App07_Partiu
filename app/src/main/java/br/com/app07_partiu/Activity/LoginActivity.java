@@ -3,6 +3,7 @@ package br.com.app07_partiu.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
+import java.util.zip.Inflater;
 
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
@@ -54,8 +56,11 @@ public class LoginActivity extends AppCompatActivity {
     public Intent intentLoginGarcom;
     public Intent intentLoginCliente;
 
-    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
-    //public static final String URL = "http://192.168.43.193:8080/partiu"; //
+    //Snackbar
+    private Snackbar snackbarErroLogin;
+
+    //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    public static final String URL = "http://192.168.137.1:8080/partiu"; //
     //public static final String URL = "http://10.71.204.149/partiu";
 
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
@@ -106,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBarTime = (ProgressBar)findViewById(R.id.progress_bar_time);
         progressBarTime.setVisibility(View.INVISIBLE);
 
-        contexto = this;
+        contexto = this;;
 
         //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
@@ -114,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             editTextSenha.setText("123");
         }
     }
+
 
     public void validarLogin() {
         email = editTextEmail.getText().toString();
@@ -167,7 +173,6 @@ public class LoginActivity extends AppCompatActivity {
                                                       }else{
                                                           intentLoginCliente.putExtra(USUARIO, usuario);
                                                           startActivity(intentLoginCliente);
-                                                          //progressBarTime.setVisibility(View.INVISIBLE);
                                                       }
                                                   }
                                               }
@@ -180,7 +185,16 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("TESTES", "Retornou 'Usuario Inválido!'");
                                 runOnUiThread(new Runnable(){
                                     public void run() {
-                                        Toast.makeText(contexto, "Usuario Inválido!",Toast.LENGTH_LONG).show();
+                                        snackbarErroLogin = Snackbar.make(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_login, Snackbar.LENGTH_LONG);
+                                       /* em desenvolvimento
+                                        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbarErroLogin.getView();
+
+                                        View viewSnackbar = Inflater.inflate(R.layout.snackbar_erro, null);
+                                        layout.setPadding(0,0,0,0);
+                                        layout.addView(viewSnackbar, 0);
+                                        */
+                                        snackbarErroLogin.show();
+
                                     }
                                 });
                             }
@@ -192,8 +206,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     public void onClickButtonLoginEntrar (View view) {
         validarLogin();

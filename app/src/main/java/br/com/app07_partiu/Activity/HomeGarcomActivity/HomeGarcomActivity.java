@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,9 +28,9 @@ import br.com.app07_partiu.R;
 
 public class HomeGarcomActivity extends AppCompatActivity {
 
-    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
     //public static final String URL = "http://192.168.200.2:8080/partiu";
-    //public static final String URL = "http://192.168.43.193:8080/partiu";
+    public static final String URL = "http://192.168.137.1:8080/partiu"; //
     public static final String COMANDA = "br.com.app07_partiu.comanda";
 
     //AlertDialog / Buider
@@ -77,8 +78,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
         context = this;
 
-        //Recebe objeto comanda, usuário e restaurante da mainActivity
+        //Recebe objeto comanda
         comandas = (ComandaConvertView[]) intentComanda.getSerializableExtra(LoginActivity.COMANDAS);
+        Log.d("TESTES", comandas.toString());
 
 
         String[] sTemp= new String[restaurante.getQtdMesas()];

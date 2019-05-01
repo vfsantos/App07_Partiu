@@ -1,6 +1,8 @@
 package br.com.app07_partiu.Model;
 
-public class ItemConvertView {
+import java.io.Serializable;
+
+public class ItemConvertView implements Serializable {
 
     private int id;
     private String categoria;

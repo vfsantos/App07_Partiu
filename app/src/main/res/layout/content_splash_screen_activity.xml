@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.SplashScreenActivity"
-    tools:showIn="@layout/activity_splash_screen_acitivy"
+    tools:showIn="@layout/activity_splash_screen_activity"
     android:background="@drawable/background">
 
     <ImageView
-        android:id="@+id/image_view_login_logo"
+        android:id="@+id/imageView_splashScreen_logo"
         android:layout_width="157dp"
         android:layout_height="73dp"
         android:layout_alignParentBottom="true"
@@ -19,6 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.423"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/ic_img_logo" />
 
 </android.support.constraint.ConstraintLayout>

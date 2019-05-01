@@ -8,8 +8,8 @@
     tools:context=".Activity.LoginActivity"
     android:orientation="vertical"
     tools:showIn="@layout/activity_login"
-    android:background="@drawable/background">
-
+    android:background="@drawable/background"
+    android:id="@+id/constraintLayoutLogin">
 
     <ImageView
         android:id="@+id/image_view_login_logo"

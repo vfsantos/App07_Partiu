@@ -125,5 +125,8 @@
     <string name="button_fechar_pedidofinalizadogarcom">fechar</string>
     <string name="title_activity_loading">LoadingActivity</string>
 
+    <!-- Snackbar -->
+    <string name="snackbar_erro_login">Descupe! Ocorreu um erro :(</string>
+
 
 </resources>
