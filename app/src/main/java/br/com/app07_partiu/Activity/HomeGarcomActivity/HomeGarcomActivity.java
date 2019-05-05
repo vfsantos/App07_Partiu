@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
+import android.content.Intent.*;
 
 import br.com.app07_partiu.Activity.ComandaVaziaGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
@@ -57,28 +58,26 @@ public class HomeGarcomActivity extends AppCompatActivity {
     private int numeroDaMesa;
     private int idGarcom;
 
+    //ListView
+    ListView listViewComandas;
+
+    //Toolbar
+    private Toolbar toolbar;
+
+    //FAB
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_garcom);
 
-        //Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //FAB criar comanda
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertNovaComanda();
-            }
-        });
+        inicializarComponentes();
 
         context = this;
 
-        //Recebe objeto comanda
+
+
         comandas = (ComandaConvertView[]) intentComanda.getSerializableExtra(LoginActivity.COMANDAS);
         Log.d("TESTES", comandas.toString());
 
@@ -90,23 +89,21 @@ public class HomeGarcomActivity extends AppCompatActivity {
         mesas = sTemp;
 
 
-        //ListView comandas do cargom
-        ListView listView = (ListView) findViewById(R.id.list_view_comanda_garcom);
+        listViewComandas = (ListView) findViewById(R.id.list_view_comanda_garcom);
         HomeGarcomAdapter adapter = new HomeGarcomAdapter(comandas, this);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewComandas.setAdapter(adapter);
+        listViewComandas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 alertProximaSprint();
-
             }
 
         });
 
     }
+
 
     //Alert com númerodas mesas
     private void alertNovaComanda() {
@@ -217,4 +214,22 @@ public class HomeGarcomActivity extends AppCompatActivity {
         //Exibe
         alertaProximaSprint.show();
     }
+
+    public void inicializarComponentes() {
+
+        //Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //FAB criar comanda
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertNovaComanda();
+            }
+        });
+
+    }
+
 }

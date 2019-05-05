@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.ComandaActivity"
-    tools:showIn="@layout/activity_comanda_activiy">
+    tools:context=".Activity.ComandaClienteActivity"
+    tools:showIn="@layout/activity_comanda_cliente_activiy">
 
 </android.support.constraint.ConstraintLayout>

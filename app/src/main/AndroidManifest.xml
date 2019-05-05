@@ -40,7 +40,7 @@
             android:label="@string/title_activity_visualizar_comanda"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.ComandaActivity"
+            android:name=".Activity.ComandaClienteActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity

@@ -51,16 +51,15 @@ public class LoginActivity extends AppCompatActivity {
     public Intent intentCodigoComandaCliente;
     public Intent intentCadastro;
     public Intent intentEsqueceuSuaSenha;
-    public Intent intentListaComandasGarcom;
-    public Intent intent;
+    public Intent intentListarComanda;
     public Intent intentLoginGarcom;
     public Intent intentLoginCliente;
 
     //Snackbar
     private Snackbar snackbarErroLogin;
 
-    //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
-    public static final String URL = "http://192.168.137.1:8080/partiu"; //
+    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    //public static final String URL = "http://192.168.137.1:8080/partiu"; //
     //public static final String URL = "http://10.71.204.149/partiu";
 
     public static final String COMANDAS = "br.com.app07_partiu.comandas";
@@ -90,26 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //ImageView
-        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
-        imageViewOu = (ImageView) findViewById(R.id.image_view_ou);
-
-        //EditText
-        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
-        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
-
-        //TextInputLayout
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
-        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
-
-        //Button
-        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
-        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
-        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
-
-        //ProgressBar
-        progressBarTime = (ProgressBar)findViewById(R.id.progress_bar_time);
-        progressBarTime.setVisibility(View.INVISIBLE);
+        inicializarComponentes();
 
         contexto = this;;
 
@@ -119,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             editTextSenha.setText("123");
         }
     }
-
 
     public void validarLogin() {
         email = editTextEmail.getText().toString();
@@ -186,13 +165,6 @@ public class LoginActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable(){
                                     public void run() {
                                         snackbarErroLogin = Snackbar.make(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_login, Snackbar.LENGTH_LONG);
-                                       /* em desenvolvimento
-                                        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbarErroLogin.getView();
-
-                                        View viewSnackbar = Inflater.inflate(R.layout.snackbar_erro, null);
-                                        layout.setPadding(0,0,0,0);
-                                        layout.addView(viewSnackbar, 0);
-                                        */
                                         snackbarErroLogin.show();
 
                                     }
@@ -226,21 +198,22 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void listarComandas(final Usuario garcom, final Restaurante restaurante) {
-        intent = new Intent(this, HomeGarcomActivity.class);
+        intentListarComanda = new Intent(this, HomeGarcomActivity.class);
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 comandas = ComandaNetwork.buscarComandas(URL, garcom.getId(), 'A');
+                                Log.d("TESTES", comandas.toString());
 
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
-                                                      intent.putExtra(RESTAURANTE, restaurante);
-                                                      intent.putExtra(COMANDAS, comandas);
-                                                      intent.putExtra(USUARIO, garcom);
-                                                      startActivity(intent);
+                                                      intentListarComanda.putExtra(RESTAURANTE, restaurante);
+                                                      intentListarComanda.putExtra(USUARIO, garcom);
+                                                      intentListarComanda.putExtra(COMANDAS, comandas);
+                                                      startActivity(intentListarComanda);
                                                       //TODO consertar progressBarTime
                                                       //progressBarTime.setVisibility(View.INVISIBLE);
                                                   }
@@ -278,6 +251,30 @@ public class LoginActivity extends AppCompatActivity {
                 }).start();
 
     }
+
+    public void inicializarComponentes(){
+        //ImageView
+        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
+        imageViewOu = (ImageView) findViewById(R.id.image_view_ou);
+
+        //EditText
+        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
+        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
+
+        //TextInputLayout
+        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
+        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
+
+        //Button
+        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
+        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
+        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
+
+        //ProgressBar
+        progressBarTime = (ProgressBar)findViewById(R.id.progress_bar_time);
+        progressBarTime.setVisibility(View.INVISIBLE);
+    }
+
 
 
     //Código abaixo é referente a parte de recomendação e nesse primeiro momento não deve ser considerado

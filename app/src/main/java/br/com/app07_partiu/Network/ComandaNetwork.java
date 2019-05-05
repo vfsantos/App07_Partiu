@@ -65,6 +65,7 @@ public class ComandaNetwork {
 
 
                 comandas.add(comandaConvertView);
+                System.out.println("Array de comandas " + comandas.toArray());
 
             }
 
@@ -127,15 +128,49 @@ public class ComandaNetwork {
             comanda.setCodigoComanda(object.getString("codigo"));
             comanda.setStatus(object.getString("status"));
             comanda.setMesa(object.getInt("mesa"));
-            comanda.setDataEntrada(object.getString("dataEntrada"));
-            comanda.setDataSaida(object.getString("dataSaida"));
-            return comanda;
+            comanda.setDataEntrada(object.getString("dtaEntrada"));
 
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
+        return comanda;
     }
+/*
+    public static Comanda getCodComanda(String url, String codigo) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Comanda comanda = new Comanda();
+
+        Request request = new Request.Builder()
+                .url(url+ "/getComandaByCodigo?codigo=" + codigo)
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        String resultado = response.body().string();
+        Log.d("TESTES", resultado);
+
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for(int i = 0; i < vetor.length(); i++){
+                JSONObject item = (JSONObject) vetor.get(i);
+                comanda.setId(item.getInt("id"));
+                comanda.setCodigoComanda(item.getString("codido"));
+                comanda.setMesa(item.getInt("mesa"));
+                comanda.setDataEntrada(item.getString("dtaEntrada"));
+                comanda.setStatus(item.getString("status"));
+                comanda.setDataSaida("");
+                comanda.setValorTotalComanda(0.0);
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new IOException(e);
+        }
+        return comanda;
+    }*/
 
     public static List<Item> getPedidosComanda(String url, int idComanda) throws IOException, JSONException {
 

@@ -20,6 +20,6 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/content_codigo_comanda_cliente" />
+    <include layout="@layout/content_entrar_comanda_cliente" />
 
 </android.support.design.widget.CoordinatorLayout>
