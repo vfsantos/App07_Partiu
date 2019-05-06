@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Partiu</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- Activity Login -->
+    <string name="text_login_bemvindo">Bem-vindo</string>
+    <string name="text_login_continueparaentrar">Continue para entrar</string>
+    <string name="text_login_novousuario">Novo usuário?</string>
+    
+    <string name="btn_login_entrar">Entrar</string>
+    <string name="btn_login_esqueceusuasenha">Esqueceu sua senha?</string>
+    <string name="btn_login_cadastrese">Cadastre-se</string>
+    <!-- Fim Activity Login -->
+
+
 
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
     <string name="placeholder_senha">senha</string>

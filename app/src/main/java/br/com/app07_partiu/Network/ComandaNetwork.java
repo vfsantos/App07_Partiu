@@ -136,41 +136,6 @@ public class ComandaNetwork {
         }
         return comanda;
     }
-/*
-    public static Comanda getCodComanda(String url, String codigo) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Comanda comanda = new Comanda();
-
-        Request request = new Request.Builder()
-                .url(url+ "/getComandaByCodigo?codigo=" + codigo)
-                .build();
-
-        Response response = client.newCall(request).execute();
-
-        String resultado = response.body().string();
-        Log.d("TESTES", resultado);
-
-
-        try {
-            JSONArray vetor = new JSONArray(resultado);
-            for(int i = 0; i < vetor.length(); i++){
-                JSONObject item = (JSONObject) vetor.get(i);
-                comanda.setId(item.getInt("id"));
-                comanda.setCodigoComanda(item.getString("codido"));
-                comanda.setMesa(item.getInt("mesa"));
-                comanda.setDataEntrada(item.getString("dtaEntrada"));
-                comanda.setStatus(item.getString("status"));
-                comanda.setDataSaida("");
-                comanda.setValorTotalComanda(0.0);
-
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            throw new IOException(e);
-        }
-        return comanda;
-    }*/
 
     public static List<Item> getPedidosComanda(String url, int idComanda) throws IOException, JSONException {
 
@@ -226,47 +191,6 @@ public class ComandaNetwork {
             return null;
         }
     }
-
-    /* em desenvolvimento
-    public static ArrayAdapter<String> buscarMesas(String url) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        ArrayList<String> numeroMesas = new ArrayList<>();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        Response response = client.newCall(request).execute();
-
-        String resultado = response.body().string();
-
-        try {
-            JSONArray vetor = new JSONArray(resultado);
-            for(int i = 0; i < vetor.length(); i++) {
-                JSONObject item = (JSONObject) vetor.get(i);
-                String numeroMesa = null;
-
-                //pegar os itens do json e atribui a um objeto comanda
-                try {
-                    numeroMesa = String.valueOf(item.getInt("numeromesa"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                //adiciona cada objeto comanda recebido em um arraylist de comandas
-                numeroMesas.add(numeroMesa);
-
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            throw new IOException(e);
-        }
-
-        return numeroMesas.toArray(new String[0]);
-    }
-
-    */
 
     public static boolean isConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)

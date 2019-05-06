@@ -26,4 +26,17 @@
 
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="StyledTilEditTextTheme">
+        <item name="colorControlNormal">#e6ffffff</item> // Cor padrão da linha
+        <item name="colorControlActivated">#faF8B864</item> // Cor linha e texto quando recebe foco
+        <item name="android:textColorHint">#c8ffffff</item> // É a cor normal do texto hint(email)
+        <item name="android:colorControlHighlight">#c8F8B864</item>
+    </style>
+
+    <style name="StyledTilEditText">
+        <item name="android:theme">@style/StyledTilEditTextTheme</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textColorHint">#c8ffffff</item> // Cor texto(hint) sem foco
+    </style>
+
 </resources>

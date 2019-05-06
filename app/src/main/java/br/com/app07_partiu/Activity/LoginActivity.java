@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //ImageView
     private ImageView imageViewLogo;
-    private ImageView imageViewOu;
 
     //EditText
     private EditText editTextEmail;
@@ -255,7 +254,6 @@ public class LoginActivity extends AppCompatActivity {
     public void inicializarComponentes(){
         //ImageView
         imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
-        imageViewOu = (ImageView) findViewById(R.id.image_view_ou);
 
         //EditText
         editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
