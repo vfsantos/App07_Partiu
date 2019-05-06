@@ -31,7 +31,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
     //public static final String URL = "http://192.168.200.2:8080/partiu";
-    public static final String URL = "http://192.168.137.1:8080/partiu"; //
+    public static final String URL = LoginActivity.URL; //
     public static final String COMANDA = "br.com.app07_partiu.comanda";
 
     //AlertDialog / Buider
@@ -75,11 +75,12 @@ public class HomeGarcomActivity extends AppCompatActivity {
         inicializarComponentes();
 
         context = this;
+        Intent intent = getIntent();
 
-
-
-        comandas = (ComandaConvertView[]) intentComanda.getSerializableExtra(LoginActivity.COMANDAS);
-        Log.d("TESTES", comandas.toString());
+        restaurante = (Restaurante) intent.getSerializableExtra(LoginActivity.RESTAURANTE);
+        comandas = (ComandaConvertView[]) intent.getSerializableExtra(LoginActivity.COMANDAS);
+        garcom = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
+//        Log.d("TESTES", comandas.toString());
 
 
         String[] sTemp= new String[restaurante.getQtdMesas()];

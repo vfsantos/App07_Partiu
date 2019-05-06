@@ -61,9 +61,9 @@ public class LoginActivity extends AppCompatActivity {
     //public static final String URL = "http://192.168.137.1:8080/partiu"; //
     //public static final String URL = "http://10.71.204.149/partiu";
 
-    public static final String COMANDAS = "br.com.app07_partiu.comandas";
-    public static final String USUARIO = "br.com.app07_partiu.usuario";
-    public static final String RESTAURANTE = "br.com.app07_partiu.restaurante";
+    public static final String COMANDAS = "br.com.app07_partiu.LoginActivity.comandas";
+    public static final String USUARIO = "br.com.app07_partiu.LoginActivity.usuario";
+    public static final String RESTAURANTE = "br.com.app07_partiu.LoginActivity.restaurante";
 
     //Array
     ComandaConvertView[] comandas;
@@ -145,9 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                                                   @Override
                                                   public void run() {
                                                       if (usuario.getTipo().equals("garcom")){
-                                                          intentLoginGarcom.putExtra(USUARIO, usuario);
-                                                          startActivity(intentLoginGarcom);
-                                                          getRestauranteByIdGarcom(usuario);
+                                                          getRestauranteByIdGarcom();
                                                       }else{
                                                           intentLoginCliente.putExtra(USUARIO, usuario);
                                                           startActivity(intentLoginCliente);
@@ -196,21 +194,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    public void listarComandas(final Usuario garcom, final Restaurante restaurante) {
+    public void listarComandas() {
         intentListarComanda = new Intent(this, HomeGarcomActivity.class);
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                comandas = ComandaNetwork.buscarComandas(URL, garcom.getId(), 'A');
+                                comandas = ComandaNetwork.buscarComandas(URL, usuario.getId(), 'A');
                                 Log.d("TESTES", comandas.toString());
 
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
                                                       intentListarComanda.putExtra(RESTAURANTE, restaurante);
-                                                      intentListarComanda.putExtra(USUARIO, garcom);
+                                                      intentListarComanda.putExtra(USUARIO, usuario);
                                                       intentListarComanda.putExtra(COMANDAS, comandas);
                                                       startActivity(intentListarComanda);
                                                       //TODO consertar progressBarTime
@@ -226,18 +224,18 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void getRestauranteByIdGarcom(final Usuario garcom) {
+    public void getRestauranteByIdGarcom() {
         new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            restaurante = RestauranteNetwork.getRestauranteByIdGarcom(URL, garcom.getId());
+                            restaurante = RestauranteNetwork.getRestauranteByIdGarcom(URL, usuario.getId());
 
                             runOnUiThread(new Runnable() {
                                               @Override
                                               public void run() {
-                                                  listarComandas(garcom, restaurante);
+                                                  listarComandas();
                                               }
                                           }
                             );
@@ -268,9 +266,6 @@ public class LoginActivity extends AppCompatActivity {
         buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
         buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
 
-        //ProgressBar
-        progressBarTime = (ProgressBar)findViewById(R.id.progress_bar_time);
-        progressBarTime.setVisibility(View.INVISIBLE);
     }
 
 

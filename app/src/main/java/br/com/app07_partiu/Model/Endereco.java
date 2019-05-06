@@ -1,6 +1,8 @@
 package br.com.app07_partiu.Model;
 
-public class Endereco {
+import java.io.Serializable;
+
+public class Endereco  implements Serializable {
 
     private long id;
     private String logradouro;

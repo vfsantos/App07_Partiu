@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorFontPrimary"
+        android:background="@color/chumbo_100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
