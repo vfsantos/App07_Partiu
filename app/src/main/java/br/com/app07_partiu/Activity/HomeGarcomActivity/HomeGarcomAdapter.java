@@ -50,7 +50,7 @@ public class HomeGarcomAdapter extends BaseAdapter implements SectionIndexer {
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_comanda_garcom, parent, false);
+            view = inflater.inflate(R.layout.item_home_garcom, parent, false);
             TextView textViewCodigoComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_codigo_comanda);
             TextView textViewTotalComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_total_comanda);
             TextView textViewTotalComandaValor = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_tota_comanda_valor);

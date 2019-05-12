@@ -13,6 +13,9 @@
     <!-- Fim Activity Login -->
 
 
+    <!-- Activity Comanda Garcom -->
+    <string name="text_comandagarcom_itensnacomanda">Itens na comanda</string>
+    <!-- Fim Activity Comanda Garcom -->
 
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
     <string name="placeholder_senha">senha</string>

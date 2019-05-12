@@ -1,6 +1,5 @@
 package br.com.app07_partiu;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ public class ItemComandaGarcomRecyclerAdapter extends RecyclerView.Adapter<ItemC
     @Override
     public ItemComandaGarcomViewHolder onCreateViewHolder(ViewGroup parent, int i) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comanda_garcom, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_garcom, parent, false);
 
         return new ItemComandaGarcomViewHolder(view);
 
