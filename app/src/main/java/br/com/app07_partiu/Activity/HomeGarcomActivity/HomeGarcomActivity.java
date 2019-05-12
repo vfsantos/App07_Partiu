@@ -1,6 +1,5 @@
 package br.com.app07_partiu.Activity.HomeGarcomActivity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,7 +16,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import org.json.JSONException;
+
 import java.io.IOException;
 
 import br.com.app07_partiu.Activity.ComandaGarcomActivity;
@@ -37,60 +38,45 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public static final String URL = LoginActivity.URL; //
     public static final String COMANDA = "br.com.app07_partiu.HomeGarcomActivity.comanda";
 
-
     //AlertDialog / Buider
     private AlertDialog alertaProximaSprint;
     private AlertDialog.Builder alertaNumeroMesa;
 
-
     //Intent
     public Intent intentNovaComanda;
-    public Intent intentDetalhesDaCOmanda;
+    public Intent intentUsuario;
     public Intent intentComanda;
     public Intent intentRestaurante;
 
-
     //Objeto
-    public ComandaConvertView[] comandas;
+    private ComandaConvertView[] comandas;
     private Restaurante restaurante;
     private Usuario garcom;
     private Context context;
     private Comanda comanda;
-    private Mesa mesa;
-
 
     //String
     private String[] mesas;
     private String resultado;
 
-
     //int
     private int idGarcom;
-
+    private int mesaSelecionadaAlert;
 
     //ListView
     ListView listViewComandas;
 
-
     //Toolbar
     private Toolbar toolbar;
-
 
     //FAB
     private FloatingActionButton fab;
 
-
     //Snackbar
     private Snackbar snackbarComandaCriada;
 
-
     //SwipeRefreshLayout
     private SwipeRefreshLayout pullToRefresh;
-
-
-    //Activity
-    Activity activity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +86,14 @@ public class HomeGarcomActivity extends AppCompatActivity {
         inicializarComponentes();
 
         //setting an setOnRefreshListener on the SwipeDownLayout
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
             }
         });
+        */
+
 
         context = this;
         Intent intent = getIntent();
@@ -113,6 +101,15 @@ public class HomeGarcomActivity extends AppCompatActivity {
         restaurante = (Restaurante) intent.getSerializableExtra(LoginActivity.RESTAURANTE);
         comandas = (ComandaConvertView[]) intent.getSerializableExtra(LoginActivity.COMANDAS);
         garcom = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
+        // mesa = new Mesa();
+//        Log.d("TESTES", comandas.toString());
+
+
+        String[] sTemp = new String[restaurante.getQtdMesas()];
+        for (int i = 0; i < restaurante.getQtdMesas(); i++) {
+            sTemp[i] = String.valueOf(i + 1);
+        }
+        mesas = sTemp;
 
         listViewComandas = (ListView) findViewById(R.id.list_view_comanda_garcom);
         HomeGarcomAdapter adapter = new HomeGarcomAdapter(comandas, this);
@@ -122,21 +119,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                intentComanda = new Intent(context, ComandaGarcomActivity.class);
-                intentComanda.putExtra(COMANDA, comandas[position]);
-                startActivity(intentComanda);
-
             }
 
         });
-
-
-        String[] sTemp = new String[restaurante.getQtdMesas()];
-        for (int i = 0; i < restaurante.getQtdMesas(); i++) {
-            sTemp[i] = String.valueOf(i + 1);
-        }
-        mesas = sTemp;
-
 
     }
 
@@ -144,34 +129,34 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //Alert com númerodas mesas
     private void alertNovaComanda() {
 
-        mesa = new Mesa();
-
         alertaNumeroMesa = new AlertDialog.Builder(this);
-        alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda)
-                .setItems(mesas, new DialogInterface.OnClickListener() {
+        alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda);
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mesa.setNumeroDaMesa(which+1);
-                        criarComanda(garcom.getId(), mesa.getNumeroDaMesa());
-                    }
-                 }).setPositiveButton(R.string.btn_alert_criar_comanda, new DialogInterface.OnClickListener() {
-                     @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
+        alertaNumeroMesa.setItems(mesas, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mesaSelecionadaAlert = which + 1;
+            }
+        });
 
+        alertaNumeroMesa.setPositiveButton(R.string.btn_alert_criar_comanda, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                criarComanda(garcom.getId(), mesaSelecionadaAlert);
+            }
+        });
 
+        alertaNumeroMesa.setNegativeButton(R.string.btn_alert_cancelar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                fecharAlertNovaComanda();
+            }
+        });
 
-                    }
-                }).setNegativeButton(R.string.btn_alert_cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        fecharAlertNovaComanda();
-                    }
-            });
         alertaProximaSprint = alertaNumeroMesa.create();
         alertaProximaSprint.show();
-    }
 
+    }
 
     //Criar comadanda
     public void criarComanda(final int idGarcom, final int numeroDaMesa) {
@@ -205,7 +190,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
         }
     }
 
-
     //fecha o alertNovaComanda quando clicar no cancelar
     private void fecharAlertNovaComanda() {
         final Dialog dialog = alertaNumeroMesa.show();
@@ -222,7 +206,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
             }
         };
 
-
         alertaNumeroMesa.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -231,7 +214,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
         });
         handler.postDelayed(runnable, 10000);
     }
-
 
 
     //exibe um alert informanda que a funcionalidade ´so esta disponível na próxima sprint
@@ -254,13 +236,11 @@ public class HomeGarcomActivity extends AppCompatActivity {
         alertaProximaSprint.show();
     }
 
-
     public void inicializarComponentes() {
 
         //Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         //FAB criar comanda
         fab = findViewById(R.id.fab);
@@ -271,9 +251,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
             }
         });
 
-
         //SwipeRefreshLayout
-        pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
+        //pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
+
     }
 
 }
