@@ -10,8 +10,4 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_action_notifications"/>
 
-
-
-
-
 </menu>

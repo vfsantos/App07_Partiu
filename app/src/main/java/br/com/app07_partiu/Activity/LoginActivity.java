@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
-            editTextEmail.setText("benjamin@gmail.com");
+            editTextEmail.setText("benjamin.bento@gmail.com");
             editTextSenha.setText("123");
         }
     }

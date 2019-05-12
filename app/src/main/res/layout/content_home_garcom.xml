@@ -7,19 +7,31 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.HomeGarcomActivity.HomeGarcomActivity"
     tools:showIn="@layout/activity_home_garcom"
-    android:background="@color/colorTextInputLayoutBackground">
+    android:background="@color/colorTextInputLayoutBackground"
+    android:id="@+id/constraintLayoutHomeGarcom">
 
-
-    <ListView
-        android:id="@+id/list_view_comanda_garcom"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </ListView>
+        <ListView
+            android:id="@+id/list_view_comanda_garcom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
 
 
 

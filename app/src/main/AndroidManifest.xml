@@ -32,7 +32,7 @@
             android:label="@string/title_activity_lista_itens_lancar_comanda_garcom_step_selecionar"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.ComandaVaziaGarcomActivity"
+            android:name=".Activity.ComandaGarcomActivity"
             android:label="@string/title_activity_comanda_vazia_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity

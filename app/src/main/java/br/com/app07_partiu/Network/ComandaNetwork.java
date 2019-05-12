@@ -98,14 +98,15 @@ public class ComandaNetwork {
             comanda.setCodigoComanda(object.getString("codigo"));
             comanda.setStatus(object.getString("status"));
             comanda.setMesa(object.getInt("mesa"));
-            comanda.setDataEntrada(object.getString("dataEntrada"));
-            comanda.setDataSaida(object.getString("dataSaida"));
-            return comanda;
+            comanda.setDataEntrada(object.getString("dtaEntrada"));
+
 
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
+
+        return comanda;
     }
 
     public static Comanda getCodComanda(String url, String codigo) throws IOException, JSONException {
