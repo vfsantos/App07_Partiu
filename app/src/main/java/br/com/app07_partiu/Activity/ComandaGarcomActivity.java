@@ -1,5 +1,6 @@
 package br.com.app07_partiu.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,11 +10,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.List;
 
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
+import br.com.app07_partiu.Activity.PedidoSelecaoGarcomActivity.PedidoSelecaoGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.Item;
+import br.com.app07_partiu.Model.ItemConvertView;
 import br.com.app07_partiu.Model.Restaurante;
+import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
 
 public class ComandaGarcomActivity extends AppCompatActivity {
@@ -29,14 +41,28 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private TextView textViewItemHora;
     private TextView textViewItensDaComanda;
 
+    private static final String URL = LoginActivity.URL;
+
+    public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
+    public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
+
+
 
     //ListView
     private ListView listViewItensComanda;
 
 
     //Objeto
-    public ComandaConvertView comanda;
-    public ComandaConvertView comandaConvertView;
+    private Comanda comanda;
+    private ComandaConvertView comandaConvertView;
+
+    private Restaurante restaurante;
+
+    private Intent intentPedidoSelecaoGarcom;
+
+    private Context context;
+
+    private ItemConvertView[] itensRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +70,35 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comanda_garcom);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context = this;
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                visualizarItensRestaurante();
             }
         });
 
         inicializarComponentes();
 
         Intent intent = getIntent();
-        comanda = (ComandaConvertView) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
+        restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
+        comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
+
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
+        // TODO carregar qtd pessoas na comanda
         textViewItemPessoaComandaNumero.setText("12");
         textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
+        // TODO verificar total dos pedidos
         textViewItemTotalComandaValor.setText("120");
         textViewItemHora.setText(comanda.getDataEntrada());
 
 
     }
 
-    public void inicializarComponentes(){
+    private void inicializarComponentes(){
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
         textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
         textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
@@ -81,6 +112,34 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
 
+    }
+
+    private void visualizarItensRestaurante() {
+        intentPedidoSelecaoGarcom = new Intent(context, PedidoSelecaoGarcomActivity.class);
+        if (ComandaNetwork.isConnected(this)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        itensRestaurante = ItemNetwork.getItensCardapio(URL, restaurante.getCnpj());
+                        //pedidos = ItemNetwork.getItensCardapio();
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              intentPedidoSelecaoGarcom.putExtra(COMANDA, comanda);
+                                              intentPedidoSelecaoGarcom.putExtra(ITENS_RESTAURANTE, itensRestaurante);
+                                              startActivity(intentPedidoSelecaoGarcom);
+                                          }
+                                      }
+                        );
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        } else {
+            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

@@ -23,10 +23,10 @@ import okhttp3.Response;
 
 public class ItemNetwork {
 
-    public static ItemConvertView[] getItensCardapio(String url) throws IOException {
+    public static ItemConvertView[] getItensCardapio(String url, long cnpj) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<ItemConvertView> itens = new ArrayList<>();
-        url += "/buscarItensCardapio";
+        url += "/getItensRestaurante?cnpj="+cnpj;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -39,6 +39,7 @@ public class ItemNetwork {
 
         try {
             JSONArray vetor = new JSONArray(resultado);
+            Log.d("TESTES", "Carregando itens do restaurante");
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Item itemCardapio = new Item();
