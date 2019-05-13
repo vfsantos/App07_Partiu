@@ -22,15 +22,15 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
-import br.com.app07_partiu.Activity.ComandaGarcomActivity;
+import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.Model.Mesa;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
-import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
 
 public class HomeGarcomActivity extends AppCompatActivity {
@@ -40,6 +40,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public static final String URL = LoginActivity.URL; //
     public static final String COMANDA = "br.com.app07_partiu.HomeGarcomActivity.comanda";
     public static final String RESTAURANTE = "br.com.app07_partiu.HomeGarcomActivity.restaurante";
+    public static final String ITENS = "br.com.app07_partiu.HomeGarcomActivity.itens";
+
 
     //AlertDialog / Buider
     private AlertDialog alertaProximaSprint;
@@ -49,10 +51,12 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public Intent intentNovaComanda;
     public Intent intentUsuario;
     public Intent intentComanda;
-    public Intent intentRestaurante;
+    public Intent intentItensComanda;
+
 
     //Objeto
     private ComandaConvertView[] comandas;
+    public ItemComandaGarcomConvertView[] itens;
     private Restaurante restaurante;
     private Usuario garcom;
     private Context context;
@@ -66,8 +70,10 @@ public class HomeGarcomActivity extends AppCompatActivity {
     private int idGarcom;
     private int mesaSelecionadaAlert;
 
+
     //ListView
     ListView listViewComandas;
+
 
     //Toolbar
     private Toolbar toolbar;
@@ -77,6 +83,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //Snackbar
     private Snackbar snackbarComandaCriada;
+
 
     //SwipeRefreshLayout
     private SwipeRefreshLayout pullToRefresh;
@@ -89,14 +96,12 @@ public class HomeGarcomActivity extends AppCompatActivity {
         inicializarComponentes();
 
         //setting an setOnRefreshListener on the SwipeDownLayout
-        /*pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
             }
         });
-        */
-
 
         context = this;
         Intent intent = getIntent();
@@ -122,11 +127,11 @@ public class HomeGarcomActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                String codigoComanda;
+
                 ComandaConvertView comandaCV = (ComandaConvertView) adapter.getItem(position);
-                codigoComanda = comandaCV.getCodigoComanda();
-                Log.d("TESTES", "Carregando comanda de código "+codigoComanda);
-                visualizarComanda(codigoComanda);
+                int idComanda = comandaCV.getId();
+                Log.d("TESTES", "Carregando comanda de id: " + idComanda);
+                visualizarComanda(idComanda);
             }
 
         });
@@ -201,15 +206,16 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //TODO visualizar pedidos dentro da comanda
     //ver comanda
-    public void visualizarComanda(final String codigoComanda) {
+    public void visualizarComanda(final int idComanda) {
         intentComanda = new Intent(context, ComandaGarcomActivity.class);
         if (ComandaNetwork.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        comanda = ComandaNetwork.getCodComanda(URL, codigoComanda);
-                        //pedidos = ItemNetwork.getItensCardapio();
+                        comanda = ComandaNetwork.getComandaById(URL, idComanda);
+                        itens = ComandaNetwork.buscarItensComanda(URL, idComanda);
+
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
@@ -247,6 +253,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
             }
         };
 
+
         alertaNumeroMesa.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -256,45 +263,24 @@ public class HomeGarcomActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 10000);
     }
 
+        public void inicializarComponentes(){
 
-    //exibe um alert informanda que a funcionalidade ´so esta disponível na próxima sprint
-    private void alertProximaSprint() {
-        //Cria o gerador do AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //define o titulo
-        builder.setTitle(R.string.title_alert_disponivel_em_breve);
-        //define a mensagem
-        builder.setMessage(R.string.subtitle1_alert_disponivel_em_breve);
-        //define um botão como positivo
-        builder.setPositiveButton(R.string.btn_alert_criar_comanda, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
+            //Toolbar
+            toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-            }
-        });
-        //cria o AlertDialog
-        alertaProximaSprint = builder.create();
-        //Exibe
-        alertaProximaSprint.show();
-    }
+            //FAB criar comanda
+            fab = findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertNovaComanda();
+                }
+            });
 
-    public void inicializarComponentes() {
 
-        //Toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //FAB criar comanda
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertNovaComanda();
-            }
-        });
-
-        //SwipeRefreshLayout
-        //pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
+            //SwipeRefreshLayout
+            pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
+        }
 
     }
-
-}

@@ -17,6 +17,7 @@ import java.util.List;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
+import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -56,6 +57,7 @@ public class ComandaNetwork {
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
                 Log.d("TESTES", comanda.toString());
 
+                comandaConvertView.setId(comanda.getId());
                 comandaConvertView.setCodigoComanda(comanda.getCodigoComanda());
                 comandaConvertView.setValorTotalComanda("120,00");
                 comandaConvertView.setMesa(String.valueOf(comanda.getMesa()));
@@ -76,6 +78,56 @@ public class ComandaNetwork {
 
         return comandas.toArray(new ComandaConvertView[0]);
     }
+
+
+    public static ItemComandaGarcomConvertView[] buscarItensComanda(String url, int idComanda) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<ItemComandaGarcomConvertView> itens = new ArrayList<>();
+        url += "/getPedidosComanda?idComanda=" + idComanda;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item it = new Item();
+                ItemComandaGarcomConvertView itemComandaGarcomConvertView = new ItemComandaGarcomConvertView();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                it.setId(item.getInt("id"));
+                it.setCategoria(item.getString("categoria"));
+                it.setNome(item.getString("nome"));
+                it.setTipo(item.getString("tipo"));
+                it.setValor(item.getDouble("valor"));
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                Log.d("TESTES", it.toString());
+
+                itemComandaGarcomConvertView.setId(it.getId());
+                itemComandaGarcomConvertView.setDescricao(it.getNome());
+                itemComandaGarcomConvertView.setQuantidade("2");
+                itemComandaGarcomConvertView.setValor(String.valueOf(it.getValor()));
+
+
+                itens.add(itemComandaGarcomConvertView);
+                System.out.println("Array de comandas " + itens.toArray());
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new IOException(e);
+        }
+
+        return itens.toArray(new ItemComandaGarcomConvertView[0]);
+    }
+
 
     public static Comanda createComanda(String url, int idGarcom, int mesa) throws IOException, JSONException {
 
@@ -109,6 +161,7 @@ public class ComandaNetwork {
         return comanda;
     }
 
+
     public static Comanda getCodComanda(String url, String codigo) throws IOException, JSONException {
 
         //converte o número da mesa de int para string para poder concatenar na url
@@ -137,6 +190,36 @@ public class ComandaNetwork {
         }
         return comanda;
     }
+
+    public static Comanda getComandaById(String url, int id) throws IOException, JSONException {
+
+        //converte o número da mesa de int para string para poder concatenar na url
+        String urlGetSenha = url + "/getComandaById?id=" + id;
+        OkHttpClient client = new OkHttpClient();
+        Comanda comanda = new Comanda();
+
+        Request request = new Request.Builder()
+                .url(urlGetSenha)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES", resultado);
+        JSONObject object = new JSONObject(resultado);
+        try {
+            comanda.setId(object.getInt("id"));
+            comanda.setCodigoComanda(object.getString("codigo"));
+            comanda.setStatus(object.getString("status"));
+            comanda.setMesa(object.getInt("mesa"));
+            comanda.setDataEntrada(object.getString("dtaEntrada"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return comanda;
+    }
+
 
     public static List<Item> getPedidosComanda(String url, int idComanda) throws IOException, JSONException {
 

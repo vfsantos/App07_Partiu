@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class ComandaConvertView implements Serializable, Comparable{
 
+    private int id;
     private String codigoComanda;
     private String mesa;
     private String status;
@@ -14,6 +15,13 @@ public class ComandaConvertView implements Serializable, Comparable{
     private String pessoasComanda;
     private String valorTotalComanda;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getCodigoComanda() {
         return codigoComanda;
     }

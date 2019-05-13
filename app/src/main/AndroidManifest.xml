@@ -16,9 +16,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".Activity.EditarItemComandaActivity"
+            android:label="@string/title_activity_editar_item_comanda"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.AdicionarItemGarcomActivity"
+            android:label="@string/title_activity_adicionar_item_garcom"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.ItemComandaDetalheGarcomActivity"
+            android:label="@string/title_activity_item_comanda_detalhe_garcom"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.ItemDetalheGarcomActivity"
+            android:label="@string/title_activity_item_comanda_detalhe_garcom"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
             android:name=".Activity.LoadingActivity"
             android:label="@string/title_activity_loading"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.PedidoFinalizadoGarcom"
             android:label="@string/title_activity_pedido_finalizado_garcom"
@@ -32,7 +48,7 @@
             android:label="@string/title_activity_lista_itens_lancar_comanda_garcom_step_selecionar"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.ComandaGarcomActivity"
+            android:name=".Activity.ComandaGarcomActivity.ComandaGarcomActivity"
             android:label="@string/title_activity_comanda_vazia_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
