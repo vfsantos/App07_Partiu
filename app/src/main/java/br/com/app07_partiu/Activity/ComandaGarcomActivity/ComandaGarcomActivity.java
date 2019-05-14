@@ -48,8 +48,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private TextView textViewItemHora;
     private TextView textViewItensDaComanda;
 
-    private static final String URL = LoginActivity.URL;
-
     public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
 
@@ -68,16 +66,14 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     public ItemComandaGarcomConvertView[] itens;
     private Context context;
 
-    private Comanda comanda;
     private ComandaConvertView comandaConvertView;
 
     private Restaurante restaurante;
 
     private Intent intentPedidoSelecaoGarcom;
 
-    private Context context;
 
-    private ItemConvertView[] itensRestaurante;
+    private ItemComandaGarcomConvertView[] itensRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +96,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
-        comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
+        comanda = (ComandaConvertView) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
 
 
         context = this;
