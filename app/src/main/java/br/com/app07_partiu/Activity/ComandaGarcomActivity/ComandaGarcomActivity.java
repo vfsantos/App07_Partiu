@@ -21,7 +21,6 @@ import java.util.List;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
-import br.com.app07_partiu.Activity.PedidoSelecaoGarcomActivity.PedidoSelecaoGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
@@ -52,17 +51,18 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
 
 
-
     //ListView
     private ListView listViewItensComanda;
 
 
     //Itent
-    public Intent intentItem;
+    private Intent intent;
+    private Intent intentItem;
 
 
     //Objeto
-    public ComandaConvertView comanda;
+    private Comanda comanda;
+    private ComandaConvertView convertedComanda;
     public ItemComandaGarcomConvertView[] itens;
     private Context context;
 
@@ -73,7 +73,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Intent intentPedidoSelecaoGarcom;
 
 
-    private ItemComandaGarcomConvertView[] itensRestaurante;
+    private ItemConvertView[] itensRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,23 +87,18 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 visualizarItensRestaurante();
             }
         });
 
         inicializarComponentes();
-
-        Intent intent = getIntent();
-        restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
-        comanda = (ComandaConvertView) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
-
-
         context = this;
-        Intent intentComanda = getIntent();
-        Intent intentItens = getIntent();
-        comanda = (ComandaConvertView) intentComanda.getSerializableExtra(HomeGarcomActivity.COMANDA);
-        itens = (ItemComandaGarcomConvertView[]) intentItens.getSerializableExtra(HomeGarcomActivity.ITENS);
+
+        intent = getIntent();
+        restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
+        comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
+        itens = (ItemComandaGarcomConvertView[]) intent.getSerializableExtra(HomeGarcomActivity.ITENS);
 
 
         //Detalhes da comanda
@@ -133,7 +128,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         });
     }
 
-    private void inicializarComponentes(){
+    private void inicializarComponentes() {
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
         textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
         textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
@@ -143,24 +138,23 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         textViewItemMesaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
         textViewItemHora = (TextView) findViewById(R.id.textView_comandaGarcom_itemHora);
         textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
-
-
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
 
     }
 
     private void visualizarItensRestaurante() {
-        intentPedidoSelecaoGarcom = new Intent(context, PedidoSelecaoGarcomActivity.class);
+        //TODO inserir proxima Activity
+        intentPedidoSelecaoGarcom = new Intent(context, null);
         if (ComandaNetwork.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         itensRestaurante = ItemNetwork.getItensCardapio(URL, restaurante.getCnpj());
-                        //pedidos = ItemNetwork.getItensCardapio();
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
+                                              //TODO Talvez comanda nao seja necessaria
                                               intentPedidoSelecaoGarcom.putExtra(COMANDA, comanda);
                                               intentPedidoSelecaoGarcom.putExtra(ITENS_RESTAURANTE, itensRestaurante);
                                               startActivity(intentPedidoSelecaoGarcom);

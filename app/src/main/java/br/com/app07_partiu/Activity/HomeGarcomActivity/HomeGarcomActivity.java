@@ -220,6 +220,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                           @Override
                                           public void run() {
                                               intentComanda.putExtra(COMANDA, comanda);
+                                              intentComanda.putExtra(ITENS, itens);
                                               intentComanda.putExtra(RESTAURANTE, restaurante);
                                               startActivity(intentComanda);
                                           }

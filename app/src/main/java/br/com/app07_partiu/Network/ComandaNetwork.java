@@ -194,7 +194,7 @@ public class ComandaNetwork {
     public static Comanda getComandaById(String url, int id) throws IOException, JSONException {
 
         //converte o número da mesa de int para string para poder concatenar na url
-        String urlGetSenha = url + "/getComandaById?id=" + id;
+        String urlGetSenha = url + "/getComandaById?idComanda=" + id;
         OkHttpClient client = new OkHttpClient();
         Comanda comanda = new Comanda();
 

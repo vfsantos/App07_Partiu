@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     //Snackbar
     private Snackbar snackbarErroLogin;
 
-    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
+    public static final String URL = "http://10.42.0.1:8080/partiu"; //emulador
    // public static final String URL = "http://192.168.50.102:8080/partiu"; //
     //public static final String URL = "http://10.71.204.149/partiu";
 
