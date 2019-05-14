@@ -14,11 +14,20 @@
 
 
     <!-- Activity Comanda Garcom -->
+    <string name="text_comandagarcom_titulopagina">Comanda</string>
     <string name="text_comandagarcom_itensnacomanda">Itens na comanda</string>
     <!-- Fim Activity Comanda Garcom -->
 
 
+    <!-- Actvity Adidionar Item Garcom -->
+    <string name="text_adicionaritemgarcom_titulopagina">Detalhes do item</string>
+    <string name="btn_adicionaritemgarcom_add">+</string>
+    <string name="btn_adicionaritemgarcom_sub">-</string>
+    <!-- Fim Actvity Adidionar Item Garcom -->
+
+
     <!-- Actiity Item Detalhe Comanda Garcom -->
+    <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhe dos itens</string>
     <string name="text_itemdetalhecomandagarcom_algumaobservacao">Alguma observação</string>
     <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
     <string name="text_itemdetalhecomandagarcom_status">Status</string>

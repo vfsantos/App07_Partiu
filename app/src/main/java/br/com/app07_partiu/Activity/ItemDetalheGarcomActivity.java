@@ -14,6 +14,7 @@ import br.com.app07_partiu.R;
 public class ItemDetalheGarcomActivity extends AppCompatActivity {
 
     //TextView
+    private TextView textViewTituloPagina;
     private TextView textViewNomeItem;
     private TextView textViewDetalhesItem;
     private TextView textViewValorItem;
@@ -40,6 +41,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
+        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
         textViewNomeItem = (TextView) findViewById(R.id.textView_itemDetalhes_nome);
         textViewDetalhesItem = (TextView) findViewById(R.id.textView_itemDetalhes_detalhes);
         textViewValorItem = (TextView) findViewById(R.id.textView_itemDetalhe_valorItem);

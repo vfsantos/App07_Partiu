@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
 
     //TextView
+    private TextView textViewTituloPagina;
     private TextView textViewItemCodigoComanda;
     private TextView textViewItemTotalComanda;
     private TextView textViewItemTotalComandaValor;
@@ -52,6 +56,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
+
 
 
     //ListView
@@ -140,7 +145,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         }
     }
 
-    private void inicializarComponentes() {
+    private void inicializarComponentes(){
+        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
         textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
         textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
