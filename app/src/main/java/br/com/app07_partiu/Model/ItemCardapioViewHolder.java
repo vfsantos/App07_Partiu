@@ -13,6 +13,7 @@ public class ItemCardapioViewHolder extends RecyclerView.ViewHolder{
 
     public ItemCardapioViewHolder(View view) {
         super(view);
+        //TODO R.id.item_cardapio_*
         item = (TextView) view.findViewById(R.id.item_item);
         preco = (TextView) view.findViewById(R.id.item_preco);
         quantidade = (TextView) view.findViewById(R.id.item_quantidade);

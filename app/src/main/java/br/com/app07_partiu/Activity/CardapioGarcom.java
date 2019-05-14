@@ -16,8 +16,10 @@ public class CardapioGarcom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO R.layout.activity_cardapio_garcom
         setContentView(R.layout.activity_main);
 
+        //TODO R.id.recycler_CardapioGarcom
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);
 
         //populacoa pra teste
