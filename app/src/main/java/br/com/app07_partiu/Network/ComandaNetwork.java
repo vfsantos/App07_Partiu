@@ -80,7 +80,7 @@ public class ComandaNetwork {
     }
 
 
-    public static ItemComandaGarcomConvertView[] buscarItensComanda(String url, int idComanda) throws IOException {
+    public static ItemComandaGarcomConvertView[] buscarPedidosComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<ItemComandaGarcomConvertView> itens = new ArrayList<>();
         url += "/getPedidosComanda?idComanda=" + idComanda;
@@ -97,35 +97,43 @@ public class ComandaNetwork {
             JSONArray vetor = new JSONArray(resultado);
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
-                Item it = new Item();
-                ItemComandaGarcomConvertView itemComandaGarcomConvertView = new ItemComandaGarcomConvertView();
+                ItemComandaGarcomConvertView it = new ItemComandaGarcomConvertView();
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
+                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
                 it.setValor(item.getDouble("valor"));
+                it.setStatus(item.getString("status"));
+                it.setIdPedido(item.getInt("idPedido"));
+                it.setPorc_desconto(item.getInt("porc_desconto"));
+                it.setData(item.getString("data"));
+                it.setStatusPedido(item.getString("statusPedido"));
+                try {
+                    it.setIdUsuario(item.getInt("idUsuario"));
+                    it.setNomeUsuario(item.getString("nomeUsuario"));
+                    it.setEmailUsuario(item.getString("emailUsuario"));
+                }catch(JSONException e){
+                    Log.d("TESTES", "Pedido sem usuario");
+                }
+
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
-                Log.d("TESTES", it.toString());
-
-                itemComandaGarcomConvertView.setId(it.getId());
-                itemComandaGarcomConvertView.setDescricao(it.getNome());
-                itemComandaGarcomConvertView.setQuantidade("2");
-                itemComandaGarcomConvertView.setValor(String.valueOf(it.getValor()));
-
-
-                itens.add(itemComandaGarcomConvertView);
-                System.out.println("Array de comandas " + itens.toArray());
+                Log.d("TESTES", "Item recebido: "+it.toString());
+                itens.add(it);
 
             }
 
+
         } catch (JSONException e) {
             e.printStackTrace();
-            throw new IOException(e);
+//            throw new IOException(e);
         }
-
-        return itens.toArray(new ItemComandaGarcomConvertView[0]);
+        if (itens.size()>0){
+            return itens.toArray(new ItemComandaGarcomConvertView[0]);
+        }
+        return null;
     }
 
 

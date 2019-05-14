@@ -21,10 +21,11 @@ public class ItemCardapioAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //TODO R.layout.item_cardapio_garcom
-        View view = LayoutInflater.from(context).inflate(R.layout.item_comanda, parent, false);
-        ItemCardapioViewHolder holder = new ItemCardapioViewHolder(view);
+        //View view = LayoutInflater.from(context).inflate(R.layout.item_comanda, parent, false);
+        //ItemCardapioViewHolder holder = new ItemCardapioViewHolder(view);
 
-        return holder;
+        //return holder;
+        return null;
     }
 
     @Override

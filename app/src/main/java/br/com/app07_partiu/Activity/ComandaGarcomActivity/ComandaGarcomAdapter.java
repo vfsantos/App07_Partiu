@@ -65,13 +65,15 @@ public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer{
 
 
         ComandaGarcomViewHolder viewHolder = (ComandaGarcomViewHolder) view.getTag();
-        viewHolder.getTextViewDetalhes().setText(String.format(itens[position].getQuantidade()+"x ", itens[position].getDescricao()));
+        viewHolder.getTextViewDetalhes().setText(itens[position].getNome());
         viewHolder.getTextViewValor().setText(String.valueOf(itens[position].getValor()));
-        Drawable drawable = Util.getDrawable(activity, itens[position].getIcone().toLowerCase());
+        // ---- item não tem item
+        /*Drawable drawable = Util.getDrawable(activity, itens[position].getIcone().toLowerCase());
         if(drawable == null){
             drawable = activity.getDrawable(R.drawable.ic_action_detalhe);
         }
         viewHolder.getImageViewIcon().setImageDrawable(drawable);
+        */
         return view;
     }
 

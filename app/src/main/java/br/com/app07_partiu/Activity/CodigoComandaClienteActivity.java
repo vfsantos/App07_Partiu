@@ -136,7 +136,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                                                   @Override
                                                   public void run() {
                                                       intentComanda.putExtra(COMANDA,comanda);
-                                                      //intentComanda.putExtra(ITENS, itens.toArray());
+                                                      //intentComanda.putExtra(PEDIDOS, itens.toArray());
                                                       startActivity(intentComanda);
                                                   }
                                               }

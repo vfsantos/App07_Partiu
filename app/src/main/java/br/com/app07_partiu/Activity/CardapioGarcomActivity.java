@@ -11,23 +11,23 @@ import java.util.List;
 import br.com.app07_partiu.Model.ItemCardapio;
 import br.com.app07_partiu.Model.ItemCardapioAdapter;
 
-public class CardapioGarcom extends AppCompatActivity {
+public class CardapioGarcomActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO R.layout.activity_cardapio_garcom
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
         //TODO R.id.recycler_CardapioGarcom
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);
+        //RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);
 
         //populacoa pra teste
         List<ItemCardapio> items = test();
-        recyclerView.setAdapter(new ItemCardapioAdapter(items, this));
-        RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layout);
+        //recyclerView.setAdapter(new ItemCardapioAdapter(items, this));
+        //RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
+        //LinearLayoutManager.VERTICAL, false);
+        //recyclerView.setLayoutManager(layout);
     }
 
     private List<ItemCardapio> test(){

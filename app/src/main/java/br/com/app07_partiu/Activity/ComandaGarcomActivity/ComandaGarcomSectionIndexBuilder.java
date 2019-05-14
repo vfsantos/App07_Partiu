@@ -13,7 +13,8 @@ public class ComandaGarcomSectionIndexBuilder {
         ArrayList<String> resultado = new ArrayList<>();
         TreeSet<String> usados = new TreeSet<>();
         for(ItemComandaGarcomConvertView item:itens){
-            String letra = item.getDescricao().substring(0,1);
+            //String letra = item.getDescricao().substring(0,1);
+            String letra = "?A";
             if((!usados.contains(letra))){
                 resultado.add(letra);
             }
@@ -29,7 +30,8 @@ public class ComandaGarcomSectionIndexBuilder {
         int secao = -1;
 
         for(int i = 0; i < itens.length; i++){
-            String letra = itens[i].getDescricao().substring(0,1);
+//            String letra = itens[i].getDescricao().substring(0,1);
+            String letra = "?B";
 
             if(!usados.contains(letra)){
                 secao++;
@@ -48,7 +50,8 @@ public class ComandaGarcomSectionIndexBuilder {
         int secao = -1;
 
         for(int i = 0; i < itens.length; i++){
-            String letra = itens[i].getDescricao().substring(0,1);
+//            String letra = itens[i].getDescricao().substring(0,1);
+            String letra = "?C";
 
             if(!usados.contains(letra)){
                 secao++;

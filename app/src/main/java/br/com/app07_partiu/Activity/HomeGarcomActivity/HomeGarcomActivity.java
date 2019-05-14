@@ -27,7 +27,6 @@ import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
-import br.com.app07_partiu.Model.Mesa;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
@@ -40,7 +39,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public static final String URL = LoginActivity.URL; //
     public static final String COMANDA = "br.com.app07_partiu.HomeGarcomActivity.comanda";
     public static final String RESTAURANTE = "br.com.app07_partiu.HomeGarcomActivity.restaurante";
-    public static final String ITENS = "br.com.app07_partiu.HomeGarcomActivity.itens";
+    public static final String PEDIDOS = "br.com.app07_partiu.HomeGarcomActivity.pedidos";
 
 
     //AlertDialog / Buider
@@ -56,7 +55,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //Objeto
     private ComandaConvertView[] comandas;
-    public ItemComandaGarcomConvertView[] itens;
+    public ItemComandaGarcomConvertView[] pedidos;
     private Restaurante restaurante;
     private Usuario garcom;
     private Context context;
@@ -181,6 +180,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         comanda = ComandaNetwork.createComanda(URL, idGarcom, numeroDaMesa);
+                        pedidos = ComandaNetwork.buscarPedidosComanda(URL, comanda.getId());
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
@@ -188,13 +188,27 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               //snackbarComandaCriada = Snackbar.make(findViewById(R.id.constraintLayoutHomeGarcom), codigo, Snackbar.LENGTH_LONG);
                                               //snackbarComandaCriada.show();
                                               intentNovaComanda.putExtra(COMANDA, comanda);
+                                              intentNovaComanda.putExtra(PEDIDOS, pedidos);
+                                                //TODO consertar restaurante vindo vazio
+//                                              intentComanda.putExtra(RESTAURANTE, restaurante);
+
+                                              Log.d("TESTES", "criarComanda: Comanda id " + comanda.getId() + " criada");
                                               startActivity(intentNovaComanda);
                                           }
                                       }
                         );
                     } catch (IOException e) {
+                        Log.d("TESTES", "criarComanda: IOException");
                         e.printStackTrace();
                     } catch (JSONException e) {
+                        Log.d("TESTES", "criarComanda: JSONException");
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              Toast.makeText(context, "Comanda de mesa " + numeroDaMesa + " já existe!", Toast.LENGTH_SHORT).show();
+                                          }
+                                      }
+                        );
                         e.printStackTrace();
                     }
                 }
@@ -204,7 +218,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
         }
     }
 
-    //TODO visualizar pedidos dentro da comanda
     //ver comanda
     public void visualizarComanda(final int idComanda) {
         intentComanda = new Intent(context, ComandaGarcomActivity.class);
@@ -214,21 +227,23 @@ public class HomeGarcomActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         comanda = ComandaNetwork.getComandaById(URL, idComanda);
-                        itens = ComandaNetwork.buscarItensComanda(URL, idComanda);
+                        pedidos = ComandaNetwork.buscarPedidosComanda(URL, idComanda);
 
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
                                               intentComanda.putExtra(COMANDA, comanda);
-                                              intentComanda.putExtra(ITENS, itens);
+                                              intentComanda.putExtra(PEDIDOS, pedidos);
                                               intentComanda.putExtra(RESTAURANTE, restaurante);
                                               startActivity(intentComanda);
                                           }
                                       }
                         );
                     } catch (IOException e) {
+                        Log.d("TESTES", "visualizarComanda: IOException");
                         e.printStackTrace();
                     } catch (JSONException e) {
+                        Log.d("TESTES", "visualizarComanda: JSONException");
                         e.printStackTrace();
                     }
                 }
@@ -264,24 +279,24 @@ public class HomeGarcomActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 10000);
     }
 
-        public void inicializarComponentes(){
+    public void inicializarComponentes() {
 
-            //Toolbar
-            toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+        //Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            //FAB criar comanda
-            fab = findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    alertNovaComanda();
-                }
-            });
+        //FAB criar comanda
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertNovaComanda();
+            }
+        });
 
 
-            //SwipeRefreshLayout
-            pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
-        }
-
+        //SwipeRefreshLayout
+        pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
     }
+
+}
