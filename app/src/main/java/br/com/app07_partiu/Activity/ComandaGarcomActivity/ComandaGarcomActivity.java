@@ -143,7 +143,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes(){
-        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
+//        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
         textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
         textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);

@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     //Snackbar
     private Snackbar snackbarErroLogin;
 
-    public static final String URL = "http://10.0.2.2:8080/partiu";
+    public static final String URL = "http://192.168.43.121:8080/partiu";
 
     public static final String COMANDAS = "br.com.app07_partiu.LoginActivity.comandas";
     public static final String USUARIO = "br.com.app07_partiu.LoginActivity.usuario";
