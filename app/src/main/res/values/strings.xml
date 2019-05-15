@@ -19,11 +19,20 @@
     <!-- Fim Activity Comanda Garcom -->
 
 
-    <!-- Actvity Adidionar Item Garcom -->
+    <!-- Activity Adidionar Item Garcom -->
     <string name="text_adicionaritemgarcom_titulopagina">Detalhes do item</string>
     <string name="btn_adicionaritemgarcom_add">+</string>
     <string name="btn_adicionaritemgarcom_sub">-</string>
     <!-- Fim Actvity Adidionar Item Garcom -->
+
+
+    <!-- Activity Cardapio Garcom -->
+    <string name="text_cardapiogarcom_titulopagina">Cardapio</string>
+    <string name="text_cardapiogarcom_resumo">Resumo</string>
+    <string name="text_cardapiogarcom_cardapio">Cardapio</string>
+    <string name="text_cardapiogarcom_detalhesitem">Pão artesanal, queijo, calabresa, bacon, milho,
+        1 salsicha, ervilha, maionese, batata palha</string>
+    <!-- Fim Activity Cardapio Garcom -->
 
 
     <!-- Actiity Item Detalhe Comanda Garcom -->
@@ -163,6 +172,9 @@
     <string name="title_activity_item_comanda_detalhe_garcom">ItemComandaDetalheGarcom</string>
     <string name="title_activity_adicionar_item_garcom">AdicionarItemGarcomActivity</string>
     <string name="title_activity_editar_item_comanda">EditarItemComandaActivity</string>
+    <string name="title_activity_cardapio_garcom">CardapioGarcomActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 
 
 </resources>
