@@ -63,7 +63,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         intentResumoAddItens =  new Intent(context, null );
         intentResumoAddItens.putExtra(ITENS_ADICIONAR, listToArray(itensAdicionar));
         intentResumoAddItens.putExtra(COMANDA, comanda);
-        startActivity(intentResumoAddItens);
+        startActivityForResult(intentResumoAddItens, 1000);
 
     }
 
@@ -77,6 +77,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         //result code deve ser o mesmo para fechar
         //data é a intent anterior; dela podemos pegar os dados necessários com data.getSerializableExtra()
         //também dá pra dar finish caso necessário
+        // a prox activity precisa ser iniciar com um requestCode: startActivityForResult(intent, 1000);
         if (resultCode == 1000) {
 //            String resultadoLoco = (String) data.getSerializableExtra("SLA");
 //            Log.d("TESTES", "sla " + resultadoLoco);
