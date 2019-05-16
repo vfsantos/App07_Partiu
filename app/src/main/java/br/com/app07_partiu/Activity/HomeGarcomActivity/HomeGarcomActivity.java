@@ -1,5 +1,6 @@
 package br.com.app07_partiu.Activity.HomeGarcomActivity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,13 +31,11 @@ import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.R;
 
 public class HomeGarcomActivity extends AppCompatActivity {
 
-    //public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
-    //public static final String URL = "http://192.168.200.2:8080/partiu";
-    public static final String URL = LoginActivity.URL; //
     public static final String COMANDA = "br.com.app07_partiu.HomeGarcomActivity.comanda";
     public static final String RESTAURANTE = "br.com.app07_partiu.HomeGarcomActivity.restaurante";
     public static final String PEDIDOS = "br.com.app07_partiu.HomeGarcomActivity.pedidos";
@@ -179,8 +178,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        comanda = ComandaNetwork.createComanda(URL, idGarcom, numeroDaMesa);
-                        pedidos = ComandaNetwork.buscarPedidosComanda(URL, comanda.getId());
+                        comanda = ComandaNetwork.createComanda(Connection.URL, idGarcom, numeroDaMesa);
+                        pedidos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
@@ -189,7 +188,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               //snackbarComandaCriada.show();
                                               intentNovaComanda.putExtra(COMANDA, comanda);
                                               intentNovaComanda.putExtra(PEDIDOS, pedidos);
-                                                //TODO consertar restaurante vindo vazio
+                                              //TODO consertar restaurante vindo vazio
 //                                              intentComanda.putExtra(RESTAURANTE, restaurante);
 
                                               Log.d("TESTES", "criarComanda: Comanda id " + comanda.getId() + " criada");
@@ -226,8 +225,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        comanda = ComandaNetwork.getComandaById(URL, idComanda);
-                        pedidos = ComandaNetwork.buscarPedidosComanda(URL, idComanda);
+                        comanda = ComandaNetwork.getComandaById(Connection.URL, idComanda);
+                        pedidos = ComandaNetwork.buscarPedidosComanda(Connection.URL, idComanda);
 
                         runOnUiThread(new Runnable() {
                                           @Override
@@ -298,5 +297,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
         //SwipeRefreshLayout
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
     }
+
 
 }

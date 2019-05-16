@@ -22,6 +22,7 @@ import java.util.List;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
@@ -34,7 +35,6 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     public Intent intentComanda;
     private AlertDialog alerta;
     private BottomNavigationView bottomNavigationView;
-    public static final String URL = "http://10.0.2.2:8080/partiu"; //emulador
     public static final String COMANDA = "br.com.app07_partiu.CodigoComandaClienteActivity.comanda";
     public static final String ITENS = "br.com.app07_partiu.CodigoComandaClienteActivity.itens" ;
     public Comanda comanda;
@@ -77,7 +77,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                comanda = ComandaNetwork.getCodComanda(URL, codigo);
+                                comanda = ComandaNetwork.getCodComanda(Connection.URL, codigo);
                                 System.out.println(comanda.toString());
 
                                 runOnUiThread(new Runnable(){
@@ -128,7 +128,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                itens  = ComandaNetwork.getPedidosComanda(URL, idComanda);
+                                itens  = ComandaNetwork.getPedidosComanda(Connection.URL, idComanda);
                                 Log.d("TESTES", comanda.toString());
 
 

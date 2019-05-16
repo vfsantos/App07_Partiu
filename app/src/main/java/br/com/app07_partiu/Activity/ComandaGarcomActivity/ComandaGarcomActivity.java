@@ -29,13 +29,14 @@ import br.com.app07_partiu.Model.ItemConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
 
 import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class ComandaGarcomActivity extends AppCompatActivity {
-    public static final String URL = LoginActivity.URL;
+
     public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
 
 
@@ -164,13 +165,15 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        itensRestaurante = ItemNetwork.getItensCardapio(URL, restaurante.getCnpj());
+                        itensRestaurante = ItemNetwork.getItensCardapio(Connection.URL, restaurante.getCnpj());
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
+
                                               //Comanda necessaria para saber em que id inserir pedidos
                                               intentPedidoSelecaoGarcom.putExtra(COMANDA, comanda);
                                               intentPedidoSelecaoGarcom.putExtra(ITENS_RESTAURANTE, itensRestaurante);
+
                                               startActivity(intentPedidoSelecaoGarcom);
                                           }
                                       }

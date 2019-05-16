@@ -115,12 +115,12 @@ public class ComandaNetwork {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
                     it.setEmailUsuario(item.getString("emailUsuario"));
-                }catch(JSONException e){
+                } catch (JSONException e) {
                     Log.d("TESTES", "Pedido sem usuario");
                 }
 
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
-                Log.d("TESTES", "Item recebido: "+it.toString());
+                Log.d("TESTES", "Item recebido: " + it.toString());
                 itens.add(it);
 
             }
@@ -130,7 +130,7 @@ public class ComandaNetwork {
             e.printStackTrace();
 //            throw new IOException(e);
         }
-        if (itens.size()>0){
+        if (itens.size() > 0) {
             return itens.toArray(new ItemComandaGarcomConvertView[0]);
         }
         return null;
@@ -278,10 +278,31 @@ public class ComandaNetwork {
 
             }
             return itens;
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static void createItemPedido(String url, int[] idItens, int idComanda) throws IOException {
+
+        String urlGetItem = url + "/createItemPedido?idComanda=" + idComanda;
+        for (int id : idItens) {
+            url += "&idItens =" + id;
+        }
+
+        Log.d("TESTES", "URL: "+url);
+
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(urlGetItem)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES", resultado);
+
     }
 
     public static boolean isConnected(Context context) {

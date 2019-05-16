@@ -86,7 +86,22 @@ public class ItemComandaGarcomConvertView extends Util implements Serializable {
     }
 
     public String getStatus() {
-        return capitalize(status);
+        String status;
+        switch(statusPedido){
+            case "N":
+                status ="Não Selecionado por Usuário";
+                break;
+            case "S":
+                status = "Selecionado por Usuário";
+                break;
+            case "P":
+                status = "Item Pago";
+                break;
+            default:
+                status = "Status Inválido - diff de N, S ou P";
+                break;
+        }
+        return status;
     }
 
     public void setStatus(String status) {
@@ -192,6 +207,15 @@ public class ItemComandaGarcomConvertView extends Util implements Serializable {
                 ", nomeUsuario='" + nomeUsuario + '\'' +
                 ", emailUsuario='" + emailUsuario + '\'' +
                 '}';
+    }
+
+    public static ItemComandaGarcomConvertView[] listToArray(List<ItemComandaGarcomConvertView> itens){
+        Object[] objects = itens.toArray();
+        ItemComandaGarcomConvertView[] itensArray = new ItemComandaGarcomConvertView[objects.length];
+        for (int i = 0; i < objects.length; i++) {
+            itensArray[i] = (ItemComandaGarcomConvertView) objects[i];
+        }
+        return itensArray;
     }
 
 /*{

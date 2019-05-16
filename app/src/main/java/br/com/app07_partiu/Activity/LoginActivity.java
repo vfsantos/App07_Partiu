@@ -23,6 +23,7 @@ import br.com.app07_partiu.Model.Estabelecimento;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
@@ -56,8 +57,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //Snackbar
     private Snackbar snackbarErroLogin;
-
-    public static final String URL = "http://192.168.43.121:8080/partiu";
 
     public static final String COMANDAS = "br.com.app07_partiu.LoginActivity.comandas";
     public static final String USUARIO = "br.com.app07_partiu.LoginActivity.usuario";
@@ -135,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                usuario = UsuarioNetwork.login(URL, enderecoEmailUsuario, senhaUsuario);
+                                usuario = UsuarioNetwork.login(Connection.URL, enderecoEmailUsuario, senhaUsuario);
                                 Log.d("TESTES", usuario.toString());
 
 
@@ -199,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                comandas = ComandaNetwork.buscarComandas(URL, usuario.getId(), 'A');
+                                comandas = ComandaNetwork.buscarComandas(Connection.URL, usuario.getId(), 'A');
                                 Log.d("TESTES", comandas.toString());
 
                                 runOnUiThread(new Runnable() {
@@ -228,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            restaurante = RestauranteNetwork.getRestauranteByIdGarcom(URL, usuario.getId());
+                            restaurante = RestauranteNetwork.getRestauranteByIdGarcom(Connection.URL, usuario.getId());
 
                             runOnUiThread(new Runnable() {
                                               @Override
