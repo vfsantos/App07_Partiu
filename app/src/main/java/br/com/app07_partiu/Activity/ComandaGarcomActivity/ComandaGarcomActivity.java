@@ -54,7 +54,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
-
+    public static final int RESULT_PEDIDOS_CRIADOS = 1000;
 
 
     //ListView
@@ -122,28 +122,32 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         textViewItemHora.setText(comanda.getDataEntrada());
 
         if (itens != null) {
-            formatItens();
-            getTotalComanda();
-
-            //Listview com itens da comanda selecionada
-            listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
-            ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
-            listViewItensComanda.setAdapter(adapter);
-            listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    intentItem = new Intent(context, ItemDetalheGarcomActivity.class);
-                    intentItem.putExtra(ITEM, itens[position]);
-                    startActivity(intentItem);
-                }
-            });
+            carregarItens();
         }
     }
 
-    private void inicializarComponentes(){
+    private void carregarItens(){
+        formatItens();
+        getTotalComanda();
+
+        //Listview com itens da comanda selecionada
+        listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
+        ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
+        listViewItensComanda.setAdapter(adapter);
+        listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                intentItem = new Intent(context, ItemDetalheGarcomActivity.class);
+                intentItem.putExtra(ITEM, itens[position]);
+                startActivity(intentItem);
+            }
+        });
+    }
+
+    private void inicializarComponentes() {
 //        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
         textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
@@ -160,7 +164,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     private void visualizarItensRestaurante() {
         intentPedidoSelecaoGarcom = new Intent(context, CardapioGarcomActivity.class);
-        if (ComandaNetwork.isConnected(this)) {
+        if (Connection.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -174,7 +178,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                                               intentPedidoSelecaoGarcom.putExtra(COMANDA, comanda);
                                               intentPedidoSelecaoGarcom.putExtra(ITENS_RESTAURANTE, itensRestaurante);
 
-                                              startActivity(intentPedidoSelecaoGarcom);
+                                              startActivityForResult(intentPedidoSelecaoGarcom, RESULT_PEDIDOS_CRIADOS);
                                           }
                                       }
                         );
@@ -183,8 +187,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                     }
                 }
             }).start();
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -247,4 +249,11 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_PEDIDOS_CRIADOS) {
+            carregarItens();
+        }
+    }
 }

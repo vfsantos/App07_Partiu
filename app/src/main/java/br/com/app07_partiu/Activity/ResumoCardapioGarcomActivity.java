@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
 
+import static br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity.RESULT_RESUMO_FINALIZADO;
 import static br.com.app07_partiu.Model.ItemComandaGarcomConvertView.listToArray;
 
 //TODO Classe PLACEHOLDER
@@ -34,6 +36,7 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
     private Comanda comanda;
 
     int[] idItens;
+    String[] obsItens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,23 +60,28 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
     }
 
     private void criarPedidos() {
-        if (ComandaNetwork.isConnected(this)) {
+        if (Connection.isConnected(this)) {
             idItens = new int[itensAdicionar.length];
+            obsItens = new String[itensAdicionar.length];
+
             for (int i = 0; i < itensAdicionar.length; i++) {
                 idItens[i] = itensAdicionar[i].getId();
+                //TODO pegar do objeto
+                obsItens[i] = "PLACEHOLDER";
             }
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        ComandaNetwork.createItemPedido(Connection.URL, idItens, comanda.getId());
+                        ComandaNetwork.createItemPedido(Connection.URL, idItens, obsItens, comanda.getId());
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
                                               Toast.makeText(context, "Itens Adicionados!", Toast.LENGTH_LONG).show();
-//                                              finish();
-                                              //TODO adicionar finish na activity anterior, depois do startActivity()
+                                              Log.d("TESTES", "Itens Adicionados à comanda com sucesso");
+                                              setResult(RESULT_RESUMO_FINALIZADO);
+                                              finish();
                                           }
                                       }
                         );
@@ -83,15 +91,15 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
                                           @Override
                                           public void run() {
                                               Toast.makeText(context, "ERRO INTERNO", Toast.LENGTH_SHORT).show();
+
                                           }
                                       }
                         );
+                        Log.d("TESTES", "IOException; não conseguiu criar pedidos");
                         e.printStackTrace();
                     }
                 }
             }).start();
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 

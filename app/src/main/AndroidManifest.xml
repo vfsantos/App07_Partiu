@@ -15,10 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Activity.DetalheCardapioGarcomActivity"></activity>
         <activity
             android:name=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:label="@string/title_activity_cardapio_garcom"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:label="@string/title_activity_cardapio_garcom"

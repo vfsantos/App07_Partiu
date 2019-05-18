@@ -36,7 +36,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     private AlertDialog alerta;
     private BottomNavigationView bottomNavigationView;
     public static final String COMANDA = "br.com.app07_partiu.CodigoComandaClienteActivity.comanda";
-    public static final String ITENS = "br.com.app07_partiu.CodigoComandaClienteActivity.itens" ;
+    public static final String ITENS = "br.com.app07_partiu.CodigoComandaClienteActivity.itens";
     public Comanda comanda;
     private Context contexto;
 
@@ -49,7 +49,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        contexto=this;
+        contexto = this;
         textViewTitulo = (TextView) findViewById(R.id.text_view_codigo_comanda_titulo);
         textViewDescricao = (TextView) findViewById(R.id.text_view_codigo_comanda_descricao);
         editTextCodigoComanda = (EditText) findViewById(R.id.edit_texte_codigo_comanda_codigo);
@@ -65,9 +65,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     }
 
 
-    public void getCodComanda(final String codigo){
+    public void getCodComanda(final String codigo) {
 
-        if(ComandaNetwork.isConnected(this)) {
+        if (Connection.isConnected(this)) {
 
             //TODO consertar progressBarTime
             //TODO parte Cliente
@@ -80,9 +80,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                                 comanda = ComandaNetwork.getCodComanda(Connection.URL, codigo);
                                 System.out.println(comanda.toString());
 
-                                runOnUiThread(new Runnable(){
+                                runOnUiThread(new Runnable() {
                                     public void run() {
-                                        if(comanda.getCodigoComanda().equals(codigo)){
+                                        if (comanda.getCodigoComanda().equals(codigo)) {
                                             getPedComanda(comanda);
                                         }
                                     }
@@ -95,9 +95,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.e("TESTES", "Retornou 'Comanda Inválido!'");
-                                runOnUiThread(new Runnable(){
+                                runOnUiThread(new Runnable() {
                                     public void run() {
-                                        Toast.makeText(contexto, "Comanda Inválido!",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(contexto, "Comanda Inválido!", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -105,20 +105,17 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                     }).start();
 
 
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-
-    public void getPedComanda(final Comanda comanda){
+    public void getPedComanda(final Comanda comanda) {
 
         final int idComanda = comanda.getId();
         intentComanda = new Intent(this, ComandaClienteActivity.class);
 
 
-        if(ComandaNetwork.isConnected(this)) {
+        if (Connection.isConnected(this)) {
 
             //TODO consertar progressBarTime
             //TODO parte Cliente
@@ -128,14 +125,14 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                itens  = ComandaNetwork.getPedidosComanda(Connection.URL, idComanda);
+                                itens = ComandaNetwork.getPedidosComanda(Connection.URL, idComanda);
                                 Log.d("TESTES", comanda.toString());
 
 
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
-                                                      intentComanda.putExtra(COMANDA,comanda);
+                                                      intentComanda.putExtra(COMANDA, comanda);
                                                       //intentComanda.putExtra(PEDIDOS, itens.toArray());
                                                       startActivity(intentComanda);
                                                   }
@@ -147,20 +144,18 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.e("TESTES", "Retornou 'Comanda Inválido!'");
-                                runOnUiThread(new Runnable(){
+                                runOnUiThread(new Runnable() {
                                     public void run() {
-                                        Toast.makeText(contexto, "Comanda Inválido!",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(contexto, "Comanda Inválido!", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
                         }
                     }).start();
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onClickButtonEntrarComanda (View view) {
+    public void onClickButtonEntrarComanda(View view) {
 //
     }
 

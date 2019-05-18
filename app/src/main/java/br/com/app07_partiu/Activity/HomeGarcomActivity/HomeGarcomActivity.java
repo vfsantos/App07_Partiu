@@ -173,7 +173,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //Criar comadanda
     public void criarComanda(final int idGarcom, final int numeroDaMesa) {
         intentNovaComanda = new Intent(context, ComandaGarcomActivity.class);
-        if (ComandaNetwork.isConnected(this)) {
+        if (Connection.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -212,15 +212,13 @@ public class HomeGarcomActivity extends AppCompatActivity {
                     }
                 }
             }).start();
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
     //ver comanda
     public void visualizarComanda(final int idComanda) {
         intentComanda = new Intent(context, ComandaGarcomActivity.class);
-        if (ComandaNetwork.isConnected(this)) {
+        if (Connection.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -247,8 +245,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
                     }
                 }
             }).start();
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
