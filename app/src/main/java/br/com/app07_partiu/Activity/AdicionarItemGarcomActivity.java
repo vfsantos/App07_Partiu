@@ -60,13 +60,13 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         inicializaComponentes();
+
         intent = getIntent();
         context = this;
-        item = (ItemComandaGarcomConvertView) intent.getSerializableExtra(CardapioGarcomActivity.ITEM);
+        //item = (ItemComandaGarcomConvertView) intent.getSerializableExtra(CardapioGarcomActivity.ITEM);
 
-        //textViewNomeItem.setText(item.getNome());
         //textViewValorItem.setText(item.getValorString());
-        //textViewDetalhesItem.setText("Descrição Placeholder de Item_Descricao");
+        //textViewDetalhesItem.setText(R.string.text_cardapiogarcom_detalhesitem);
 
 
     }

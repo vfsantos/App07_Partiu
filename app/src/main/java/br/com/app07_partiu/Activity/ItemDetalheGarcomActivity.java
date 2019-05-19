@@ -83,7 +83,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         buttonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                this.clo
+                finish();
             }
         });
 

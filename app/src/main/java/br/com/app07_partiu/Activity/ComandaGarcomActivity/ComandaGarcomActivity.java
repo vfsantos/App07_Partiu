@@ -101,7 +101,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         });
 
         inicializarComponentes();
-        context = this;
 
         intent = getIntent();
         restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);

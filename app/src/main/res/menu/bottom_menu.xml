@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_recomendacao"
-        android:title="@string/bottom_navagation_recomendacao"
-        android:icon="@drawable/ic_action_add_recomandacao" />
+        android:id="@+id/menu_explorar"
+        android:title="@string/text_bottombar_explorar"
+        android:icon="@drawable/ic_action_explorar" />
 
     <item
         android:id="@+id/menu_comanda"

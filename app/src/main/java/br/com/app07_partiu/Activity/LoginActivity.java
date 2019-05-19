@@ -17,6 +17,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.zip.Inflater;
 
+import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
@@ -122,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         final String senhaUsuario = senha;
 
         intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
-        intentLoginCliente = new Intent(this, CodigoComandaClienteActivity.class);
+        intentLoginCliente = new Intent(this, ExplorarClienteActivity.class);
 
         if(UsuarioNetwork.isConnected(this)) {
 

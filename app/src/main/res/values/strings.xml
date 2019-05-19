@@ -32,7 +32,8 @@
     <string name="text_cardapiogarcom_detalhesitem">Pão artesanal, queijo, calabresa, bacon, milho,
         1 salsicha, ervilha, maionese, batata palha</string>
     <!-- Fim Activity Cardapio Garcom -->
-    
+
+
     <!-- Activity Resumo Garcom -->
     <string name="text_resumogarcom_titulopagina">Resumo</string>
     <string name="text_resumogarcom_total">Total</string>
@@ -43,7 +44,7 @@
 
     <!-- Actiity Item Detalhe Comanda Garcom -->
     <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhe dos itens</string>
-    <string name="text_itemdetalhecomandagarcom_algumaobservacao">Alguma observação</string>
+    <string name="text_itemdetalhecomandagarcom_algumaobservacao">Alguma observação?</string>
     <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
     <string name="text_itemdetalhecomandagarcom_status">Status</string>
     <string name="btn_itemdetalhecomandagarcom_remover">Remover</string>
@@ -56,6 +57,24 @@
     <string name="text_resumocomandagarcom_total">Total</string>
     <string name="btn_resumocomandagarcom_adicionarmaisitens">Adicionar mais itens</string>
     <!-- Fim Activity Resumo Garcom -->
+
+
+    <!-- Activity Editar Item Garcom -->
+    <string name="text_editaritemgarcom_titulopagina">Detalhe do item</string>
+    <string name="btn_editaritemgarcom_add">+</string>
+    <string name="btn_editaritemgarcom_sub">-</string>
+    <string name="text_editaritemgarcom_algumaobservacao">Alguma observação</string>
+    <string name="btn_editaritemgarcom_remover">Remover</string>
+    <!-- Fim Activity Editar Item Garcom -->
+
+
+    <!-- BottomBar Cliente -->
+    <string name="text_bottombar_explorar">Explorar</string>
+    <string name="text_bottombar_comanda">Comanda</string>
+    <string name="text_bottombar_perfil">Perfil</string>
+    <!-- Fim BottomBar Cliente -->
+
+
 
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
     <string name="placeholder_senha">senha</string>
@@ -189,6 +208,7 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_resumo_garcom">ResumoGarcomActivity</string>
+    <string name="title_activity_explorar_cliente">ExplorarClienteActivity</string>
 
 
 </resources>

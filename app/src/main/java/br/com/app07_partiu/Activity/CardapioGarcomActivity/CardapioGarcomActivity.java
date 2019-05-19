@@ -72,7 +72,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        intent = this.getIntent();
+        intent = getIntent();
         context = this;
 
         comanda = (Comanda) intent.getSerializableExtra(ComandaGarcomActivity.COMANDA);
@@ -81,7 +81,9 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         itensAdicionar = new ArrayList<ItemComandaGarcomConvertView>();
         //OnClickListener detalheCardapioGarcom();
 
-        carregarItens();
+        if (itensRestaurante != null) {
+            carregarItens();
+        }
     }
 
 
@@ -97,7 +99,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 intentItem = new Intent(context, AdicionarItemGarcomActivity.class);
-                //intentItem.putExtra(ITEM, itens[position]);
+                intentItem.putExtra(ITEM, itensRestaurante[position]);
                 startActivity(intentItem);
             }
         });

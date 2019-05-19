@@ -43,4 +43,12 @@
         // Cor texto(hint) sem foco
     </style>
 
+
+    <!-- Style Bottombar Cliente -->
+    <style name="CustomBottomBar" parent="Widget.Design.BottomNavigationView">
+        <item name="itemIconTint">#FFFFFF</item>
+        <item name="itemTextColor">#FFFFFF</item>
+    </style>
+    <!-- Fim Style BottomBar Cliente -->
+
 </resources>
