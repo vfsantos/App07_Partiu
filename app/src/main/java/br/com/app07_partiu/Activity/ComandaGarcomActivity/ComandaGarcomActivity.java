@@ -38,9 +38,6 @@ import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class ComandaGarcomActivity extends AppCompatActivity {
 
-    public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
-
-
     //TextView
     private TextView textViewTituloPagina;
     private TextView textViewItemCodigoComanda;
@@ -53,6 +50,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private TextView textViewItemHora;
     private TextView textViewItensDaComanda;
 
+    public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
     public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
     public static final int RESULT_PEDIDOS_CRIADOS = 1000;

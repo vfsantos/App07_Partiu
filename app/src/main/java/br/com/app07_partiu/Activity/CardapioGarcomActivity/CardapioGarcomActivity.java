@@ -18,9 +18,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomAdapter;
 import br.com.app07_partiu.Activity.DetalheCardapioGarcomActivity;
+import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
 import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
@@ -38,6 +40,7 @@ import static br.com.app07_partiu.Model.ItemComandaGarcomConvertView.listToArray
 
 public class CardapioGarcomActivity extends AppCompatActivity {
 
+    public static final String ITEM = "br.com.app07_partiu.CardapioGarcomActivity.item";
     public static final String ITENS_ADICIONAR = "CardapioGarcomActivity.ItensAdicionar";
     public static final String COMANDA = "CardapioGarcomActivity.Comanda";
     public static final String ITEM_DETALHE = "CardapioGarcomActivity.ItemDetalhe";
@@ -45,10 +48,13 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     public static final int RESULT_DETALHE_RETORNADO = 2000;
 
     Intent intent;
+    private Intent intentItem;
+
     Context context;
 
     Intent intentResumoAddItens;
     Intent intentDetalheCardapioGarcom;
+    Intent intentAdicionarItemPedido;
 
     //Do intent
     private Comanda comanda;
@@ -84,11 +90,15 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         listViewItensCardapio = (ListView) findViewById(R.id.listView_cardapioGarcom);
         CardapioGarcomAdapter adapter = new CardapioGarcomAdapter(itensRestaurante, this);
         listViewItensCardapio.setAdapter(adapter);
+        listViewItensCardapio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        listViewItensCardapio.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
-
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                intentItem = new Intent(context, AdicionarItemGarcomActivity.class);
+                //intentItem.putExtra(ITEM, itens[position]);
+                startActivity(intentItem);
             }
         });
     }

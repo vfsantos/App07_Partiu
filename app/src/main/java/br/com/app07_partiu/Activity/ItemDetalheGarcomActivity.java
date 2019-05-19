@@ -53,7 +53,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
 
         textViewNomeItem.setText(item.getNome());
         textViewValorItem.setText(item.getValorString());
-        textViewDetalhesItem.setText("Desrição Placeholder de Item_Descricao");
+        textViewDetalhesItem.setText("Descrição Placeholder de Item_Descricao");
 
         textViewQuantidade.setText("");
         textViewQuantidadeValor.setText("");
