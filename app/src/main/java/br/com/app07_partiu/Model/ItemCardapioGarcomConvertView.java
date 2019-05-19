@@ -1,15 +1,21 @@
 package br.com.app07_partiu.Model;
 
-public class ItemCardapioGarcomConvertView {
+import java.io.Serializable;
 
+public class ItemCardapioGarcomConvertView implements Serializable {
+
+    private int id;
     private String nomeItem;
     private String detalheItem;
     private String valorItem;
 
-    public ItemCardapioGarcomConvertView(String nomeItem, String detalheItem, String valorItem) {
-        this.nomeItem = nomeItem;
-        this.detalheItem = detalheItem;
-        this.valorItem = valorItem;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNomeItem() {

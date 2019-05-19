@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -16,9 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
+import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomAdapter;
 import br.com.app07_partiu.Activity.DetalheCardapioGarcomActivity;
+import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
 import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.ItemCardapioGarcomConvertView;
 import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.Model.ItemConvertView;
 import br.com.app07_partiu.Network.ComandaNetwork;
@@ -46,10 +52,12 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
     //Do intent
     private Comanda comanda;
-    private ItemConvertView[] itensRestaurante;
+    private ItemCardapioGarcomConvertView[] itensRestaurante;
 
     List<ItemComandaGarcomConvertView> itensAdicionar;
 
+    //RecyclerView
+    private ListView listViewItensCardapio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +65,34 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cardapio_garcom);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         intent = this.getIntent();
         context = this;
 
         comanda = (Comanda) intent.getSerializableExtra(ComandaGarcomActivity.COMANDA);
-        itensRestaurante = (ItemConvertView[]) intent.getSerializableExtra(ComandaGarcomActivity.ITENS_RESTAURANTE);
+        itensRestaurante = (ItemCardapioGarcomConvertView[]) intent.getSerializableExtra(ComandaGarcomActivity.ITENS_RESTAURANTE);
 
         itensAdicionar = new ArrayList<ItemComandaGarcomConvertView>();
         //OnClickListener detalheCardapioGarcom();
 
+        carregarItens();
     }
+
+
+    private void carregarItens() {
+        //Recycler com itens da cardapio do restaurante
+        listViewItensCardapio = (ListView) findViewById(R.id.listView_cardapioGarcom);
+        CardapioGarcomAdapter adapter = new CardapioGarcomAdapter(itensRestaurante, this);
+        listViewItensCardapio.setAdapter(adapter);
+
+        listViewItensCardapio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
 
     // Envia item selecionado à proxima Activity (DetalheCardapioGarcomActivity)
     private void detalheCardapioGarcom(ItemComandaGarcomConvertView item) {
@@ -75,6 +101,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         intent.putExtra(ITEM_DETALHE, item);
         startActivityForResult(intent, RESULT_DETALHE_RETORNADO);
     }
+
 
     // Envia itens a serem adicionados à proxima Activity (ResumoCardapioGarcomActivity)
     private void resumoCardapioGarcom() {

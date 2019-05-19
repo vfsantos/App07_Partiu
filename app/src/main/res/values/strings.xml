@@ -6,7 +6,6 @@
     <string name="text_login_bemvindo">Bem-vindo</string>
     <string name="text_login_continueparaentrar">Continue para entrar</string>
     <string name="text_login_novousuario">Novo usuário?</string>
-
     <string name="btn_login_entrar">Entrar</string>
     <string name="btn_login_esqueceusuasenha">Esqueceu sua senha?</string>
     <string name="btn_login_cadastrese">Cadastre-se</string>
@@ -33,6 +32,13 @@
     <string name="text_cardapiogarcom_detalhesitem">Pão artesanal, queijo, calabresa, bacon, milho,
         1 salsicha, ervilha, maionese, batata palha</string>
     <!-- Fim Activity Cardapio Garcom -->
+    
+    <!-- Activity Resumo Garcom -->
+    <string name="text_resumogarcom_titulopagina">Resumo</string>
+    <string name="text_resumogarcom_total">Total</string>
+    <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
+    <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
+    <!-- Fim Activity Resumo Garcom -->
 
 
     <!-- Actiity Item Detalhe Comanda Garcom -->
@@ -43,6 +49,13 @@
     <string name="btn_itemdetalhecomandagarcom_remover">Remover</string>
     <string name="btn_itemdetalhecomandagarcom_voltar">Voltar</string>
     <!-- Fim Activity Item Detalhe Comanda Garcom -->
+
+
+    <!-- Activity Resumo Garcom -->
+    <string name="text_resumocomandagarcom_titulopagina">Resumo</string>
+    <string name="text_resumocomandagarcom_total">Total</string>
+    <string name="btn_resumocomandagarcom_adicionarmaisitens">Adicionar mais itens</string>
+    <!-- Fim Activity Resumo Garcom -->
 
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
     <string name="placeholder_senha">senha</string>
@@ -175,6 +188,7 @@
     <string name="title_activity_cardapio_garcom">CardapioGarcomActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_resumo_garcom">ResumoGarcomActivity</string>
 
 
 </resources>

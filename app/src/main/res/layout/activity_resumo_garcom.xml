@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ComandaGarcomActivity.ComandaGarcomActivity">
+    tools:context=".Activity.ResumoGarcomActivity.ResumoGarcomActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout9"
             android:layout_width="match_parent"
@@ -25,19 +26,17 @@
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/textView_itemDetalhes_tituloPage"
+                android:id="@+id/textView_resumoGarcom_tituloPage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="18dp"
                 android:layout_marginBottom="14dp"
-                android:text="@string/text_comandagarcom_titulopagina"
+                android:text="@string/text_resumogarcom_titulopagina"
                 android:textAllCaps="true"
                 android:textColor="@color/branco"
                 android:textSize="14sp"
@@ -50,14 +49,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_comanda_garcom" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_action_add" />
+    <include layout="@layout/content_resumo_garcom" />
 
 </android.support.design.widget.CoordinatorLayout>

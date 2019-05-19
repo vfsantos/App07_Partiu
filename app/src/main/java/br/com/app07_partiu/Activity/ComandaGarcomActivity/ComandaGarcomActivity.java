@@ -24,6 +24,7 @@ import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.ItemCardapioGarcomConvertView;
 import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.Model.ItemConvertView;
 import br.com.app07_partiu.Model.Restaurante;
@@ -82,7 +83,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Intent intentPedidoSelecaoGarcom;
 
 
-    private ItemConvertView[] itensRestaurante;
+    private ItemCardapioGarcomConvertView[] itensRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +170,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        itensRestaurante = ItemNetwork.getItensCardapio(Connection.URL, restaurante.getCnpj());
+                        itensRestaurante = ItemNetwork.getItensCardapioGarcom(Connection.URL, restaurante.getCnpj());
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
@@ -177,7 +178,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                                               //Comanda necessaria para saber em que id inserir pedidos
                                               intentPedidoSelecaoGarcom.putExtra(COMANDA, comanda);
                                               intentPedidoSelecaoGarcom.putExtra(ITENS_RESTAURANTE, itensRestaurante);
-
                                               startActivityForResult(intentPedidoSelecaoGarcom, RESULT_PEDIDOS_CRIADOS);
                                           }
                                       }

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import br.com.app07_partiu.R;
 
 public class AdicionarItemGarcomActivity extends AppCompatActivity {
-
     //TextView
     private TextView textViewTituloPagina;
     private TextView textViewNomeItem;
@@ -39,6 +38,9 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     private ImageView imageViewSub;
 
 
+    //int
+    private int quantidade;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +49,11 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         inicializaComponentes();
-
     }
 
+
     private void inicializaComponentes() {
+        //TextView
         textViewTituloPagina = (TextView) findViewById(R.id.textView_adicionarItemGarcom_tituloPage);
         textViewNomeItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_nome);
         textViewDetalhesItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_detalhes);
@@ -59,14 +62,18 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         texViewQuantidade = (TextView) findViewById(R.id.textView_adicionarItem_quantidade);
 
 
+        //EditText
         editTextObservacao = (EditText) findViewById(R.id.editText_adicionarItemGarcom_observacao);
 
 
+        //Button
         buttonAdicionarItem = (Button) findViewById(R.id.button_adicionarItem_addComanda);
 
 
+        //ImageView
         imageViewAdd = (ImageView) findViewById(R.id.imageView_adicionarItem_add);
         imageViewSub = (ImageView) findViewById(R.id.imageView_adicionarItem_retirar);
     }
+
 
 }

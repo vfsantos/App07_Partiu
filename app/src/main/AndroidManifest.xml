@@ -17,6 +17,10 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".Activity.DetalheCardapioGarcomActivity"></activity>
         <activity
+            android:name=".Activity.ResumoGarcomActivity.ResumoGarcomActivity"
+            android:label="@string/title_activity_resumo_garcom"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:label="@string/title_activity_cardapio_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
