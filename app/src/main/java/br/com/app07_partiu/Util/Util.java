@@ -20,8 +20,11 @@ public class Util {
     }
 
     public static String doubleToReal(double d){
-        DecimalFormat df = new DecimalFormat("#.00");
-        return "R$"+((df.format(d)).replace(".",","));
+        if (d > 0){
+            DecimalFormat df = new DecimalFormat("#.00");
+            return "R$"+((df.format(d)).replace(".",","));
+        }
+        return "R$00,00";
     }
 
     public static Drawable getDrawable(Context context, String nome){

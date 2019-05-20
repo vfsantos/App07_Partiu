@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
             //TODO consertar progressBarTime
             //TODO parte Cliente
-            //progressBarTime.setVisibility(View.VISIBLE);
+//            progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
                         @Override
@@ -153,6 +153,9 @@ public class LoginActivity extends AppCompatActivity {
                                 );
                             } catch (IOException e) {
                                 e.printStackTrace();
+                                Log.d("TESTES", "Erro no webservice ou na conexão");
+                                snackbarErroLogin = Snackbar.make(findViewById(R.id.constraintLayoutLogin), "Erro no webservice ou na conexão", Snackbar.LENGTH_LONG);
+                                snackbarErroLogin.show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -229,14 +232,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             restaurante = RestauranteNetwork.getRestauranteByIdGarcom(Connection.URL, usuario.getId());
-
-                            runOnUiThread(new Runnable() {
-                                              @Override
-                                              public void run() {
-                                                  listarComandas();
-                                              }
-                                          }
-                            );
+                            listarComandas();
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {

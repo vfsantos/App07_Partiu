@@ -55,15 +55,12 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
     public static final int RESULT_PEDIDOS_CRIADOS = 1000;
 
-
     //ListView
     private ListView listViewItensComanda;
-
 
     //Itent
     private Intent intent;
     private Intent intentItem;
-
 
     //Objeto
     private Comanda comanda;
@@ -73,14 +70,9 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Context context;
 
     private Double valorTotalComanda = 0.0;
-
     private ComandaConvertView comandaConvertView;
-
     private Restaurante restaurante;
-
     private Intent intentPedidoSelecaoGarcom;
-
-
     private ItemCardapioGarcomConvertView[] itensRestaurante;
 
     @Override
@@ -114,17 +106,20 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         //   Talvez colocar junto com o metodo escroto de formatar itens, já tá no meio do processo msm
         textViewItemPessoaComandaNumero.setText("00");
         textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
+
+
+        if (itens != null) {
+            carregarItens();
+        }
+
         // TODO decidir entre total total ou total a pagar
         // TODO arrumar, esta vindo 0
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
         textViewItemHora.setText(comanda.getDataEntrada());
 
-        if (itens != null) {
-            carregarItens();
-        }
     }
 
-    private void carregarItens(){
+    private void carregarItens() {
         formatItens();
         getTotalComanda();
 
@@ -225,6 +220,19 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                 // Se não existir idPedido, adciona direto na lista
             } else {
                 idPedidos.add(i.getIdPedido());
+                if (i.getNomeUsuario() != null || i.getNomeUsuario() != "") {
+                    Usuario u = new Usuario();
+                    u.setId(i.getIdUsuario());
+                    u.setNome(i.getNomeUsuario());
+                    u.setEmail(i.getEmailUsuario());
+                    List<Usuario> temp = new ArrayList<Usuario>();
+                    temp.add(u);
+                    i.setUsuariosPedido(temp);
+
+                }else{
+
+                    i.setUsuariosPedido(new ArrayList<Usuario>());
+                }
                 itensF.add(i);
 
             }

@@ -2,10 +2,11 @@ package br.com.app07_partiu.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Connection {
-    public static final String URL = "http://10.0.2.2:8080/partiu";
+    public static final String URL = "http://192.168.50.102:8080/partiu";
 
     public static boolean isConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -17,6 +18,7 @@ public class Connection {
     }
 
     public static void makeToast(Context context) {
+        Log.d("TESTES", "Connection time out");
         Toast.makeText(context, "Rede inativa!\nReconecte-se e tente novamente.", Toast.LENGTH_SHORT).show();
     }
 

@@ -86,7 +86,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         }
     }
 
-
     private void carregarItens() {
         //Recycler com itens da cardapio do restaurante
         listViewItensCardapio = (ListView) findViewById(R.id.listView_cardapioGarcom);
@@ -104,7 +103,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
             }
         });
     }
-
 
     // Envia item selecionado à proxima Activity (DetalheCardapioGarcomActivity)
     private void detalheCardapioGarcom(ItemComandaGarcomConvertView item) {

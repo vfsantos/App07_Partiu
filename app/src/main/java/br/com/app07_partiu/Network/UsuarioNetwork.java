@@ -2,6 +2,7 @@ package br.com.app07_partiu.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +62,7 @@ public class UsuarioNetwork {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.d("TESTES", "Não conectou");
             return null;
         }
 

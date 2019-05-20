@@ -181,7 +181,7 @@ public class ItemComandaGarcomConvertView extends Util implements Serializable {
     }
 
     public String getEmailUsuario() {
-        return emailUsuario.toLowerCase();
+        return emailUsuario;
     }
 
     public void setEmailUsuario(String emailUsuario) {

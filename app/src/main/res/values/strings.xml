@@ -173,7 +173,7 @@
     <string name="bottom_navagation_perfil">perfil</string>
 
     <!-- Item comanda garcom -->
-    <string name="item_comanda_garcom_total_comanda">total da comandada: </string>
+    <string name="item_comanda_garcom_total_comanda">total da comanda: </string>
     <string name="item_comanda_garcom_pessoas_comanda">pessoas na comanda: </string>
     <string name="item_comanda_garcom_mesa">mesa: </string>
 

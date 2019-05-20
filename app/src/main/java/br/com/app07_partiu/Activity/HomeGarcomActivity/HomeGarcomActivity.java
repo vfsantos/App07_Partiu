@@ -188,6 +188,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               //snackbarComandaCriada.show();
                                               intentNovaComanda.putExtra(COMANDA, comanda);
                                               intentNovaComanda.putExtra(PEDIDOS, pedidos);
+                                              intentNovaComanda.putExtra(RESTAURANTE, restaurante);
                                               //TODO consertar restaurante vindo vazio
 //                                              intentComanda.putExtra(RESTAURANTE, restaurante);
 
@@ -264,7 +265,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
             }
         };
 
-
         alertaNumeroMesa.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -288,7 +288,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
                 alertNovaComanda();
             }
         });
-
 
         //SwipeRefreshLayout
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
