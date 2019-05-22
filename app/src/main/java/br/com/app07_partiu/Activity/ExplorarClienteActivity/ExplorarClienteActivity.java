@@ -20,6 +20,7 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
 
     private BottomNavigationView bottomNavigationView;
     private Context context;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,9 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         bottomNavigationView = findViewById(R.id.bottomNavegation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         context = this;
+
+        //TODO import itent
+
 
 
     }

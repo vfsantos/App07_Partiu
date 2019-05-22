@@ -14,18 +14,18 @@ import android.widget.TextView;
 import java.util.Hashtable;
 
 
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer{
     private Activity activity;
-    public ItemComandaGarcomConvertView[] itens;
+    public Item[] itens;
     Object[] sectionHeaders;
     Hashtable<Integer, Integer> positionForSectionMap;
     Hashtable<Integer, Integer> sectionForPositionMap;
 
 
-    public ComandaGarcomAdapter(ItemComandaGarcomConvertView[] itens, Activity activity) {
+    public ComandaGarcomAdapter(Item[] itens, Activity activity) {
         this.itens = itens;
         this.activity = activity;
         sectionHeaders = ComandaGarcomSectionIndexBuilder.buildSectionHeaders(itens);
@@ -66,8 +66,8 @@ public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer{
 
         ComandaGarcomViewHolder viewHolder = (ComandaGarcomViewHolder) view.getTag();
         viewHolder.getTextViewDetalhes().setText(itens[position].getNome());
-        viewHolder.getTextViewValor().setText(String.valueOf(itens[position].getValor()));
-        // ---- item não tem item
+        viewHolder.getTextViewValor().setText(itens[position].getValorString());
+        // ---- item não tem img
         /*Drawable drawable = Util.getDrawable(activity, itens[position].getIcone().toLowerCase());
         if(drawable == null){
             drawable = activity.getDrawable(R.drawable.ic_action_detalhe);

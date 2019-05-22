@@ -27,7 +27,7 @@ import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
@@ -54,7 +54,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //Objeto
     private ComandaConvertView[] comandas;
-    public ItemComandaGarcomConvertView[] pedidos;
+    public Item[] pedidos;
     private Restaurante restaurante;
     private Usuario garcom;
     private Context context;
@@ -107,7 +107,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
         restaurante = (Restaurante) intent.getSerializableExtra(LoginActivity.RESTAURANTE);
         comandas = (ComandaConvertView[]) intent.getSerializableExtra(LoginActivity.COMANDAS);
         garcom = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
-        // mesa = new Mesa();
 //        Log.d("TESTES", comandas.toString());
 
 

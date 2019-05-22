@@ -5,14 +5,13 @@ import java.util.Hashtable;
 import java.util.TreeSet;
 
 import br.com.app07_partiu.Model.Item;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 
 public class ComandaGarcomSectionIndexBuilder {
 
-    public static Object[] buildSectionHeaders(ItemComandaGarcomConvertView[] itens){
+    public static Object[] buildSectionHeaders(Item[] itens){
         ArrayList<String> resultado = new ArrayList<>();
         TreeSet<String> usados = new TreeSet<>();
-        for(ItemComandaGarcomConvertView item:itens){
+        for(Item item:itens){
             //String letra = item.getDescricao().substring(0,1);
             String letra = "?A";
             if((!usados.contains(letra))){
@@ -23,7 +22,7 @@ public class ComandaGarcomSectionIndexBuilder {
         return resultado.toArray(new Object[0]);
     }
 
-    public static Hashtable<Integer, Integer> buildSectionForPositionMap(ItemComandaGarcomConvertView[] itens){
+    public static Hashtable<Integer, Integer> buildSectionForPositionMap(Item[] itens){
         Hashtable<Integer, Integer> resultados = new Hashtable<>();
         TreeSet<String> usados = new TreeSet<>();
 
@@ -43,7 +42,7 @@ public class ComandaGarcomSectionIndexBuilder {
     }
 
 
-    public static Hashtable<Integer, Integer> buildPositionForSectionMap(ItemComandaGarcomConvertView[] itens){
+    public static Hashtable<Integer, Integer> buildPositionForSectionMap(Item[] itens){
         Hashtable<Integer, Integer> resultados = new Hashtable<>();
         TreeSet<String> usados = new TreeSet<>();
 

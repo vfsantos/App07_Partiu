@@ -1,9 +1,14 @@
 package br.com.app07_partiu.Model;
 
 import java.io.Serializable;
+import java.util.List;
+
+import static br.com.app07_partiu.Util.Util.capitalize;
+import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class Item implements Serializable {
 
+    //Item
     private int id;
     private long cnpjRestaurante;
     private String categoria;
@@ -19,9 +24,16 @@ public class Item implements Serializable {
     private String idComanda;
     private String data;
     private String statusPedido;
+
+    //Usuario
     private int idUsuario;
     private String nomeUsuario;
     private String emailUsuario;
+
+    //Lista de Usuarios
+    private List<Usuario> usuariosPedido;
+
+
 
     public Usuario getUsuario() {
         return usuario;
@@ -37,6 +49,17 @@ public class Item implements Serializable {
 
     public String getData() {
         return data;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public long getCnpjRestaurante() {
+        return cnpjRestaurante;
+    }
+    public String getCnpjRestauranteString() {
+        return Long.toString(cnpjRestaurante);
     }
 
     public void setUsuario(Usuario usuario) {
@@ -55,16 +78,8 @@ public class Item implements Serializable {
         this.data = data;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public long getCnpjRestaurante() {
-        return cnpjRestaurante;
     }
 
     public void setCnpjRestaurante(long cnpjRestaurante) {
@@ -80,7 +95,7 @@ public class Item implements Serializable {
     }
 
     public String getCategoria() {
-        return categoria;
+        return capitalize(categoria);
     }
 
     public void setCategoria(String categoria) {
@@ -88,6 +103,25 @@ public class Item implements Serializable {
     }
 
     public String getStatus() {
+        return status;
+    }
+
+    public String getStatusString() {
+        String status;
+        switch(statusPedido){
+            case "N":
+                status ="Não Selecionado por Usuário";
+                break;
+            case "S":
+                status = "Selecionado por Usuário";
+                break;
+            case "P":
+                status = "Item Pago";
+                break;
+            default:
+                status = "Status Inválido - diff de N, S ou P";
+                break;
+        }
         return status;
     }
 
@@ -105,6 +139,10 @@ public class Item implements Serializable {
 
     public double getValor() {
         return valor;
+    }
+
+    public String getValorString() {
+        return doubleToReal(this.valor);
     }
 
     public void setValor(double valor) {
@@ -153,6 +191,31 @@ public class Item implements Serializable {
 
     public void setStatusPedido(String statusPedido) {
         this.statusPedido = statusPedido;
+    }
+
+    public List<Usuario> getUsuariosPedido() {
+        return usuariosPedido;
+    }
+
+    public void setUsuariosPedido(List<Usuario> usuariosPedido) {
+        this.usuariosPedido = usuariosPedido;
+    }
+
+    public String[] getDataHorario() {
+        String[] temp = data.split(" ");
+        String tempData = temp[0].split("-")[2]+"/"+temp[0].split("-")[1];
+        String tempHora = temp[1].split(":")[0]+":"+temp[1].split(":")[1];
+        String[] dataHora = {tempData, tempHora};
+        return dataHora ;
+    }
+
+    public static Item[] itemListToArray(List<Item> itens){
+        Object[] objects = itens.toArray();
+        Item[] itensArray = new Item[objects.length];
+        for (int i = 0; i < objects.length; i++) {
+            itensArray[i] = (Item) objects[i];
+        }
+        return itensArray;
     }
 
     @Override

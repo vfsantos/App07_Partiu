@@ -43,8 +43,8 @@
 
 
     <!-- Actiity Item Detalhe Comanda Garcom -->
-    <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhe dos itens</string>
-    <string name="text_itemdetalhecomandagarcom_algumaobservacao">Alguma observação?</string>
+    <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhes</string>
+    <string name="text_itemdetalhecomandagarcom_algumaobservacao">Observações</string>
     <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
     <string name="text_itemdetalhecomandagarcom_status">Status</string>
     <string name="btn_itemdetalhecomandagarcom_remover">Remover</string>

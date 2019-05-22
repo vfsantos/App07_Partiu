@@ -9,19 +9,21 @@ import android.widget.BaseAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import java.util.Hashtable;
-import br.com.app07_partiu.Model.ItemCardapioGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
+
+import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class CardapioGarcomAdapter extends BaseAdapter implements SectionIndexer {
 
     private Activity activity;
-    public ItemCardapioGarcomConvertView[] itens;
+    public Item[] itens;
     Object[] sectionHeaders;
     Hashtable<Integer, Integer> positionForSectionMap;
     Hashtable<Integer, Integer> sectionForPositionMap;
 
 
-    public CardapioGarcomAdapter(ItemCardapioGarcomConvertView[] itens, Activity activity) {
+    public CardapioGarcomAdapter(Item[] itens, Activity activity) {
         this.itens = itens;
         this.activity = activity;
         sectionHeaders = CardapioGarcomSectionIndexBuilder.buildSectionHeaders(itens);
@@ -62,8 +64,8 @@ public class CardapioGarcomAdapter extends BaseAdapter implements SectionIndexer
 
 
         CardapioGarcomViewHolder viewHolder = (CardapioGarcomViewHolder) view.getTag();
-        viewHolder.getTextViewNomeItem().setText(itens[position].getNomeItem());
-        viewHolder.getTextViewValor().setText(doubleToReal(itens[position].getValorItem()));
+        viewHolder.getTextViewNomeItem().setText(itens[position].getNome());
+        viewHolder.getTextViewValor().setText(doubleToReal(itens[position].getValor()));
         return view;
     }
 

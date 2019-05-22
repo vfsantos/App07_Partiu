@@ -13,10 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
-import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
-import br.com.app07_partiu.Model.ItemCardapio;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 public class AdicionarItemGarcomActivity extends AppCompatActivity {
@@ -47,7 +44,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     //int
     private int quantidade;
 
-    ItemComandaGarcomConvertView item;
+    Item item;
 
     Intent intent;
     Context context;
@@ -63,7 +60,8 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
 
         intent = getIntent();
         context = this;
-        //item = (ItemComandaGarcomConvertView) intent.getSerializableExtra(CardapioGarcomActivity.ITEM);
+        //item = (Item
+        //) intent.getSerializableExtra(CardapioGarcomActivity.ITEM);
 
         //textViewValorItem.setText(item.getValorString());
         //textViewDetalhesItem.setText(R.string.text_cardapiogarcom_detalhesitem);

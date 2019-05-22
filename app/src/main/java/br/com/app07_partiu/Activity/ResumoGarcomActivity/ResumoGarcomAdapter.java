@@ -12,21 +12,19 @@ import android.widget.TextView;
 
 import java.util.Hashtable;
 
-import br.com.app07_partiu.Activity.ResumoGarcomActivity.ResumoGarcomSectionIndexBuilder;
-import br.com.app07_partiu.Activity.ResumoGarcomActivity.ResumoGarcomViewHolder;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 public class ResumoGarcomAdapter extends BaseAdapter implements SectionIndexer{
 
     private Activity activity;
-    public ItemComandaGarcomConvertView[] itens;
+    public Item[] itens;
     Object[] sectionHeaders;
     Hashtable<Integer, Integer> positionForSectionMap;
     Hashtable<Integer, Integer> sectionForPositionMap;
 
 
-        public ResumoGarcomAdapter(ItemComandaGarcomConvertView[] itens, Activity activity) {
+        public ResumoGarcomAdapter(Item[] itens, Activity activity) {
             this.itens = itens;
             this.activity = activity;
             sectionHeaders = ResumoGarcomSectionIndexBuilder.buildSectionHeaders(itens);

@@ -12,19 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
-import java.util.zip.Inflater;
 
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
-import br.com.app07_partiu.Model.Estabelecimento;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
+import br.com.app07_partiu.Network.RecomendacaoNetwork;
 import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
@@ -63,17 +61,24 @@ public class LoginActivity extends AppCompatActivity {
     public static final String USUARIO = "br.com.app07_partiu.LoginActivity.usuario";
     public static final String RESTAURANTE = "br.com.app07_partiu.LoginActivity.restaurante";
 
+    public static final String RECOMENDACAO_DIA = "LoginActivity.RecomendacaoDia";
+    public static final String RECOMENDACAO_AVALIACAO = "LoginActivity.RecomendacaoDia";
+    public static final String RECOMENDACAO_EMALTA = "LoginActivity.RecomendacaoDia";
+    public static final String RECOMENDACAO_ESPECIALIDADE = "LoginActivity.RecomendacaoDia";
+    public static final String RECOMENDACAO_RECENTE = "LoginActivity.RecomendacaoDia";
+
     //Array
     ComandaConvertView[] comandas;
-    Estabelecimento[] estabelecimentos;
-    ComandaConvertView[] comandaConvertView;
+    Restaurante[] recomendacaoDia, recomendacaoAvaliacao, recomendacaoEmAlta, recomendacaoEspecialidade, recomendacaoRecente;
 
     Context contexto;
 
     //Progressbar
     ProgressBar progressBarTime;
 
-    private final boolean testeGarcom = true;
+    private final boolean testeGarcom = false;
+    private final boolean testeCliente = true;
+
     Usuario usuario;
     Restaurante restaurante;
 
@@ -93,6 +98,11 @@ public class LoginActivity extends AppCompatActivity {
         //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
             editTextEmail.setText("benjamin.bento@gmail.com");
+            editTextSenha.setText("123");
+        }
+
+        if (testeCliente){
+            editTextEmail.setText("brenda.mariah@gmail.com");
             editTextSenha.setText("123");
         }
     }
@@ -118,6 +128,39 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void onClickButtonLoginEntrar (View view) {
+        validarLogin();
+    }
+
+    public void onClickButtonLoginCadastrarse (View view) {
+        intentCadastro = new Intent(LoginActivity.this, CadastroClienteActivity.class);
+        startActivity(intentCadastro);
+    }
+
+    public void onClickButtonLoginEsqueceuSuaSenha (View view) {
+        intentEsqueceuSuaSenha = new Intent(LoginActivity.this, EsqueceuSuaSenhaActivity.class);
+        startActivity(intentEsqueceuSuaSenha);
+    }
+
+    public void inicializarComponentes(){
+        //ImageView
+        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
+
+        //EditText
+        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
+        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
+
+        //TextInputLayout
+        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
+        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
+
+        //Button
+        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
+        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
+        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
+
+    }
+
     public void login(String email, String senha){
         final String enderecoEmailUsuario = email;
         final String senhaUsuario = senha;
@@ -125,10 +168,8 @@ public class LoginActivity extends AppCompatActivity {
         intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
         intentLoginCliente = new Intent(this, ExplorarClienteActivity.class);
 
-        if(UsuarioNetwork.isConnected(this)) {
-
+        if(Connection.isConnected(this)) {
             //TODO consertar progressBarTime
-            //TODO parte Cliente
 //            progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
@@ -138,15 +179,13 @@ public class LoginActivity extends AppCompatActivity {
                                 usuario = UsuarioNetwork.login(Connection.URL, enderecoEmailUsuario, senhaUsuario);
                                 Log.d("TESTES", usuario.toString());
 
-
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
                                                       if (usuario.getTipo().equals("garcom")){
-                                                          getRestauranteByIdGarcom();
+                                                          getRestauranteComandasGarcom();
                                                       }else{
-                                                          intentLoginCliente.putExtra(USUARIO, usuario);
-                                                          startActivity(intentLoginCliente);
+                                                          getRecomendacoesCliente();
                                                       }
                                                   }
                                               }
@@ -172,67 +211,32 @@ public class LoginActivity extends AppCompatActivity {
                     }).start();
 
 
-        } else {
-            Toast.makeText(this, "Rede inativa", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onClickButtonLoginEntrar (View view) {
-        validarLogin();
-
-    }
-
-    public void onClickButtonLoginCadastrarse (View view) {
-        intentCadastro = new Intent(LoginActivity.this, CadastroClienteActivity.class);
-        startActivity(intentCadastro);
-    }
-
-    public void onClickButtonLoginEsqueceuSuaSenha (View view) {
-        intentEsqueceuSuaSenha = new Intent(LoginActivity.this, EsqueceuSuaSenhaActivity.class);
-        startActivity(intentEsqueceuSuaSenha);
-    }
-
-
-
-
-    public void listarComandas() {
+    public void getRestauranteComandasGarcom() {
         intentListarComanda = new Intent(this, HomeGarcomActivity.class);
-            new Thread(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                comandas = ComandaNetwork.buscarComandas(Connection.URL, usuario.getId(), 'A');
-                                Log.d("TESTES", comandas.toString());
-
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      intentListarComanda.putExtra(RESTAURANTE, restaurante);
-                                                      intentListarComanda.putExtra(USUARIO, usuario);
-                                                      intentListarComanda.putExtra(COMANDAS, comandas);
-                                                      startActivity(intentListarComanda);
-                                                      //TODO consertar progressBarTime
-                                                      //progressBarTime.setVisibility(View.INVISIBLE);
-                                                  }
-                                              }
-                                );
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();
-
-    }
-
-    public void getRestauranteByIdGarcom() {
         new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
                         try {
                             restaurante = RestauranteNetwork.getRestauranteByIdGarcom(Connection.URL, usuario.getId());
-                            listarComandas();
+                            comandas = ComandaNetwork.buscarComandas(Connection.URL, usuario.getId(), 'A');
+                            Log.d("TESTES", comandas.toString());
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  intentListarComanda.putExtra(USUARIO, usuario);
+
+                                                  intentListarComanda.putExtra(RESTAURANTE, restaurante);
+                                                  intentListarComanda.putExtra(COMANDAS, comandas);
+                                                  startActivity(intentListarComanda);
+                                                  //TODO consertar progressBarTime
+                                                  //progressBarTime.setVisibility(View.INVISIBLE);
+                                              }
+                                          }
+                            );
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -240,135 +244,48 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }).start();
-
     }
 
-    public void inicializarComponentes(){
-        //ImageView
-        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
-
-        //EditText
-        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
-        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
-
-        //TextInputLayout
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
-        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
-
-        //Button
-        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
-        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
-        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
-
-    }
-
-
-
-    //Código abaixo é referente a parte de recomendação e nesse primeiro momento não deve ser considerado
-
-    /*
-    public void listarEstabelecimentosEmAlta(View view) {
-        intent = new Intent(this, RecomendacaoActivity.class);
-        if (RecomendacaoNetwork.isConnected(this)) {
-            timer.setVisibility(View.VISIBLE);
+    public void getRecomendacoesCliente() {
+        if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                estabelecimentos = RecomendacaoNetwork.buscaListaEstabelecimento(URL, "em_alta");
+                                //TODO ver se a performance disso é tão ruim quanto parece
+                                recomendacaoAvaliacao       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado(Connection.URL);
+                                recomendacaoDia             = RecomendacaoNetwork.getRecomendacaoDiaSemana(Connection.URL);
+                                recomendacaoEmAlta          = RecomendacaoNetwork.getRecomendacaoMaisVisitados(Connection.URL);
+                                recomendacaoEspecialidade   = RecomendacaoNetwork.getRecomendacaoEspecialidadeUsuario(Connection.URL, usuario.getId());
+                                recomendacaoRecente         = RecomendacaoNetwork.getRecomendacaoVisitadoRecentemente(Connection.URL, usuario.getId());
+
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
-                                                      intent.putExtra(ESTABELECIMENTO, estabelecimentos);
-                                                      startActivity(intent);
-                                                      timer.setVisibility(View.INVISIBLE);
+                                                      intentLoginCliente.putExtra(USUARIO, usuario);
+
+                                                      intentLoginCliente.putExtra(RECOMENDACAO_AVALIACAO, recomendacaoAvaliacao);
+                                                      intentLoginCliente.putExtra(RECOMENDACAO_DIA, recomendacaoDia);
+                                                      intentLoginCliente.putExtra(RECOMENDACAO_EMALTA, recomendacaoEmAlta);
+                                                      intentLoginCliente.putExtra(RECOMENDACAO_ESPECIALIDADE, recomendacaoEspecialidade);
+                                                      intentLoginCliente.putExtra(RECOMENDACAO_RECENTE, recomendacaoRecente);
+
+                                                      startActivity(intentLoginCliente);
                                                   }
                                               }
                                 );
                             } catch (IOException e) {
+                                Log.d("TESTES", "Erro no getRecomendacoesCliente");
                                 e.printStackTrace();
                             }
                         }
                     }).start();
-        } else {
-            intentCadastro = new Intent(LoginActivity.this, ErroConeccaoActivity.class);
-            startActivity(intentCadastro);
         }
     }
 
+    //TODO verificar se necessário abaixo
 
-
-    public void listarEstabelecimentosSugestaoParaVoce(View view) {
-        intent = new Intent(this, RecomendacaoActivity.class);
-        if (RecomendacaoNetwork.isConnected(this)) {
-            timer.setVisibility(View.VISIBLE);
-            new Thread(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                estabelecimentos = RecomendacaoNetwork.buscaListaEstabelecimento(URL, "sugestao_para_voce");
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      intent.putExtra(ESTABELECIMENTO, estabelecimentos);
-                                                      startActivity(intent);
-                                                      timer.setVisibility(View.INVISIBLE);
-                                                  }
-                                              }
-                                );
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();
-        } else {
-            intentCadastro = new Intent(LoginActivity.this, ErroConeccaoActivity.class);
-            startActivity(intentCadastro);
-        }
-    }
-
-    public void listarEstabelecimentosVisiteNovamente(View view) {
-        intent = new Intent(this, RecomendacaoActivity.class);
-        if (RecomendacaoNetwork.isConnected(this)) {
-            timer.setVisibility(View.VISIBLE);
-            new Thread(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                estabelecimentos = RecomendacaoNetwork.buscaListaEstabelecimento(URL, "visite_novamente");
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      intent.putExtra(ESTABELECIMENTO, estabelecimentos);
-                                                      startActivity(intent);
-                                                      timer.setVisibility(View.INVISIBLE);
-                                                  }
-                                              }
-                                );
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();
-        } else {
-            intentCadastro = new Intent(LoginActivity.this, ErroConeccaoActivity.class);
-            startActivity(intentCadastro);
-        }
-    }
-*/
-
-     /* public void validarUsuario(String email, String senha) {
-        login(email,senha);
-//        String emailCliente = "cliente@gmail.com";
-//        String emailGarcom = "garcom@gmail.com";
-//        String senhaCliente = "teste1";
-//        String senhaGarcom = "teste2";
-//
-//
-//
 //        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
 //            textInputLayoutEmail.setErrorEnabled(false);
 //            intentCodigoComandaCliente = new Intent(LoginActivity.this, CodigoComandaClienteActivity.class);
@@ -386,6 +303,5 @@ public class LoginActivity extends AppCompatActivity {
 //            textInputLayoutEmail.setErrorEnabled(true);
 //            textInputLayoutEmail.setError("Usuário invalido");
 //        }
-    }*/
 
 }

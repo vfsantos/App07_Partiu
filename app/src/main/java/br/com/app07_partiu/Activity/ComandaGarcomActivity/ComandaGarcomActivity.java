@@ -21,15 +21,11 @@ import java.util.Set;
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
-import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
-import br.com.app07_partiu.Model.ItemCardapioGarcomConvertView;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
-import br.com.app07_partiu.Model.ItemConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
-import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
@@ -65,15 +61,15 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     //Objeto
     private Comanda comanda;
     private ComandaConvertView convertedComanda;
-    public ItemComandaGarcomConvertView[] itens;
-    public ItemComandaGarcomConvertView[] itensFormatados;
+    public Item[] itens;
+    public Item[] itensFormatados;
     private Context context;
 
     private Double valorTotalComanda = 0.0;
     private ComandaConvertView comandaConvertView;
     private Restaurante restaurante;
     private Intent intentPedidoSelecaoGarcom;
-    private ItemCardapioGarcomConvertView[] itensRestaurante;
+    private Item[] itensRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +93,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         intent = getIntent();
         restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
         comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
-        itens = (ItemComandaGarcomConvertView[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
+        itens = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
 
 
         //Detalhes da comanda
@@ -199,13 +195,13 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     private void formatItens() {
         Set idPedidos = new HashSet();
-        List<ItemComandaGarcomConvertView> itensF = new ArrayList<>();
-        for (ItemComandaGarcomConvertView i : itens) {
+        List<Item> itensF = new ArrayList<>();
+        for (Item i : itens) {
 
             //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
             if (idPedidos.contains(i.getIdPedido())) {
                 //pega o item que tem idPedido ==
-                for (ItemComandaGarcomConvertView item : itensF) {
+                for (Item item : itensF) {
                     if (item.getIdPedido() == i.getIdPedido()) {
                         List<Usuario> us = item.getUsuariosPedido();
                         //adciona usuario e devolve ao item
@@ -240,16 +236,16 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         }
         //volta a ser Array em vez de List
         Object[] objects = itensF.toArray();
-        ItemComandaGarcomConvertView[] itensArray = new ItemComandaGarcomConvertView[objects.length];
+        Item[] itensArray = new Item[objects.length];
         for (int i = 0; i < objects.length; i++) {
-            itensArray[i] = (ItemComandaGarcomConvertView) objects[i];
+            itensArray[i] = (Item) objects[i];
         }
         itensFormatados = itensArray;
 
     }
 
     private void getTotalComanda() {
-        for (ItemComandaGarcomConvertView i : itensFormatados) {
+        for (Item i : itensFormatados) {
             valorTotalComanda += i.getValor();
         }
     }

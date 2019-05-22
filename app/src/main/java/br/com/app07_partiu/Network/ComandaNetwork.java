@@ -1,23 +1,18 @@
 package br.com.app07_partiu.Network;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -80,9 +75,9 @@ public class ComandaNetwork {
     }
 
 
-    public static ItemComandaGarcomConvertView[] buscarPedidosComanda(String url, int idComanda) throws IOException {
+    public static Item[] buscarPedidosComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        ArrayList<ItemComandaGarcomConvertView> itens = new ArrayList<>();
+        ArrayList<Item> itens = new ArrayList<>();
         url += "/getPedidosComanda?idComanda=" + idComanda;
 
         Request request = new Request.Builder()
@@ -97,7 +92,7 @@ public class ComandaNetwork {
             JSONArray vetor = new JSONArray(resultado);
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
-                ItemComandaGarcomConvertView it = new ItemComandaGarcomConvertView();
+                Item it = new Item();
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
@@ -131,7 +126,7 @@ public class ComandaNetwork {
 //            throw new IOException(e);
         }
         if (itens.size() > 0) {
-            return itens.toArray(new ItemComandaGarcomConvertView[0]);
+            return itens.toArray(new Item[0]);
         }
         return null;
     }

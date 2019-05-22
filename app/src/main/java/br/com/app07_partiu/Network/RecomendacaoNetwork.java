@@ -1,8 +1,5 @@
 package br.com.app07_partiu.Network;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,50 +7,74 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.com.app07_partiu.Model.Estabelecimento;
+import br.com.app07_partiu.Model.Restaurante;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class RecomendacaoNetwork {
 
-    public static Estabelecimento[] buscaListaEstabelecimento(String url, String categoria) throws  IOException {
+    public static Restaurante[] getRecomendacaoDiaSemana(String url) throws IOException {
+        url += "/recomendacao/getRecomendacaoDiaSemana";
+        return getRestaurantes(url);
+    }
 
-        String urlBuscaListaEstabelecimento = url+categoria;
+    public static Restaurante[] getRecomendacaoMaisVisitados(String url) throws IOException {
+        url += "/recomendacao/getRecomendacaoMaisVisitados";
+        return getRestaurantes(url);
+    }
+
+    public static Restaurante[] getRecomendacaoVisitadoRecentemente(String url, int idUsuario) throws IOException {
+        url += "/recomendacao/getRecomendacaoVisitadoRecentemente?idUsuario="+idUsuario;
+        return getRestaurantes(url);
+    }
+
+    public static Restaurante[] getRecomendacaoEspecialidadeUsuario(String url, int idUsuario) throws IOException {
+        url += "/recomendacao/getRecomendacaoEspecialidadeUsuario?idUsuario="+idUsuario;
+        return getRestaurantes(url);
+    }
+    public static Restaurante[] getRecomendacaoRestauranteAvaliado(String url) throws IOException {
+        url += "/recomendacao/getRecomendacaoRestauranteAvaliado";
+        return getRestaurantes(url);
+    }
+
+    private static Restaurante[] getRestaurantes(String url) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        ArrayList<Estabelecimento> estabelecimentos = new ArrayList<>();
+        ArrayList<Restaurante> restaurantes = new ArrayList<>();
 
         Request request = new Request.Builder()
-                .url(url+categoria)
+                .url(url)
                 .build();
 
         Response response = client.newCall(request).execute();
 
-        String  resultado =  response.body().string();
+        String resultado = response.body().string();
 
         try {
             JSONArray vetor = new JSONArray(resultado);
-            for(int i = 0; i < vetor.length(); i++){
-                JSONObject item = (JSONObject) vetor.get(i);
-                Estabelecimento estabelecimento = new Estabelecimento();
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject objeto = (JSONObject) vetor.get(i);
+                Restaurante restaurante = new Restaurante();
 
-                estabelecimento.setId(item.getInt("id"));
-                estabelecimento.setNome(item.getString("nome"));
-                estabelecimento.setImagem(item.getString("imagem"));
-                estabelecimentos.add(estabelecimento);
+                restaurante.setCnpj(objeto.getLong("cnpj"));
+                restaurante.setQtdMesas(objeto.getInt("qtdMesas"));
+                restaurante.setCodigoComanda(objeto.getString("codigoComanda"));
+                restaurante.setRazaoSocial(objeto.getString("razaoSocial"));
+                restaurante.setNomeFantasia(objeto.getString("nomeFantasia"));
+                restaurante.setStatus(objeto.getString("status"));
+                restaurante.setLogo(objeto.getString("logo"));
+                restaurante.setDescricao(objeto.getString("descricao"));
+
+                //TODO pegar horarios
+
+                restaurantes.add(restaurante);
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            throw  new IOException(e);
+            throw new IOException(e);
         }
 
-        return estabelecimentos.toArray(new Estabelecimento[0]);
+        return restaurantes.toArray(new Restaurante[0]);
     }
 
-    public static boolean isConnected(Context context){
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return connectivityManager.getActiveNetworkInfo() != null &&
-                connectivityManager.getActiveNetworkInfo().isConnected();
-    }
 }

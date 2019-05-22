@@ -9,19 +9,15 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
-import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
 
 import static br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity.RESULT_RESUMO_FINALIZADO;
-import static br.com.app07_partiu.Model.ItemComandaGarcomConvertView.listToArray;
 
 //TODO Classe PLACEHOLDER
 public class ResumoCardapioGarcomActivity extends AppCompatActivity {
@@ -32,7 +28,7 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
 //    Intent intentResumoAddItens;
 
-    private ItemComandaGarcomConvertView[] itensAdicionar;
+    private Item[] itensAdicionar;
     private Comanda comanda;
 
     int[] idItens;
@@ -47,7 +43,7 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
         intent = this.getIntent();
         context = this;
 
-        itensAdicionar = (ItemComandaGarcomConvertView[]) intent.getSerializableExtra(CardapioGarcomActivity.ITENS_ADICIONAR);
+        itensAdicionar = (Item[]) intent.getSerializableExtra(CardapioGarcomActivity.ITENS_ADICIONAR);
         comanda = (Comanda) intent.getSerializableExtra(CardapioGarcomActivity.COMANDA);
         //OnClickListener addItem();
 

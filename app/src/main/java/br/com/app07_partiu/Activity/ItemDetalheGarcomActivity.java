@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 public class ItemDetalheGarcomActivity extends AppCompatActivity {
@@ -34,7 +34,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     private Button buttonRemover;
     private Button buttonVoltar;
 
-    ItemComandaGarcomConvertView item;
+    Item item;
 
     Intent intent;
     Context context;
@@ -49,7 +49,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
 
         intent = getIntent();
         context = this;
-        item = (ItemComandaGarcomConvertView) intent.getSerializableExtra(ComandaGarcomActivity.ITEM);
+        item = (Item) intent.getSerializableExtra(ComandaGarcomActivity.ITEM);
 
         textViewNomeItem.setText(item.getNome());
         textViewValorItem.setText(item.getValorString());

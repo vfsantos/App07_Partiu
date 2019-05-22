@@ -3,40 +3,27 @@ package br.com.app07_partiu.Activity.CardapioGarcomActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
-import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomAdapter;
 import br.com.app07_partiu.Activity.DetalheCardapioGarcomActivity;
-import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
-import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
 import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
-import br.com.app07_partiu.Model.ItemCardapioGarcomConvertView;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
-import br.com.app07_partiu.Model.ItemConvertView;
-import br.com.app07_partiu.Network.ComandaNetwork;
-import br.com.app07_partiu.Network.Connection;
-import br.com.app07_partiu.Network.ItemNetwork;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 import static br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity.RESULT_PEDIDOS_CRIADOS;
 import static br.com.app07_partiu.Activity.DetalheCardapioGarcomActivity.ITENS_NOVOS;
-import static br.com.app07_partiu.Model.ItemComandaGarcomConvertView.listToArray;
+import static br.com.app07_partiu.Model.Item.itemListToArray;
 
 public class CardapioGarcomActivity extends AppCompatActivity {
 
@@ -58,9 +45,9 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
     //Do intent
     private Comanda comanda;
-    private ItemCardapioGarcomConvertView[] itensRestaurante;
+    private Item[] itensRestaurante;
 
-    List<ItemComandaGarcomConvertView> itensAdicionar;
+    List<Item> itensAdicionar;
 
     //RecyclerView
     private ListView listViewItensCardapio;
@@ -76,9 +63,9 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         context = this;
 
         comanda = (Comanda) intent.getSerializableExtra(ComandaGarcomActivity.COMANDA);
-        itensRestaurante = (ItemCardapioGarcomConvertView[]) intent.getSerializableExtra(ComandaGarcomActivity.ITENS_RESTAURANTE);
+        itensRestaurante = (Item[]) intent.getSerializableExtra(ComandaGarcomActivity.ITENS_RESTAURANTE);
 
-        itensAdicionar = new ArrayList<ItemComandaGarcomConvertView>();
+        itensAdicionar = new ArrayList<Item>();
         //OnClickListener detalheCardapioGarcom();
 
         if (itensRestaurante != null) {
@@ -105,7 +92,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     }
 
     // Envia item selecionado à proxima Activity (DetalheCardapioGarcomActivity)
-    private void detalheCardapioGarcom(ItemComandaGarcomConvertView item) {
+    private void detalheCardapioGarcom(Item item) {
         // TODO Definir Activity correta
         intentDetalheCardapioGarcom = new Intent(context, DetalheCardapioGarcomActivity.class);
         intent.putExtra(ITEM_DETALHE, item);
@@ -117,14 +104,14 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     private void resumoCardapioGarcom() {
         // TODO Definir Activity correta
         intentResumoAddItens = new Intent(context, ResumoCardapioGarcomActivity.class);
-        intentResumoAddItens.putExtra(ITENS_ADICIONAR, listToArray(itensAdicionar));
+        intentResumoAddItens.putExtra(ITENS_ADICIONAR, itemListToArray(itensAdicionar));
         intentResumoAddItens.putExtra(COMANDA, comanda);
         startActivityForResult(intentResumoAddItens, RESULT_RESUMO_FINALIZADO);
 
     }
 
     // Adiciona item à list de itens a adicionar (list enviada ao Resumo)
-    private void addItem(ItemComandaGarcomConvertView item) {
+    private void addItem(Item item) {
         itensAdicionar.add(item);
     }
 
@@ -146,8 +133,8 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
             //Retornando itens do DetalheCardapioGarcomActivity
         } else if (resultCode == RESULT_DETALHE_RETORNADO) {
-            ItemComandaGarcomConvertView[] novosItens = (ItemComandaGarcomConvertView[]) data.getSerializableExtra(ITENS_NOVOS);
-            for (ItemComandaGarcomConvertView item : novosItens) {
+            Item[] novosItens = (Item[]) data.getSerializableExtra(ITENS_NOVOS);
+            for (Item item : novosItens) {
                 addItem(item);
             }
         }

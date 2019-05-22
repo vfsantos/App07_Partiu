@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 public class EditarItemComandaActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class EditarItemComandaActivity extends AppCompatActivity {
     //int
     private int quantidade;
 
-    ItemComandaGarcomConvertView item;
+    Item item;
 
     Intent intent;
     Context context;

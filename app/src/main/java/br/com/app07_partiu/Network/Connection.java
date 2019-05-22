@@ -6,7 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class Connection {
-    public static final String URL = "http://192.168.50.102:8080/partiu";
+    public static final String URL = "http://192.168.15.120:8080/partiu";
 
     public static boolean isConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -14,6 +14,7 @@ public class Connection {
         boolean connected = connectivityManager.getActiveNetworkInfo() != null &&
                 connectivityManager.getActiveNetworkInfo().isConnected();
         if (!connected) makeToast(context);
+        //TODO else if conexcao com o webservice
         return connected;
     }
 

@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
 import br.com.app07_partiu.R;
 
 public class Util {

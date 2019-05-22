@@ -8,19 +8,18 @@ import android.support.v7.widget.Toolbar;
 
 import java.util.List;
 
-import br.com.app07_partiu.Model.ItemComandaGarcomConvertView;
+import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 import static br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity.ITEM_DETALHE;
 import static br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity.RESULT_DETALHE_RETORNADO;
-import static br.com.app07_partiu.Model.ItemComandaGarcomConvertView.listToArray;
 
 public class DetalheCardapioGarcomActivity extends AppCompatActivity {
 
     public static final String ITENS_NOVOS = "DetalheCardapioGarcomActivity.ItensNovos";
 
-    ItemComandaGarcomConvertView itemRecebido;
-    ItemComandaGarcomConvertView[] itensNovos;
+    Item itemRecebido;
+    Item[] itensNovos;
 
     Intent intent;
     Context context;
@@ -34,7 +33,7 @@ public class DetalheCardapioGarcomActivity extends AppCompatActivity {
         context = this;
         intent = this.getIntent();
 
-        itemRecebido = (ItemComandaGarcomConvertView) intent.getSerializableExtra(ITEM_DETALHE);
+        itemRecebido = (Item) intent.getSerializableExtra(ITEM_DETALHE);
 
 
 
@@ -46,10 +45,10 @@ public class DetalheCardapioGarcomActivity extends AppCompatActivity {
     private void finalizarDetalhe() {
         // TODO remover variavel placeholder
         int qtd = 3;
-        itensNovos = new ItemComandaGarcomConvertView[qtd];
+        itensNovos = new Item[qtd];
         for (int i = 0; i < qtd; i++) {
             String observacao = "placeholder"; //get do adapter
-            ItemComandaGarcomConvertView novo = itemRecebido;
+            Item novo = itemRecebido;
             //TODO adicionar Observaçao ao Model
             // novo.setObservacao(observacao);
             itensNovos[i] = novo;
