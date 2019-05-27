@@ -66,7 +66,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
         });
     }
 
-    public void getComandaPedidos(final String codigo) {
+    private void getComandaPedidos(final String codigo) {
         if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
@@ -100,7 +100,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     }
 
     //functions para a ComandaClienteActivity
-    public void selecionarPedido(final Item item) {
+    private void selecionarPedido(final Item item) {
         if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
@@ -108,30 +108,39 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                         public void run() {
                             try {
 
-                                final String resultadoSelecioanr = ComandaNetwork.selecionarPedido(Connection.URL, item.getIdPedido());
-                                itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
-                                runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        switch (resultadoSelecioanr) {
-                                            case "selecionado": // Selecionou e nenhum outro usuario selecionou
-                                                Toast.makeText(contexto, "Item Selecionado!", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case "cancelado": // Não selecionou, item cancelado
-                                                Toast.makeText(contexto, "O item não existe masi!", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case "dividindo": // Selecionou, retornou Nomes de usuários com quem vai dividindo
-                                                Toast.makeText(contexto, "Item Selecionado e sendo Dividido!", Toast.LENGTH_LONG).show();
-                                                break;
-                                            default:
-                                                Toast.makeText(contexto, "Deu ruim!", Toast.LENGTH_LONG).show();
-                                                Log.d("TESTES", "Erro selecionarPedido");
-                                                break;
+                                final String resultadoSelecionar = ComandaNetwork.selecionarPedido(Connection.URL, item.getIdPedido());
+                                if (resultadoSelecionar != "") {
+                                    itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            switch (resultadoSelecionar) {
+                                                case "selecionado": // Selecionou e nenhum outro usuario selecionou
+                                                    Toast.makeText(contexto, "Item Selecionado!", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case "cancelado": // Não selecionou, item cancelado
+                                                    Toast.makeText(contexto, "O item não existe masi!", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case "dividindo": // Selecionou, retornou Nomes de usuários com quem vai dividindo
+                                                    Toast.makeText(contexto, "Item Selecionado e sendo Dividido!", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                default:
+                                                    Toast.makeText(contexto, "Deu ruim!", Toast.LENGTH_LONG).show();
+                                                    Log.d("TESTES", "Erro selecionarPedido (dentro do SWITCH");
+                                                    break;
 
-                                        }
+                                            }
 
 //                                        reloadPedidos()
-                                    }
-                                });
+                                        }
+                                    });
+                                }else{
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            Toast.makeText(contexto, "Deu ruim!", Toast.LENGTH_LONG).show();
+                                            Log.d("TESTES", "Erro selecionarPedido (no ELSE");
+                                        }
+                                    });
+                                }
                             } catch (IOException e) {
                                 Log.e("TESTES", "IOException selecioanarPedidos'");
                                 e.printStackTrace();
@@ -149,5 +158,38 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
                     }).start();
         }
     }
+
+    private void getPedidos() {
+        if (Connection.isConnected(this)) {
+            new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+
+                                String dataComandaAtualizacao ="";
+                                String novaData = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
+
+                                if (!novaData.equals(dataComandaAtualizacao)){
+                                    itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                                    dataComandaAtualizacao = novaData;
+
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            reloadPedidos();
+                                        }
+                                    });
+                                }
+                            } catch (IOException e) {
+                                Log.e("TESTES", "IOException getComandaPedidos'");
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+        }
+    }
+
+    private void reloadPedidos(){};
+
 
 }
