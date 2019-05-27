@@ -108,8 +108,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
             carregarItens();
         }
 
-        // TODO decidir entre total total ou total a pagar
-        // TODO arrumar, esta vindo 0
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
         textViewItemHora.setText(comanda.getDataEntrada());
 

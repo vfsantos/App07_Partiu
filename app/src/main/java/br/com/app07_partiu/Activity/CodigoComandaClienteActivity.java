@@ -32,7 +32,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     private TextView textViewDescricao;
     private EditText editTextCodigoComanda;
     private Button buttonEntrarComanda;
-    public Intent intentComanda;
+
     private AlertDialog alerta;
     private BottomNavigationView bottomNavigationView;
     public static final String COMANDA = "br.com.app07_partiu.CodigoComandaClienteActivity.comanda";
@@ -40,7 +40,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
     public Comanda comanda;
     private Context contexto;
 
-    List<Item> itens;
+    public Intent intentComanda;
+
+    Item[] itens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,104 +61,93 @@ public class CodigoComandaClienteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String codigo = editTextCodigoComanda.getText().toString();
-                getCodComanda(codigo);
+                getComandaPedidos(codigo);
             }
         });
     }
 
-
-    public void getCodComanda(final String codigo) {
-
+    public void getComandaPedidos(final String codigo) {
         if (Connection.isConnected(this)) {
-
-            //TODO consertar progressBarTime
-            //TODO parte Cliente
-            //progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 comanda = ComandaNetwork.getCodComanda(Connection.URL, codigo);
-                                System.out.println(comanda.toString());
-
+                                itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        if (comanda.getCodigoComanda().equals(codigo)) {
-                                            getPedComanda(comanda);
-                                        }
+                                        intentComanda.putExtra(COMANDA, comanda);
+                                        intentComanda.putExtra(ITENS, itens);
+                                        startActivity(intentComanda);
                                     }
                                 });
-
-
                             } catch (IOException e) {
+                                Log.e("TESTES", "IOException getComandaPedidos'");
                                 e.printStackTrace();
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.e("TESTES", "Retornou 'Comanda Inválido!'");
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        Toast.makeText(contexto, "Comanda Inválido!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(contexto, "Comanda Inválida!", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
                         }
                     }).start();
-
-
         }
     }
 
-
-    public void getPedComanda(final Comanda comanda) {
-
-        final int idComanda = comanda.getId();
-        intentComanda = new Intent(this, ComandaClienteActivity.class);
-
-
+    //functions para a ComandaClienteActivity
+    public void selecionarPedido(final Item item) {
         if (Connection.isConnected(this)) {
-
-            //TODO consertar progressBarTime
-            //TODO parte Cliente
-            //progressBarTime.setVisibility(View.VISIBLE);
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                itens = ComandaNetwork.getPedidosComanda(Connection.URL, idComanda);
-                                Log.d("TESTES", comanda.toString());
 
-
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      intentComanda.putExtra(COMANDA, comanda);
-                                                      //intentComanda.putExtra(PEDIDOS, itens.toArray());
-                                                      startActivity(intentComanda);
-                                                  }
-                                              }
-                                );
-                            } catch (IOException e) {
-                                e.printStackTrace();
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Log.e("TESTES", "Retornou 'Comanda Inválido!'");
+                                final String resultadoSelecioanr = ComandaNetwork.selecionarPedido(Connection.URL, item.getIdPedido());
+                                itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        Toast.makeText(contexto, "Comanda Inválido!", Toast.LENGTH_LONG).show();
+                                        switch (resultadoSelecioanr) {
+                                            case "selecionado": // Selecionou e nenhum outro usuario selecionou
+                                                Toast.makeText(contexto, "Item Selecionado!", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case "cancelado": // Não selecionou, item cancelado
+                                                Toast.makeText(contexto, "O item não existe masi!", Toast.LENGTH_LONG).show();
+                                                break;
+                                            case "dividindo": // Selecionou, retornou Nomes de usuários com quem vai dividindo
+                                                Toast.makeText(contexto, "Item Selecionado e sendo Dividido!", Toast.LENGTH_LONG).show();
+                                                break;
+                                            default:
+                                                Toast.makeText(contexto, "Deu ruim!", Toast.LENGTH_LONG).show();
+                                                Log.d("TESTES", "Erro selecionarPedido");
+                                                break;
+
+                                        }
+
+//                                        reloadPedidos()
+                                    }
+                                });
+                            } catch (IOException e) {
+                                Log.e("TESTES", "IOException selecioanarPedidos'");
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                //TODO ver oq acontece quando 2 pegam ao msm tempo
+                                Log.e("TESTES", "--");
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(contexto, "--", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
                         }
                     }).start();
         }
-    }
-
-    public void onClickButtonEntrarComanda(View view) {
-//
     }
 
 }

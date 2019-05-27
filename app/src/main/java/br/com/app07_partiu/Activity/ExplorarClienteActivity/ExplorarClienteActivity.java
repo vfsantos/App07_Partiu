@@ -5,22 +5,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Switch;
 
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
+import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.R;
+
+import static br.com.app07_partiu.Activity.LoginActivity.RECOMENDACAO_DIA;
+import static br.com.app07_partiu.Activity.LoginActivity.RECOMENDACAO_AVALIACAO;
+import static br.com.app07_partiu.Activity.LoginActivity.RECOMENDACAO_EMALTA;
+import static br.com.app07_partiu.Activity.LoginActivity.RECOMENDACAO_ESPECIALIDADE;
+import static br.com.app07_partiu.Activity.LoginActivity.RECOMENDACAO_RECENTE;
 
 public class ExplorarClienteActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
     private Context context;
     private Intent intent;
+
+    Restaurante[] recomendacaoDia, recomendacaoAvaliacao, recomendacaoEmAlta, recomendacaoEspecialidade, recomendacaoRecente;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,15 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         context = this;
 
-        //TODO import itent
+        intent = this.getIntent();
 
+        recomendacaoDia = (Restaurante[]) intent.getSerializableExtra(RECOMENDACAO_DIA);
+        recomendacaoAvaliacao = (Restaurante[]) intent.getSerializableExtra(RECOMENDACAO_AVALIACAO);
+        recomendacaoEmAlta = (Restaurante[]) intent.getSerializableExtra(RECOMENDACAO_EMALTA);
+        recomendacaoEspecialidade = (Restaurante[]) intent.getSerializableExtra(RECOMENDACAO_ESPECIALIDADE);
+        recomendacaoRecente = (Restaurante[]) intent.getSerializableExtra(RECOMENDACAO_RECENTE);
 
+        //TODO inserir recomendação nos carroseis
 
     }
 
