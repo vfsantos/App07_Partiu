@@ -19,7 +19,6 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.List;
 
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
@@ -27,15 +26,13 @@ import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
-import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
-import static br.com.app07_partiu.Activity.LoginActivity.USUARIO;
+import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.USUARIO;
 
-public class CodigoComandaClienteActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class CodigoComandaClienteActivity extends AppCompatActivity{
 
     private BottomNavigationView bottomNavigationView;
-    private Context context;
 
     //TextView
     private TextView textViewTitulo;
@@ -55,10 +52,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
 
     private AlertDialog alerta;
     private Comanda comanda;
-    private Context contexto;
 
     private Intent intentComanda;
     private Intent intent;
+    private Context context;
 
     private Usuario cliente;
 
@@ -78,6 +75,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
         cliente = (Usuario) intent.getSerializableExtra(USUARIO);
 
         bottomNavigationView = findViewById(R.id.bottomNavegation);
+        bottomNavigationView.setSelectedItemId(R.id.menu_comanda);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -102,16 +100,18 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
 
 
     private void getComandaPedidos(final String codigo) {
+        intentComanda = new Intent(context, ComandaClienteActivity.class);
         if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                comanda = ComandaNetwork.getCodComanda(Connection.URL, codigo);
+                                comanda = ComandaNetwork.getComandaByCodigo(Connection.URL, codigo);
                                 itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                 runOnUiThread(new Runnable() {
                                     public void run() {
+                                        Log.d("TESTES", itens[0].toString());
                                         intentComanda.putExtra(CLIENTE, cliente);
                                         intentComanda.putExtra(COMANDA, comanda);
                                         intentComanda.putExtra(ITENS, itens);
@@ -123,10 +123,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
                                 e.printStackTrace();
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Log.e("TESTES", "Retornou 'Comanda Inválido!'");
+                                Log.d("TESTES", "Retornou 'Comanda Inválido!'");
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        Toast.makeText(contexto, "Comanda Inválida!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Comanda Inválida!", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -159,10 +159,4 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
         bottomNavigationView = findViewById(R.id.bottomNavegation);
     }
 
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Log.d("TESTES", "Isso é necessário?");
-        return false;
-    }
 }

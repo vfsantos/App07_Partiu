@@ -1,9 +1,9 @@
 package br.com.app07_partiu.Activity.ExplorarClienteActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
@@ -22,17 +20,14 @@ import java.util.Calendar;
 import java.util.List;
 
 
-import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
-import br.com.app07_partiu.Activity.ExplorarClienteDetalhesActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Activity.PerfilClienteActivity;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
-import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.R;
 
-public class ExplorarClienteActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class ExplorarClienteActivity extends AppCompatActivity {
 
     //BottomNavigationView
     private BottomNavigationView bottomNavigationView;
@@ -110,16 +105,13 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
     //Intent
     private Intent intentRecomendacaoDetalhe;
 
+    public static final String USUARIO = "ExplorarClienteActivity.Cliente";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorar_cliente);
-
-
-        //test
-//    View linearLayoutTest;
-//        linearLayoutTest = findViewById(R.id.linearLayoutTest);
 
         context = this;
         intent = getIntent();
@@ -143,6 +135,7 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
                         break;
                     case R.id.menu_comanda:
                         Intent a = new Intent(ExplorarClienteActivity.this, CodigoComandaClienteActivity.class);
+                        a.putExtra(USUARIO, cliente);
                         a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(a);
                         break;
@@ -288,23 +281,4 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
 
     }
 
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.menu_explorar: {
-                Intent intent = new Intent(context, ExplorarClienteActivity.class);
-                startActivity(intent);
-            }
-            case R.id.menu_comanda: {
-                Intent intent = new Intent(context, CodigoComandaClienteActivity.class);
-                startActivity(intent);
-            }
-            case R.id.menu_perfil: {
-                Intent intent = new Intent(context, PerfilClienteActivity.class);
-                startActivity(intent);
-            }
-        }
-        return true;
-    }
 }

@@ -68,19 +68,19 @@
     <!-- Fim Activity Editar Item Garcom -->
 
     <!-- BottomBar -->
-    <string name="text_bottombar_explorar">Explorar</string>
+    <string name="text_bottombar_explorar">explorar</string>
     <string name="text_bottombar_comanda">Comanda</string>
     <string name="text_bottombar_perfil">Perfil</string>
     <!-- Fim BottomBar -->
 
     <!-- ActivityExplorarCliente -->
-    <string name="textview_recomendacaovisitadosrecentemente">Visite novamente</string>
+    <string name="textview_recomendacaovisitadosrecentemente">Visite Novamente</string>
     <string name="textview_recomendacaovisitadosrecentemente_descricao">quem gosta, sempre volta</string>
     <string name="textview_recomendacaorestauranteavaliado">Os Melhores</string>
     <string name="textview_recomendacaorestauranteavaliado_descricao">os tops do Partiu</string>
     <string name="textview_recomendacaomaisvisitados">Em Alta</string>
-    <string name="textview_recomendacaomaisvisitados_descricao">Todos os melhores restaurantes em um só lugar.</string>
-    <string name="textview_recomendacaoespecialidadeusuario">Susgestões pra você</string>
+    <string name="textview_recomendacaomaisvisitados_descricao">onde tá todo mundo?</string>
+    <string name="textview_recomendacaoespecialidadeusuario">Sugestões pra Você</string>
     <string name="textview_recomendacaoespecialidadeusuario_descricao">acho que vai curtir esses aqui</string>
     <string name="textview_recomendacaodiasemana">Recomendações do Dia</string>
     <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>

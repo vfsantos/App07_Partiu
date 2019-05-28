@@ -4,16 +4,18 @@
     <item
         android:id="@+id/menu_explorar"
         android:title="@string/text_bottombar_explorar"
-        android:icon="@drawable/ic_action_explorar" />
+        android:icon="@drawable/ic_action_explorar"
+        />
 
     <item
         android:id="@+id/menu_comanda"
         android:title="@string/bottom_navagation_comanda"
-        android:icon="@drawable/ic_action_comanda" />
+        android:icon="@drawable/ic_action_comanda"/>
 
     <item
         android:id="@+id/menu_perfil"
         android:title="@string/bottom_navagation_perfil"
-        android:icon="@drawable/ic_action_perfil" />
+        android:icon="@drawable/ic_action_perfil"
+        android:checked="true"/>
 
 </menu>

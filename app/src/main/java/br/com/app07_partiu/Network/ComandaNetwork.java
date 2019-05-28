@@ -149,8 +149,10 @@ public class ComandaNetwork {
 //            throw new IOException(e);
         }
         if (itens.size() > 0) {
+            Log.d("TESTES", "Itens>0");
             return itens.toArray(new Item[0]);
         }
+        Log.d("TESTES", "Itens==0");
         return null;
     }
 
@@ -188,7 +190,7 @@ public class ComandaNetwork {
     }
 
 
-    public static Comanda getCodComanda(String url, String codigo) throws IOException, JSONException {
+    public static Comanda getComandaByCodigo(String url, String codigo) throws IOException, JSONException {
 
         //converte o número da mesa de int para string para poder concatenar na url
         String urlGetSenha = url + "/getComandaByCodigo?codigo=" + codigo;
