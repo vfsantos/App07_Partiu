@@ -67,11 +67,10 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         });
 
         intentRecomendacao = getIntent();
-        restaurante = new Restaurante();
-        endereco = new Endereco();
         restaurante = (Restaurante) intentRecomendacao.getSerializableExtra(ExplorarClienteAdapter.RECOMENDACAO_DETALHE);
         textViewRecomendacaoDetalheNomeRestaurante.setText(restaurante.getNomeFantasia());
-        textViewRecomendacaoDetalheEnderecoValor.setText(endereco.toString());
+        textViewRecomendacaoDetalheHorarioFuncionamentoValor.setText(null);
+        textViewRecomendacaoDetalheEnderecoValor.setText(restaurante.getEndereco().toString());
 
     }
 

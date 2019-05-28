@@ -3,29 +3,40 @@ package br.com.app07_partiu.Activity.ExplorarClienteActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.List;
 
 import br.com.app07_partiu.Activity.ExplorarClienteDetalhesActivity;
+import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.Restaurante;
+import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
+import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.R;
 
 
 public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarClienteAdapter.MyViewHolder> {
 
-    private Context mContext;
+    private Context context;
     private List<Restaurante> restauranteConvertViewsList;
     public static final String RECOMENDACAO_DETALHE = "br.com.app07_partiu.ExplorarClienteAdapter.recomendacaoDetalhe";
+
+    private Intent intentRecomendacaoDetalhe;
 
 
 
     public ExplorarClienteAdapter(Context mContext, List<Restaurante> restauranteConvertViewsList){
-        this.mContext = mContext;
+        this.context = mContext;
         this.restauranteConvertViewsList = restauranteConvertViewsList;
     }
 
@@ -42,7 +53,7 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
     public void onBindViewHolder(final ExplorarClienteAdapter.MyViewHolder viewHolder, int i){
         viewHolder.textViewNomeRestaurante.setText(restauranteConvertViewsList.get(i).getNomeFantasia());
         String poster = restauranteConvertViewsList.get(i).getLogo();
-        Glide.with(mContext)
+        Glide.with(context)
                 .load(poster)
                 .placeholder(R.drawable.ic_load)
                 .into(viewHolder.imageViewLogoRestaurante);
@@ -93,11 +104,26 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
                 public void onClick(View v){
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION){
-                        Restaurante itemRestauranteConvertView = restauranteConvertViewsList.get(pos);
-                        Intent intent = new Intent(mContext, ExplorarClienteDetalhesActivity.class);
-                        intent.putExtra("RECOMENDACAO_DETALHE", itemRestauranteConvertView );
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
+                        final Restaurante itemRestauranteConvertView = restauranteConvertViewsList.get(pos);
+                        intentRecomendacaoDetalhe = new Intent(context, ExplorarClienteDetalhesActivity.class);
+                        new Thread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            intentRecomendacaoDetalhe.putExtra(RECOMENDACAO_DETALHE, itemRestauranteConvertView);
+                                            intentRecomendacaoDetalhe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            context.startActivity(intentRecomendacaoDetalhe);
+                                            //TODO consertar progressBarTime
+                                            //progressBarTime.setVisibility(View.INVISIBLE);
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }}
+                        ).start();
+
+
                     }
                 }
             });

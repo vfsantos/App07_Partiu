@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.Restaurante;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -69,6 +70,7 @@ public class RecomendacaoNetwork {
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject objeto = (JSONObject) vetor.get(i);
                 Restaurante restaurante = new Restaurante();
+                Endereco endereco = new Endereco();
 
                 restaurante.setCnpj(objeto.getLong("cnpj"));
                 restaurante.setQtdMesas(objeto.getInt("qtdMesas"));
@@ -76,6 +78,15 @@ public class RecomendacaoNetwork {
                 restaurante.setRazaoSocial(objeto.getString("razaoSocial"));
                 restaurante.setNomeFantasia(objeto.getString("nomeFantasia"));
                 restaurante.setStatus(objeto.getString("status"));
+                restaurante.setEndereco(endereco);
+                endereco.setId(objeto.getJSONObject("endereco").getInt("id"));
+                endereco.getLogradouro(objeto.getJSONObject("endereco").getString("logradouro"));
+                endereco.setNumero(objeto.getJSONObject("endereco").getString("numero"));
+                endereco.setComplemento(objeto.getJSONObject("endereco").getString("complemento"));
+                endereco.setBairro(objeto.getJSONObject("endereco").getString("bairro"));
+                endereco.setCidade(objeto.getJSONObject("endereco").getString("cidade"));
+                endereco.setUf(objeto.getJSONObject("endereco").getString("uf"));
+                endereco.setCep(objeto.getJSONObject("endereco").getString("cep"));
 
                 //TODO reparar imagens
 //                restaurante.setLogo(objeto.getString("logo"));

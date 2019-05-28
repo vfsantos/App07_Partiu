@@ -87,7 +87,7 @@
     <string name="textview_recomendacaoespecialidadeusuario_descricao">Fica fácio se divertir com esses restaurantes</string>
     <string name="textview_recomendacaodiasemana_descricao">Inpirado em você</string>
     <!-- Fim ActivityExplorarCliente -->
-    <string name="textview_recomendacaodetalhehorariodefuncionamento">Endereço</string>
+    <string name="textview_recomendacaodetalhehorariodefuncionamento">Horário de funcionamento</string>
     <string name="textview_recomendacaodetalheendereco">Endereço</string>
     <string name="button_recomendacaodetalhevoltar">Voltar</string>
     <!-- ActivityExplorarClienteDetalhe -->
