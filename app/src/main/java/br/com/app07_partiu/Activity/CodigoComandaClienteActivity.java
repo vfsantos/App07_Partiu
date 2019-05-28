@@ -47,8 +47,6 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
     private Button buttonEntrarComanda;
 
 
-
-
     private AlertDialog alerta;
     public static final String COMANDA = "br.com.app07_partiu.CodigoComandaClienteActivity.comanda";
     public static final String ITENS = "br.com.app07_partiu.CodigoComandaClienteActivity.itens";
@@ -67,9 +65,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
         setSupportActionBar(toolbar);
 
 
-
         implentarComponentes();
         context = this;
+
+        bottomNavigationView = findViewById(R.id.bottomNavegation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -81,7 +80,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
                     case R.id.menu_comanda:
                         break;
                     case R.id.menu_perfil:
-                        Intent b = new Intent(CodigoComandaClienteActivity.this,  PerfilClienteActivity.class);
+                        Intent b = new Intent(CodigoComandaClienteActivity.this, PerfilClienteActivity.class);
                         startActivity(b);
                         break;
                 }
@@ -192,10 +191,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
                         public void run() {
                             try {
 
-                                String dataComandaAtualizacao ="";
+                                String dataComandaAtualizacao = "";
                                 String novaData = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
 
-                                if (!novaData.equals(dataComandaAtualizacao)){
+                                if (!novaData.equals(dataComandaAtualizacao)) {
                                     itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                     dataComandaAtualizacao = novaData;
 
@@ -214,7 +213,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
         }
     }
 
-    private void reloadPedidos(){};
+    private void reloadPedidos() {
+    }
+
+
 
     private void implentarComponentes() {
         //TextView
@@ -232,7 +234,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity implements B
             @Override
             public void onClick(View v) {
                 String codigo = editTextCodigoComanda.getText().toString();
-                Log.d("TESTES","Erro aqui no implementar");
+                Log.d("TESTES", "Erro aqui no implementar");
 //                getCodComanda(codigo);
             }
         });

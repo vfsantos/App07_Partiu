@@ -76,19 +76,17 @@ public class ComandaNetwork {
 
     public static String getDataAtualizacaoComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        ArrayList<Item> itens = new ArrayList<>();
         url += "/getDataAtualizacaoComanda?idComanda=" + idComanda;
-
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
+        Log.d("TESTES","DataAtualização: "+resultado);
 
         return resultado;
-
     }
+
     public static Item[] buscarPedidosComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<Item> itens = new ArrayList<>();

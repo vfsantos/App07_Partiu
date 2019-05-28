@@ -23,7 +23,8 @@
         <activity
             android:name=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:label="@string/title_activity_explorar_cliente"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
+            android:launchMode="singleInstance"/>
         <activity android:name=".Activity.DetalheCardapioGarcomActivity" />
         <activity
             android:name=".Activity.ResumoGarcomActivity.ResumoGarcomActivity"
@@ -76,7 +77,8 @@
         <activity
             android:name=".Activity.CodigoComandaClienteActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".Activity.ErroConexaoActivity"
             android:label="@string/app_name"

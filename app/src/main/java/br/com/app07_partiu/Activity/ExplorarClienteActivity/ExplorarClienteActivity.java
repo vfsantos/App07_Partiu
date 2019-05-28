@@ -14,9 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
+
 import java.util.Arrays;
 import java.util.List;
+
 
 import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
@@ -107,15 +110,25 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
     private Intent intentRecomendacaoDetalhe;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorar_cliente);
 
+
+
+        context = this;
+        intent = getIntent();
+        cliente = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
+
+        recomendacoesDiaSemana = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_DIASEMANA);
+        recomendacoesMaisVisitados = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_MAISVISITADOS);
+        recomendacoesVisitadosRecentemente = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_VISITADOSRECENTEMENTE);
+        recomendacoesEspecialidadeUsuario = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_ESPECIALIDADEUSUARIO);
+        recomendacoesRestauranteAvaliado = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_RESTAURANTEAVALIADO);
+
         implentarComponentes();
+        popularRecomendacoes();
 
         bottomNavigationView = findViewById(R.id.bottomNavegation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -129,26 +142,20 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
                         startActivity(a);
                         break;
                     case R.id.menu_perfil:
-                        Intent b = new Intent(ExplorarClienteActivity.this,  PerfilClienteActivity.class);
+                        Intent b = new Intent(ExplorarClienteActivity.this, PerfilClienteActivity.class);
                         startActivity(b);
-
                         break;
                 }
+
                 return false;
             }
         });
 
+    }
 
-        context = this;
-        intent = getIntent();
-        cliente = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
-
-
-
-        Log.d("TESTES", "DiaSemana");
+    private void popularRecomendacoes() {
         //RecomendacaoDiaSemanda
-        recomendacoesDiaSemana = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_DIASEMANA);
-        if(recomendacoesDiaSemana == null) {
+        if (recomendacoesDiaSemana == null) {
             constraintLayoutDiaSemana.removeAllViews();
         } else {
             listaRecomendacaoDiaSemanda = Arrays.asList(recomendacoesDiaSemana);//converte array para list para poder ser trabalho no RecyclerView
@@ -158,12 +165,8 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
             recyclerViewRecomendacaoDiaSemana.setAdapter(recomendacaoDiaSemanaAdapter);
         }
 
-
-        Log.d("TESTES", "MaisVIsitados");
-
         //RecomendacaoMaisVisitados
-        recomendacoesMaisVisitados = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_MAISVISITADOS);
-        if(recomendacoesMaisVisitados == null) {
+        if (recomendacoesMaisVisitados == null) {
             constraintLayoutMaisVisitados.removeAllViews();
         } else {
             listaRecomendacaoMaisVisitados = Arrays.asList(recomendacoesMaisVisitados);//converte array para list para poder ser trabalho no RecyclerView
@@ -173,25 +176,19 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
             recyclerViewRecomendacaoMaisVisitados.setAdapter(recomendacaoMaisVisitadosAdapter);
         }
 
-        Log.d("TESTES", "VisitadosRecentemente");
-
         //RecomendacaoVisitadosRecentemente
-        recomendacoesVisitadosRecentemente = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_VISITADOSRECENTEMENTE);
-        if(recomendacoesVisitadosRecentemente == null) {
+        if (recomendacoesVisitadosRecentemente == null) {
             constraintLayoutVisitadodsRecentemente.removeAllViews();
         } else {
-
             listaRecomendacaoVisitadosRecentemente = Arrays.asList(recomendacoesVisitadosRecentemente);//converte array para list para poder ser trabalho no RecyclerView
             recomendacaoVisitadosRecentementeAdapter = new ExplorarClienteAdapter(getApplicationContext(), listaRecomendacaoVisitadosRecentemente);
             linearLayoutManagerVisitadosRecentemente = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
             recyclerViewRecomendacaoVisitadosRecentemente.setLayoutManager(linearLayoutManagerVisitadosRecentemente);
             recyclerViewRecomendacaoVisitadosRecentemente.setAdapter(recomendacaoVisitadosRecentementeAdapter);
         }
-        Log.d("TESTES", "Especiaidade USuario");
 
         //RecomendacaoEspecialidadeUsuario
-        recomendacoesEspecialidadeUsuario = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_ESPECIALIDADEUSUARIO);
-        if(recomendacoesEspecialidadeUsuario == null) {
+        if (recomendacoesEspecialidadeUsuario == null) {
             constraintLayoutEspecialidadeUsuario.removeAllViews();
         } else {
             listaRecomendacaoEspecialidadeUsuario = Arrays.asList(recomendacoesEspecialidadeUsuario);//converte array para list para poder ser trabalho no RecyclerView
@@ -201,12 +198,8 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
             recyclerViewRecomendacaoEspecialidadeUsuario.setAdapter(recomendacaoEspecialidadeUsuarioAdapter);
         }
 
-
-        Log.d("TESTES", "EwrauanteAvaiiado");
-
         //RecomendacaoRestauranteAvaliado
-        recomendacoesRestauranteAvaliado = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_RESTAURANTEAVALIADO);
-        if(recomendacoesRestauranteAvaliado == null) {
+        if (recomendacoesRestauranteAvaliado == null) {
             constraintLayoutRestauranteAvaliado.removeAllViews();
         } else {
             listaRecomendacaoRestauranteAvaliado = Arrays.asList(recomendacoesRestauranteAvaliado);//converte array para list para poder ser trabalho no RecyclerView
@@ -215,15 +208,13 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
             recyclerViewRecomendacaoRestauranteAvaliado.setLayoutManager(linearLayoutManagerRestauranteAvaliado);
             recyclerViewRecomendacaoRestauranteAvaliado.setAdapter(recomendacaoRestauranteAvaliadoAdapter);
         }
-        Log.d("TESTES", "FIMMMMM");
 
     }
 
 
-    private void implentarComponentes(){
+    private void implentarComponentes() {
         //BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottomNavegation);
-
 
         //TextView - Título
         textViewRecomendacaoDiaSemana = (TextView) findViewById(R.id.textView_recomendacaoDiaSemana);
@@ -232,7 +223,6 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         textViewRecomendacaoRestauranteAvaliado = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado);
         textViewRecomendacaoVisitadosRecentemente = (TextView) findViewById(R.id.textView_recomendacaoVisitadosRecentemente);
 
-
         //TextView - Descrição
         textViewRecomendacaoDiaSemanaDescricao = (TextView) findViewById(R.id.textView_recomendacaoDiaSemana_descricao);
         textViewRecomendacaoEspecialidadeUsuarioDescricao = (TextView) findViewById(R.id.textView_recomendacaoEspecialidadeUsuario_descricao);
@@ -240,14 +230,12 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         textViewRecomendacaoRestauranteAvaliadoDescricao = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao);
         textViewRecomendacaoVisitadosDescricao = (TextView) findViewById(R.id.textView_recomendacaoVisitadosRecentemente_descricao);
 
-
         //RecyclerView - Carrossel
         recyclerViewRecomendacaoDiaSemana = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoDiaSemana);
         recyclerViewRecomendacaoEspecialidadeUsuario = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoEspecialidadeUsuario);
-        recyclerViewRecomendacaoMaisVisitados = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoMaisVisitados );
+        recyclerViewRecomendacaoMaisVisitados = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoMaisVisitados);
         recyclerViewRecomendacaoRestauranteAvaliado = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado);
         recyclerViewRecomendacaoVisitadosRecentemente = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoVisitadosRecentemente);
-
 
         //ConstraintLayout
         constraintLayoutDiaSemana = (ConstraintLayout) findViewById(R.id.constraintLayout_diaSemana);
