@@ -3,7 +3,6 @@ package br.com.app07_partiu.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
@@ -23,7 +23,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     private TextView textViewDetalhesItem;
     private TextView textViewValorItem;
     private TextView textViewAlgumaObservacao;
-    private TextView texViewQuantidade;
+    private TextView textViewQuantidade;
 
 
     //EditText
@@ -60,12 +60,12 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
 
         intent = getIntent();
         context = this;
-        //item = (Item
-        //) intent.getSerializableExtra(CardapioGarcomActivity.ITEM);
+        item = (Item) intent.getSerializableExtra(CardapioGarcomActivity.ITEM);
 
-        //textViewValorItem.setText(item.getValorString());
-        //textViewDetalhesItem.setText(R.string.text_cardapiogarcom_detalhesitem);
-
+        textViewNomeItem.setText(item.getNome());
+        textViewValorItem.setText(item.getValorString());
+        textViewDetalhesItem.setText("DETALHE PLACEHOLDER");
+        textViewQuantidade.setText("1");
 
     }
 
@@ -77,7 +77,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         textViewDetalhesItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_detalhes);
         textViewValorItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_valorItem);
         textViewAlgumaObservacao = (TextView) findViewById(R.id.textView_adicionarItemGarcom_algumaObservacao);
-        texViewQuantidade = (TextView) findViewById(R.id.textView_adicionarItem_quantidade);
+        textViewQuantidade = (TextView) findViewById(R.id.textView_adicionarItem_quantidade);
 
 
         //EditText
@@ -93,27 +93,19 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         imageViewSub = (ImageView) findViewById(R.id.imageView_adicionarItem_retirar);
     }
 
-
     public void onClickAdicionarQuantidade(View v) {
-        quantidade++;
-        String mensagem = Integer.toString(quantidade);
-        texViewQuantidade.setText(mensagem);
-    }
-
-
-    public void onClickRemoverQunatidade(View v) {
-        if(quantidade>= 1) {
-            quantidade--;
+        if(quantidade<9) {
+            quantidade++;
             String mensagem = Integer.toString(quantidade);
-            texViewQuantidade.setText(mensagem);
-        }else {
-            String mensagem = "0";
-            texViewQuantidade.setText(mensagem);
-            Snackbar.make(v, "Teste", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-
+            textViewQuantidade.setText(mensagem);
         }
     }
 
-
+    public void onClickRemoverQunatidade(View v) {
+        if(quantidade>1) {
+            quantidade--;
+            String mensagem = Integer.toString(quantidade);
+            textViewQuantidade.setText(mensagem);
+        }
+    }
 }

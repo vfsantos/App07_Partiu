@@ -127,6 +127,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         popularRecomendacoes();
 
         bottomNavigationView = findViewById(R.id.bottomNavegation);
+        bottomNavigationView.setSelectedItemId(R.id.menu_explorar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -145,7 +146,6 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                         startActivity(b);
                         break;
                 }
-
                 return false;
             }
         });

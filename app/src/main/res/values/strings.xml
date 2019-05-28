@@ -224,6 +224,7 @@
     <string name="title_activity_resumo_garcom">ResumoGarcomActivity</string>
     <string name="title_activity_explorar_cliente">ExplorarClienteActivity</string>
     <string name="title_activity_perfil_cliente">PerfilClienteActivity</string>
+    <string name="button_cardapio_finalizar">FINALIZAR</string>
 
 
 </resources>
