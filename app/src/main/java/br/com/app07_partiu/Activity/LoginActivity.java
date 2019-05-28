@@ -212,7 +212,6 @@ public class LoginActivity extends AppCompatActivity {
                                               @Override
                                               public void run() {
                                                   intentListarComanda.putExtra(USUARIO, usuario);
-
                                                   intentListarComanda.putExtra(RESTAURANTE, restaurante);
                                                   intentListarComanda.putExtra(COMANDAS, comandas);
                                                   startActivity(intentListarComanda);
@@ -250,13 +249,11 @@ public class LoginActivity extends AppCompatActivity {
                                                   @Override
                                                   public void run() {
                                                       intentListarRecomendacoes.putExtra(USUARIO, usuario);
-
                                                       intentListarRecomendacoes.putExtra(RECOMENDACOES_RESTAURANTEAVALIADO, recomendacaoAvaliacao);
                                                       intentListarRecomendacoes.putExtra(RECOMENDACOES_DIASEMANA, recomendacaoDia);
                                                       intentListarRecomendacoes.putExtra(RECOMENDACOES_MAISVISITADOS, recomendacaoEmAlta);
                                                       intentListarRecomendacoes.putExtra(RECOMENDACOES_ESPECIALIDADEUSUARIO, recomendacaoEspecialidade);
                                                       intentListarRecomendacoes.putExtra(RECOMENDACOES_VISITADOSRECENTEMENTE, recomendacaoRecente);
-
                                                       startActivity(intentListarRecomendacoes);
                                                   }
                                               }

@@ -35,9 +35,6 @@ public class DetalheCardapioGarcomActivity extends AppCompatActivity {
 
         itemRecebido = (Item) intent.getSerializableExtra(ITEM_DETALHE);
 
-
-
-        // Quando finalizar, finalizarDetalhe()
         finalizarDetalhe();
 
     }
@@ -50,7 +47,7 @@ public class DetalheCardapioGarcomActivity extends AppCompatActivity {
             String observacao = "placeholder"; //get do adapter
             Item novo = itemRecebido;
             //TODO adicionar Observaçao ao Model
-            // novo.setObservacao(observacao);
+//             novo.setObservacao(observacao);
             itensNovos[i] = novo;
         }
 

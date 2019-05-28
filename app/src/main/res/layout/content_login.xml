@@ -68,7 +68,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_input_layout_login_email"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorFont">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/edit_text_login_senha"
@@ -78,12 +79,14 @@
             android:layout_weight=".75"
             android:hint="@string/placeholder_senha"
             android:inputType="textPassword"
+
             android:maxLength="10"
             android:textAllCaps="false"
             android:textColor="@color/colorFont"
             android:textSize="16sp"
             android:textStyle="normal"
-            tools:layout_editor_absoluteY="118dp" />
+            tools:layout_editor_absoluteY="118dp"
+            />
 
     </android.support.design.widget.TextInputLayout>
 

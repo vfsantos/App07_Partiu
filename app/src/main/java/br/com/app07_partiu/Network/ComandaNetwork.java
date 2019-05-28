@@ -74,6 +74,18 @@ public class ComandaNetwork {
         return comandas.toArray(new ComandaConvertView[0]);
     }
 
+    public static String selecionarPedido(String url, int idPedido, int idUsuario) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/selecionarPedido?idPedido=" + idPedido+"&idUsuario="+idUsuario;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES","SelecionarPedidoResult: "+resultado);
+        return resultado;
+    }
+
     public static String getDataAtualizacaoComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
         url += "/getDataAtualizacaoComanda?idComanda=" + idComanda;

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -116,6 +117,9 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         setContentView(R.layout.activity_explorar_cliente);
 
 
+        //test
+//    View linearLayoutTest;
+//        linearLayoutTest = findViewById(R.id.linearLayoutTest);
 
         context = this;
         intent = getIntent();
@@ -139,10 +143,12 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
                         break;
                     case R.id.menu_comanda:
                         Intent a = new Intent(ExplorarClienteActivity.this, CodigoComandaClienteActivity.class);
+                        a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(a);
                         break;
                     case R.id.menu_perfil:
                         Intent b = new Intent(ExplorarClienteActivity.this, PerfilClienteActivity.class);
+                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(b);
                         break;
                 }
@@ -155,18 +161,51 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
 
     private void popularRecomendacoes() {
         //RecomendacaoDiaSemanda
-        if (recomendacoesDiaSemana == null) {
+        if (recomendacoesDiaSemana.length == 0) {
             constraintLayoutDiaSemana.removeAllViews();
+            Log.d("TESTES", "Recomendacao_DiaSemana Vazio");
         } else {
             listaRecomendacaoDiaSemanda = Arrays.asList(recomendacoesDiaSemana);//converte array para list para poder ser trabalho no RecyclerView
             recomendacaoDiaSemanaAdapter = new ExplorarClienteAdapter(getApplicationContext(), listaRecomendacaoDiaSemanda);
             linearLayoutManagerDiaSemana = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
             recyclerViewRecomendacaoDiaSemana.setLayoutManager(linearLayoutManagerDiaSemana);
             recyclerViewRecomendacaoDiaSemana.setAdapter(recomendacaoDiaSemanaAdapter);
+
+            //Altera Título de acordo com dia
+            String text = "Recomendações do Dia";
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+            switch (day) {
+                case Calendar.SUNDAY:
+                    text = "Domingou";
+                    break;
+                case Calendar.MONDAY:
+                    text = "Segundou";
+                    break;
+                case Calendar.TUESDAY:
+                    text = "Terçou";
+                    break;
+                case Calendar.WEDNESDAY:
+                    text = "Quartou";
+                    break;
+                case Calendar.THURSDAY:
+                    text = "Quintou";
+                    break;
+                case Calendar.FRIDAY:
+                    text = "Sextou";
+                    break;
+                case Calendar.SATURDAY:
+                    text = "Sabadou";
+                    break;
+
+            }
+            textViewRecomendacaoDiaSemana.setText(text);
         }
 
         //RecomendacaoMaisVisitados
-        if (recomendacoesMaisVisitados == null) {
+        if (recomendacoesMaisVisitados.length == 0) {
+            Log.d("TESTES", "Recomendacao_MaisVisitados Vazio");
             constraintLayoutMaisVisitados.removeAllViews();
         } else {
             listaRecomendacaoMaisVisitados = Arrays.asList(recomendacoesMaisVisitados);//converte array para list para poder ser trabalho no RecyclerView
@@ -177,7 +216,8 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         }
 
         //RecomendacaoVisitadosRecentemente
-        if (recomendacoesVisitadosRecentemente == null) {
+        if (recomendacoesVisitadosRecentemente.length == 0) {
+            Log.d("TESTES", "Recomendacao_VisitadoRecentemente Vazio");
             constraintLayoutVisitadodsRecentemente.removeAllViews();
         } else {
             listaRecomendacaoVisitadosRecentemente = Arrays.asList(recomendacoesVisitadosRecentemente);//converte array para list para poder ser trabalho no RecyclerView
@@ -188,7 +228,8 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         }
 
         //RecomendacaoEspecialidadeUsuario
-        if (recomendacoesEspecialidadeUsuario == null) {
+        if (recomendacoesEspecialidadeUsuario.length == 0) {
+            Log.d("TESTES", "Recomendacao_EspecialidadeUsuario Vazio");
             constraintLayoutEspecialidadeUsuario.removeAllViews();
         } else {
             listaRecomendacaoEspecialidadeUsuario = Arrays.asList(recomendacoesEspecialidadeUsuario);//converte array para list para poder ser trabalho no RecyclerView
@@ -199,7 +240,8 @@ public class ExplorarClienteActivity extends AppCompatActivity implements Bottom
         }
 
         //RecomendacaoRestauranteAvaliado
-        if (recomendacoesRestauranteAvaliado == null) {
+        if (recomendacoesRestauranteAvaliado.length == 0) {
+            Log.d("TESTES", "Recomendacao_RestauranteAvaliado Vazio");
             constraintLayoutRestauranteAvaliado.removeAllViews();
         } else {
             listaRecomendacaoRestauranteAvaliado = Arrays.asList(recomendacoesRestauranteAvaliado);//converte array para list para poder ser trabalho no RecyclerView

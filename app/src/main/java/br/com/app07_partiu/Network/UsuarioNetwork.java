@@ -62,16 +62,10 @@ public class UsuarioNetwork {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.d("TESTES", "Não conectou");
+            Log.d("TESTES", "Não acho usuario Login");
             return null;
         }
 
     }
 
-    public static boolean isConnected(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return connectivityManager.getActiveNetworkInfo() != null &&
-                connectivityManager.getActiveNetworkInfo().isConnected();
-    }
 }
