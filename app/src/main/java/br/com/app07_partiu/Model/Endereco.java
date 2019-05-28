@@ -21,7 +21,7 @@ public class Endereco  implements Serializable {
         this.id = id;
     }
 
-    public String getLogradouro() {
+    public String getLogradouro(String string) {
         return logradouro;
     }
 
@@ -96,8 +96,7 @@ public class Endereco  implements Serializable {
 
     @Override
     public String toString() {
-        return "Endereco [id=" + id + ", logradouro=" + logradouro + ", numero=" + numero + ", complemento="
-                + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep + "]";
+        return "Endereco: " + logradouro + ", " + numero + " " + bairro + ", " + cidade + "- " +uf + " "+ cep;
     }
 
 }

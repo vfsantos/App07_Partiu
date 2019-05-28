@@ -31,12 +31,12 @@
     <color name="garcom_comanda_item_mesa_desativada">#767676</color>
     <color name="garcom_comanda_item_hora_de_chagada_desativada">#767676</color>
 
-    <color name="background_footer_button">#F6F6F6</color>
-
     <color name="branco">#FFFFFF</color>
     <color name="cinza_10">#E6E6E6</color>
     <color name="chumbo_100">#383838</color>
     <color name="chumbo_50">#848484</color>
+    <color name="chumbo_40">#9D9D9D</color>
+    <color name="chumbo_30">#4C4C4C</color>
     <color name="mostarda_100">#E9A64E</color>
     <color name="vermelho_100">#F54B4B</color>
     <color name="cinza_20">#C4C4C4</color>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.Endereco;
+import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
@@ -18,20 +21,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RestauranteNetwork {
-
-
-
- /*   {"cnpj": 2704394000356,
-        "qtdMesas": 23,
-        "codigoComanda": "OSA",
-        "razaoSocial": "OUTBACK STEAKHOUSE",
-        "nomeFantasia": "OUTBACK STEAKHOUSE ANÁLIA FRANCO",
-        "status": "A",
-        "logo": "iVBORw0KGrkJggg==",
-            "descricao": "É o ambiente perfeito para juntar tosdo mundo! Quer ver? O cardápio inclui porções bem generosas, perfeitas para compartilhar! A incomparável Aussie Cheese Fries (Batata com bacon e queijo), a suculenta Ribs On The Barbie (nossa costelinha), nosso ícone Bloomin? Onion (cebola empanhada), pão australiano, chopp na caneca congelada e muitas outras opções vão acompanhar a sua visita. Happy hour, almoço, jantar, comemorações, fim de semana: venha para o Outback! "
-}
-*/
-
 
     public static Restaurante getRestauranteByIdGarcom(String url, int idGarcom) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
@@ -68,5 +57,62 @@ public class RestauranteNetwork {
         }
 
     }
+
+
+
+    public static Restaurante[] getRecomendacaoRestauranteAvaliado(String url) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<Restaurante> restaurantes = new ArrayList<>();
+        url += "/recomendacao/getRecomendacaoRestauranteAvaliado";
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                Restaurante restaurante = new Restaurante();
+                Endereco endereco = new Endereco();
+                Restaurante itemRestauranteConvertView = new Restaurante();
+
+                //pegar os itens do json e atribui a um objeto restaurante
+                restaurante.setCnpj(item.getInt("cnpj"));
+                restaurante.setNomeFantasia(item.getString("nomeFantasia"));
+                restaurante.setLogo(null);
+                restaurante.setAvaliacao(item.getString("avaliacao"));
+                restaurante.setDescricao(item.getString("descricao"));
+                endereco.setId(item.getJSONObject("endereco").getInt("id"));
+                endereco.getLogradouro(item.getJSONObject("endereco").getString("logradouro"));
+                endereco.setNumero(item.getJSONObject("endereco").getString("numero"));
+                endereco.setComplemento(item.getJSONObject("endereco").getString("complemento"));
+                endereco.setBairro(item.getJSONObject("endereco").getString("bairro"));
+                endereco.setCidade(item.getJSONObject("endereco").getString("cidade"));
+                endereco.setUf(item.getJSONObject("endereco").getString("uf"));
+                endereco.setCep(item.getJSONObject("endereco").getString("cep"));
+
+
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                itemRestauranteConvertView.setCnpj(restaurante.getCnpj());
+                itemRestauranteConvertView.setNomeFantasia(restaurante.getNomeFantasia());
+                itemRestauranteConvertView.setLogo(restaurante.getLogo());
+                itemRestauranteConvertView.setAvaliacao(restaurante.getAvaliacao());
+                itemRestauranteConvertView.setDescricao(restaurante.getDescricao());
+                itemRestauranteConvertView.setEndereco(endereco);
+                restaurantes.add(itemRestauranteConvertView);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new IOException(e);
+        }
+        return restaurantes.toArray(new Restaurante[0]);
+    }
+
+
+
 
 }

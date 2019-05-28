@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
+import java.util.zip.Inflater;
 
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.Estabelecimento;
+import br.com.app07_partiu.Model.ItemRestauranteConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
@@ -51,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
     public Intent intentCadastro;
     public Intent intentEsqueceuSuaSenha;
     public Intent intentListarComanda;
-    public Intent intentLoginGarcom;
-    public Intent intentLoginCliente;
+    public Intent intentListarRecomendacoes;
+
 
     //Snackbar
     private Snackbar snackbarErroLogin;
@@ -60,24 +64,33 @@ public class LoginActivity extends AppCompatActivity {
     public static final String COMANDAS = "br.com.app07_partiu.LoginActivity.comandas";
     public static final String USUARIO = "br.com.app07_partiu.LoginActivity.usuario";
     public static final String RESTAURANTE = "br.com.app07_partiu.LoginActivity.restaurante";
+    public static final String RECOMENDACOES_DIASEMANA = "br.com.app07_partiu.LoginActivity.recomendacoesDiaSemana";
+    public static final String RECOMENDACOES_MAISVISITADOS = "br.com.app07_partiu.LoginActivity.recomendacoesMaisVisitados";
+    public static final String RECOMENDACOES_ESPECIALIDADEUSUARIO = "br.com.app07_partiu.LoginActivity.recomendacoesEspecialidadeUsuario";
+    public static final String RECOMENDACOES_VISITADOSRECENTEMENTE = "br.com.app07_partiu.LoginActivity.recomendacoesVisitadosRecentemente";
+    public static final String RECOMENDACOES_RESTAURANTEAVALIADO = "br.com.app07_partiu.LoginActivity.recomendacoesRestauranteAvaliado";
 
-    public static final String RECOMENDACAO_DIA = "LoginActivity.RecomendacaoDia";
-    public static final String RECOMENDACAO_AVALIACAO = "LoginActivity.RecomendacaoDia";
-    public static final String RECOMENDACAO_EMALTA = "LoginActivity.RecomendacaoDia";
-    public static final String RECOMENDACAO_ESPECIALIDADE = "LoginActivity.RecomendacaoDia";
-    public static final String RECOMENDACAO_RECENTE = "LoginActivity.RecomendacaoDia";
+
+    //Array - Item do carrossel de recomeendção
+    private Restaurante[] recomendacaoAvaliacao;
+    private Restaurante[] recomendacaoDia;
+    private Restaurante[] recomendacaoEmAlta;
+    private Restaurante[] recomendacaoEspecialidade;
+    private Restaurante[] recomendacaoRecente;
+
 
     //Array
     ComandaConvertView[] comandas;
-    Restaurante[] recomendacaoDia, recomendacaoAvaliacao, recomendacaoEmAlta, recomendacaoEspecialidade, recomendacaoRecente;
+    Estabelecimento[] estabelecimentos;
+    ComandaConvertView[] comandaConvertView;
 
     Context contexto;
 
     //Progressbar
     ProgressBar progressBarTime;
 
-    private final boolean testeGarcom = false;
-    private final boolean testeCliente = true;
+    private final boolean testeGarcom = true;
+    private final boolean testeCliente = false;
 
     Usuario usuario;
     Restaurante restaurante;
@@ -132,41 +145,12 @@ public class LoginActivity extends AppCompatActivity {
         validarLogin();
     }
 
-    public void onClickButtonLoginCadastrarse (View view) {
-        intentCadastro = new Intent(LoginActivity.this, CadastroClienteActivity.class);
-        startActivity(intentCadastro);
-    }
-
-    public void onClickButtonLoginEsqueceuSuaSenha (View view) {
-        intentEsqueceuSuaSenha = new Intent(LoginActivity.this, EsqueceuSuaSenhaActivity.class);
-        startActivity(intentEsqueceuSuaSenha);
-    }
-
-    public void inicializarComponentes(){
-        //ImageView
-        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
-
-        //EditText
-        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
-        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
-
-        //TextInputLayout
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
-        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
-
-        //Button
-        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
-        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
-        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
-
-    }
-
     public void login(String email, String senha){
         final String enderecoEmailUsuario = email;
         final String senhaUsuario = senha;
 
-        intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
-        intentLoginCliente = new Intent(this, ExplorarClienteActivity.class);
+        //intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
+        //intentLoginCliente = new Intent(this, ExplorarClienteActivity.class);
 
         if(Connection.isConnected(this)) {
             //TODO consertar progressBarTime
@@ -244,9 +228,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }).start();
+
     }
 
     public void getRecomendacoesCliente() {
+        intentListarRecomendacoes = new Intent(this, ExplorarClienteActivity.class);
         if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
@@ -263,15 +249,15 @@ public class LoginActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
-                                                      intentLoginCliente.putExtra(USUARIO, usuario);
+                                                      intentListarRecomendacoes.putExtra(USUARIO, usuario);
 
-                                                      intentLoginCliente.putExtra(RECOMENDACAO_AVALIACAO, recomendacaoAvaliacao);
-                                                      intentLoginCliente.putExtra(RECOMENDACAO_DIA, recomendacaoDia);
-                                                      intentLoginCliente.putExtra(RECOMENDACAO_EMALTA, recomendacaoEmAlta);
-                                                      intentLoginCliente.putExtra(RECOMENDACAO_ESPECIALIDADE, recomendacaoEspecialidade);
-                                                      intentLoginCliente.putExtra(RECOMENDACAO_RECENTE, recomendacaoRecente);
+                                                      intentListarRecomendacoes.putExtra(RECOMENDACOES_RESTAURANTEAVALIADO, recomendacaoAvaliacao);
+                                                      intentListarRecomendacoes.putExtra(RECOMENDACOES_DIASEMANA, recomendacaoDia);
+                                                      intentListarRecomendacoes.putExtra(RECOMENDACOES_MAISVISITADOS, recomendacaoEmAlta);
+                                                      intentListarRecomendacoes.putExtra(RECOMENDACOES_ESPECIALIDADEUSUARIO, recomendacaoEspecialidade);
+                                                      intentListarRecomendacoes.putExtra(RECOMENDACOES_VISITADOSRECENTEMENTE, recomendacaoRecente);
 
-                                                      startActivity(intentLoginCliente);
+                                                      startActivity(intentListarRecomendacoes);
                                                   }
                                               }
                                 );
@@ -284,24 +270,26 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //TODO verificar se necessário abaixo
+    public void inicializarComponentes(){
+        //ImageView
+        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
 
-//        if(email.equals(emailCliente) && senha.equals(senhaCliente)){
-//            textInputLayoutEmail.setErrorEnabled(false);
-//            intentCodigoComandaCliente = new Intent(LoginActivity.this, CodigoComandaClienteActivity.class);
-//            startActivity(intentCodigoComandaCliente);
-//        } else {
-//            textInputLayoutEmail.setErrorEnabled(true);
-//            textInputLayoutEmail.setError("Usuário invalido");
-//        }
-//
-//        if(email.equals(emailGarcom) && senha.equals(senhaGarcom)){
-//            textInputLayoutEmail.setErrorEnabled(false);
-////            listarComandas();
-//
-//        } else {
-//            textInputLayoutEmail.setErrorEnabled(true);
-//            textInputLayoutEmail.setError("Usuário invalido");
-//        }
+
+        //EditText
+        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
+        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
+
+
+        //TextInputLayout
+        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
+        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
+
+
+        //Button
+        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
+        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
+        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
+
+    }
 
 }

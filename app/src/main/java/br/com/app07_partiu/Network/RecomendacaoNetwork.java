@@ -1,5 +1,8 @@
 package br.com.app07_partiu.Network;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +41,17 @@ public class RecomendacaoNetwork {
         return getRestaurantes(url);
     }
 
+    //TODO adicionar ENDERECO
+    /*endereco.setId(item.getJSONObject("endereco").getInt("id"));
+                endereco.getLogradouro(item.getJSONObject("endereco").getString("logradouro"));
+                endereco.setNumero(item.getJSONObject("endereco").getString("numero"));
+                endereco.setComplemento(item.getJSONObject("endereco").getString("complemento"));
+                endereco.setBairro(item.getJSONObject("endereco").getString("bairro"));
+                endereco.setCidade(item.getJSONObject("endereco").getString("cidade"));
+                endereco.setUf(item.getJSONObject("endereco").getString("uf"));
+                endereco.setCep(item.getJSONObject("endereco").getString("cep"));
+                */
+
     private static Restaurante[] getRestaurantes(String url) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<Restaurante> restaurantes = new ArrayList<>();
@@ -62,7 +76,10 @@ public class RecomendacaoNetwork {
                 restaurante.setRazaoSocial(objeto.getString("razaoSocial"));
                 restaurante.setNomeFantasia(objeto.getString("nomeFantasia"));
                 restaurante.setStatus(objeto.getString("status"));
-                restaurante.setLogo(objeto.getString("logo"));
+
+                //TODO reparar imagens
+//                restaurante.setLogo(objeto.getString("logo"));
+                restaurante.setLogo(null);
                 restaurante.setDescricao(objeto.getString("descricao"));
 
                 //TODO pegar horarios

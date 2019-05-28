@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.RecomendacaoDetalhesActivity"
-    tools:showIn="@layout/activity_recomendacao_detalhes">
+    tools:context=".Activity.PerfilClienteActivity"
+    tools:showIn="@layout/activity_perfil_cliente">
 
 </android.support.constraint.ConstraintLayout>

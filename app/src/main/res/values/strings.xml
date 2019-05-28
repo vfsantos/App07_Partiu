@@ -68,14 +68,31 @@
     <!-- Fim Activity Editar Item Garcom -->
 
 
-    <!-- BottomBar Cliente -->
+    <!-- BottomBar -->
     <string name="text_bottombar_explorar">Explorar</string>
     <string name="text_bottombar_comanda">Comanda</string>
     <string name="text_bottombar_perfil">Perfil</string>
-    <!-- Fim BottomBar Cliente -->
+    <!-- Fim BottomBar -->
 
 
+    <!-- ActivityExplorarCliente -->
+    <string name="textview_recomendacaovisitadosrecentemente">Visitados recentemente</string>
+    <string name="textview_recomendacaorestauranteavaliado">Mais bem avaliados</string>
+    <string name="textview_recomendacaomaisvisitados">Em alta</string>
+    <string name="textview_recomendacaoespecialidadeusuario">Susgestão pra você</string>
+    <string name="textview_recomendacaodiasemana">Vamos curtir a sexta</string>
+    <string name="textview_recomendacaovisitadosrecentemente_descricao">Inpirados nas suas atividades recentes</string>
+    <string name="textview_recomendacaorestauranteavaliado_descricao">Sempre o melhor pra você</string>
+    <string name="textview_recomendacaomaisvisitados_descricao">Todos os melhores restaurantes em um só lugar.</string>
+    <string name="textview_recomendacaoespecialidadeusuario_descricao">Fica fácio se divertir com esses restaurantes</string>
+    <string name="textview_recomendacaodiasemana_descricao">Inpirado em você</string>
+    <!-- Fim ActivityExplorarCliente -->
+    <string name="textview_recomendacaodetalhehorariodefuncionamento">Endereço</string>
+    <string name="textview_recomendacaodetalheendereco">Endereço</string>
+    <string name="button_recomendacaodetalhevoltar">Voltar</string>
+    <!-- ActivityExplorarClienteDetalhe -->
 
+    <!-- Fim Activity ExplorarClienteDetalhe-->
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
     <string name="placeholder_senha">senha</string>
 
@@ -209,6 +226,7 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_resumo_garcom">ResumoGarcomActivity</string>
     <string name="title_activity_explorar_cliente">ExplorarClienteActivity</string>
+    <string name="title_activity_perfil_cliente">PerfilClienteActivity</string>
 
 
 </resources>
