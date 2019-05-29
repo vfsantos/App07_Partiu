@@ -29,6 +29,7 @@
         android:text="@string/button_cardapio_finalizar"
         android:textColor="@color/branco"
         android:background="@drawable/btn_primary"
+        android:onClick="onClickButtonCardapioFinalizar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

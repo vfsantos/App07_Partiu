@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     public static final int RESULT_RESUMO_FINALIZADO = 1000;
     public static final int RESULT_DETALHE_RETORNADO = 2000;
 
+
+    Button buttonCardapioFinalizar;
     Intent intent;
     private Intent intentItem;
 
@@ -71,6 +74,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         if (itensRestaurante != null) {
             carregarItens();
         }
+
     }
 
     private void carregarItens() {
@@ -118,6 +122,34 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        //Retornando sinal para fechar Activity de Cardapio (Resumo confirmado; volta à Comanda)
+        if (resultCode == RESULT_RESUMO_FINALIZADO) {
+            setResult(RESULT_PEDIDOS_CRIADOS);
+            finish();
+
+            //Retornando itens do DetalheCardapioGarcomActivity
+        } else if (resultCode == RESULT_DETALHE_RETORNADO) {
+            Item[] novosItens = (Item[]) data.getSerializableExtra(ITENS_NOVOS);
+            for (Item item : novosItens) {
+                addItem(item);
+            }
+        }
+    }
+
+    //click finalizar
+    public void onClickButtonCardapioFinalizar(){
+
+    }
+
+}
+
+
+/* ------------BACKUP------------------
+
+   @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Log.d("TESTES", "RequestCode " + requestCode);
         Log.d("TESTES", "ResultCode " + resultCode);
         Log.d("TESTES", "Data " + data);
@@ -139,5 +171,4 @@ public class CardapioGarcomActivity extends AppCompatActivity {
             }
         }
     }
-
-}
+ */

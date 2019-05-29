@@ -127,12 +127,14 @@ public class LoginActivity extends AppCompatActivity {
         if(email.isEmpty()) {
             textInputLayoutEmail.setErrorEnabled(true);
             textInputLayoutEmail.setError("Preencha com seu e-mail");
+            buttonEntrar.setEnabled(true);
         } else {
             textInputLayoutEmail.setErrorEnabled(false);
 
-            if(senha.isEmpty() || senha.length() > 8) {
+            if(senha.isEmpty()) {
                 textInputLayoutSenha.setErrorEnabled(true);
-                textInputLayoutSenha.setError("Sua senha deve possuir mínimo 8 caracteres.");
+                textInputLayoutSenha.setError("Insira a senha");
+                buttonEntrar.setEnabled(true);
             } else {
                 textInputLayoutSenha.setErrorEnabled(false);
                 login(email, senha);
@@ -141,8 +143,15 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //TODO disable botão Login
     public void onClickButtonLoginEntrar (View view) {
+//        buttonEntrar.setEnabled(false);
         validarLogin();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 
     public void login(String email, String senha){
@@ -155,25 +164,61 @@ public class LoginActivity extends AppCompatActivity {
         if(Connection.isConnected(this)) {
             //TODO consertar progressBarTime
 //            progressBarTime.setVisibility(View.VISIBLE);
-            new Thread(
+
+            intentListarComanda = new Intent(this, HomeGarcomActivity.class);
+            intentListarRecomendacoes = new Intent(this, ExplorarClienteActivity.class);
+
+            Thread loginThread = new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 usuario = UsuarioNetwork.login(Connection.URL, enderecoEmailUsuario, senhaUsuario);
                                 Log.d("TESTES", usuario.toString());
+                                if (usuario.getTipo().equals("garcom")){
 
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                      if (usuario.getTipo().equals("garcom")){
-                                                          getRestauranteComandasGarcom();
-                                                      }else{
-                                                          getRecomendacoesCliente();
+                                    restaurante = RestauranteNetwork.getRestauranteByIdGarcom(Connection.URL, usuario.getId());
+                                    comandas = ComandaNetwork.buscarComandas(Connection.URL, usuario.getId(), 'A');
+                                    Log.d("TESTES", comandas.toString());
+                                    runOnUiThread(new Runnable() {
+                                                      @Override
+                                                      public void run() {
+                                                          intentListarComanda.putExtra(USUARIO, usuario);
+                                                          intentListarComanda.putExtra(RESTAURANTE, restaurante);
+                                                          intentListarComanda.putExtra(COMANDAS, comandas);
+                                                          startActivity(intentListarComanda);
+                                                          //TODO consertar progressBarTime
+                                                          //progressBarTime.setVisibility(View.INVISIBLE);
                                                       }
                                                   }
-                                              }
-                                );
+                                    );
+
+                                }else{
+                                    recomendacaoAvaliacao       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado(Connection.URL);
+                                    recomendacaoDia             = RecomendacaoNetwork.getRecomendacaoDiaSemana(Connection.URL);
+                                    recomendacaoEmAlta          = RecomendacaoNetwork.getRecomendacaoMaisVisitados(Connection.URL);
+                                    recomendacaoEspecialidade   = RecomendacaoNetwork.getRecomendacaoEspecialidadeUsuario(Connection.URL, usuario.getId());
+                                    recomendacaoRecente         = RecomendacaoNetwork.getRecomendacaoVisitadoRecentemente(Connection.URL, usuario.getId());
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            intentListarRecomendacoes.putExtra(USUARIO, usuario);
+                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_RESTAURANTEAVALIADO, recomendacaoAvaliacao);
+                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_DIASEMANA, recomendacaoDia);
+                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_MAISVISITADOS, recomendacaoEmAlta);
+                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_ESPECIALIDADEUSUARIO, recomendacaoEspecialidade);
+                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_VISITADOSRECENTEMENTE, recomendacaoRecente);
+                                            startActivity(intentListarRecomendacoes);
+                                            try {
+                                                Thread.sleep(2000);
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Log.d("TESTES", "Erro no webservice ou na conexão");
@@ -191,10 +236,24 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 });
                             }
+
+
                         }
-                    }).start();
+                    },"LoginThread");
 
-
+            loginThread.start();
+//            while(true){
+//                if(loginThread.isAlive()){
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }else{
+//                    buttonEntrar.setEnabled(true);
+//                    return;
+//                }
+//            }
         }
     }
 
@@ -220,12 +279,21 @@ public class LoginActivity extends AppCompatActivity {
                                               }
                                           }
                             );
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        try {
+                            Thread.sleep(000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        buttonEntrar.setEnabled(true);
+
                     }
+
                 }).start();
 
     }
@@ -256,12 +324,12 @@ public class LoginActivity extends AppCompatActivity {
                                                       intentListarRecomendacoes.putExtra(RECOMENDACOES_VISITADOSRECENTEMENTE, recomendacaoRecente);
                                                       startActivity(intentListarRecomendacoes);
                                                   }
-                                              }
-                                );
+                                              });
                             } catch (IOException e) {
                                 Log.d("TESTES", "Erro no getRecomendacoesCliente");
                                 e.printStackTrace();
                             }
+
                         }
                     }).start();
         }

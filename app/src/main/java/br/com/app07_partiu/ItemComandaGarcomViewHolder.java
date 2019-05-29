@@ -21,10 +21,10 @@ public class ItemComandaGarcomViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         this.textViewCodigoComanda = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_codigo_comanda);
-        this.textViewTotalComanda = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_total_comanda);
-        this.textViewTotalComandaValor = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_tota_comanda_valor);
-        this.textViewPessoasComanda = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda);
-        this.textViewPessoasComandaGarcomNumero = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda_numero);
+//        this.textViewTotalComanda = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_total_comanda);
+//        this.textViewTotalComandaValor = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_tota_comanda_valor);
+//        this.textViewPessoasComanda = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda);
+//        this.textViewPessoasComandaGarcomNumero = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda_numero);
         this.textViewMesa = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_mesa);
         this.textViewMesaNumero = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_mesa_numero);
         this.textViewHora = (TextView) itemView.findViewById(R.id.text_view_garcom_comanda_item_hora);

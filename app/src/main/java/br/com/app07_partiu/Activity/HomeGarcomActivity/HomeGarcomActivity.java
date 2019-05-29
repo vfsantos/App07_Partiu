@@ -97,9 +97,11 @@ public class HomeGarcomActivity extends AppCompatActivity {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                refreshComandas();
+                pullToRefresh.stopNestedScroll();
             }
         });
+
 
         context = this;
         Intent intent = getIntent();
@@ -116,6 +118,17 @@ public class HomeGarcomActivity extends AppCompatActivity {
         }
         mesas = sTemp;
 
+        loadComandas();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        refreshComandas();
+    }
+
+    private void loadComandas(){
         listViewComandas = (ListView) findViewById(R.id.list_view_comanda_garcom);
         final HomeGarcomAdapter adapter = new HomeGarcomAdapter(comandas, this);
         listViewComandas.setAdapter(adapter);
@@ -124,14 +137,46 @@ public class HomeGarcomActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
+                listViewComandas.setEnabled(false);
                 ComandaConvertView comandaCV = (ComandaConvertView) adapter.getItem(position);
                 int idComanda = comandaCV.getId();
                 Log.d("TESTES", "Carregando comanda de id: " + idComanda);
                 visualizarComanda(idComanda);
+
             }
 
         });
+    }
+
+    private void refreshComandas(){
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            comandas = ComandaNetwork.buscarComandas(Connection.URL, garcom.getId(), 'A');
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  loadComandas();
+                                                  pullToRefresh.setRefreshing(false);
+                                              }
+                                          }
+                            );
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.d("TESTES", "ResfreshComandas(): Erro no webservice ou na conexão");
+                            Toast.makeText(context, "Erro Conexão ou Webservice!", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  pullToRefresh.setRefreshing(false);
+                                              }
+                                          }
+                            );
+                        }
+                    }
+                }).start();
 
     }
 
@@ -151,11 +196,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
             }
         });
 
-        alertaNumeroMesa.setPositiveButton(R.string.btn_alert_criar_comanda, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-            }
-        });
 
         alertaNumeroMesa.setNegativeButton(R.string.btn_alert_cancelar, new DialogInterface.OnClickListener() {
             @Override
@@ -236,6 +276,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                           }
                                       }
                         );
+
+
                     } catch (IOException e) {
                         Log.d("TESTES", "visualizarComanda: IOException");
                         e.printStackTrace();
@@ -243,9 +285,18 @@ public class HomeGarcomActivity extends AppCompatActivity {
                         Log.d("TESTES", "visualizarComanda: JSONException");
                         e.printStackTrace();
                     }
+                    try {
+                        Thread.sleep(1000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    listViewComandas.setEnabled(true);
                 }
             }).start();
         }
+
+
     }
 
     //fecha o alertNovaComanda quando clicar no cancelar

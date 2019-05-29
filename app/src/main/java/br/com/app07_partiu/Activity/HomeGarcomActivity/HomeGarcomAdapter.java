@@ -52,15 +52,17 @@ public class HomeGarcomAdapter extends BaseAdapter implements SectionIndexer {
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_home_garcom, parent, false);
             TextView textViewCodigoComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_codigo_comanda);
-            TextView textViewTotalComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_total_comanda);
-            TextView textViewTotalComandaValor = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_tota_comanda_valor);
-            TextView textViewPessoasComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda);
-            TextView textViewPessoasComandaGarcomNumero = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda_numero);
+//            TextView textViewTotalComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_total_comanda);
+//            TextView textViewTotalComandaValor = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_tota_comanda_valor);
+//            TextView textViewPessoasComanda = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda);
+//            TextView textViewPessoasComandaGarcomNumero = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_pessoas_comanda_numero);
             TextView textViewMesa = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_mesa);
             TextView textViewMesaNumero = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_mesa_numero);
             TextView textViewHora = (TextView) view.findViewById(R.id.text_view_garcom_comanda_item_hora);
-            HomeGarcomViewHolder viewHolder = new HomeGarcomViewHolder(textViewCodigoComanda, textViewTotalComanda,textViewTotalComandaValor,
-                    textViewPessoasComanda, textViewPessoasComandaGarcomNumero, textViewMesa, textViewMesaNumero, textViewHora);
+//            HomeGarcomViewHolder viewHolder = new HomeGarcomViewHolder(textViewCodigoComanda, textViewTotalComanda,textViewTotalComandaValor,
+//                    textViewPessoasComanda, textViewPessoasComandaGarcomNumero, textViewMesa, textViewMesaNumero, textViewHora);
+            HomeGarcomViewHolder viewHolder = new HomeGarcomViewHolder(textViewCodigoComanda, textViewMesa, textViewMesaNumero, textViewHora);
+
             view.setTag(viewHolder);
         }
 
@@ -68,10 +70,8 @@ public class HomeGarcomAdapter extends BaseAdapter implements SectionIndexer {
 
         HomeGarcomViewHolder viewHolder = (HomeGarcomViewHolder)view.getTag();
         viewHolder.getTextViewCodigoComanda().setText(comandas[position].getCodigoComanda());
-        viewHolder.getTextViewTotalComandaValor().setText(comandas[position].getValorTotalComanda());
         viewHolder.getTextViewMesaNumero().setText(comandas[position].getMesa());
-        viewHolder.getTextViewPessoasComandaGarcomNumero().setText(comandas[position].getPessoasComanda());
-        viewHolder.getTextViewHora().setText(comandas[position].getDataEntrada());
+        viewHolder.getTextViewHora().setText(comandas[position].getDataEntrada().split(" ")[1].replace(":","h"));
 
 
         return view;

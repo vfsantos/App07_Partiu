@@ -189,7 +189,7 @@
     <!-- Item comanda garcom -->
     <string name="item_comanda_garcom_total_comanda">total da comanda: </string>
     <string name="item_comanda_garcom_pessoas_comanda">pessoas na comanda: </string>
-    <string name="item_comanda_garcom_mesa">mesa: </string>
+    <string name="item_comanda_garcom_mesa">Mesa: </string>
 
     <!-- FAB extended -->
     <string name="fab_extended_comanda">comanda</string>

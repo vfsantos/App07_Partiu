@@ -69,7 +69,6 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
 
     }
 
-
     private void inicializaComponentes() {
         //TextView
         textViewTituloPagina = (TextView) findViewById(R.id.textView_adicionarItemGarcom_tituloPage);
@@ -79,14 +78,11 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         textViewAlgumaObservacao = (TextView) findViewById(R.id.textView_adicionarItemGarcom_algumaObservacao);
         textViewQuantidade = (TextView) findViewById(R.id.textView_adicionarItem_quantidade);
 
-
         //EditText
         editTextObservacao = (EditText) findViewById(R.id.editText_adicionarItemGarcom_observacao);
 
-
         //Button
         buttonAdicionarItem = (Button) findViewById(R.id.button_adicionarItem_addComanda);
-
 
         //ImageView
         imageViewAdd = (ImageView) findViewById(R.id.imageView_adicionarItem_add);

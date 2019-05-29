@@ -6,7 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class Connection {
-    public static final String URL = "http://10.42.0.1:8080/partiu";
+    public static final String URL = "http://192.168.15.100:8080/partiu";
 
     public static boolean isConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
