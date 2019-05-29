@@ -7,12 +7,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Model.Item;
+import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
+import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
 public class ItemDetalheGarcomActivity extends AppCompatActivity {
@@ -59,9 +68,9 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         textViewQuantidadeValor.setText("");
 
         String status = "";
-        switch(item.getStatusPedido()){
+        switch (item.getStatusPedido()) {
             case "N":
-                status ="Não Selecionado por Usuário";
+                status = "Não Selecionado por Usuário";
                 break;
 
             case "S":
@@ -87,7 +96,51 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
             }
         });
 
+        buttonRemover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Fazer verificação antes de remover
+                removerPedido();
+            }
+        });
 
+
+    }
+
+    private void removerPedido() {
+        if (Connection.isConnected(this)) {
+            //TODO consertar progressBarTime
+//            progressBarTime.setVisibility(View.VISIBLE);
+            new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String result = ComandaNetwork.removerPedido(Connection.URL, item.getIdPedido());
+                                Log.d("TESTES", "Removeu pedido id " + item.getIdPedido());
+                                if (result.equals("sucesso")){
+                                    runOnUiThread(new Runnable() {
+                                                      @Override
+                                                      public void run() {
+                                                          finish();
+                                                      }
+                                                  }
+                                    );
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Log.d("TESTES", "Erro no webservice ou na conexão");
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(context, "Erro no webservice ou na conexão", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
+
+
+        }
     }
 
     private void inicializaComponentes() {

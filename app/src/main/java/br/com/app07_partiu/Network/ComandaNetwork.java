@@ -86,6 +86,18 @@ public class ComandaNetwork {
         return resultado;
     }
 
+    public static String removerPedido(String url, int idPedido) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/removerPedido?idPedido=" + idPedido;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES","RemoverPedidoResult: "+resultado);
+        return resultado;
+    }
+
     public static String getDataAtualizacaoComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
         url += "/getDataAtualizacaoComanda?idComanda=" + idComanda;
