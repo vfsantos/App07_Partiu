@@ -109,9 +109,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                             try {
                                 comanda = ComandaNetwork.getComandaByCodigo(Connection.URL, codigo);
                                 itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                                ComandaNetwork.insertUsuarioComanda(Connection.URL, cliente.getId(), comanda.getId());
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        Log.d("TESTES", itens[0].toString());
                                         intentComanda.putExtra(CLIENTE, cliente);
                                         intentComanda.putExtra(COMANDA, comanda);
                                         intentComanda.putExtra(ITENS, itens);

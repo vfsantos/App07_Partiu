@@ -1,8 +1,10 @@
 package br.com.app07_partiu.Activity.CardapioGarcomActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -36,7 +38,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     public static final int RESULT_DETALHE_RETORNADO = 2000;
 
 
-    Button buttonCardapioFinalizar;
+    FloatingActionButton buttonCardapioFinalizar;
     Intent intent;
     private Intent intentItem;
 
@@ -55,6 +57,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     //RecyclerView
     private ListView listViewItensCardapio;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,10 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         intent = getIntent();
         context = this;
 
+        buttonCardapioFinalizar = findViewById(R.id.button_cardapio_finalizar);
+        buttonCardapioFinalizar.setEnabled(false);
+        buttonCardapioFinalizar.setBackgroundTintList(getResources().getColorStateList(R.drawable.btn_floating_tintlist));
+
         comanda = (Comanda) intent.getSerializableExtra(ComandaGarcomActivity.COMANDA);
         itensRestaurante = (Item[]) intent.getSerializableExtra(ComandaGarcomActivity.ITENS_RESTAURANTE);
 
@@ -74,6 +81,9 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         if (itensRestaurante != null) {
             carregarItens();
         }
+
+
+
 
     }
 
@@ -138,9 +148,15 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     }
 
     //click finalizar
-    public void onClickButtonCardapioFinalizar(){
+    public void onClickButtonCardapioFinalizar(View view){
+        buttonCardapioFinalizar.setEnabled(false);
+        Intent intent = new Intent();
+        intent.putExtra(ITENS_ADICIONAR, itemListToArray(itensAdicionar));
+        setResult(RESULT_RESUMO_FINALIZADO);
+        finish();
 
     }
+
 
 }
 

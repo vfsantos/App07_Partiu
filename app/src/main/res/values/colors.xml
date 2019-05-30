@@ -37,7 +37,8 @@
     <color name="chumbo_50">#848484</color>
     <color name="chumbo_40">#9D9D9D</color>
     <color name="chumbo_30">#4C4C4C</color>
-    <color name="mostarda_100">#E9A64E</color>
+    <color name="mostarda_dark">#E9A64E</color>
+    <color name="mostarda_100">#F8B864</color>
     <color name="vermelho_100">#F54B4B</color>
     <color name="cinza_20">#C4C4C4</color>
 </resources>

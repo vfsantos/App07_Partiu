@@ -126,8 +126,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
+
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_cardapio_garcom" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_cardapio_finalizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_action_add"
+        android:onClick="onClickButtonCardapioFinalizar"/>
 
 </android.support.design.widget.CoordinatorLayout>

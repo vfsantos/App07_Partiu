@@ -86,6 +86,17 @@ public class ComandaNetwork {
         return resultado;
     }
 
+    public static void insertUsuarioComanda(String url, int idUsuario, int idComanda) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+            url += "/vincularUsuarioComanda?idUsuario=" + idUsuario+"&idComanda="+idComanda;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES","insertUsuarioComanda: "+resultado);
+    }
+
     public static String removerPedido(String url, int idPedido) throws IOException {
         OkHttpClient client = new OkHttpClient();
         url += "/removerPedido?idPedido=" + idPedido;
@@ -109,6 +120,36 @@ public class ComandaNetwork {
         Log.d("TESTES","DataAtualização: "+resultado);
 
         return resultado;
+    }
+
+    public static int[] getIdsUsuarioComanda(String url, int idComanda) throws IOException{
+        OkHttpClient client = new OkHttpClient();
+        url += "/getIdsUsuarioComanda?idComanda=" + idComanda;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES","DataAtualização: "+resultado);
+
+        List<Integer> idUsuario = new ArrayList<>();
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i<vetor.length();i++){
+                idUsuario.add((Integer) vetor.get(i));
+            }
+
+            Object[] objects = idUsuario.toArray();
+            int[] array = new int[objects.length];
+            for (int i = 0; i < objects.length; i++) {
+                array[i] = (int) objects[i];
+            }
+            return array;
+
+        }catch (JSONException e){
+            e.printStackTrace();
+            return new int[0];
+        }
     }
 
     public static Item[] buscarPedidosComanda(String url, int idComanda) throws IOException {

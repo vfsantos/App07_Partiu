@@ -39,6 +39,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public static final String COMANDA = "br.com.app07_partiu.HomeGarcomActivity.comanda";
     public static final String RESTAURANTE = "br.com.app07_partiu.HomeGarcomActivity.restaurante";
     public static final String PEDIDOS = "br.com.app07_partiu.HomeGarcomActivity.pedidos";
+    public static final String USUARIO_IDS = "HomeGarcomActivity.UsuariosId";
 
 
     //AlertDialog / Buider
@@ -67,6 +68,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //int
     private int idGarcom;
     private int mesaSelecionadaAlert;
+    private int[] idUsuario;
 
 
     //ListView
@@ -228,9 +230,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               intentNovaComanda.putExtra(COMANDA, comanda);
                                               intentNovaComanda.putExtra(PEDIDOS, pedidos);
                                               intentNovaComanda.putExtra(RESTAURANTE, restaurante);
-                                              //TODO consertar restaurante vindo vazio
-//                                              intentComanda.putExtra(RESTAURANTE, restaurante);
-
+                                              intentNovaComanda.putExtra(USUARIO_IDS, new int[0]);
                                               Log.d("TESTES", "criarComanda: Comanda id " + comanda.getId() + " criada");
                                               startActivity(intentNovaComanda);
                                           }
@@ -265,6 +265,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                     try {
                         comanda = ComandaNetwork.getComandaById(Connection.URL, idComanda);
                         pedidos = ComandaNetwork.buscarPedidosComanda(Connection.URL, idComanda);
+                        idUsuario = ComandaNetwork.getIdsUsuarioComanda(Connection.URL, idComanda);
 
                         runOnUiThread(new Runnable() {
                                           @Override
@@ -272,6 +273,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               intentComanda.putExtra(COMANDA, comanda);
                                               intentComanda.putExtra(PEDIDOS, pedidos);
                                               intentComanda.putExtra(RESTAURANTE, restaurante);
+                                              intentComanda.putExtra(USUARIO_IDS, idUsuario);
                                               startActivity(intentComanda);
                                           }
                                       }

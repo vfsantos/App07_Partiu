@@ -187,8 +187,8 @@
     <string name="bottom_navagation_perfil">perfil</string>
 
     <!-- Item comanda garcom -->
-    <string name="item_comanda_garcom_total_comanda">total da comanda: </string>
-    <string name="item_comanda_garcom_pessoas_comanda">pessoas na comanda: </string>
+    <string name="item_comanda_garcom_total_comanda">Total: </string>
+    <string name="item_comanda_garcom_pessoas_comanda">Integrantes: </string>
     <string name="item_comanda_garcom_mesa">Mesa: </string>
 
     <!-- FAB extended -->
@@ -225,6 +225,7 @@
     <string name="title_activity_explorar_cliente">ExplorarClienteActivity</string>
     <string name="title_activity_perfil_cliente">PerfilClienteActivity</string>
     <string name="button_cardapio_finalizar">FINALIZAR</string>
+    <string name="item_comanda_garcom_data">Entrada</string>
 
 
 </resources>

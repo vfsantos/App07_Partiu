@@ -9,7 +9,6 @@
     tools:showIn="@layout/activity_comanda_garcom">
 
 
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
@@ -19,16 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
+
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="334dp"
-            android:layout_height="95dp"
-            android:layout_margin="16dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="290dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -38,23 +39,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="AAA0000"
+                android:gravity="left"
+                android:text="AAA00"
                 android:textAllCaps="true"
                 android:textColor="@color/mostarda_100"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
+
 
 
             <!-- Valor total da comanda -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+
+
                 <TextView
                     android:id="@+id/textView_comandaGarcom_itemTotalComanda"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:text="@string/item_comanda_garcom_total_comanda"
                     android:textAllCaps="false"
                     android:textColor="@color/chumbo_100"
@@ -63,56 +69,25 @@
 
                 <TextView
                     android:id="@+id/textView_comandaGarcom_itemTotalComandaValor"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="120,00"
+                    android:layout_weight="3"
+                    android:text="R$120,00"
                     android:textAllCaps="false"
                     android:textColor="@color/chumbo_100"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
-
-            <!-- Pessoas na comanda -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView_comandaGarcom_itemPessoasComanda"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="@string/item_comanda_garcom_pessoas_comanda"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/textView_comandaGarcom_itemPessoasComandaNumero"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="12"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <!-- Número da mesa -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2" />
 
                 <TextView
                     android:id="@+id/textView_comandaGarcom_itemMesa"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="@string/item_comanda_garcom_mesa"
                     android:textAllCaps="false"
                     android:textColor="@color/chumbo_100"
@@ -121,36 +96,111 @@
 
                 <TextView
                     android:id="@+id/textView_comandaGarcom_itemMesaNumero"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:text="01"
                     android:textAllCaps="false"
                     android:textColor="@color/chumbo_100"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
             </LinearLayout>
 
+            <!-- Pessoas na comanda -->
+
+
+            <!-- Número da mesa -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_comandaGarcom_data"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/item_comanda_garcom_data"
+                    android:textAllCaps="false"
+                    android:textColor="@color/chumbo_100"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/textView_comandaGarcom_dataValor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="19h24"
+                    android:textAllCaps="false"
+                    android:textColor="@color/chumbo_100"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2"/>
+
+
+
+
+                <TextView
+                    android:id="@+id/textView_comandaGarcom_itemPessoasComanda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/item_comanda_garcom_pessoas_comanda"
+                    android:textAllCaps="false"
+                    android:textColor="@color/chumbo_100"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/textView_comandaGarcom_itemPessoasComandaNumero"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="12"
+                    android:textAllCaps="false"
+                    android:textColor="@color/chumbo_100"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <!-- Hora -->
-        <TextView
-            android:id="@+id/textView_comandaGarcom_itemHora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="93dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="12dp"
-            android:text="17h 30"
-            android:textAlignment="textEnd"
-            android:textAllCaps="false"
-            android:textColor="@color/chumbo_100"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--<TextView-->
+        <!--android:id="@+id/textView_comandaGarcom_itemHora"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="90dp"-->
+        <!--android:layout_marginEnd="18dp"-->
+        <!--android:layout_marginBottom="12dp"-->
+        <!--android:text="17h 30"-->
+        <!--android:textAlignment="textEnd"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@color/chumbo_100"-->
+        <!--android:textSize="12sp"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout

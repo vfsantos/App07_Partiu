@@ -43,7 +43,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private TextView textViewItemPessoaComandaNumero;
     private TextView textViewItemMesa;
     private TextView textViewItemMesaNumero;
-    private TextView textViewItemHora;
+    private TextView textViewItemData;
+    private TextView textViewItemDataValor;
     private TextView textViewItensDaComanda;
 
     public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
@@ -70,6 +71,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Restaurante restaurante;
     private Intent intentPedidoSelecaoGarcom;
     private Item[] itensRestaurante;
+    private int[] idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
         comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
         itens = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
-
+        idUsuario = (int[]) intent.getSerializableExtra(HomeGarcomActivity.USUARIO_IDS);
 
         //Detalhes da comanda
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
@@ -102,6 +104,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         //   Talvez colocar junto com o metodo escroto de formatar itens, já tá no meio do processo msm
         textViewItemPessoaComandaNumero.setText("00");
         textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
+        textViewItemDataValor.setText(comanda.getDataEntrada().split(" ")[1].replace(":", "h"));
+
 
 
         if (itens != null) {
@@ -109,7 +113,9 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         }
 
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
-        textViewItemHora.setText(comanda.getDataEntrada());
+        textViewItemPessoaComandaNumero.setText(""+idUsuario.length);
+
+
 
     }
 
@@ -143,7 +149,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComandaNumero);
         textViewItemMesa = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
         textViewItemMesaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
-        textViewItemHora = (TextView) findViewById(R.id.textView_comandaGarcom_itemHora);
+        textViewItemData = (TextView) findViewById(R.id.textView_comandaGarcom_data);
+        textViewItemDataValor = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
         textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
 
