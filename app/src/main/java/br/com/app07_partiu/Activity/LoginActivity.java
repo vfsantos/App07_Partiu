@@ -112,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         if (testeGarcom){
             editTextEmail.setText("benjamin.bento@gmail.com");
             editTextSenha.setText("123");
+            validarLogin();
         }
 
         if (testeCliente){

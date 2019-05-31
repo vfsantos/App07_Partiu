@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,14 +17,12 @@ import java.util.List;
 
 import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
-import br.com.app07_partiu.Activity.DetalheCardapioGarcomActivity;
-import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity;
+import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 import static br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity.RESULT_PEDIDOS_CRIADOS;
-import static br.com.app07_partiu.Activity.DetalheCardapioGarcomActivity.ITENS_NOVOS;
 import static br.com.app07_partiu.Model.Item.itemListToArray;
 
 public class CardapioGarcomActivity extends AppCompatActivity {
@@ -33,7 +30,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     public static final String ITEM = "br.com.app07_partiu.CardapioGarcomActivity.item";
     public static final String ITENS_ADICIONAR = "CardapioGarcomActivity.ItensAdicionar";
     public static final String COMANDA = "CardapioGarcomActivity.Comanda";
-    public static final String ITEM_DETALHE = "CardapioGarcomActivity.ItemDetalhe";
     public static final int RESULT_RESUMO_FINALIZADO = 1000;
     public static final int RESULT_DETALHE_RETORNADO = 2000;
 
@@ -100,33 +96,23 @@ public class CardapioGarcomActivity extends AppCompatActivity {
                                     int position, long id) {
                 intentItem = new Intent(context, AdicionarItemGarcomActivity.class);
                 intentItem.putExtra(ITEM, itensRestaurante[position]);
-                startActivity(intentItem);
+                startActivityForResult(intentItem, RESULT_DETALHE_RETORNADO);
             }
         });
     }
 
-    // Envia item selecionado à proxima Activity (DetalheCardapioGarcomActivity)
-    private void detalheCardapioGarcom(Item item) {
-        // TODO Definir Activity correta
-        intentDetalheCardapioGarcom = new Intent(context, DetalheCardapioGarcomActivity.class);
-        intent.putExtra(ITEM_DETALHE, item);
-        startActivityForResult(intent, RESULT_DETALHE_RETORNADO);
-    }
-
-
     // Envia itens a serem adicionados à proxima Activity (ResumoCardapioGarcomActivity)
     private void resumoCardapioGarcom() {
         // TODO Definir Activity correta
-        intentResumoAddItens = new Intent(context, ResumoCardapioGarcomActivity.class);
-        intentResumoAddItens.putExtra(ITENS_ADICIONAR, itemListToArray(itensAdicionar));
-        intentResumoAddItens.putExtra(COMANDA, comanda);
-        startActivityForResult(intentResumoAddItens, RESULT_RESUMO_FINALIZADO);
+
 
     }
 
     // Adiciona item à list de itens a adicionar (list enviada ao Resumo)
     private void addItem(Item item) {
         itensAdicionar.add(item);
+        Log.d("TESTES", "CardapioGarcom.addItem="+item.toString());
+
     }
 
     @Override
@@ -134,13 +120,17 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         //Retornando sinal para fechar Activity de Cardapio (Resumo confirmado; volta à Comanda)
+        Log.d("TESTES", "CardapioGarcomActivity.resultCode = "+resultCode);
         if (resultCode == RESULT_RESUMO_FINALIZADO) {
-            setResult(RESULT_PEDIDOS_CRIADOS);
+
+            setResult(RESULT_PEDIDOS_CRIADOS, data);
             finish();
 
-            //Retornando itens do DetalheCardapioGarcomActivity
+            //Retornando itens do AdicionarItemGarcomActivity
         } else if (resultCode == RESULT_DETALHE_RETORNADO) {
-            Item[] novosItens = (Item[]) data.getSerializableExtra(ITENS_NOVOS);
+            buttonCardapioFinalizar.setEnabled(true);
+            Item[] novosItens = (Item[]) data.getSerializableExtra(AdicionarItemGarcomActivity.ITENS_RETORNADOS);
+            Log.d("TESTES", "CardapioGarcom.qtdItensRetornadosNovos="+novosItens.length);
             for (Item item : novosItens) {
                 addItem(item);
             }
@@ -149,11 +139,11 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
     //click finalizar
     public void onClickButtonCardapioFinalizar(View view){
-        buttonCardapioFinalizar.setEnabled(false);
-        Intent intent = new Intent();
-        intent.putExtra(ITENS_ADICIONAR, itemListToArray(itensAdicionar));
-        setResult(RESULT_RESUMO_FINALIZADO);
-        finish();
+        Log.d("TESTES", "CardapioGarcomActivity.onClickButtonCardapioFinalizar");
+        intentResumoAddItens = new Intent(context, ResumoCardapioGarcomActivity.class);
+        intentResumoAddItens.putExtra(ITENS_ADICIONAR, itemListToArray(itensAdicionar));
+        intentResumoAddItens.putExtra(COMANDA, comanda);
+        startActivityForResult(intentResumoAddItens, RESULT_RESUMO_FINALIZADO);
 
     }
 
@@ -179,7 +169,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
             setResult(RESULT_PEDIDOS_CRIADOS);
             finish();
 
-            //Retornando itens do DetalheCardapioGarcomActivity
         } else if (resultCode == RESULT_DETALHE_RETORNADO) {
             Item[] novosItens = (Item[]) data.getSerializableExtra(ITENS_NOVOS);
             for (Item item : novosItens) {

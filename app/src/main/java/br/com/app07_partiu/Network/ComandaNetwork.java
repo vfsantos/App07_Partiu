@@ -76,25 +76,25 @@ public class ComandaNetwork {
 
     public static String selecionarPedido(String url, int idPedido, int idUsuario) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        url += "/selecionarPedido?idPedido=" + idPedido+"&idUsuario="+idUsuario;
+        url += "/selecionarPedido?idPedido=" + idPedido + "&idUsuario=" + idUsuario;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES","SelecionarPedidoResult: "+resultado);
+        Log.d("TESTES", "SelecionarPedidoResult: " + resultado);
         return resultado;
     }
 
     public static void insertUsuarioComanda(String url, int idUsuario, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
-            url += "/vincularUsuarioComanda?idUsuario=" + idUsuario+"&idComanda="+idComanda;
+        url += "/vincularUsuarioComanda?idUsuario=" + idUsuario + "&idComanda=" + idComanda;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES","insertUsuarioComanda: "+resultado);
+        Log.d("TESTES", "insertUsuarioComanda: " + resultado);
     }
 
     public static String removerPedido(String url, int idPedido) throws IOException {
@@ -105,7 +105,7 @@ public class ComandaNetwork {
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES","RemoverPedidoResult: "+resultado);
+        Log.d("TESTES", "RemoverPedidoResult: " + resultado);
         return resultado;
     }
 
@@ -117,12 +117,12 @@ public class ComandaNetwork {
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES","DataAtualização: "+resultado);
+        Log.d("TESTES", "DataAtualização: " + resultado);
 
         return resultado;
     }
 
-    public static int[] getIdsUsuarioComanda(String url, int idComanda) throws IOException{
+    public static int[] getIdsUsuarioComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
         url += "/getIdsUsuarioComanda?idComanda=" + idComanda;
         Request request = new Request.Builder()
@@ -130,12 +130,12 @@ public class ComandaNetwork {
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES","DataAtualização: "+resultado);
+        Log.d("TESTES", "DataAtualização: " + resultado);
 
         List<Integer> idUsuario = new ArrayList<>();
         try {
             JSONArray vetor = new JSONArray(resultado);
-            for (int i = 0; i<vetor.length();i++){
+            for (int i = 0; i < vetor.length(); i++) {
                 idUsuario.add((Integer) vetor.get(i));
             }
 
@@ -146,7 +146,7 @@ public class ComandaNetwork {
             }
             return array;
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
             return new int[0];
         }
@@ -301,27 +301,35 @@ public class ComandaNetwork {
         return comanda;
     }
 
-    public static List<Item> createItemPedido(String url, int[] idItens, String[] obsItens, int idComanda) throws IOException {
+    public static List<Item> createItemPedido(String url, Item[] itensAdicionar, int idComanda) throws IOException {
 
-        String urlGetItem = url + "/createItemPedido?idComanda=" + idComanda;
+        int[] idItens = new int[itensAdicionar.length];
+        String[] obsItens = new String[itensAdicionar.length];
+        //TODO pegar observacao
+        for (int i = 0; i < itensAdicionar.length; i++) {
+            idItens[i] = itensAdicionar[i].getId();
+            obsItens[i] = "";
+        }
+
+        url += "/createItemPedido?idComanda=" + idComanda;
         for (int id : idItens) {
             url += "&idItens=" + id;
         }
 
-        for (String obs : obsItens){
-            if (obs == null || obs ==""){
+        for (String obs : obsItens) {
+            if (obs == null || obs == "") {
                 url += "&obsItens=" + "-";
-            }else{
+            } else {
                 url += "&obsItens=" + obs;
             }
         }
 
-        Log.d("TESTES", "URL: "+url);
+        Log.d("TESTES", "URL: " + url);
 
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(urlGetItem)
+                .url(url)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -333,34 +341,32 @@ public class ComandaNetwork {
         try {
             JSONArray vetor = new JSONArray(resultado);
             for (int i = 0; i < vetor.length(); i++) {
-                JSONObject obj = (JSONObject) vetor.get(i);
-                Item item = new Item();
-                item.setId(obj.getInt("id"));
-                item.setCnpjRestaurante(obj.getLong("cnpjRestaurante"));
-                item.setCategoria(obj.getString("categoria"));
-                item.setNome(obj.getString("nome"));
-                item.setTipo(obj.getString("tipo"));
-                item.setValor(obj.getDouble("valor"));
-                item.setStatus(obj.getString("status"));
-                Usuario usuario = new Usuario();
-                usuario.setId(obj.getJSONObject("usuario").getInt("id"));
-                usuario.setTipo(obj.getJSONObject("tipo").getString("tipo"));
-                usuario.setCpf(obj.getJSONObject("cpf").getLong("cpf"));
-                usuario.setNome(obj.getJSONObject("nome").getString("nome"));
-                usuario.setDta_nascimento(obj.getJSONObject("dta_nascimento").getString("dta_nascimento"));
-                usuario.setEmail(obj.getJSONObject("email").getString("email"));
-                usuario.setDdd(obj.getJSONObject("ddd").getInt("ddd"));
-                usuario.setTelefone(obj.getJSONObject("telefone").getInt("telefone"));
-                usuario.setGenero((obj.getJSONObject("genero").getString("genero")).charAt(0));
-                usuario.setSenha(obj.getJSONObject("senha").getString("senha"));
-                item.setUsuario(usuario);
-                item.setIdPedido(obj.getInt("idPedido"));
-                item.setPorc_desconto(obj.getDouble("porc_desconto"));
-                item.setIdComanda(obj.getString("idComanda"));
-                item.setData(obj.getString("data"));
-                item.setStatusPedido(obj.getString("statusPedido"));
 
-                itens.add(item);
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item it = new Item();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                it.setId(item.getInt("id"));
+                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCategoria(item.getString("categoria"));
+                it.setNome(item.getString("nome"));
+                it.setTipo(item.getString("tipo"));
+                it.setValor(item.getDouble("valor"));
+                it.setStatus(item.getString("status"));
+                it.setIdPedido(item.getInt("idPedido"));
+                it.setPorc_desconto(item.getInt("porc_desconto"));
+                it.setData(item.getString("data"));
+                it.setStatusPedido(item.getString("statusPedido"));
+                try {
+                    it.setIdUsuario(item.getInt("idUsuario"));
+                    it.setNomeUsuario(item.getString("nomeUsuario"));
+                    it.setEmailUsuario(item.getString("emailUsuario"));
+                } catch (JSONException e) {
+                    Log.d("TESTES", "Pedido sem usuario");
+                }
+
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                itens.add(it);
 
             }
             return itens;

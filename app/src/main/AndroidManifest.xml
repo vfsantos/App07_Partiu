@@ -24,11 +24,13 @@
             android:name=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:label="@string/title_activity_explorar_cliente"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
-        <activity android:name=".Activity.DetalheCardapioGarcomActivity" />
         <activity
             android:name=".Activity.ResumoGarcomActivity.ResumoGarcomActivity"
             android:label="@string/title_activity_resumo_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity android:name=".Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity"
+            android:label="ResumoCardapioGarcomActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
         <activity
             android:name=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:label="@string/title_activity_cardapio_garcom"

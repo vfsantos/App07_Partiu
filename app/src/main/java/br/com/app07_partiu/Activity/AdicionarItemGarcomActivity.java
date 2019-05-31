@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,8 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     Intent intent;
     Context context;
 
+    public static final String ITENS_RETORNADOS = "AdicionarItemGarcom.ItensRetornados";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         textViewValorItem.setText(item.getValorString());
         textViewDetalhesItem.setText("DETALHE PLACEHOLDER");
         textViewQuantidade.setText("1");
+        quantidade = 1;
 
     }
 
@@ -98,10 +102,23 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     }
 
     public void onClickRemoverQunatidade(View v) {
-        if(quantidade>1) {
+        if(quantidade>2) {
             quantidade--;
             String mensagem = Integer.toString(quantidade);
             textViewQuantidade.setText(mensagem);
         }
+    }
+
+    public void retornarItens(View view) {
+        Item[] itensRetornar = new Item[quantidade];
+        for(int i = 0; i < quantidade; i++){
+            itensRetornar[i] = item;
+        }
+        Intent returnIntent = new Intent();
+        Log.d("TESTES", "AdicionarItemGarcom.qtdItensRetornadso="+itensRetornar.length);
+        returnIntent.putExtra(ITENS_RETORNADOS,itensRetornar);
+        setResult(CardapioGarcomActivity.RESULT_DETALHE_RETORNADO, returnIntent);
+        finish();
+
     }
 }

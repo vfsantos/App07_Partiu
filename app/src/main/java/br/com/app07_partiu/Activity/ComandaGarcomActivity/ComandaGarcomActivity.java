@@ -21,6 +21,7 @@ import java.util.Set;
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
+import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
@@ -259,6 +260,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_PEDIDOS_CRIADOS) {
+            Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ResumoCardapioGarcomActivity.RETORNO_ITENS_COMANDA);
+            itens = itensRecarregar;
             carregarItens();
         }
     }
