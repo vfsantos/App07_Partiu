@@ -30,6 +30,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     public static final String ITEM = "br.com.app07_partiu.CardapioGarcomActivity.item";
     public static final String ITENS_ADICIONAR = "CardapioGarcomActivity.ItensAdicionar";
     public static final String COMANDA = "CardapioGarcomActivity.Comanda";
+
     public static final int RESULT_RESUMO_FINALIZADO = 1000;
     public static final int RESULT_DETALHE_RETORNADO = 2000;
 
@@ -78,8 +79,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
             carregarItens();
         }
 
-
-
+        //TODO Trocar icone do FloatingActionButton
 
     }
 
@@ -99,13 +99,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
                 startActivityForResult(intentItem, RESULT_DETALHE_RETORNADO);
             }
         });
-    }
-
-    // Envia itens a serem adicionados à proxima Activity (ResumoCardapioGarcomActivity)
-    private void resumoCardapioGarcom() {
-        // TODO Definir Activity correta
-
-
     }
 
     // Adiciona item à list de itens a adicionar (list enviada ao Resumo)

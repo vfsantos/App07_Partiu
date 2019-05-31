@@ -44,9 +44,14 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     private Button buttonVoltar;
 
     Item item;
+    Item[] pedidosRefresh;
 
     Intent intent;
     Context context;
+
+    private int idComanda;
+
+    public static final String PEDIDOS_REFRESH = "ItemDetalhe.Remover.Pedidos";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         intent = getIntent();
         context = this;
         item = (Item) intent.getSerializableExtra(ComandaGarcomActivity.ITEM);
+        idComanda = (Integer) intent.getSerializableExtra(ComandaGarcomActivity.ID_COMANDA);
 
         textViewNomeItem.setText(item.getNome());
         textViewValorItem.setText(item.getValorString());
@@ -105,6 +111,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     private void removerPedido() {
@@ -116,17 +123,19 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                String result = ComandaNetwork.removerPedido(Connection.URL, item.getIdPedido());
+                                pedidosRefresh = ComandaNetwork.removerPedidoComanda(Connection.URL, item.getIdPedido(), idComanda);
+                                    //TODO verificar erro
                                 Log.d("TESTES", "Removeu pedido id " + item.getIdPedido());
-                                if (result.equals("sucesso")){
                                     runOnUiThread(new Runnable() {
                                                       @Override
                                                       public void run() {
+                                                          Intent intent = new Intent();
+                                                          intent.putExtra(PEDIDOS_REFRESH, pedidosRefresh);
+                                                          setResult(ComandaGarcomActivity.RESULT_PEDIDO_REMOVIDO, intent);
                                                           finish();
                                                       }
                                                   }
                                     );
-                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 Log.d("TESTES", "Erro no webservice ou na conexão");
@@ -135,8 +144,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
                                         Toast.makeText(context, "Erro no webservice ou na conexão", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            }
-                        }
+                            }                        }
                     }).start();
 
 

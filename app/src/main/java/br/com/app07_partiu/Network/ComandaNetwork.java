@@ -97,16 +97,55 @@ public class ComandaNetwork {
         Log.d("TESTES", "insertUsuarioComanda: " + resultado);
     }
 
-    public static String removerPedido(String url, int idPedido) throws IOException {
+    public static Item[] removerPedidoComanda(String url, int idPedido, int idComanda) throws IOException{
         OkHttpClient client = new OkHttpClient();
-        url += "/removerPedido?idPedido=" + idPedido;
+        url += "/removerPedidoComanda?idPedido=" + idPedido +"&idComanda="+idComanda;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES", "RemoverPedidoResult: " + resultado);
-        return resultado;
+
+        List<Item> itens = new ArrayList<>();
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item it = new Item();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                it.setId(item.getInt("id"));
+                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCategoria(item.getString("categoria"));
+                it.setNome(item.getString("nome"));
+                it.setTipo(item.getString("tipo"));
+                it.setValor(item.getDouble("valor"));
+                it.setStatus(item.getString("status"));
+                it.setIdPedido(item.getInt("idPedido"));
+                it.setPorc_desconto(item.getInt("porc_desconto"));
+                it.setData(item.getString("data"));
+                it.setStatusPedido(item.getString("statusPedido"));
+                try {
+                    it.setIdUsuario(item.getInt("idUsuario"));
+                    it.setNomeUsuario(item.getString("nomeUsuario"));
+                    it.setEmailUsuario(item.getString("emailUsuario"));
+                } catch (JSONException e) {
+//                    Log.d("TESTES", "Pedido sem usuario");
+                }
+
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                itens.add(it);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (itens.size() > 0) {
+            return itens.toArray(new Item[0]);
+        }
+        return null;
     }
 
     public static String getDataAtualizacaoComanda(String url, int idComanda) throws IOException {
@@ -202,10 +241,8 @@ public class ComandaNetwork {
 //            throw new IOException(e);
         }
         if (itens.size() > 0) {
-            Log.d("TESTES", "Itens>0");
             return itens.toArray(new Item[0]);
         }
-        Log.d("TESTES", "Itens==0");
         return null;
     }
 

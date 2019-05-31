@@ -51,7 +51,11 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
     public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
+
+    public static final String ID_COMANDA = "CardapioGarcom.idComanda";
+
     public static final int RESULT_PEDIDOS_CRIADOS = 1000;
+    public static final int RESULT_PEDIDO_REMOVIDO = 2000;
 
     //ListView
     private ListView listViewItensComanda;
@@ -136,7 +140,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                                     int position, long id) {
                 intentItem = new Intent(context, ItemDetalheGarcomActivity.class);
                 intentItem.putExtra(ITEM, itens[position]);
-                startActivity(intentItem);
+                intentItem.putExtra(ID_COMANDA, comanda.getId());
+                startActivityForResult(intentItem, RESULT_PEDIDO_REMOVIDO);
             }
         });
     }
@@ -261,6 +266,12 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_PEDIDOS_CRIADOS) {
             Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ResumoCardapioGarcomActivity.RETORNO_ITENS_COMANDA);
+            itens = itensRecarregar;
+            carregarItens();
+        }else if (resultCode == RESULT_PEDIDO_REMOVIDO) {
+            Toast.makeText(context, "Pedido Cancelado!", Toast.LENGTH_LONG).show();
+
+            Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ItemDetalheGarcomActivity.PEDIDOS_REFRESH);
             itens = itensRecarregar;
             carregarItens();
         }
