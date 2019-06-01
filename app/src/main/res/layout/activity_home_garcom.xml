@@ -114,16 +114,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
+        android:id="@+id/button_homegarcom_criarComanda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/float_button_icone_nome"
+        android:drawableLeft="@drawable/ic_action_add"
+        android:elevation="16sp"
+        android:text="@string/button_homegarcom_comanda"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_action_add" />
+        app:layout_constraintEnd_toEndOf="@+id/include" />
 
 </android.support.constraint.ConstraintLayout>

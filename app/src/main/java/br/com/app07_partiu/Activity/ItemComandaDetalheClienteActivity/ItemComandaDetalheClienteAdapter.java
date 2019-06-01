@@ -53,7 +53,7 @@ public class ItemComandaDetalheClienteAdapter extends BaseAdapter implements Sec
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_comanda_cliente_detalhe, parent, false);
+            view = inflater.inflate(R.layout.list_item_nome_valor, parent, false);
             TextView textViewNome = (TextView) view.findViewById(R.id.textView_itemComandaCliente_nome);
             TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaCliente_valor);
             ItemComandaDetalheClienteViewHolder viewHolder = new ItemComandaDetalheClienteViewHolder(textViewNome, textViewValor);

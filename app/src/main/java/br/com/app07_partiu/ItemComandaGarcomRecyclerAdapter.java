@@ -20,7 +20,7 @@ public class ItemComandaGarcomRecyclerAdapter extends RecyclerView.Adapter<ItemC
     @Override
     public ItemComandaGarcomViewHolder onCreateViewHolder(ViewGroup parent, int i) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_garcom, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_codigo_horario, parent, false);
 
         return new ItemComandaGarcomViewHolder(view);
 

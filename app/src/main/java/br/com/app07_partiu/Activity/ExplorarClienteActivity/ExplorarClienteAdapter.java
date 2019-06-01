@@ -3,7 +3,6 @@ package br.com.app07_partiu.Activity.ExplorarClienteActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.List;
 
 import br.com.app07_partiu.Activity.ExplorarClienteDetalhesActivity;
-import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.Restaurante;
-import br.com.app07_partiu.Network.ComandaNetwork;
-import br.com.app07_partiu.Network.Connection;
-import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.R;
 
 
@@ -44,7 +36,7 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
     @Override
     public ExplorarClienteAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_restaurante, viewGroup, false);
+                .inflate(R.layout.list_card_imagem_nome, viewGroup, false);
         return new MyViewHolder(view);
     }
 

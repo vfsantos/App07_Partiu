@@ -9,20 +9,20 @@
     <string name="btn_login_entrar">Entrar</string>
     <string name="btn_login_esqueceusuasenha">Esqueceu sua senha?</string>
     <string name="btn_login_cadastrese">Cadastre-se</string>
-    <!-- Fim LoginActivity -->
 
 
     <!-- ComandaGarcomActivity -->
     <string name="text_comandagarcom_titulopagina">Comanda</string>
     <string name="text_comandagarcom_itensnacomanda">Itens na comanda</string>
+    <string name="button_comandaGarcom_pedido">Pedido</string>
     <!-- Fim ComandaGarcomActivity -->
 
 
-    <!-- Activity Adidionar Item Garcom -->
+    <!-- AdicionarItemGarcomActivity -->
     <string name="text_adicionaritemgarcom_titulopagina">Detalhes do item</string>
     <string name="btn_adicionaritemgarcom_add">+</string>
     <string name="btn_adicionaritemgarcom_sub">-</string>
-    <!-- Fim Actvity Adidionar Item Garcom -->
+    <string name="btn_adicionarcomanda">Adicionar</string>
 
 
     <!-- CardapioGarcomActivity -->
@@ -31,7 +31,6 @@
     <string name="text_cardapiogarcom_cardapio">Cardapio</string>
     <string name="text_cardapiogarcom_detalhesitem">Pão artesanal, queijo, calabresa, bacon, milho,
         1 salsicha, ervilha, maionese, batata palha</string>
-    <!-- Fim CardapioGarcomActivity -->
 
 
     <!-- ResumoGarcomActivity -->
@@ -39,24 +38,21 @@
     <string name="text_resumogarcom_total">Total</string>
     <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
     <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
-    <!-- Fim ResumoGarcomActivity -->
 
 
-    <!-- Actiity Item Detalhe Comanda Garcom -->
+    <!-- ItemDetalheComandaGarcomActivity -->
     <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhes</string>
     <string name="text_itemdetalhecomandagarcom_algumaobservacao">Observações</string>
     <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
     <string name="text_itemdetalhecomandagarcom_status">Status</string>
     <string name="btn_itemdetalhecomandagarcom_remover">Cancelar Pedido</string>
     <string name="btn_itemdetalhecomandagarcom_voltar">Voltar</string>
-    <!-- Fim Activity Item Detalhe Comanda Garcom -->
 
 
     <!-- Activity Resumo Garcom -->
     <string name="text_resumocomandagarcom_titulopagina">Resumo</string>
     <string name="text_resumocomandagarcom_total">Total</string>
     <string name="btn_resumocomandagarcom_adicionarmaisitens">Adicionar mais itens</string>
-    <!-- Fim Activity Resumo Garcom -->
 
 
     <!-- Activity Editar Item Garcom -->
@@ -65,30 +61,31 @@
     <string name="btn_editaritemgarcom_sub">-</string>
     <string name="text_editaritemgarcom_algumaobservacao">Alguma observação</string>
     <string name="btn_editaritemgarcom_remover">Remover</string>
-    <!-- Fim Activity Editar Item Garcom -->
+
 
     <!-- CodigoComandaClienteActivity -->
     <string name="textview_codigocomandacliente_titulo">comanda da mesa</string>
     <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda digite o código no campo seguir</string>
-    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua, entre em contato com o
-garçom do estabelecimento para estar gerando
-o mesmo</string>
+    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua, entre em contato com o garçom do estabelecimento para estar gerandoo mesmo</string>
     <string name="textview_codigocomandacliente_insiracodigo">Insira o código da comanda</string>
     <string name="button_codigocomandacliente_entranacomanda">Entrar na comanda</string>
-    <!-- Fim CodigoComandaClienteActivity -->
 
 
     <!-- ItemComandaDetalheCliente -->
     <string name="button_itemDetalhesCliente_selecionar">Selecionar item</string>
-    <!-- Fim ItemComandaDetalheCliente -->
+
+
+    <!-- HomeGarcomActivity -->
+    <string name="button_homegarcom_comanda">Comanda</string>
 
     <!-- BottomBar -->
     <string name="text_bottombar_explorar">explorar</string>
     <string name="text_bottombar_comanda">Comanda</string>
     <string name="text_bottombar_perfil">Perfil</string>
-    <!-- Fim BottomBar -->
 
-    <!-- ActivityExplorarCliente -->
+
+
+    <!-- ExplorarClienteActivity -->
     <string name="textview_recomendacaovisitadosrecentemente">Visite Novamente</string>
     <string name="textview_recomendacaovisitadosrecentemente_descricao">quem gosta, sempre volta</string>
     <string name="textview_recomendacaorestauranteavaliado">Os Melhores</string>
@@ -99,19 +96,16 @@ o mesmo</string>
     <string name="textview_recomendacaoespecialidadeusuario_descricao">acho que vai curtir esses aqui</string>
     <string name="textview_recomendacaodiasemana">Recomendações do Dia</string>
     <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>
-    <!-- Fim ActivityExplorarCliente -->
 
 
-    <!-- ActivityExplorarClienteDetalhe -->
+    <!-- ExplorarClienteDetalheActivity -->
     <string name="textview_recomendacaodetalhehorariodefuncionamento">Horário de funcionamento</string>
     <string name="textview_recomendacaodetalheendereco">Endereço</string>
     <string name="button_recomendacaodetalhevoltar">Voltar</string>
-    <!-- Fim Activity ExplorarClienteDetalhe-->
 
 
     <!-- ComandaMesaClienteActivity -->
     <string name="text_comandamesacliente_titulopagina">Comanda da mesa</string>
-    <!-- Fim ComandaMesaClienteActivity -->
 
 
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>

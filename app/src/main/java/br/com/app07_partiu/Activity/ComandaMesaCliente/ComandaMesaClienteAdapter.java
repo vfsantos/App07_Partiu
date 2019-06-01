@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -54,7 +53,7 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_comanda_mesa_cliente, parent, false);
+            view = inflater.inflate(R.layout.list_item_nome_valor_status, parent, false);
             TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_descricao);
             TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_valor);
             TextView textViewStatus = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_status);

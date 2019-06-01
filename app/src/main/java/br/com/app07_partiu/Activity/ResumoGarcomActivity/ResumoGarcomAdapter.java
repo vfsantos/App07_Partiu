@@ -54,10 +54,10 @@ public class ResumoGarcomAdapter extends BaseAdapter implements SectionIndexer{
             if(view == null) {
                 LayoutInflater inflater = (LayoutInflater)
                         activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.item_comanda_garcom, parent, false);
-                TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_itemComandaGarcom_descricao);
-                TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaGarcom_valor);
-                ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageView_itemComandaGarcom_icon);
+                view = inflater.inflate(R.layout.list_item_nome_valor_icone, parent, false);
+                TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_list_item_nome);
+                TextView textViewValor = (TextView) view.findViewById(R.id.textView_list_item_valor);
+                ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageView_list_item_icon);
                 ResumoGarcomViewHolder viewHolder = new ResumoGarcomViewHolder(textViewDescricao, textViewValor, imageViewIcon);
                 view.setTag(viewHolder);
             }

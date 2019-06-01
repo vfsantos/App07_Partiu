@@ -36,18 +36,22 @@ public class LoginActivity extends AppCompatActivity {
     //ImageView
     private ImageView imageViewLogo;
 
+
     //EditText
     private EditText editTextEmail;
     private EditText editTextSenha;
+
 
     //TextInputLayout
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutSenha;
 
+
     //Button
     private Button buttonEntrar;
     private Button buttonCadastrese;
     private Button buttonEsqueceuSuaSenha;
+
 
     //Intent
     public Intent intentErro;
@@ -61,14 +65,15 @@ public class LoginActivity extends AppCompatActivity {
     //Snackbar
     private Snackbar snackbarErroLogin;
 
-    public static final String COMANDAS = "br.com.app07_partiu.LoginActivity.comandas";
-    public static final String USUARIO = "br.com.app07_partiu.LoginActivity.usuario";
-    public static final String RESTAURANTE = "br.com.app07_partiu.LoginActivity.restaurante";
-    public static final String RECOMENDACOES_DIASEMANA = "br.com.app07_partiu.LoginActivity.recomendacoesDiaSemana";
-    public static final String RECOMENDACOES_MAISVISITADOS = "br.com.app07_partiu.LoginActivity.recomendacoesMaisVisitados";
-    public static final String RECOMENDACOES_ESPECIALIDADEUSUARIO = "br.com.app07_partiu.LoginActivity.recomendacoesEspecialidadeUsuario";
+
+    public static final String COMANDAS                            = "br.com.app07_partiu.LoginActivity.comandas";
+    public static final String USUARIO                             = "br.com.app07_partiu.LoginActivity.usuario";
+    public static final String RESTAURANTE                         = "br.com.app07_partiu.LoginActivity.restaurante";
+    public static final String RECOMENDACOES_DIASEMANA             = "br.com.app07_partiu.LoginActivity.recomendacoesDiaSemana";
+    public static final String RECOMENDACOES_MAISVISITADOS         = "br.com.app07_partiu.LoginActivity.recomendacoesMaisVisitados";
+    public static final String RECOMENDACOES_ESPECIALIDADEUSUARIO  = "br.com.app07_partiu.LoginActivity.recomendacoesEspecialidadeUsuario";
     public static final String RECOMENDACOES_VISITADOSRECENTEMENTE = "br.com.app07_partiu.LoginActivity.recomendacoesVisitadosRecentemente";
-    public static final String RECOMENDACOES_RESTAURANTEAVALIADO = "br.com.app07_partiu.LoginActivity.recomendacoesRestauranteAvaliado";
+    public static final String RECOMENDACOES_RESTAURANTEAVALIADO   = "br.com.app07_partiu.LoginActivity.recomendacoesRestauranteAvaliado";
 
 
     //Array - Item do carrossel de recomeendção
@@ -81,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Array
     ComandaConvertView[] comandas;
-    Estabelecimento[] estabelecimentos;
+    Estabelecimento[]    estabelecimentos;
     ComandaConvertView[] comandaConvertView;
 
     Context contexto;
@@ -89,10 +94,10 @@ public class LoginActivity extends AppCompatActivity {
     //Progressbar
     ProgressBar progressBarTime;
 
-    private final boolean testeGarcom = false;
-    private final boolean testeCliente = true;
+    private final boolean testeGarcom  = true;
+    private final boolean testeCliente = false;
 
-    Usuario usuario;
+    Usuario     usuario;
     Restaurante restaurante;
 
     //String
@@ -157,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(String email, String senha){
         final String enderecoEmailUsuario = email;
-        final String senhaUsuario = senha;
+        final String senhaUsuario         = senha;
 
         //intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
         //intentLoginCliente = new Intent(this, ExplorarClienteActivity.class);
@@ -352,8 +357,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //Button
-        buttonEntrar = (Button) findViewById(R.id.button_login_entrar);
-        buttonCadastrese = (Button) findViewById(R.id.button_login_cadastrarse);
+        buttonEntrar           = (Button) findViewById(R.id.button_login_entrar);
+        buttonCadastrese       = (Button) findViewById(R.id.button_login_cadastrarse);
         buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
 
     }

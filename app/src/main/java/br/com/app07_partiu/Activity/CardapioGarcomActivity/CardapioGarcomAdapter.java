@@ -53,7 +53,7 @@ public class CardapioGarcomAdapter extends BaseAdapter implements SectionIndexer
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_cardapio_garcom, parent, false);
+            view = inflater.inflate(R.layout.list_item_nome_descricao_valor, parent, false);
             TextView textViewNomeItem = (TextView) view.findViewById(R.id.textView_cardapioGarcom_nomeItem);
             TextView textViewDescricaoItem = (TextView) view.findViewById(R.id.textView_cardapioGarcom_descricaoItem);
             TextView textViewValorItem = (TextView) view.findViewById(R.id.textView_cardapioGarcom_valorItem);

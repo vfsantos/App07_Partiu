@@ -96,13 +96,17 @@ public class ComandaGarcomActivity extends AppCompatActivity {
             }
         });
 
+
+
         inicializarComponentes();
 
         intent = getIntent();
+
+
         restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
-        comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
-        itens = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
-        idUsuario = (int[]) intent.getSerializableExtra(HomeGarcomActivity.USUARIO_IDS);
+        comanda     = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
+        itens       = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
+        idUsuario   = (int[]) intent.getSerializableExtra(HomeGarcomActivity.USUARIO_IDS);
 
         //Detalhes da comanda
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
@@ -151,21 +155,21 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private void inicializarComponentes() {
 
         //TextView
-//        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
-        textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
-        textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
-        textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
-        textViewItemPessoaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComanda);
+//        textViewTituloPagina          = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
+        textViewItemCodigoComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
+        textViewItemTotalComanda        = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
+        textViewItemTotalComandaValor   = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
+        textViewItemPessoaComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComanda);
         textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComandaNumero);
-        textViewItemMesa = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
-        textViewItemMesaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
-        textViewItemData = (TextView) findViewById(R.id.textView_comandaGarcom_data);
-        textViewItemDataValor = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
-        textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
+        textViewItemMesa                = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
+        textViewItemMesaNumero          = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
+        textViewItemData                = (TextView) findViewById(R.id.textView_comandaGarcom_data);
+        textViewItemDataValor           = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
+        textViewItensDaComanda          = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
 
 
         //ListView
-        listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
+        listViewItensComanda            = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
 
     }
 

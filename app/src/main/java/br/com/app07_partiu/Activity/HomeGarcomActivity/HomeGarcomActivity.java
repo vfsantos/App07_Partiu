@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -80,6 +81,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //FAB
     private FloatingActionButton fab;
+    private Button buttonCriarComanda;
+
 
     //Snackbar
     private Snackbar snackbarComandaCriada;
@@ -121,6 +124,14 @@ public class HomeGarcomActivity extends AppCompatActivity {
         mesas = sTemp;
 
         loadComandas();
+
+
+        buttonCriarComanda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertNovaComanda();
+            }
+        });
 
     }
 
@@ -303,7 +314,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //fecha o alertNovaComanda quando clicar no cancelar
     private void fecharAlertNovaComanda() {
-        final Dialog dialog = alertaNumeroMesa.show();
+        final Dialog dialog   = alertaNumeroMesa.show();
         final Handler handler = new Handler();
         dialog.dismiss();
         final Runnable runnable = new Runnable() {
@@ -332,14 +343,10 @@ public class HomeGarcomActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //FAB criar comanda
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertNovaComanda();
-            }
-        });
+
+        //Button
+        buttonCriarComanda = (Button) findViewById(R.id.button_homegarcom_criarComanda);
+
 
         //SwipeRefreshLayout
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
