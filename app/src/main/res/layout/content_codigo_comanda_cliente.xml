@@ -10,14 +10,14 @@
     android:background="@color/colorBackground">
 
     <TextView
-        android:id="@+id/text_view_codigo_comanda_titulo"
+        android:id="@+id/textView_codigoComandaTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
-        android:text="@string/title_comanda_codigo_da_mesa"
-        android:textColor="@color/colorFont"
+        android:text="@string/text_comandamesacliente_titulopagina"
+        android:textColor="@color/branco"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,72 +25,103 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_view_codigo_comanda_descricao"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_codigoComandaDescricao1"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:textColor="@color/colorFont"
         android:gravity="center"
-        android:text="@string/text1_comanda_codigo_da_mesa"
-        android:textSize="16sp"
+        android:text="@string/textview_codigocomandacliente_decricao1"
+        android:textColor="@color/chumbo_40"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_codigo_comanda_titulo" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_codigoComandaTitulo" />
+
+    <ImageView
+        android:id="@+id/imageView_codigocomandaclienteCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_codigoComandaDescricao1"
+        app:srcCompat="@drawable/ic_img_code" />
+
+    <TextView
+        android:id="@+id/textView_codigoComandaDescricao2"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="@string/textview_codigocomandacliente_decricao2"
+        android:textColor="@color/chumbo_40"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_codigocomandaclienteCodigo" />
+
 
     <EditText
-        android:id="@+id/edit_texte_codigo_comanda_codigo"
-        android:layout_width="150dp"
+        android:id="@+id/editTexte_codigoComandaCodigo"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="54dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/input_chumbo"
         android:ems="10"
         android:inputType="text"
         android:maxLength="10"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorFont"
-        android:textSize="24sp"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_codigoComandaEntrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_codigo_comanda_descricao" />
+        app:layout_constraintHorizontal_bias="0.572"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_codigo_comanda_entrar"
-        android:layout_width="150dp"
+        android:id="@+id/button_codigoComandaEntrar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/btn_primary"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/button_primary"
         android:text="@string/btn_entrar"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorFontDark"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
         android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavegation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_texte_codigo_comanda_codigo"
-        app:layout_constraintVertical_bias="0.093" />
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottomNavegation"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="@color/chumbo_100"
-        android:theme="@style/CustomBottomBar"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView_codigoComandaInserirCodido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/textview_codigocomandacliente_insiracodigo"
+        android:textAllCaps="false"
+        android:textColor="@color/branco"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTexte_codigoComandaCodigo"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"
-        app:itemIconTint="@drawable/navbar_cliente_colors"
-        app:itemTextColor="@drawable/navbar_cliente_colors"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_codigoComandaDescricao2"
+        app:layout_constraintVertical_bias="0.923" />
+
 
 </android.support.constraint.ConstraintLayout>

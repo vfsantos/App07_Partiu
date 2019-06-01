@@ -1,7 +1,9 @@
 package br.com.app07_partiu.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,12 +14,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteAdapter;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.ItemRestauranteConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
@@ -44,6 +48,7 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
     //Context
     private Context context;
+    public Activity activity;
 
 
     //Objeto
@@ -67,15 +72,16 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         });
 
         intentRecomendacao = getIntent();
+
         restaurante = (Restaurante) intentRecomendacao.getSerializableExtra(ExplorarClienteAdapter.RECOMENDACAO_DETALHE);
+
         textViewRecomendacaoDetalheNomeRestaurante.setText(restaurante.getNomeFantasia());
         textViewRecomendacaoDetalheHorarioFuncionamentoValor.setText(null);
         textViewRecomendacaoDetalheEnderecoValor.setText(restaurante.getEndereco().toString());
-
     }
 
 
-    public void implementarComponentes () {
+    public void implementarComponentes() {
 
 
         //ImageView

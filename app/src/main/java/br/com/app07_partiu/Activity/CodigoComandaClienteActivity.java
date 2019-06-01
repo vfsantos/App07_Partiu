@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
@@ -36,7 +38,13 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
     //TextView
     private TextView textViewTitulo;
-    private TextView textViewDescricao;
+    private TextView textViewDescricao1;
+    private TextView textViewDescricao2;
+    private TextView textViewInserirCodigo;
+
+
+    //ImageView
+    private ImageView imageViewCode;
 
 
     //EditText
@@ -50,16 +58,19 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     public static final String ITENS = "br.com.app07_partiu.CodigoComandaClienteActivity.itens";
     public static final String CLIENTE = "br.com.app07_partiu.CodigoComandaClienteActivity.cliente";
 
-    private AlertDialog alerta;
+
+    //Objeto
     private Comanda comanda;
-
-    private Intent intentComanda;
-    private Intent intent;
     private Context context;
-
     private Usuario cliente;
 
-    Item[] itens;
+
+    //Intent
+    private Intent intentComanda;
+    private Intent intent;
+
+    //Array
+    public Item[] itens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +85,8 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         intent = getIntent();
         cliente = (Usuario) intent.getSerializableExtra(USUARIO);
 
+
+        //BottomNavigationBar
         bottomNavigationView = findViewById(R.id.bottomNavegation);
         bottomNavigationView.setSelectedItemId(R.id.menu_comanda);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -100,7 +113,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
 
     private void getComandaPedidos(final String codigo) {
-        intentComanda = new Intent(context, ComandaClienteActivity.class);
+        intentComanda = new Intent(context, ComandaMesaClienteActivity.class);
         if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
@@ -139,14 +152,22 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
     private void implentarComponentes() {
         //TextView
-        textViewTitulo = (TextView) findViewById(R.id.text_view_codigo_comanda_titulo);
-        textViewDescricao = (TextView) findViewById(R.id.text_view_codigo_comanda_descricao);
+        textViewTitulo = (TextView) findViewById(R.id.textView_codigoComandaTitulo);
+        textViewDescricao1 = (TextView) findViewById(R.id.textView_codigoComandaDescricao1);
+        textViewDescricao2 = (TextView) findViewById(R.id.textView_codigoComandaDescricao2);
+        textViewInserirCodigo = (TextView) findViewById(R.id.textView_codigoComandaInserirCodido);
+
 
         //EditText
-        editTextCodigoComanda = (EditText) findViewById(R.id.edit_texte_codigo_comanda_codigo);
+        editTextCodigoComanda = (EditText) findViewById(R.id.editTexte_codigoComandaCodigo);
+
+
+        //ImageView
+        imageViewCode = (ImageView) findViewById(R.id.imageView_codigocomandaclienteCodigo);
+
 
         //Button
-        buttonEntrarComanda = (Button) findViewById(R.id.button_codigo_comanda_entrar);
+        buttonEntrarComanda = (Button) findViewById(R.id.button_codigoComandaEntrar);
         buttonEntrarComanda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

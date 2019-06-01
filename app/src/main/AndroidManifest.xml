@@ -17,9 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity"
+            android:label="@string/title_activity_item_comanda_detalhe_cliente"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
+            android:label="@string/title_activity_comanda_mesa_cliente"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
             android:name=".Activity.PerfilClienteActivity"
             android:label="@string/title_activity_perfil_cliente"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:label="@string/title_activity_explorar_cliente"
@@ -78,7 +86,7 @@
         <activity
             android:name=".Activity.CodigoComandaClienteActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ErroConexaoActivity"
             android:label="@string/app_name"

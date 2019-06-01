@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -129,6 +130,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         getTotalComanda();
 
         //Listview com itens da comanda selecionada
+        Log.e("TESTES", itens[0].toString());
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
         ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
         listViewItensComanda.setAdapter(adapter);
@@ -147,6 +149,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes() {
+
+        //TextView
 //        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
         textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
@@ -158,6 +162,9 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         textViewItemData = (TextView) findViewById(R.id.textView_comandaGarcom_data);
         textViewItemDataValor = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
         textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
+
+
+        //ListView
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
 
     }
