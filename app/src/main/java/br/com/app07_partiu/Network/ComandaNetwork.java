@@ -94,12 +94,12 @@ public class ComandaNetwork {
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES", "insertUsuarioComanda: " + resultado);
+        Log.d("TESTES", "insertUsuarioComandaResult: " + resultado);
     }
 
-    public static Item[] removerPedidoComanda(String url, int idPedido, int idComanda) throws IOException{
+    public static Item[] removerPedidoComanda(String url, int idPedido, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        url += "/removerPedidoComanda?idPedido=" + idPedido +"&idComanda="+idComanda;
+        url += "/removerPedidoComanda?idPedido=" + idPedido + "&idComanda=" + idComanda;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -130,6 +130,8 @@ public class ComandaNetwork {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
                     it.setEmailUsuario(item.getString("emailUsuario"));
+                    it.setPorcPaga(item.getDouble("porcPaga"));
+                    it.setStatusPedidoUsuario(item.getString("statusPedidoUsuario"));
                 } catch (JSONException e) {
 //                    Log.d("TESTES", "Pedido sem usuario");
                 }
@@ -169,7 +171,7 @@ public class ComandaNetwork {
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES", "DataAtualização: " + resultado);
+        Log.d("TESTES", "IdsUsuarios: " + resultado);
 
         List<Integer> idUsuario = new ArrayList<>();
         try {
@@ -226,8 +228,11 @@ public class ComandaNetwork {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
                     it.setEmailUsuario(item.getString("emailUsuario"));
+                    it.setPorcPaga(item.getDouble("porcPaga"));
+                    it.setStatusPedidoUsuario(item.getString("statusPedidoUsuario"));
                 } catch (JSONException e) {
                     Log.d("TESTES", "Pedido sem usuario");
+                    e.printStackTrace();
                 }
 
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
@@ -306,6 +311,8 @@ public class ComandaNetwork {
             e.printStackTrace();
             return null;
         }
+
+        Log.d("TESTES", "ComandaNetwork getComandaByCodigo.Comanda=" + comanda.toString());
         return comanda;
     }
 
@@ -398,6 +405,8 @@ public class ComandaNetwork {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
                     it.setEmailUsuario(item.getString("emailUsuario"));
+                    it.setPorcPaga(item.getDouble("porcPaga"));
+                    it.setStatusPedidoUsuario(item.getString("statusPedidoUsuario"));
                 } catch (JSONException e) {
                     Log.d("TESTES", "Pedido sem usuario");
                 }

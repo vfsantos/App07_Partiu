@@ -2,6 +2,7 @@ package br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,33 +13,38 @@ import android.widget.TextView;
 import java.util.Hashtable;
 
 import br.com.app07_partiu.Model.Item;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
+
+import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class ItemComandaDetalheClienteAdapter extends BaseAdapter implements SectionIndexer {
 
     private Activity activity;
-    public Item[] itens;
+    private Usuario[] usuarios;
+    private double valorItem;
     Object[] sectionHeaders;
     Hashtable<Integer, Integer> positionForSectionMap;
     Hashtable<Integer, Integer> sectionForPositionMap;
 
 
-    public ItemComandaDetalheClienteAdapter(Item[] itens, Activity activity) {
-        this.itens = itens;
+    public ItemComandaDetalheClienteAdapter(Usuario[] usuarios, double valorItem, Activity activity) {
+        this.usuarios = usuarios;
         this.activity = activity;
-        sectionHeaders = ItemComandaDetalheClienteSectionIndexBuilder.buildSectionHeaders(itens);
-        positionForSectionMap = ItemComandaDetalheClienteSectionIndexBuilder.buildPositionForSectionMap(itens);
-        sectionForPositionMap = ItemComandaDetalheClienteSectionIndexBuilder.buildSectionForPositionMap(itens);
+        this.valorItem = valorItem;
+        sectionHeaders = ItemComandaDetalheClienteSectionIndexBuilder.buildSectionHeaders(usuarios);
+        positionForSectionMap = ItemComandaDetalheClienteSectionIndexBuilder.buildPositionForSectionMap(usuarios);
+        sectionForPositionMap = ItemComandaDetalheClienteSectionIndexBuilder.buildSectionForPositionMap(usuarios);
     }
 
     @Override
     public int getCount() {
-        return itens.length;
+        return usuarios.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return itens[position];
+        return usuarios[position];
     }
 
     @Override
@@ -50,23 +56,40 @@ public class ItemComandaDetalheClienteAdapter extends BaseAdapter implements Sec
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
-        if(view == null) {
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_item_nome_valor, parent, false);
             TextView textViewNome = (TextView) view.findViewById(R.id.textView_itemComandaCliente_nome);
             TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaCliente_valor);
-            ItemComandaDetalheClienteViewHolder viewHolder = new ItemComandaDetalheClienteViewHolder(textViewNome, textViewValor);
+            TextView textViewStatus = (TextView) view.findViewById(R.id.textView_itemComandaCliente_status);
+
+            ItemComandaDetalheClienteViewHolder viewHolder = new ItemComandaDetalheClienteViewHolder(textViewNome, textViewValor, textViewStatus);
             view.setTag(viewHolder);
         }
 
 
         ItemComandaDetalheClienteViewHolder viewHolder = (ItemComandaDetalheClienteViewHolder) view.getTag();
-        viewHolder.getTextViewNome().setText(itens[position].getNome());
-        viewHolder.getTextViewValor().setText(itens[position].getValorString());
+        viewHolder.getTextViewNome().setText(usuarios[position].getNome());
+
+        //TODO atualizar para aceitar porcentagem
+        viewHolder.getTextViewValor().setText(""+(doubleToReal(valorItem*usuarios[position].getPorcPedido()/100)));
+//        viewHolder.getTextViewValor().setText("" + (doubleToReal(valorItem/usuarios.length)));
+        try {
+            if (usuarios[position].getStatusPedido().equals("N")) {
+                viewHolder.getTextViewStatus().setText("Não Pago");
+            } else {
+                viewHolder.getTextViewStatus().setText("Pago");
+            }
+
+        } catch (NullPointerException e) {
+            viewHolder.getTextViewStatus().setText("NO STATUS");
+            Log.e("TESTES", "Usuário id:" + usuarios[position].getId() + " nome:" + usuarios[position].getNome() + " ; Não possui status em usuario_pedido");
+        }
+
+
         return view;
     }
-
 
 
     @Override

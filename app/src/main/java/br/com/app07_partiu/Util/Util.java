@@ -42,4 +42,24 @@ public class Util {
         return null;
     }
 
+    public static String nomeToNomeUltimo(String nome){
+        // Pedro Gallon Alves -> Pedro Alves
+        return nome.split(" ")[0] +" "+ nome.split(" ")[nome.split(" ").length-1];
+
+    }
+
+    public static String nomeToPrimeiroNome(String nome){
+        // Pedro Gallon Alves -> Pedro
+        return nome.split(" ")[0];
+
+    }
+
+    public static String nomeToNomeUltimoAbrev(String nome){
+        // Pedro Gallon Alves -> Pedro Alves
+        return nome.split(" ")[0] +" "+ nome.split(" ")[nome.split(" ").length-1].charAt(0);
+
+    }
+
+
+
 }

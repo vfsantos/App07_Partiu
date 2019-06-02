@@ -55,8 +55,11 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     private Button buttonEntrarComanda;
 
     public static final String COMANDA = "br.com.app07_partiu.CodigoComandaClienteActivity.comanda";
+    public static final String RESTAURANTE = "br.com.app07_partiu.CodigoComandaClienteActivity.restaurante";
+
     public static final String ITENS = "br.com.app07_partiu.CodigoComandaClienteActivity.itens";
     public static final String CLIENTE = "br.com.app07_partiu.CodigoComandaClienteActivity.cliente";
+    public static final String USUARIO_IDS = "CodigoComandaClienteActivity.UsuariosId";
 
 
     //Objeto
@@ -71,6 +74,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
     //Array
     public Item[] itens;
+    private int[] idUsuario;
+
+    private boolean test = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +115,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                 return false;
             }
         });
+
+        if (test){
+            getComandaPedidos("OAF01");
+        }
     }
 
 
@@ -122,12 +132,14 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                             try {
                                 comanda = ComandaNetwork.getComandaByCodigo(Connection.URL, codigo);
                                 itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                                idUsuario = ComandaNetwork.getIdsUsuarioComanda(Connection.URL, comanda.getId());
                                 ComandaNetwork.insertUsuarioComanda(Connection.URL, cliente.getId(), comanda.getId());
                                 runOnUiThread(new Runnable() {
                                     public void run() {
                                         intentComanda.putExtra(CLIENTE, cliente);
                                         intentComanda.putExtra(COMANDA, comanda);
                                         intentComanda.putExtra(ITENS, itens);
+                                        intentComanda.putExtra(USUARIO_IDS, idUsuario);
                                         startActivity(intentComanda);
                                     }
                                 });
@@ -172,6 +184,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String codigo = editTextCodigoComanda.getText().toString();
+                Log.d("TESTES", "Cod: "+codigo);
                 getComandaPedidos(codigo);
             }
         });

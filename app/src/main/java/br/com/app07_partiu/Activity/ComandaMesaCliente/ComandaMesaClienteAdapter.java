@@ -2,6 +2,7 @@ package br.com.app07_partiu.Activity.ComandaMesaCliente;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,13 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
         ComandaMesaClienteViewHolder viewHolder = (ComandaMesaClienteViewHolder) view.getTag();
         viewHolder.getTextViewDetalhes().setText(itens[position].getNome());
         viewHolder.getTextViewValor().setText(itens[position].getValorString());
-        viewHolder.getTextViewStatus().setText(itens[position].getStatusString());
+        try{
+
+            viewHolder.getTextViewStatus().setText(itens[position].getStatusString());
+        }catch(NullPointerException e){
+            Log.e("TESTES", "Erro status pedido de id="+itens[position].getIdPedido());
+            viewHolder.getTextViewStatus().setText("ERRO");
+        }
         return view;
     }
 

@@ -40,7 +40,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     private Button buttonCarrinho;
 
 
-    FloatingActionButton buttonCardapioFinalizar;
     Intent intent;
     private Intent intentItem;
 
@@ -126,7 +125,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
             //Retornando itens do AdicionarItemGarcomActivity
         } else if (resultCode == RESULT_DETALHE_RETORNADO) {
-            buttonCardapioFinalizar.setEnabled(true);
+            buttonCarrinho.setEnabled(true);
             Item[] novosItens = (Item[]) data.getSerializableExtra(AdicionarItemGarcomActivity.ITENS_RETORNADOS);
             Log.d("TESTES", "CardapioGarcom.qtdItensRetornadosNovos="+novosItens.length);
             for (Item item : novosItens) {
@@ -136,7 +135,7 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     }
 
     //click finalizar
-    public void onClickButtonCardapioFinalizar(View view){
+    public void onClickButtonCarrinho(View view){
         Log.d("TESTES", "CardapioGarcomActivity.onClickButtonCardapioFinalizar");
         intentResumoAddItens = new Intent(context, ResumoCardapioGarcomActivity.class);
         intentResumoAddItens.putExtra(ITENS_ADICIONAR, itemListToArray(itensAdicionar));

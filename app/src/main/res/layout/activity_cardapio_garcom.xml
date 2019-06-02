@@ -147,6 +147,7 @@
         android:textColor="@color/branco"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:onClick="onClickButtonCarrinho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include" />
 

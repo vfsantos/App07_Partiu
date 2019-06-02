@@ -76,15 +76,15 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         String status = "";
         switch (item.getStatusPedido()) {
             case "N":
-                status = "Não Selecionado por Usuário";
+                status = "Não Selecionado";
                 break;
 
             case "S":
-                status = "Selecionado por Usuário";
+                status = "Selecionado";
                 break;
 
             case "P":
-                status = "Item Pago";
+                status = "Pago";
                 break;
 
             default:

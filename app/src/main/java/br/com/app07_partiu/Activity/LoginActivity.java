@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         if (testeCliente){
             editTextEmail.setText("brenda.mariah@gmail.com");
             editTextSenha.setText("123");
+            validarLogin();
         }
     }
 

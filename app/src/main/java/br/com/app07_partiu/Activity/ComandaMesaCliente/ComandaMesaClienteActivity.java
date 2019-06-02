@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -81,33 +82,34 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     //BottomNavigationView
     private BottomNavigationView bottomNavigationView;
 
+    private int[] idUsuario;
+
+    public static final String COMANDA = "ComandaCliente.Comanda";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comanda_mesa_cliente);
 
+        context = this;
+
+        intent = getIntent();
+        restaurante = (Restaurante) intent.getSerializableExtra(CodigoComandaClienteActivity.RESTAURANTE);
+        comanda = (Comanda) intent.getSerializableExtra(CodigoComandaClienteActivity.COMANDA);
+        itens = (Item[]) intent.getSerializableExtra(CodigoComandaClienteActivity.ITENS);
+        idUsuario = (int[]) intent.getSerializableExtra(CodigoComandaClienteActivity.USUARIO_IDS);
 
         implementacaoComponentes();
 
-
-        intent = getIntent();
-        restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
-        comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
-        itens = (Item[]) intent.getSerializableExtra(CodigoComandaClienteActivity.ITENS);
-
+        Log.d("TESTES", "Comanda = "+ comanda.toString());
 
 
         //Carrega os detalhes da comanda
-        if(comanda != null) {
             textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
-            // TODO carregar qtd pessoas na comanda
-            //   Talvez colocar junto com o metodo escroto de formatar itens, já tá no meio do processo msm
-            textViewItemPessoaComandaNumero.setText("00");
+            textViewItemPessoaComandaNumero.setText(""+idUsuario.length);
             textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
-            textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
             textViewItemHora.setText(comanda.getDataEntrada());
-        }
 
 
         //Carraga listView de itens da comanda
@@ -115,30 +117,9 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             carregarItens();
         }
 
+        getTotalComanda();
+        textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
 
-        //BottomNavigationBar
-        bottomNavigationView = findViewById(R.id.bottomNavegation);
-        bottomNavigationView.setSelectedItemId(R.id.menu_comanda);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_explorar:
-                        Intent a = new Intent(ComandaMesaClienteActivity.this, ExplorarClienteActivity.class);
-                        a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(a);
-                        break;
-                    case R.id.menu_comanda:
-                        break;
-                    case R.id.menu_perfil:
-                        Intent b = new Intent(ComandaMesaClienteActivity.this, PerfilClienteActivity.class);
-                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(b);
-                        break;
-                }
-                return false;
-            }
-        });
 
     }
 
@@ -148,16 +129,19 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
         //Listview com itens da comanda selecionada
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
-        ComandaMesaClienteAdapter adapter = new ComandaMesaClienteAdapter(itens, this);
+        ComandaMesaClienteAdapter adapter = new ComandaMesaClienteAdapter(itensFormatados, this);
         listViewItensComanda.setAdapter(adapter);
         listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+
+                Log.d("TESTES", "Item Selecionado: idPedido="+itensFormatados[position].getIdPedido());
+                Log.d("TESTES", "Item Selecionado: Item="+itensFormatados[position].toString());
+
                 intentItem = new Intent(context, ItemComandaDetalheClienteActivity.class);
-                intentItem.putExtra(ITEM, itens[position]);
+                intentItem.putExtra(ITEM, itensFormatados[position]);
+                intentItem.putExtra(COMANDA, comanda);
                 startActivity(intentItem);
             }
         });
@@ -179,6 +163,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                         u.setId(i.getIdUsuario());
                         u.setNome(i.getNomeUsuario());
                         u.setEmail(i.getEmailUsuario());
+                        u.setPorcPedido(i.getPorcPaga());
+                        u.setStatusPedido(i.getStatusPedidoUsuario());
                         us.add(u);
                         item.setUsuariosPedido(us);
                     }
@@ -186,11 +172,13 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                 // Se não existir idPedido, adciona direto na lista
             } else {
                 idPedidos.add(i.getIdPedido());
-                if (i.getNomeUsuario() != null || i.getNomeUsuario() != "") {
+                if (i.getNomeUsuario() != null) {
                     Usuario u = new Usuario();
                     u.setId(i.getIdUsuario());
                     u.setNome(i.getNomeUsuario());
                     u.setEmail(i.getEmailUsuario());
+                    u.setPorcPedido(i.getPorcPaga());
+                    u.setStatusPedido(i.getStatusPedidoUsuario());
                     List<Usuario> temp = new ArrayList<Usuario>();
                     temp.add(u);
                     i.setUsuariosPedido(temp);
@@ -223,9 +211,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
 
     public void implementacaoComponentes() {
-        //BottomNavigationView
-        bottomNavigationView = findViewById(R.id.bottomNavegation);
-
 
         //TextView
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemCodigoComanda);
@@ -235,7 +220,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComandaNumero);
         textViewItemMesa = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesa);
         textViewItemMesaNumero = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesaNumero);
-        textViewItemHora = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemHora);
+        textViewItemHora = (TextView) findViewById(R.id.textView_comandaMesaCliente_dataValor);
         textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itensNaComanda);
 
 

@@ -15,6 +15,8 @@ public class Usuario implements Serializable {
     private char genero;
     private String senha;
     private Endereco endereco;
+    private String statusPedido;
+    private double porcPedido;
     public int getId() {
         return id;
     }
@@ -81,6 +83,23 @@ public class Usuario implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    public String getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(String statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+
+    public double getPorcPedido() {
+        return porcPedido;
+    }
+
+    public void setPorcPedido(double porcPedido) {
+        this.porcPedido = porcPedido;
+    }
+
     public Usuario(int id, String tipo, long cpf, String nome, String dta_nascimento, String email, int ddd,
                    int telefone, char genero, String senha, Endereco endereco) {
         super();
@@ -114,6 +133,8 @@ public class Usuario implements Serializable {
                 ", genero=" + genero +
                 ", senha='" + senha + '\'' +
                 ", endereco=" + endereco +
+                ", statusPedido='" + statusPedido + '\'' +
+                ", porcPedido=" + porcPedido +
                 '}';
     }
 }

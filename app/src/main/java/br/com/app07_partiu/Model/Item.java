@@ -1,10 +1,13 @@
 package br.com.app07_partiu.Model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.List;
 
 import static br.com.app07_partiu.Util.Util.capitalize;
 import static br.com.app07_partiu.Util.Util.doubleToReal;
+import static br.com.app07_partiu.Util.Util.nomeToNomeUltimoAbrev;
 
 public class Item implements Serializable {
 
@@ -33,7 +36,25 @@ public class Item implements Serializable {
     //Lista de Usuarios
     private List<Usuario> usuariosPedido;
 
+    private double porcPaga;
+    private String statusPedidoUsuario;
 
+
+    public double getPorcPaga() {
+        return porcPaga;
+    }
+
+    public void setPorcPaga(double porcPaga) {
+        this.porcPaga = porcPaga;
+    }
+
+    public String getStatusPedidoUsuario() {
+        return statusPedidoUsuario;
+    }
+
+    public void setStatusPedidoUsuario(String statusPedidoUsuario) {
+        this.statusPedidoUsuario = statusPedidoUsuario;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -110,15 +131,22 @@ public class Item implements Serializable {
         String status;
         switch(statusPedido){
             case "N":
-                status ="Não Selecionado por Usuário";
+                status ="Não Selecionado";
                 break;
             case "S":
-                status = "Selecionado por Usuário";
+                status = "Selecionado: ";
+                for (Usuario u : this.usuariosPedido){
+                    status.replace(";",",");
+                    status += nomeToNomeUltimoAbrev(u.getNome()) + ";";
+                }
+                status.replace(";","");
+
                 break;
             case "P":
-                status = "Item Pago";
+                status = "Pago";
                 break;
             default:
+                Log.e("TESTES", "Status Diff = "+statusPedido);
                 status = "Status Inválido - diff de N, S ou P";
                 break;
         }

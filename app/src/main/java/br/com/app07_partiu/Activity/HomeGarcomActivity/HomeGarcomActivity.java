@@ -196,7 +196,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //Alert com númerodas mesas
     private void alertNovaComanda() {
-        //TODO separar o onclick dos itens com o confirmar
         alertaNumeroMesa = new AlertDialog.Builder(this);
         alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda);
 

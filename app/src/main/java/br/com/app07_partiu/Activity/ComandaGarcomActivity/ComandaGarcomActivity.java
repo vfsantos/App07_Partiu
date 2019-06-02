@@ -115,9 +115,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         //Detalhes da comanda
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
-        // TODO carregar qtd pessoas na comanda
-        //   Talvez colocar junto com o metodo escroto de formatar itens, já tá no meio do processo msm
-        textViewItemPessoaComandaNumero.setText("00");
+        textViewItemPessoaComandaNumero.setText("0");
         textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
         textViewItemDataValor.setText(comanda.getDataEntrada().split(" ")[1].replace(":", "h"));
 
@@ -139,7 +137,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         getTotalComanda();
 
         //Listview com itens da comanda selecionada
-        Log.e("TESTES", itens[0].toString());
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
         ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
         listViewItensComanda.setAdapter(adapter);
@@ -185,20 +182,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     }
 
 
-    //TODO fazer saporra dificil pra krl
-    // Não só tem que ver como vaif azer para itens já pagos; entram ou não?
-    // Tem que levar em conta 3 níveis:
-    // id item, idPedido e idUsuario
-    // para cada id item, pode ter varios id pedido
-    // para cada id pedido, pode ter varios id usuario
-    // mas depende, acho que dá pra excluir item; mostrar um item na lista para cada pedido, e não 1 item falando "3x pedido"
-    // socorro
-    // Dia 1: tentando fazer com 2 níveis
-    // Dia 1: socorro
-    // Da forma atual, está carregando itens; e esses itens serão uma List<Usuario>
-    // espero q funcione
-    // Dia1.2: funfo parece, testar com pedidos partihados por + de 1 usuario
-
     private void formatItens() {
         Set idPedidos = new HashSet();
         List<Item> itensF = new ArrayList<>();
@@ -215,6 +198,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                         u.setId(i.getIdUsuario());
                         u.setNome(i.getNomeUsuario());
                         u.setEmail(i.getEmailUsuario());
+                        u.setPorcPedido(i.getPorcPaga());
+                        u.setStatusPedido(i.getStatusPedidoUsuario());
                         us.add(u);
                         item.setUsuariosPedido(us);
                     }
@@ -227,6 +212,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                     u.setId(i.getIdUsuario());
                     u.setNome(i.getNomeUsuario());
                     u.setEmail(i.getEmailUsuario());
+                    u.setPorcPedido(i.getPorcPaga());
+                    u.setStatusPedido(i.getStatusPedidoUsuario());
                     List<Usuario> temp = new ArrayList<Usuario>();
                     temp.add(u);
                     i.setUsuariosPedido(temp);

@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,7 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import br.com.app07_partiu.Activity.ComandaClienteActivity;
+import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
+import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
 
 public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
@@ -41,7 +46,8 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
 
     //Array
-    private Item[] itemPessoasSelecionado;
+    private Item item;
+    private Comanda comanda;
 
 
     @Override
@@ -51,17 +57,37 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        context = this;
+        intent = getIntent();
+
+        comanda = (Comanda) intent.getSerializableExtra(ComandaMesaClienteActivity.COMANDA);
+        item = (Item) intent.getSerializableExtra(ComandaMesaClienteActivity.ITEM);
+
+
+
         implementarComponentes();
 
+        carregarViews();
+
+
+
     }
 
+    private void carregarViews(){
+        textViewNomeDoItem.setText(item.getNome());
+        textViewValor.setText(item.getValorString());
+        textViewDescricao.setText("Descrição");
+        try {
+                Log.d("TESTES", "Qtd Usuários_Pedido de id=" + item.getIdPedido() + " : " + item.getUsuariosPedido().size());
+                listViewPessoaItemSelecionado = (ListView) findViewById(R.id.listView_itemDetalhesCliente_pessoaItemSelecionado);
+                ItemComandaDetalheClienteAdapter adapter = new ItemComandaDetalheClienteAdapter(item.getUsuariosPedido().toArray(new Usuario[item.getUsuariosPedido().size()]), item.getValor(), this);
+                listViewPessoaItemSelecionado.setAdapter(adapter);
 
-    private void carregarItens() {
-        listViewPessoaItemSelecionado = (ListView) findViewById(R.id.listView_itemDetalhesCliente_pessoaItemSelecionado);
-        ItemComandaDetalheClienteAdapter adapter = new ItemComandaDetalheClienteAdapter(itemPessoasSelecionado, this);
-        listViewPessoaItemSelecionado.setAdapter(adapter);
+
+        }catch(NullPointerException e){
+            Log.d("TESTES", "ListUsuariosPedido vaiza");
+        }
     }
-
 
     private void implementarComponentes() {
         //TextView
