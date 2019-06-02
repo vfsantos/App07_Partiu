@@ -3,6 +3,7 @@ package br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,12 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
     private Comanda comanda;
 
 
+    //ConstraintLayout
+    private ConstraintLayout constraintLayoutItemSelecioando;
+    private ConstraintLayout constraintLayoutItemDeselecionado;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +73,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
 
         implementarComponentes();
-
         carregarViews();
-
 
 
     }
@@ -102,6 +107,11 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
         //Button
         buttonSelecionar = (Button) findViewById(R.id.button_itemDetalhesCliente_selecionar);
+
+
+        //ConstraintLayout
+        constraintLayoutItemDeselecionado = (ConstraintLayout) findViewById(R.id.constraintLayoutDeselecionar);
+        constraintLayoutItemSelecioando   = (ConstraintLayout) findViewById(R.id.constraintLayoutSelecionado);
     }
 
 }

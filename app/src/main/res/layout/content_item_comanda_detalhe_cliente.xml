@@ -126,7 +126,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout11"
+        android:id="@+id/constraintLayoutSelecionado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cinza_10"
@@ -144,6 +144,35 @@
             android:layout_marginBottom="18dp"
             android:background="@drawable/btn_primary"
             android:text="@string/button_itemDetalhesCliente_selecionar"
+            android:textAllCaps="true"
+            android:textColor="@color/branco"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayoutDeselecionar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cinza_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button_itemDetalhesCliente_dsselecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/button_vermelho"
+            android:text="@string/button_itemDetalhesCliente_deselecionar"
             android:textAllCaps="true"
             android:textColor="@color/branco"
             app:layout_constraintBottom_toBottomOf="parent"
