@@ -232,7 +232,7 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:background="@drawable/btn_link"
+            android:background="@drawable/button_link_nome"
             android:text="@string/btn_editaritemgarcom_remover"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

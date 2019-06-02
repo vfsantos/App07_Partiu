@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Partiu</string>
     <string name="action_settings">Settings</string>
@@ -31,6 +32,7 @@
     <string name="text_cardapiogarcom_cardapio">Cardapio</string>
     <string name="text_cardapiogarcom_detalhesitem">Pão artesanal, queijo, calabresa, bacon, milho,
         1 salsicha, ervilha, maionese, batata palha</string>
+    <string name="button_cardapiogarcom_carrinho">Carrinho</string>
 
 
     <!-- ResumoGarcomActivity -->
@@ -38,6 +40,14 @@
     <string name="text_resumogarcom_total">Total</string>
     <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
     <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
+
+
+    <!-- FormasPagamentoActivity -->
+    <string name="textview_formaspagamento_debito">Débito</string>
+    <string name="textview_formaspagamento_credito">Crédito</string>
+    <string name="textview_formaspagamento_dinheiro">Dinheiro</string>
+    <string name="textview_formaspagamento_ticket">Ticket</string>
+
 
 
     <!-- ItemDetalheComandaGarcomActivity -->
@@ -82,7 +92,6 @@
     <string name="text_bottombar_explorar">explorar</string>
     <string name="text_bottombar_comanda">Comanda</string>
     <string name="text_bottombar_perfil">Perfil</string>
-
 
 
     <!-- ExplorarClienteActivity -->
@@ -192,7 +201,8 @@
     <string name="subtitle1_alert_selecione_numero_mesa">Insirá o número da mesa para criar a comanda</string>
 
     <string name="title_alert_disponivel_em_breve">Em breve!</string>
-    <string name="subtitle1_alert_disponivel_em_breve">Essa funcionalidade está disponível a partir da próxima Sprint. Agradecemos a compreensão</string>
+    <string name="subtitle1_alert_disponivel_em_breve">Essa funcionalidade está disponível a partir
+        da próxima Sprint. Agradecemos a compreensão</string>
 
     <string name="erro_login_email">Preencha com seu e-mail</string>
     <string name="erro_login_senha">Sua senha deve possuir mínimo 8 caracteres.</string>
@@ -244,9 +254,9 @@
     <string name="title_activity_perfil_cliente">PerfilClienteActivity</string>
     <string name="button_cardapio_finalizar">FINALIZAR</string>
     <string name="title_activity_comanda_mesa_cliente">ComandaMesaCliente</string>
-    <string name="title_activity_item_comanda_detalhe_cliente">ItemComandaDetalheClienteActivity
-    </string>
+    <string name="title_activity_item_comanda_detalhe_cliente">Detalhe item</string>
     <string name="item_comanda_garcom_data">Entrada</string>
+    <string name="title_activity_formas_pagamento">FormasPagamentoActivity</string>
 
 
 </resources>

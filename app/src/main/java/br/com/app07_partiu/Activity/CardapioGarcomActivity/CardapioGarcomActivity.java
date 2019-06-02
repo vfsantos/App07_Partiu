@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -27,12 +28,16 @@ import static br.com.app07_partiu.Model.Item.itemListToArray;
 
 public class CardapioGarcomActivity extends AppCompatActivity {
 
-    public static final String ITEM = "br.com.app07_partiu.CardapioGarcomActivity.item";
-    public static final String ITENS_ADICIONAR = "CardapioGarcomActivity.ItensAdicionar";
-    public static final String COMANDA = "CardapioGarcomActivity.Comanda";
+    public static final String ITEM            = "br.com.app07_partiu.CardapioGarcomActivity.item";
+    public static final String ITENS_ADICIONAR = "br.com.app07_partiu.CardapioGarcomActivity.ItensAdicionar";
+    public static final String COMANDA         = "br.com.app07_partiu.CardapioGarcomActivity.Comanda";
 
     public static final int RESULT_RESUMO_FINALIZADO = 1000;
     public static final int RESULT_DETALHE_RETORNADO = 2000;
+
+
+    //Button
+    private Button buttonCarrinho;
 
 
     FloatingActionButton buttonCardapioFinalizar;
@@ -62,14 +67,15 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        implementarComponentes();
+
         intent = getIntent();
         context = this;
 
-        buttonCardapioFinalizar = findViewById(R.id.button_cardapio_finalizar);
-        buttonCardapioFinalizar.setEnabled(false);
-        buttonCardapioFinalizar.setBackgroundTintList(getResources().getColorStateList(R.drawable.btn_floating_tintlist));
+        buttonCarrinho.setEnabled(false);
+        buttonCarrinho.setBackgroundTintList(getResources().getColorStateList(R.drawable.button_float_tintlist));
 
-        comanda = (Comanda) intent.getSerializableExtra(ComandaGarcomActivity.COMANDA);
+        comanda          = (Comanda) intent.getSerializableExtra(ComandaGarcomActivity.COMANDA);
         itensRestaurante = (Item[]) intent.getSerializableExtra(ComandaGarcomActivity.ITENS_RESTAURANTE);
 
         itensAdicionar = new ArrayList<Item>();
@@ -85,7 +91,6 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
     private void carregarItens() {
         //Recycler com itens da cardapio do restaurante
-        listViewItensCardapio = (ListView) findViewById(R.id.listView_cardapioGarcom);
         CardapioGarcomAdapter adapter = new CardapioGarcomAdapter(itensRestaurante, this);
         listViewItensCardapio.setAdapter(adapter);
         listViewItensCardapio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,6 +143,15 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         intentResumoAddItens.putExtra(COMANDA, comanda);
         startActivityForResult(intentResumoAddItens, RESULT_RESUMO_FINALIZADO);
 
+    }
+
+    private void implementarComponentes() {
+        //Button
+        buttonCarrinho = (Button) findViewById(R.id.button_cardapioGarcom_carrinho);
+
+
+        //ListView
+        listViewItensCardapio = (ListView) findViewById(R.id.listView_cardapioGarcom);
     }
 
 

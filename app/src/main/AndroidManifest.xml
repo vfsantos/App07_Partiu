@@ -17,9 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".Activity.FormasPagamentoActivity"
+            android:label="@string/title_activity_formas_pagamento"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity"
             android:label="@string/title_activity_item_comanda_detalhe_cliente"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
             android:label="@string/title_activity_comanda_mesa_cliente"
@@ -31,14 +35,15 @@
         <activity
             android:name=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:label="@string/title_activity_explorar_cliente"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ResumoGarcomActivity.ResumoGarcomActivity"
             android:label="@string/title_activity_resumo_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity android:name=".Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity"
+        <activity
+            android:name=".Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity"
             android:label="ResumoCardapioGarcomActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:label="@string/title_activity_cardapio_garcom"

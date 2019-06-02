@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.HomeGarcomActivity.HomeGarcomActivity"
     tools:showIn="@layout/activity_home_garcom"
-    android:background="@color/colorTextInputLayoutBackground"
+    android:background="@color/chumbo_100"
     android:id="@+id/constraintLayoutHomeGarcom">
 
     <android.support.v4.widget.SwipeRefreshLayout

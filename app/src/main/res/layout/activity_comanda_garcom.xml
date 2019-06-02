@@ -133,12 +133,13 @@
     <include layout="@layout/content_comanda_garcom" />
 
     <Button
-        android:id="@+id/button_comandaGarcom_"
+        android:id="@+id/button_comandaGarcom_pedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/float_button_icone_nome"
+        android:layout_gravity="end|bottom"
+        android:background="@drawable/button_float_icone_nome"
         android:drawableLeft="@drawable/ic_action_add"
         android:elevation="16sp"
         android:text="@string/button_comandaGarcom_pedido"

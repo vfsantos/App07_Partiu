@@ -132,13 +132,22 @@
 
     <include layout="@layout/content_cardapio_garcom" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_cardapio_finalizar"
+    <Button
+        android:id="@+id/button_cardapioGarcom_carrinho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_action_add"
-        android:onClick="onClickButtonCardapioFinalizar"/>
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="end|bottom"
+        android:background="@drawable/button_float_icone_nome"
+        android:drawableLeft="@drawable/ic_action_carrinho"
+        android:elevation="16sp"
+        android:text="@string/button_cardapiogarcom_carrinho"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/include" />
 
 </android.support.design.widget.CoordinatorLayout>

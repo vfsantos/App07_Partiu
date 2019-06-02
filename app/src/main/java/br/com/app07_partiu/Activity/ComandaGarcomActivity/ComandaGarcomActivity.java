@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,9 +62,15 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     //ListView
     private ListView listViewItensComanda;
 
+
+    //Button
+    private Button buttonPedido;
+
+
     //Itent
     private Intent intent;
     private Intent intentItem;
+
 
     //Objeto
     private Comanda comanda;
@@ -79,6 +86,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Item[] itensRestaurante;
     private int[] idUsuario;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,18 +95,15 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         context = this;
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        inicializarComponentes();
+
+        buttonPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 visualizarItensRestaurante();
             }
         });
 
-
-
-        inicializarComponentes();
 
         intent = getIntent();
 
@@ -150,27 +155,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                 startActivityForResult(intentItem, RESULT_PEDIDO_REMOVIDO);
             }
         });
-    }
-
-    private void inicializarComponentes() {
-
-        //TextView
-//        textViewTituloPagina          = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
-        textViewItemCodigoComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
-        textViewItemTotalComanda        = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
-        textViewItemTotalComandaValor   = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
-        textViewItemPessoaComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComanda);
-        textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComandaNumero);
-        textViewItemMesa                = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
-        textViewItemMesaNumero          = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
-        textViewItemData                = (TextView) findViewById(R.id.textView_comandaGarcom_data);
-        textViewItemDataValor           = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
-        textViewItensDaComanda          = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
-
-
-        //ListView
-        listViewItensComanda            = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
-
     }
 
     private void visualizarItensRestaurante() {
@@ -286,5 +270,31 @@ public class ComandaGarcomActivity extends AppCompatActivity {
             itens = itensRecarregar;
             carregarItens();
         }
+    }
+
+
+    private void inicializarComponentes() {
+
+        //TextView
+//        textViewTituloPagina          = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
+        textViewItemCodigoComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
+        textViewItemTotalComanda        = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
+        textViewItemTotalComandaValor   = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
+        textViewItemPessoaComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComanda);
+        textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComandaNumero);
+        textViewItemMesa                = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
+        textViewItemMesaNumero          = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
+        textViewItemData                = (TextView) findViewById(R.id.textView_comandaGarcom_data);
+        textViewItemDataValor           = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
+        textViewItensDaComanda          = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
+
+
+        //ListView
+        listViewItensComanda            = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
+
+
+        //Button
+        buttonPedido                    = (Button) findViewById(R.id.button_comandaGarcom_pedido);
+
     }
 }

@@ -106,7 +106,6 @@
     <include
         android:id="@+id/include"
         layout="@layout/content_home_garcom"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -120,14 +119,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/float_button_icone_nome"
+        android:background="@drawable/button_float_icone_nome"
         android:drawableLeft="@drawable/ic_action_add"
         android:elevation="16sp"
         android:text="@string/button_homegarcom_comanda"
         android:textAllCaps="true"
         android:textColor="@color/branco"
         android:textSize="14sp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include" />
 
