@@ -57,7 +57,7 @@ public class ComandaClienteActivity extends AppCompatActivity {
                         public void run() {
                             try {
 
-                                final String resultadoSelecionar = ComandaNetwork.selecionarPedido(Connection.URL, item.getIdPedido(), cliente.getId());
+                                final String resultadoSelecionar = ComandaNetwork.selecionarPedidoUsuario(Connection.URL, item.getIdPedido(), cliente.getId(), comanda.getId());
                                 if (resultadoSelecionar != "") {
                                     itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                     runOnUiThread(new Runnable() {

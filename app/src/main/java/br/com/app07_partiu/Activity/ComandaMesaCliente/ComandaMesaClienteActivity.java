@@ -12,7 +12,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +32,10 @@ import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
+import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Util.Util.doubleToReal;
 
@@ -48,16 +55,15 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
 
     public static final String ITEM = "br.com.app07_partiu.ComandaMesaClienteActivity.item";
-
+    public static final String COMANDA = "ComandaCliente.Comanda";
+    public static final String CLIENTE_LOGADO = "ComandaCliente.ClienteLogado";
 
     //ListView
     private ListView listViewItensComanda;
 
-
     //Itent
     private Intent intent;
     private Intent intentItem;
-
 
     //Objeto
     private Comanda comanda;
@@ -65,26 +71,17 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     private ComandaConvertView comandaConvertView;
     private Restaurante restaurante;
 
-
     //Array
     public Item[] itens;
     public Item[] itensFormatados;
 
-
     private Context context;
     private Double valorTotalComanda = 0.0;
 
-
-    //Intent
-    private Intent intentPedidoSelecaoGarcom;
-
-
-    //BottomNavigationView
-    private BottomNavigationView bottomNavigationView;
-
     private int[] idUsuario;
+    private Item itemDetalhe;
 
-    public static final String COMANDA = "ComandaCliente.Comanda";
+    private Usuario clienteLogado;
 
 
     @Override
@@ -99,33 +96,40 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         comanda = (Comanda) intent.getSerializableExtra(CodigoComandaClienteActivity.COMANDA);
         itens = (Item[]) intent.getSerializableExtra(CodigoComandaClienteActivity.ITENS);
         idUsuario = (int[]) intent.getSerializableExtra(CodigoComandaClienteActivity.USUARIO_IDS);
+        clienteLogado = (Usuario) intent.getSerializableExtra(CodigoComandaClienteActivity.CLIENTE);
+
 
         implementacaoComponentes();
 
-        Log.d("TESTES", "Comanda = "+ comanda.toString());
-
+        Log.d("TESTES", "Comanda = " + comanda.toString());
 
         //Carrega os detalhes da comanda
-            textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
-            textViewItemPessoaComandaNumero.setText(""+idUsuario.length);
-            textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
-            textViewItemHora.setText(comanda.getDataEntrada());
-
+        textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
+        textViewItemPessoaComandaNumero.setText("" + idUsuario.length);
+        textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
+        textViewItemHora.setText(comanda.getDataEntrada());
 
         //Carraga listView de itens da comanda
         if (itens != null) {
             carregarItens();
+        }else{
+            textViewItemTotalComandaValor.setText(doubleToReal(0));
         }
-
-        getTotalComanda();
-        textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
 
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        reloadPedidos();
+        carregarItens();
+    }
+
     private void carregarItens() {
-        formatItens();
+        itensFormatados = Util.formatItens(itens);
         getTotalComanda();
+        textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
 
         //Listview com itens da comanda selecionada
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
@@ -135,73 +139,37 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                Log.d("TESTES", "Item Selecionado: idPedido="+itensFormatados[position].getIdPedido());
-                Log.d("TESTES", "Item Selecionado: Item="+itensFormatados[position].toString());
-
-                intentItem = new Intent(context, ItemComandaDetalheClienteActivity.class);
-                intentItem.putExtra(ITEM, itensFormatados[position]);
-                intentItem.putExtra(COMANDA, comanda);
-                startActivity(intentItem);
+                getItemComandaDetalhe(itensFormatados[position].getIdPedido());
             }
         });
     }
 
-    private void formatItens() {
-        Set idPedidos = new HashSet();
-        List<Item> itensF = new ArrayList<>();
-        for (Item i : itens) {
-
-            //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
-            if (idPedidos.contains(i.getIdPedido())) {
-                //pega o item que tem idPedido ==
-                for (Item item : itensF) {
-                    if (item.getIdPedido() == i.getIdPedido()) {
-                        List<Usuario> us = item.getUsuariosPedido();
-                        //adciona usuario e devolve ao item
-                        Usuario u = new Usuario();
-                        u.setId(i.getIdUsuario());
-                        u.setNome(i.getNomeUsuario());
-                        u.setEmail(i.getEmailUsuario());
-                        u.setPorcPedido(i.getPorcPaga());
-                        u.setStatusPedido(i.getStatusPedidoUsuario());
-                        us.add(u);
-                        item.setUsuariosPedido(us);
-                    }
-                }
-                // Se não existir idPedido, adciona direto na lista
-            } else {
-                idPedidos.add(i.getIdPedido());
-                if (i.getNomeUsuario() != null) {
-                    Usuario u = new Usuario();
-                    u.setId(i.getIdUsuario());
-                    u.setNome(i.getNomeUsuario());
-                    u.setEmail(i.getEmailUsuario());
-                    u.setPorcPedido(i.getPorcPaga());
-                    u.setStatusPedido(i.getStatusPedidoUsuario());
-                    List<Usuario> temp = new ArrayList<Usuario>();
-                    temp.add(u);
-                    i.setUsuariosPedido(temp);
-
-                }else{
-
-                    i.setUsuariosPedido(new ArrayList<Usuario>());
-                }
-                itensF.add(i);
-
-            }
-
+    private void reloadPedidos(){
+        if (Connection.isConnected(this)) {
+            new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      carregarItens();
+                                                  }
+                                              }
+                                );
+                            } catch (IOException e) {
+                                Log.e("TESTES", "IOException reloadPedidos'");
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
         }
-        //volta a ser Array em vez de List
-        Object[] objects = itensF.toArray();
-        Item[] itensArray = new Item[objects.length];
-        for (int i = 0; i < objects.length; i++) {
-            itensArray[i] = (Item) objects[i];
-        }
-        itensFormatados = itensArray;
+
+
 
     }
-
 
     private void getTotalComanda() {
         for (Item i : itensFormatados) {
@@ -223,9 +191,38 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         textViewItemHora = (TextView) findViewById(R.id.textView_comandaMesaCliente_dataValor);
         textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itensNaComanda);
 
-
         //ListView
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
+
     }
 
+    private void getItemComandaDetalhe(final int idPedido) {
+        if (Connection.isConnected(context)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Item[] pedidoNaoFormatado = ComandaNetwork.getPedidoUsuarioBydId(Connection.URL, idPedido);
+                        itemDetalhe = Util.formatItens(pedidoNaoFormatado)[0];
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              Log.d("TESTES", "Item Selecionado: idPedido=" + idPedido);
+                                              intentItem = new Intent(context, ItemComandaDetalheClienteActivity.class);
+                                              intentItem.putExtra(COMANDA, comanda);
+                                              intentItem.putExtra(ITEM, itemDetalhe);
+                                              intentItem.putExtra(CLIENTE_LOGADO, clienteLogado);
+                                              startActivity(intentItem);
+                                          }
+                                      }
+                        );
+                    } catch (IOException e) {
+                        Log.d("TESTES", "getItemComandaDetalhe - Erro ao pegar pedido de id=" + idPedido);
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+    }
 }

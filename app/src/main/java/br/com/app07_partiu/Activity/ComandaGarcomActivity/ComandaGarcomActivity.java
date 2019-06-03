@@ -32,6 +32,7 @@ import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Util.Util.doubleToReal;
 
@@ -109,9 +110,9 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
 
         restaurante = (Restaurante) intent.getSerializableExtra(HomeGarcomActivity.RESTAURANTE);
-        comanda     = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
-        itens       = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
-        idUsuario   = (int[]) intent.getSerializableExtra(HomeGarcomActivity.USUARIO_IDS);
+        comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
+        itens = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
+        idUsuario = (int[]) intent.getSerializableExtra(HomeGarcomActivity.USUARIO_IDS);
 
         //Detalhes da comanda
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
@@ -119,39 +120,43 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
         textViewItemDataValor.setText(comanda.getDataEntrada().split(" ")[1].replace(":", "h"));
 
-
-
         if (itens != null) {
             carregarItens();
         }
 
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
-        textViewItemPessoaComandaNumero.setText(""+idUsuario.length);
-
-
+        textViewItemPessoaComandaNumero.setText("" + idUsuario.length);
 
     }
 
     private void carregarItens() {
-        formatItens();
-        getTotalComanda();
+        try {
 
-        //Listview com itens da comanda selecionada
-        listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
-        ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
-        listViewItensComanda.setAdapter(adapter);
-        listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            itensFormatados = Util.formatItens(itens);
+            getTotalComanda();
+            listViewItensComanda.setVisibility(View.VISIBLE);
+            //Listview com itens da comanda selecionada
+            listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
+            ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
+            listViewItensComanda.setAdapter(adapter);
+            listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                intentItem = new Intent(context, ItemDetalheGarcomActivity.class);
-                intentItem.putExtra(ITEM, itens[position]);
-                intentItem.putExtra(ID_COMANDA, comanda.getId());
-                startActivityForResult(intentItem, RESULT_PEDIDO_REMOVIDO);
-            }
-        });
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    intentItem = new Intent(context, ItemDetalheGarcomActivity.class);
+                    intentItem.putExtra(ITEM, itens[position]);
+                    intentItem.putExtra(ID_COMANDA, comanda.getId());
+                    startActivityForResult(intentItem, RESULT_PEDIDO_REMOVIDO);
+                }
+            });
+        }catch(NullPointerException e){
+            Log.d("TESTES", "carregarItens: Sem Pedidos na Comanda");
+            listViewItensComanda.setVisibility(View.INVISIBLE);
+
+        }
+
     }
 
     private void visualizarItensRestaurante() {
@@ -182,61 +187,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     }
 
 
-    private void formatItens() {
-        Set idPedidos = new HashSet();
-        List<Item> itensF = new ArrayList<>();
-        for (Item i : itens) {
-
-            //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
-            if (idPedidos.contains(i.getIdPedido())) {
-                //pega o item que tem idPedido ==
-                for (Item item : itensF) {
-                    if (item.getIdPedido() == i.getIdPedido()) {
-                        List<Usuario> us = item.getUsuariosPedido();
-                        //adciona usuario e devolve ao item
-                        Usuario u = new Usuario();
-                        u.setId(i.getIdUsuario());
-                        u.setNome(i.getNomeUsuario());
-                        u.setEmail(i.getEmailUsuario());
-                        u.setPorcPedido(i.getPorcPaga());
-                        u.setStatusPedido(i.getStatusPedidoUsuario());
-                        us.add(u);
-                        item.setUsuariosPedido(us);
-                    }
-                }
-                // Se não existir idPedido, adciona direto na lista
-            } else {
-                idPedidos.add(i.getIdPedido());
-                if (i.getNomeUsuario() != null || i.getNomeUsuario() != "") {
-                    Usuario u = new Usuario();
-                    u.setId(i.getIdUsuario());
-                    u.setNome(i.getNomeUsuario());
-                    u.setEmail(i.getEmailUsuario());
-                    u.setPorcPedido(i.getPorcPaga());
-                    u.setStatusPedido(i.getStatusPedidoUsuario());
-                    List<Usuario> temp = new ArrayList<Usuario>();
-                    temp.add(u);
-                    i.setUsuariosPedido(temp);
-
-                }else{
-
-                    i.setUsuariosPedido(new ArrayList<Usuario>());
-                }
-                itensF.add(i);
-
-            }
-
-        }
-        //volta a ser Array em vez de List
-        Object[] objects = itensF.toArray();
-        Item[] itensArray = new Item[objects.length];
-        for (int i = 0; i < objects.length; i++) {
-            itensArray[i] = (Item) objects[i];
-        }
-        itensFormatados = itensArray;
-
-    }
-
     private void getTotalComanda() {
         for (Item i : itensFormatados) {
             valorTotalComanda += i.getValor();
@@ -250,10 +200,11 @@ public class ComandaGarcomActivity extends AppCompatActivity {
             Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ResumoCardapioGarcomActivity.RETORNO_ITENS_COMANDA);
             itens = itensRecarregar;
             carregarItens();
-        }else if (resultCode == RESULT_PEDIDO_REMOVIDO) {
+        } else if (resultCode == RESULT_PEDIDO_REMOVIDO) {
             Toast.makeText(context, "Pedido Cancelado!", Toast.LENGTH_LONG).show();
 
             Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ItemDetalheGarcomActivity.PEDIDOS_REFRESH);
+
             itens = itensRecarregar;
             carregarItens();
         }
@@ -263,25 +214,22 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private void inicializarComponentes() {
 
         //TextView
-//        textViewTituloPagina          = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
-        textViewItemCodigoComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
-        textViewItemTotalComanda        = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
-        textViewItemTotalComandaValor   = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
-        textViewItemPessoaComanda       = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComanda);
+        textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);
+        textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComanda);
+        textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaGarcom_itemTotalComandaValor);
+        textViewItemPessoaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComanda);
         textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemPessoasComandaNumero);
-        textViewItemMesa                = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
-        textViewItemMesaNumero          = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
-        textViewItemData                = (TextView) findViewById(R.id.textView_comandaGarcom_data);
-        textViewItemDataValor           = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
-        textViewItensDaComanda          = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
-
+        textViewItemMesa = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesa);
+        textViewItemMesaNumero = (TextView) findViewById(R.id.textView_comandaGarcom_itemMesaNumero);
+        textViewItemData = (TextView) findViewById(R.id.textView_comandaGarcom_data);
+        textViewItemDataValor = (TextView) findViewById(R.id.textView_comandaGarcom_dataValor);
+        textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itensNaComanda);
 
         //ListView
-        listViewItensComanda            = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
-
+        listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
 
         //Button
-        buttonPedido                    = (Button) findViewById(R.id.button_comandaGarcom_pedido);
+        buttonPedido = (Button) findViewById(R.id.button_comandaGarcom_pedido);
 
     }
 }

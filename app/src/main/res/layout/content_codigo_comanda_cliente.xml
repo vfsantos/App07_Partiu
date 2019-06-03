@@ -95,7 +95,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/button_primary"
+        android:background="@drawable/btn_primary"
         android:text="@string/btn_entrar"
         android:textAllCaps="true"
         android:textColor="@color/branco"

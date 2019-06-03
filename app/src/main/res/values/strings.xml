@@ -244,6 +244,19 @@
     <string name="title_activity_detalhes_comanda_garcom">DetalhesComandaGarcomActivity</string>
     <string name="title_activity_comanda_vazia_garcom">ComandaVaziaGarcomActivity</string>
 
+    <string name="bottom_navagation_recomendacao">recomendação</string>
+    <string name="bottom_navagation_comanda">comanda</string>
+    <string name="bottom_navagation_perfil">perfil</string>
+
+    <!-- Item comanda garcom -->
+    <string name="item_comanda_garcom_total_comanda">Total: </string>
+    <string name="item_comanda_garcom_pessoas_comanda">Integrantes: </string>
+    <string name="item_comanda_garcom_mesa">Mesa: </string>
+
+    <!-- FAB extended -->
+    <string name="fab_extended_comanda">comanda</string>
+    <string name="fab_extended_cardapio">cardápio</string>
+
     <!-- Step lançar item -->
     <string name="lancar_item_comanda_garcom_step_selecionar">Selecionar itens:</string>
 

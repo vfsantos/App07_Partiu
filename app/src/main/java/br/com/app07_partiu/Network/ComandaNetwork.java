@@ -74,15 +74,27 @@ public class ComandaNetwork {
         return comandas.toArray(new ComandaConvertView[0]);
     }
 
-    public static String selecionarPedido(String url, int idPedido, int idUsuario) throws IOException {
+    public static String selecionarPedidoUsuario(String url, int idPedido, int idUsuario, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        url += "/selecionarPedido?idPedido=" + idPedido + "&idUsuario=" + idUsuario;
+        url += "/selecionarPedidoUsuario?idPedido=" + idPedido + "&idUsuario=" + idUsuario + "&idComanda=" + idComanda;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES", "SelecionarPedidoResult: " + resultado);
+        Log.d("TESTES", "selecionarPedidoUsuario: " + resultado);
+        return resultado;
+    }
+
+    public static String deselecionarPedidoUsuario(String url, int idPedido, int idUsuario, int idComanda) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/deselecionarPedidoUsuario?idPedido=" + idPedido + "&idUsuario=" + idUsuario + "&idComanda=" + idComanda;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES", "selecionarPedidoUsuario: " + resultado);
         return resultado;
     }
 
@@ -163,6 +175,7 @@ public class ComandaNetwork {
         return resultado;
     }
 
+
     public static int[] getIdsUsuarioComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
         url += "/getIdsUsuarioComanda?idComanda=" + idComanda;
@@ -192,6 +205,7 @@ public class ComandaNetwork {
             return new int[0];
         }
     }
+
 
     public static Item[] buscarPedidosComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -251,6 +265,62 @@ public class ComandaNetwork {
         return null;
     }
 
+    public static Item[] getPedidoUsuarioBydId(String url, int idPedido) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<Item> itens = new ArrayList<>();
+        url += "/getPedidoUsuarioBydId?idPedido=" + idPedido;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item it = new Item();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                it.setId(item.getInt("id"));
+                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCategoria(item.getString("categoria"));
+                it.setNome(item.getString("nome"));
+                it.setTipo(item.getString("tipo"));
+                it.setValor(item.getDouble("valor"));
+                it.setStatus(item.getString("status"));
+                it.setIdPedido(item.getInt("idPedido"));
+                it.setPorc_desconto(item.getInt("porc_desconto"));
+                it.setData(item.getString("data"));
+                it.setStatusPedido(item.getString("statusPedido"));
+                try {
+                    it.setIdUsuario(item.getInt("idUsuario"));
+                    it.setNomeUsuario(item.getString("nomeUsuario"));
+                    it.setEmailUsuario(item.getString("emailUsuario"));
+                    it.setPorcPaga(item.getDouble("porcPaga"));
+                    it.setStatusPedidoUsuario(item.getString("statusPedidoUsuario"));
+                } catch (JSONException e) {
+                    Log.d("TESTES", "Pedido sem usuario");
+                    e.printStackTrace();
+                }
+
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                itens.add(it);
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+//            throw new IOException(e);
+        }
+        if (itens.size() > 0) {
+            return itens.toArray(new Item[0]);
+        }
+        return null;
+    }
 
     public static Comanda createComanda(String url, int idGarcom, int mesa) throws IOException, JSONException {
 
