@@ -3,27 +3,24 @@
     <string name="app_name">Partiu</string>
     <string name="action_settings">Settings</string>
 
-    <!-- LoginActivity -->
-    <string name="text_login_bemvindo">Bem-vindo</string>
-    <string name="text_login_continueparaentrar">Continue para entrar</string>
-    <string name="text_login_novousuario">Novo usuário?</string>
-    <string name="btn_login_entrar">Entrar</string>
-    <string name="btn_login_esqueceusuasenha">Esqueceu sua senha?</string>
-    <string name="btn_login_cadastrese">Cadastre-se</string>
-
-
-    <!-- ComandaGarcomActivity -->
-    <string name="text_comandagarcom_titulopagina">Comanda</string>
-    <string name="text_comandagarcom_itensnacomanda">Itens na comanda</string>
-    <string name="button_comandaGarcom_pedido">Pedido</string>
-    <!-- Fim ComandaGarcomActivity -->
-
-
     <!-- AdicionarItemGarcomActivity -->
     <string name="text_adicionaritemgarcom_titulopagina">Detalhes do item</string>
     <string name="btn_adicionaritemgarcom_add">+</string>
     <string name="btn_adicionaritemgarcom_sub">-</string>
     <string name="btn_adicionarcomanda">Adicionar</string>
+
+
+    <!-- AvaliacaoActivity -->
+    <string name="title_activity_avaliacao">Feedback</string>
+    <string name="textview_avaliacao_titulo">estamos indo bem?</string>
+    <string name="textview_avaliacao_descritivo1">Seu feedback é muito importante.
+        Nos ajude a melhorar cada vez mais.</string>
+    <string name="textview_avaliacao_descritivo2">Queremos saber o que você gosta ou não gosta e
+        como acha que poderíamos melhorar. Não poderemos responder a cada feedback individualmente,
+        mas lemos tudo com atenção.</string>
+    <string name="button_avaliacao_feedback">avaliar</string>
+    <string name="button_avaliacao_fechar">fechar</string>
+    <string name="textview_avaliacao_labelcomentario">Conte-nos um pouco mais</string>
 
 
     <!-- CardapioGarcomActivity -->
@@ -35,44 +32,6 @@
     <string name="button_cardapiogarcom_carrinho">Carrinho</string>
 
 
-    <!-- ResumoGarcomActivity -->
-    <string name="text_resumogarcom_titulopagina">Resumo</string>
-    <string name="text_resumogarcom_total">Total</string>
-    <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
-    <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
-
-
-    <!-- FormasPagamentoActivity -->
-    <string name="textview_formaspagamento_debito">Débito</string>
-    <string name="textview_formaspagamento_credito">Crédito</string>
-    <string name="textview_formaspagamento_dinheiro">Dinheiro</string>
-    <string name="textview_formaspagamento_ticket">Ticket</string>
-
-
-
-    <!-- ItemDetalheComandaGarcomActivity -->
-    <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhes</string>
-    <string name="text_itemdetalhecomandagarcom_algumaobservacao">Observações</string>
-    <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
-    <string name="text_itemdetalhecomandagarcom_status">Status</string>
-    <string name="btn_itemdetalhecomandagarcom_remover">Cancelar Pedido</string>
-    <string name="btn_itemdetalhecomandagarcom_voltar">Voltar</string>
-
-
-    <!-- Activity Resumo Garcom -->
-    <string name="text_resumocomandagarcom_titulopagina">Resumo</string>
-    <string name="text_resumocomandagarcom_total">Total</string>
-    <string name="btn_resumocomandagarcom_adicionarmaisitens">Adicionar mais itens</string>
-
-
-    <!-- Activity Editar Item Garcom -->
-    <string name="text_editaritemgarcom_titulopagina">Detalhe do item</string>
-    <string name="btn_editaritemgarcom_add">+</string>
-    <string name="btn_editaritemgarcom_sub">-</string>
-    <string name="text_editaritemgarcom_algumaobservacao">Alguma observação</string>
-    <string name="btn_editaritemgarcom_remover">Remover</string>
-
-
     <!-- CodigoComandaClienteActivity -->
     <string name="textview_codigocomandacliente_titulo">comanda da mesa</string>
     <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda digite o código no campo seguir</string>
@@ -81,20 +40,48 @@
     <string name="button_codigocomandacliente_entranacomanda">Entrar na comanda</string>
 
 
-    <!-- ItemComandaDetalheCliente -->
-    <string name="button_itemDetalhesCliente_selecionar">Selecionar item</string>
+    <!-- ComandaGarcomActivity -->
+    <string name="text_comandagarcom_titulopagina">Comanda</string>
+    <string name="text_comandagarcom_itensnacomanda">Itens na comanda</string>
+    <string name="button_comandaGarcom_pedido">Pedido</string>
+    <string name="textview_comandagarcom_totalcomanda">Total: </string>
+    <string name="textview_comandagarcom_mesa">Mesa: </string>
+    <string name="textview_comandagarcom_data">Entrada: </string>
+    <string name="textview_comandagarcom_pessoascomanda">Integrantes: </string>
 
 
-    <!-- HomeGarcomActivity -->
-    <string name="button_homegarcom_comanda">Comanda</string>
+    <!-- ComandaMesaClienteActivity -->
+    <string name="title_activity_comanda_mesa_cliente">Comanda da Mesa</string>
+    <string name="text_comandamesacliente_titulopagina">Comanda da mesa</string>
+    <string name="textview_comandamesacliente_totalcomanda">Total: </string>
+    <string name="textview_comandamesacliente_mesa">Mesa: </string>
+    <string name="textview_comandamesacliente_data">Entrada: </string>
+    <string name="textview_comandamesacliente_pessoascomanda">Integrantes: </string>
 
-    <!-- BottomBar -->
-    <string name="text_bottombar_explorar">explorar</string>
-    <string name="text_bottombar_comanda">Comanda</string>
-    <string name="text_bottombar_perfil">Perfil</string>
+
+    <!-- ComandaVaziaGarcomActivity -->
+    <string name="textview_comandavaziagarcom_titulopagina">Comanda</string>
+    <string name="textview_comandavaziagarcom_itensnacomanda">Itens na comanda</string>
+    <string name="button_comandavaziagarcom_pedido">Pedido</string>
+    <string name="textview_comandavaziagarcom_informacaotitulo">Comanda vazia.</string>
+    <string name="textview_comandavaziagarcom_informacaodescricao">Não conseguimos consultar o
+        consumo desta comanda.</string>
+    <string name="textview_comandavaziagarcom_totalcomanda">Total: </string>
+    <string name="textview_comandavaziagarcom_mesa">Mesa: </string>
+    <string name="textview_comandavaziagarcom_data">Entrada: </string>
+    <string name="textview_comandavaziagarcom_pessoascomanda">Integrantes: </string>
+
+
+    <!-- EditarItemGarcom -->
+    <string name="text_editaritemgarcom_titulopagina">Detalhe do item</string>
+    <string name="btn_editaritemgarcom_add">+</string>
+    <string name="btn_editaritemgarcom_sub">-</string>
+    <string name="text_editaritemgarcom_algumaobservacao">Alguma observação</string>
+    <string name="btn_editaritemgarcom_remover">Remover</string>
 
 
     <!-- ExplorarClienteActivity -->
+    <string name="title_activity_explorar_cliente">Explorar</string>
     <string name="textview_recomendacaovisitadosrecentemente">Visite Novamente</string>
     <string name="textview_recomendacaovisitadosrecentemente_descricao">quem gosta, sempre volta</string>
     <string name="textview_recomendacaorestauranteavaliado">Os Melhores</string>
@@ -113,8 +100,70 @@
     <string name="button_recomendacaodetalhevoltar">Voltar</string>
 
 
-    <!-- ComandaMesaClienteActivity -->
-    <string name="text_comandamesacliente_titulopagina">Comanda da mesa</string>
+    <!-- FormasPagamentoActivity -->
+    <string name="title_activity_formas_pagamento">Formas Pagamento</string>
+    <string name="textview_formaspagamento_debito">Débito</string>
+    <string name="textview_formaspagamento_credito">Crédito</string>
+    <string name="textview_formaspagamento_dinheiro">Dinheiro</string>
+    <string name="textview_formaspagamento_ticket">Ticket</string>
+
+
+    <!-- ItemDetalheComandaGarcomActivity -->
+    <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhes</string>
+    <string name="text_itemdetalhecomandagarcom_algumaobservacao">Observações</string>
+    <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
+    <string name="text_itemdetalhecomandagarcom_status">Status</string>
+    <string name="btn_itemdetalhecomandagarcom_remover">Cancelar Pedido</string>
+    <string name="btn_itemdetalhecomandagarcom_voltar">Voltar</string>
+
+
+    <!-- LoginActivity -->
+    <string name="text_login_bemvindo">Bem-vindo</string>
+    <string name="text_login_continueparaentrar">Continue para entrar</string>
+    <string name="text_login_novousuario">Novo usuário?</string>
+    <string name="btn_login_entrar">Entrar</string>
+    <string name="btn_login_esqueceusuasenha">Esqueceu sua senha?</string>
+    <string name="btn_login_cadastrese">Cadastre-se</string>
+
+
+    <!-- PagamentoConfirmado -->
+    <string name="textview_pagamentoconfirmado_descritivo1">ISSO AI!</string>
+    <string name="textview_pagamentoconfirmado_descritivo2">SEU PAGAMENTO FOI CONFIRMADO.</string>
+    <string name="button_pagamentoconfirmado_fechar">fechar</string>
+    <string name="button_pagamentoconfirmado_feedback">feedback</string>
+
+
+    <!-- ResumoGarcomActivity -->
+    <string name="text_resumogarcom_titulopagina">Resumo</string>
+    <string name="text_resumogarcom_total">Total</string>
+    <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
+    <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
+
+
+
+    <!-- ResumoGarcomActivity -->
+    <string name="text_resumocomandagarcom_titulopagina">Resumo</string>
+    <string name="text_resumocomandagarcom_total">Total</string>
+    <string name="btn_resumocomandagarcom_adicionarmaisitens">Adicionar mais itens</string>
+    <string name="button_resumogarcom_lancaritenscomanda">Confirmar pedido</string>
+
+
+    <!-- ItemComandaDetalheCliente -->
+    <string name="button_itemDetalhesCliente_selecionar">Selecionar</string>
+    <string name="button_itemDetalhesCliente_deselecionar">Deselecionar</string>
+
+
+    <!-- HomeGarcomActivity -->
+    <string name="button_homegarcom_comanda">Comanda</string>
+
+
+    <!-- PerfilClienteActivity -->
+    <string name="title_activity_perfil_cliente">Perfil</string>
+
+    <!-- BottomBar -->
+    <string name="text_bottombar_explorar">explorar</string>
+    <string name="text_bottombar_comanda">Comanda</string>
+    <string name="text_bottombar_perfil">Perfil</string>
 
 
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
@@ -136,12 +185,7 @@
     <string name="link_esqueceu_sua_senha">esqueceu sua senha?</string>
     <string name="link_precisa_de_ajuda">precisa de ajuda?</string>
 
-    <string name="checkbox_lembrarme">lembrar_me</string>
-
-    <string name="section_ou">ou</string>
-    <string name="section_ou_entrar_com">ou entrar com</string>
     <string name="section_selecione_o_metodo_de_pagamento">selecione o método de pagamento</string>
-
     <string name="tab_comanda">comanda</string>
     <string name="tab_grupo">grupo</string>
 
@@ -174,16 +218,6 @@
     <string name="title_activity_cadastro">CadastroActivity</string>
     <string name="title_activity_recomendacao">RecomendacaoActivity</string>
 
-    <string name="title_feito_para_voce">feito para você</string>
-    <string name="subtitle1_recomendacao">em alta</string>
-    <string name="subtitle2_recomendacao">sugestão para você</string>
-    <string name="subtitle3_recomendacao">visite novamente</string>
-    <string name="subtitle4_recomendacao">porque você visitou outback</string>
-    <string name="subtitle5_recomendacao">o melhor da zona leste</string>
-    <string name="subtitle6_recomendacao">vamos curtir a sexta</string>
-    <string name="subtitle7_recomendacao">para fãs de cerveja</string>
-    <string name="subtitle8_recomendacao">para a família</string>
-    <string name="subtitle9_recomendacao">parecidos com outback</string>
     <string name="title_activity_recomendacao_detalhes">RecomendacaoDetalhesActivity</string>
     <string name="title_activity_erro_coneccao">ErroConeccaoActivity</string>
     <string name="title_activity_esqueceu_sua_senha">EsqueceuSuaSenhaActivity</string>
@@ -210,19 +244,6 @@
     <string name="title_activity_detalhes_comanda_garcom">DetalhesComandaGarcomActivity</string>
     <string name="title_activity_comanda_vazia_garcom">ComandaVaziaGarcomActivity</string>
 
-    <string name="bottom_navagation_recomendacao">recomendação</string>
-    <string name="bottom_navagation_comanda">comanda</string>
-    <string name="bottom_navagation_perfil">perfil</string>
-
-    <!-- Item comanda garcom -->
-    <string name="item_comanda_garcom_total_comanda">Total: </string>
-    <string name="item_comanda_garcom_pessoas_comanda">Integrantes: </string>
-    <string name="item_comanda_garcom_mesa">Mesa: </string>
-
-    <!-- FAB extended -->
-    <string name="fab_extended_comanda">comanda</string>
-    <string name="fab_extended_cardapio">cardápio</string>
-
     <!-- Step lançar item -->
     <string name="lancar_item_comanda_garcom_step_selecionar">Selecionar itens:</string>
 
@@ -247,16 +268,12 @@
     <string name="title_activity_adicionar_item_garcom">AdicionarItemGarcomActivity</string>
     <string name="title_activity_editar_item_comanda">EditarItemComandaActivity</string>
     <string name="title_activity_cardapio_garcom">CardapioGarcomActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_resumo_garcom">ResumoGarcomActivity</string>
-    <string name="title_activity_explorar_cliente">ExplorarClienteActivity</string>
-    <string name="title_activity_perfil_cliente">PerfilClienteActivity</string>
     <string name="button_cardapio_finalizar">FINALIZAR</string>
-    <string name="title_activity_comanda_mesa_cliente">ComandaMesaCliente</string>
     <string name="title_activity_item_comanda_detalhe_cliente">Detalhe item</string>
     <string name="item_comanda_garcom_data">Entrada</string>
-    <string name="title_activity_formas_pagamento">FormasPagamentoActivity</string>
+
+
 
 
 </resources>

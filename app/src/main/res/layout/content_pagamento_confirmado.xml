@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.PagamentoConfirmadoActivity"
+    tools:showIn="@layout/activity_pagamento_confirmado"
+    android:background="@color/chumbo_100">
+
+
+    <ImageView
+        android:id="@+id/imageView_pagamentoConfirmado_cerveja"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_img_beer" />
+
+    <TextView
+        android:id="@+id/textView_pagamentoConfirmado_descritivo1"
+        android:layout_width="270dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="176dp"
+        android:text="@string/textview_pagamentoconfirmado_descritivo1"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_pagamentoConfirmado_cerveja" />
+
+    <TextView
+        android:id="@+id/textView_pagamentoConfirmado_descritivo2"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textview_pagamentoconfirmado_descritivo2"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.324"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pagamentoConfirmado_descritivo1" />
+
+    <Button
+        android:id="@+id/button_pagamentoConfirmado_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_mostarda"
+        android:text="@string/button_pagamentoconfirmado_feedback"
+        android:textAllCaps="true"
+        android:onClick="onClickFeedback"
+        android:textColor="@color/branco"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_pagamentoConfirmado_fechar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_pagamentoConfirmado_fechar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:textColor="@color/branco"
+        android:onClick="onClickFechar"
+        android:text="@string/button_pagamentoconfirmado_fechar"
+        android:background="@drawable/button_mostarda_outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
