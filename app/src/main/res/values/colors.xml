@@ -15,24 +15,8 @@
 
     <color name="colorTransparente">#414141</color>
 
-    <!-- garcom_comanda_item_comanda / ativa -->
-    <color name="garcom_comanda_item_background">#FFFFFF</color>
-    <color name="garcom_comanda_item_titulo_codigo_comanda">#F8B864</color>
-    <color name="garcom_comanda_item_valor_total">#767676</color>
-    <color name="garcom_comanda_item_pessoas_na_mesa">#767676</color>
-    <color name="garcom_comanda_item_mesa">#767676</color>
-    <color name="garcom_comanda_item_hora_de_chagada">#767676</color>
-
-    <!-- garcom_comanda_item_comanda / desativada -->
-    <color name="garcom_comanda_item_background_desativada">#4D4D4D</color>
-    <color name="garcom_comanda_item_titulo_codigo_comanda_desativada">#767676</color>
-    <color name="garcom_comanda_item_valor_total_desativada">#767676</color>
-    <color name="garcom_comanda_item_pessoas_na_mesa_desativada">#767676</color>
-    <color name="garcom_comanda_item_mesa_desativada">#767676</color>
-    <color name="garcom_comanda_item_hora_de_chagada_desativada">#767676</color>
-
     <color name="branco">#FFFFFF</color>
-    <color name="cinza_10">#E6E6E6</color>
+    <color name="cinza_10">#ECECEC</color>
     <color name="chumbo_100">#383838</color>
     <color name="chumbo_50">#848484</color>
     <color name="chumbo_40">#9D9D9D</color>
