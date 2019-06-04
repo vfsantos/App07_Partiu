@@ -85,30 +85,52 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         setButtonListeners();
 
 
+//        checkUsuarioJaPagou();
 
     }
 
+    private void checkUsuarioJaPagou() {
+//        try {
+//
+//            for (Usuario u : item.getUsuariosPedido()) {
+//                if (u.getId() == clienteLogado.getId() && u.getStatusPedido() == "P") {
+                    btnSelecionar.setVisibility(View.INVISIBLE);
+                    btnDeselecionar.setVisibility(View.INVISIBLE);
+//                }
+//            }
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
+//        }
+    }
+
     private void carregarViews() {
-        boolean usuarioJaSelecionou = false;
+
 
         textViewNomeDoItem.setText(item.getNome());
         textViewValor.setText(item.getValorString());
         textViewDescricao.setText("Descrição");
         try {
+
+            boolean usuarioJaSelecionou = false;
+            boolean usuarioJaPagou = false;
+
             Log.d("TESTES", "Qtd Usuários_Pedido de id=" + item.getIdPedido() + " : " + item.getUsuariosPedido().size());
             ItemComandaDetalheClienteAdapter adapter = new ItemComandaDetalheClienteAdapter(item.getUsuariosPedido().toArray(new Usuario[item.getUsuariosPedido().size()]), item.getValor(), this);
             listViewPessoaItemSelecionado.setAdapter(adapter);
 
             for (Usuario u : item.getUsuariosPedido()) {
+//                Log.d("TESTES", u.toString());
                 if (u.getId() == clienteLogado.getId()) {
                     usuarioJaSelecionou = true;
-                    return;
+                    if (u.getStatusPedido().toUpperCase().equals("P")){
+                        usuarioJaPagou = true;
+                    }
                 }
             }
 
             switchButtons(usuarioJaSelecionou);
 
-
+            if (usuarioJaPagou) checkUsuarioJaPagou();
 
 
         } catch (NullPointerException e) {
@@ -116,16 +138,14 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         }
 
 
-
-
     }
 
-    private void switchButtons(boolean selecionado){
+    private void switchButtons(boolean selecionado) {
         if (selecionado) {
             constraintLayoutItemSelecioando.setVisibility(View.INVISIBLE);
             constraintLayoutItemDeselecionado.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
             constraintLayoutItemSelecioando.setVisibility(View.VISIBLE);
             constraintLayoutItemDeselecionado.setVisibility(View.INVISIBLE);
         }
@@ -151,7 +171,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
                                               public void run() {
                                                   /*carregarViews();
                                                   switchButtons(true);*/
-                                                  Toast.makeText(context, "Item removido com sucesso!", Toast.LENGTH_LONG).show();
+                                                  Toast.makeText(context, "Pedido Selecionado!", Toast.LENGTH_SHORT).show();
                                                   finish();
                                               }
                                           }
@@ -188,7 +208,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
                                               public void run() {
                                                   /*carregarViews();
                                                   switchButtons(false);*/
-                                                  Toast.makeText(context, "Pedido Deselecionado!", Toast.LENGTH_LONG).show();
+                                                  Toast.makeText(context, "Pedido Deselecionado!", Toast.LENGTH_SHORT).show();
 
                                                   finish();
                                               }

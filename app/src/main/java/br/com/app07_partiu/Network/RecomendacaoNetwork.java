@@ -89,8 +89,8 @@ public class RecomendacaoNetwork {
                 endereco.setCep(objeto.getJSONObject("endereco").getString("cep"));
 
                 //TODO reparar imagens
-//                restaurante.setLogo(objeto.getString("logo"));
-                restaurante.setLogo(null);
+                restaurante.setLogo(objeto.getString("logo"));
+//                restaurante.setLogo(null);
                 restaurante.setDescricao(objeto.getString("descricao"));
 
                 //TODO pegar horarios

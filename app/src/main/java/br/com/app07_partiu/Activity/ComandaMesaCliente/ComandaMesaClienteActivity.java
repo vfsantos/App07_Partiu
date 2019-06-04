@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +23,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
+import br.com.app07_partiu.Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity;
 import br.com.app07_partiu.Activity.PerfilClienteActivity;
@@ -57,6 +62,9 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     public static final String ITEM = "br.com.app07_partiu.ComandaMesaClienteActivity.item";
     public static final String COMANDA = "ComandaCliente.Comanda";
     public static final String CLIENTE_LOGADO = "ComandaCliente.ClienteLogado";
+    public static final String ITENS_FINALIZAR ="ComandaCliente.ItensFInalizar";
+
+    public static final int RESULT_PEDIDOSFINALIZADOS = 3333;
 
     //ListView
     private ListView listViewItensComanda;
@@ -83,7 +91,11 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
     private Usuario clienteLogado;
 
+    private Item[] pedidosFinalizarCliente;
 
+    private Button btnFinalizarPedidos;
+
+    String dataAtualizacao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +109,9 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         itens = (Item[]) intent.getSerializableExtra(CodigoComandaClienteActivity.ITENS);
         idUsuario = (int[]) intent.getSerializableExtra(CodigoComandaClienteActivity.USUARIO_IDS);
         clienteLogado = (Usuario) intent.getSerializableExtra(CodigoComandaClienteActivity.CLIENTE);
+        dataAtualizacao = (String) intent.getSerializableExtra(CodigoComandaClienteActivity.DATA_ATUALIZACAO_COMANDA);
+
+
 
 
         implementacaoComponentes();
@@ -115,6 +130,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         }else{
             textViewItemTotalComandaValor.setText(doubleToReal(0));
         }
+
+        setReloadInterval();
 
 
     }
@@ -139,7 +156,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                getItemComandaDetalhe(itensFormatados[position].getIdPedido());
+                if (!itensFormatados[position].getStatusPedido().equals("P"))
+                    getItemComandaDetalhe(itensFormatados[position].getIdPedido());
             }
         });
     }
@@ -172,6 +190,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     }
 
     private void getTotalComanda() {
+        valorTotalComanda = 0.0;
         for (Item i : itensFormatados) {
             valorTotalComanda += i.getValor();
         }
@@ -193,6 +212,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
         //ListView
         listViewItensComanda = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
+        btnFinalizarPedidos = findViewById(R.id.button_cardapioResumoGarcom_finalizar);
 
     }
 
@@ -224,5 +244,88 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             }).start();
         }
 
+    }
+
+    public void onClickIrAoCarrinho(View view) {
+//        btnFinalizarPedidos.setEnabled(false);
+
+        if (Connection.isConnected(this)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        pedidosFinalizarCliente = ComandaNetwork.getPedidosByUsuarioComanda(Connection.URL, comanda.getId(), clienteLogado.getId());
+
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              Intent intentFinalizarPedidos = new Intent(context, FinalizarPedidoClienteActivity.class);
+                                              intentFinalizarPedidos.putExtra(CLIENTE_LOGADO, clienteLogado);
+                                              intentFinalizarPedidos.putExtra(COMANDA, comanda);
+                                              intentFinalizarPedidos.putExtra(ITENS_FINALIZAR, pedidosFinalizarCliente);
+                                              startActivityForResult(intentFinalizarPedidos, RESULT_PEDIDOSFINALIZADOS);
+                                          }
+                                      }
+                        );
+
+                    } catch (IOException e) {
+                        Log.d("TESTES", "onClickIrAoCarrinho: IOException");
+                        e.printStackTrace();
+                    }
+                    try {
+                        Thread.sleep(1000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+//                    btnFinalizarPedidos.setEnabled(true);
+                }
+            }).start();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_PEDIDOSFINALIZADOS){
+            finish();
+        }
+    }
+
+    private void setReloadInterval(){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run()
+            {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
+//                            Log.d("TESTES", "ComandaCliente_novaDataAtualizacao = "+novaDataAtualizacao);
+                            if (!dataAtualizacao.equals(novaDataAtualizacao)){
+//                                Log.d("TESTES", "ComandaCliente_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
+                                dataAtualizacao = novaDataAtualizacao;
+                                final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      itens = itensNovos;
+                                                      carregarItens();
+                                                  }
+                                              }
+                                );
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        };
+        timer.schedule( task, 0L ,3000L);
     }
 }

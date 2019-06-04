@@ -164,7 +164,19 @@ public class ComandaNetwork {
 
     public static String getDataAtualizacaoComanda(String url, int idComanda) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        url += "/getDataAtualizacaoComanda?idComanda=" + idComanda;
+        url += "/getAtualizacaoComanda?idComanda=" + idComanda;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+//        Log.d("TESTES", "DataAtualização: " + resultado);
+
+        return resultado;
+    }
+    public static String finalizarItemPedidoUsuario(String url, int idUsuario, int idComanda) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/finalizarItemPedidoUsuario?idUsuario=" + idUsuario+"&idComanda="+idComanda;
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -492,5 +504,65 @@ public class ComandaNetwork {
         }
 
     }
+//getPedidosByUsuario?idComanda=1&idUsuario=6
 
+    public static Item[] getPedidosByUsuarioComanda(String url, int idComanda, int idUsuario) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<Item> itens = new ArrayList<>();
+        url += "/getPedidosByUsuario?idComanda=" + idComanda+"&idUsuario="+idUsuario;
+        Log.d("TESTES", "URL="+url);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+        Log.d("TESTES", "getPedidosByUsuarioComanda="+resultado);
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item it = new Item();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                it.setId(item.getInt("id"));
+                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCategoria(item.getString("categoria"));
+                it.setNome(item.getString("nome"));
+                it.setTipo(item.getString("tipo"));
+                it.setValor(item.getDouble("valor"));
+                it.setStatus(item.getString("status"));
+                it.setIdPedido(item.getInt("idPedido"));
+                it.setPorc_desconto(item.getInt("porc_desconto"));
+                it.setData(item.getString("data"));
+                it.setStatusPedido(item.getString("statusPedido"));
+                try {
+                    it.setIdUsuario(item.getInt("idUsuario"));
+                    it.setNomeUsuario(item.getString("nomeUsuario"));
+                    it.setEmailUsuario(item.getString("emailUsuario"));
+                    it.setPorcPaga(item.getDouble("porcPaga"));
+                    it.setStatusPedidoUsuario(item.getString("statusPedidoUsuario"));
+                } catch (JSONException e) {
+                    Log.d("TESTES", "Pedido sem usuario");
+                    e.printStackTrace();
+                }
+
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                itens.add(it);
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+//            throw new IOException(e);
+        }
+        if (itens.size() > 0) {
+            return itens.toArray(new Item[0]);
+        }
+        return null;
+    }
 }

@@ -11,7 +11,7 @@ public class FinalizarPedidoClienteSectionIndexBuilder {
     public static Object[] buildSectionHeaders(Item[] itens){
         ArrayList<String> resultado = new ArrayList<>();
         TreeSet<String> usados = new TreeSet<>();
-        for(Item item:itens){
+        for(Item item :itens){
             //String letra = item.getDescricao().substring(0,1);
             String letra = "?A";
             if((!usados.contains(letra))){

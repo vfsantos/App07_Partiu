@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
@@ -29,6 +31,7 @@ import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
+import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
 import br.com.app07_partiu.R;
@@ -87,6 +90,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Item[] itensRestaurante;
     private int[] idUsuario;
 
+    private String dataAtualizacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         comanda = (Comanda) intent.getSerializableExtra(HomeGarcomActivity.COMANDA);
         itens = (Item[]) intent.getSerializableExtra(HomeGarcomActivity.PEDIDOS);
         idUsuario = (int[]) intent.getSerializableExtra(HomeGarcomActivity.USUARIO_IDS);
+        dataAtualizacao = (String) intent.getSerializableExtra(HomeGarcomActivity.DATA_ATUALIZACAO_COMANDA);
 
         //Detalhes da comanda
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
@@ -126,6 +131,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
         textViewItemPessoaComandaNumero.setText("" + idUsuario.length);
+
+        setReloadInterval();
 
     }
 
@@ -151,6 +158,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                     startActivityForResult(intentItem, RESULT_PEDIDO_REMOVIDO);
                 }
             });
+
         }catch(NullPointerException e){
             Log.d("TESTES", "carregarItens: Sem Pedidos na Comanda");
             listViewItensComanda.setVisibility(View.INVISIBLE);
@@ -208,6 +216,42 @@ public class ComandaGarcomActivity extends AppCompatActivity {
             itens = itensRecarregar;
             carregarItens();
         }
+    }
+
+    private void setReloadInterval(){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run()
+            {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
+                            Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
+                            if (!dataAtualizacao.equals(novaDataAtualizacao)){
+                                Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
+                                dataAtualizacao = novaDataAtualizacao;
+                                final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                    itens = itensNovos;
+                                                    carregarItens();
+                                                  }
+                                              }
+                                );
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        };
+        timer.schedule( task, 0L ,3000L);
     }
 
 

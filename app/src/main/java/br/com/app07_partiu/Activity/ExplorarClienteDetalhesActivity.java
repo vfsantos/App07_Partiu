@@ -78,6 +78,7 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         textViewRecomendacaoDetalheNomeRestaurante.setText(restaurante.getNomeFantasia());
         textViewRecomendacaoDetalheHorarioFuncionamentoValor.setText(null);
         textViewRecomendacaoDetalheEnderecoValor.setText(restaurante.getEndereco().toString());
+
     }
 
 

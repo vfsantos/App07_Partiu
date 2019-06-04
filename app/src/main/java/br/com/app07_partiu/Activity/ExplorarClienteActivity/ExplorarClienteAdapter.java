@@ -3,6 +3,7 @@ package br.com.app07_partiu.Activity.ExplorarClienteActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,15 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
     public void onBindViewHolder(final ExplorarClienteAdapter.MyViewHolder viewHolder, int i){
         viewHolder.textViewNomeRestaurante.setText(restauranteConvertViewsList.get(i).getNomeFantasia());
         String poster = restauranteConvertViewsList.get(i).getLogo();
+        if (restauranteConvertViewsList.get(i).getCodigoComanda().equals("OAF")){
+            Log.d("TESTES", "Logo: "+restauranteConvertViewsList.get(i).getLogo());
+        }
         Glide.with(context)
                 .load(poster)
                 .placeholder(R.drawable.ic_load)
                 .into(viewHolder.imageViewLogoRestaurante);
+
 /*
-        viewHolder.imagem.setTag(i);
         viewHolder.imagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,9 +110,6 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
                                             intentRecomendacaoDetalhe.putExtra(RECOMENDACAO_DETALHE, itemRestauranteConvertView);
                                             intentRecomendacaoDetalhe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             context.startActivity(intentRecomendacaoDetalhe);
-                                            //TODO consertar progressBarTime
-                                            //progressBarTime.setVisibility(View.INVISIBLE);
-
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }

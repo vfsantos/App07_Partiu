@@ -61,6 +61,8 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     public static final String CLIENTE = "br.com.app07_partiu.CodigoComandaClienteActivity.cliente";
     public static final String USUARIO_IDS = "CodigoComandaClienteActivity.UsuariosId";
 
+    public static final String DATA_ATUALIZACAO_COMANDA = "CodigoComandaCliente.DataAtualizacao";
+
 
     //Objeto
     private Comanda comanda;
@@ -134,12 +136,15 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                                 itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                 idUsuario = ComandaNetwork.getIdsUsuarioComanda(Connection.URL, comanda.getId());
                                 ComandaNetwork.insertUsuarioComanda(Connection.URL, cliente.getId(), comanda.getId());
+                                final String dataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
+
                                 runOnUiThread(new Runnable() {
                                     public void run() {
                                         intentComanda.putExtra(CLIENTE, cliente);
                                         intentComanda.putExtra(COMANDA, comanda);
                                         intentComanda.putExtra(ITENS, itens);
                                         intentComanda.putExtra(USUARIO_IDS, idUsuario);
+                                        intentComanda.putExtra(DATA_ATUALIZACAO_COMANDA, dataAtualizacao);
                                         startActivity(intentComanda);
                                     }
                                 });

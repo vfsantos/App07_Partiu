@@ -41,6 +41,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public static final String RESTAURANTE = "br.com.app07_partiu.HomeGarcomActivity.restaurante";
     public static final String PEDIDOS = "br.com.app07_partiu.HomeGarcomActivity.pedidos";
     public static final String USUARIO_IDS = "HomeGarcomActivity.UsuariosId";
+    public static final String DATA_ATUALIZACAO_COMANDA = "HomeGarcom.DataAtualizacao";
 
 
     //AlertDialog / Buider
@@ -90,6 +91,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //SwipeRefreshLayout
     private SwipeRefreshLayout pullToRefresh;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,6 +280,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                         comanda = ComandaNetwork.getComandaById(Connection.URL, idComanda);
                         pedidos = ComandaNetwork.buscarPedidosComanda(Connection.URL, idComanda);
                         idUsuario = ComandaNetwork.getIdsUsuarioComanda(Connection.URL, idComanda);
+                        final String dataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
 
                         runOnUiThread(new Runnable() {
                                           @Override
@@ -285,6 +289,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               intentComanda.putExtra(PEDIDOS, pedidos);
                                               intentComanda.putExtra(RESTAURANTE, restaurante);
                                               intentComanda.putExtra(USUARIO_IDS, idUsuario);
+                                              intentComanda.putExtra(DATA_ATUALIZACAO_COMANDA, dataAtualizacao);
                                               startActivity(intentComanda);
                                           }
                                       }

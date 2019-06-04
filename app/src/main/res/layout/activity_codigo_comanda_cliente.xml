@@ -64,7 +64,7 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavegation"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
         android:background="@color/chumbo_100"
         android:theme="@style/CustomBottomBar"

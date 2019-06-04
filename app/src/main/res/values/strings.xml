@@ -290,6 +290,7 @@
     <string name="button_cardapio_finalizar">FINALIZAR</string>
     <string name="title_activity_item_comanda_detalhe_cliente">Detalhe item</string>
     <string name="item_comanda_garcom_data">Entrada</string>
+    <string name="btn_comandacliente_carrinho">IR AO CARRINHO</string>
     <string name="title_activity_finalizar_pedido_cliente">FinalizarPedidoClienteActivity</string>
 
 
