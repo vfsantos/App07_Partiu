@@ -111,6 +111,7 @@
     <string name="textview_formaspagamento_credito">Crédito</string>
     <string name="textview_formaspagamento_dinheiro">Dinheiro</string>
     <string name="textview_formaspagamento_ticket">Ticket</string>
+    <string name="button_formaspagamento_concluir">Concluir</string>
 
 
     <!-- ItemDetalheComandaGarcomActivity -->
