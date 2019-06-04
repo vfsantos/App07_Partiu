@@ -152,7 +152,7 @@
         android:layout_marginBottom="17dp"
         android:text="@string/button_recomendacaodetalhevoltar"
         android:textColor="@color/branco"
-        android:background="@drawable/btn_primary"
+        android:background="@drawable/button_mostarda_outline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
