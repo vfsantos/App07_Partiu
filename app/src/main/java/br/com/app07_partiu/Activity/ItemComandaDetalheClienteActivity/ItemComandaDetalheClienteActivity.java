@@ -151,7 +151,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
                                               public void run() {
                                                   /*carregarViews();
                                                   switchButtons(true);*/
-                                                  Toast.makeText(context, "Pedido Selecionado!", Toast.LENGTH_LONG).show();
+                                                  Toast.makeText(context, "Item removido com sucesso!", Toast.LENGTH_LONG).show();
                                                   finish();
                                               }
                                           }

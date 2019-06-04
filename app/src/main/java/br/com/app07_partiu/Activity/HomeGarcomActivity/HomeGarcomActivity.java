@@ -199,6 +199,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
         alertaNumeroMesa = new AlertDialog.Builder(this);
         alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda);
 
+
         alertaNumeroMesa.setItems(mesas, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

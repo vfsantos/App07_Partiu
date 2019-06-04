@@ -141,12 +141,11 @@
         android:layout_gravity="end|bottom"
         android:background="@drawable/button_float_icone_nome"
         android:drawableLeft="@drawable/ic_action_add"
-        android:elevation="16sp"
+        android:elevation="14sp"
         android:text="@string/button_comandaGarcom_pedido"
         android:textAllCaps="true"
         android:textColor="@color/branco"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include" />
 
