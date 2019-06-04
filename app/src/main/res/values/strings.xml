@@ -100,6 +100,11 @@
     <string name="button_recomendacaodetalhevoltar">Voltar</string>
 
 
+    <!-- FinalizarPedidoClienteActivity -->
+    <string name="textview_finalizarpedidocliente_total">Total</string>
+    <string name="button_finalizarpedidocliente_confirmar">Confirmar</string>
+    <string name="textview_finalizarpedidocliente_itensselecionados">Itens selecionados</string>
+
     <!-- FormasPagamentoActivity -->
     <string name="title_activity_formas_pagamento">Formas Pagamento</string>
     <string name="textview_formaspagamento_debito">Débito</string>
@@ -138,7 +143,6 @@
     <string name="text_resumogarcom_total">Total</string>
     <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
     <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
-
 
 
     <!-- ResumoGarcomActivity -->
@@ -285,8 +289,7 @@
     <string name="button_cardapio_finalizar">FINALIZAR</string>
     <string name="title_activity_item_comanda_detalhe_cliente">Detalhe item</string>
     <string name="item_comanda_garcom_data">Entrada</string>
-
-
+    <string name="title_activity_finalizar_pedido_cliente">FinalizarPedidoClienteActivity</string>
 
 
 </resources>

@@ -17,9 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity"
+            android:label="@string/title_activity_finalizar_pedido_cliente"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".Activity.AvaliacaoActivity"
             android:label="@string/title_activity_avaliacao"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ComandaVaziaGarcomActivity"
             android:label="@string/title_activity_comanda_vazia_garcom"
