@@ -188,7 +188,7 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
         valorTotalComanda = 0.0;
         for (Item i : itens) {
-            valorTotalComanda += i.getValor();
+            valorTotalComanda += i.getValor() * i.getPorcPaga()/100;
         }
 
     }

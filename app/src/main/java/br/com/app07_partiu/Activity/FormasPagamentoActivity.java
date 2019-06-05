@@ -3,6 +3,7 @@ package br.com.app07_partiu.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
     Context context;
     Intent intent;
+
+    private Intent intentTelaPago;
 
 
     @Override
@@ -74,6 +77,7 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
 
     public void onClickConcluir(View view) {
+        intentTelaPago = new Intent(this, PagamentoConfirmadoActivity.class);
 
         if (Connection.isConnected(context)) {
             new Thread(new Runnable() {
@@ -85,9 +89,10 @@ public class FormasPagamentoActivity extends AppCompatActivity {
                                           @Override
                                           public void run() {
                                               Toast.makeText(context, "Pedidos Pagos!", Toast.LENGTH_LONG).show();
-                                              setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
-                                              finish();
+//                                              setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+//                                              finish();
 
+                                              startActivityForResult(intentTelaPago, ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
                                           }
                                       }
                         );
@@ -99,5 +104,14 @@ public class FormasPagamentoActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode ==  ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS){
+            setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+            finish();
+        }
     }
 }

@@ -270,14 +270,9 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
                     } catch (IOException e) {
                         Log.d("TESTES", "onClickIrAoCarrinho: IOException");
-                        e.printStackTrace();
+//                        e.printStackTrace();
                     }
-                    try {
-                        Thread.sleep(1000);
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    
 //                    btnFinalizarPedidos.setEnabled(true);
                 }
             }).start();

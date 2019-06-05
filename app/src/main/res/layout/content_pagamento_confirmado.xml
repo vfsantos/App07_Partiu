@@ -83,7 +83,6 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
         android:textColor="@color/branco"
-        android:onClick="onClickFechar"
         android:text="@string/button_pagamentoconfirmado_fechar"
         android:background="@drawable/button_mostarda_outline"
         app:layout_constraintBottom_toBottomOf="parent"

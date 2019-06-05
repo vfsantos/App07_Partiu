@@ -294,7 +294,6 @@ public class ComandaNetwork {
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Item it = new Item();
-
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
                 it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
@@ -317,16 +316,10 @@ public class ComandaNetwork {
                     Log.d("TESTES", "Pedido sem usuario");
                     e.printStackTrace();
                 }
-
-                //adiciona cada objeto comanda recebido em um arraylist de comandas
                 itens.add(it);
-
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
-//            throw new IOException(e);
         }
         if (itens.size() > 0) {
             return itens.toArray(new Item[0]);
@@ -335,11 +328,11 @@ public class ComandaNetwork {
     }
 
     public static Comanda createComanda(String url, int idGarcom, int mesa) throws IOException, JSONException {
-
         //converte o número da mesa de int para string para poder concatenar na url
         String numeroMesa = String.valueOf(mesa);
         String urlGerarSenha = url + "/createComanda?idGarcom=" + idGarcom + "&mesa=" + mesa;
         OkHttpClient client = new OkHttpClient();
+
         Comanda comanda = new Comanda();
 
         Request request = new Request.Builder()
@@ -495,16 +488,13 @@ public class ComandaNetwork {
 
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
                 itens.add(it);
-
             }
             return itens;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
-
     }
-//getPedidosByUsuario?idComanda=1&idUsuario=6
 
     public static Item[] getPedidosByUsuarioComanda(String url, int idComanda, int idUsuario) throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -549,16 +539,11 @@ public class ComandaNetwork {
                     Log.d("TESTES", "Pedido sem usuario");
                     e.printStackTrace();
                 }
-
                 //adiciona cada objeto comanda recebido em um arraylist de comandas
                 itens.add(it);
-
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
-//            throw new IOException(e);
         }
         if (itens.size() > 0) {
             return itens.toArray(new Item[0]);

@@ -229,7 +229,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                         try {
                             String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
                             Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
-                            if (!dataAtualizacao.equals(novaDataAtualizacao)){
+                            //TODO verificar pq data atualizacao vem null
+                            if (!(dataAtualizacao==novaDataAtualizacao)){
                                 Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
                                 dataAtualizacao = novaDataAtualizacao;
                                 final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());

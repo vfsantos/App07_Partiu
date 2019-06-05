@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.R;
 
 public class AvaliacaoActivity extends AppCompatActivity {
@@ -66,13 +67,10 @@ public class AvaliacaoActivity extends AppCompatActivity {
     }
 
     public void onClickAvaliar(View view) {
-        buttonAvaliar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getAvalicao();
-                getComentario();
-            }
-        });
+//                getAvalicao();
+//                getComentario();
+        setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+        finish();
     }
 
     public void onClickfechar(View view){
@@ -86,21 +84,19 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
 
     private void implementarComponentes() {
+
         //TextView
         textViewTitulo     = (TextView) findViewById(R.id.textView_avaliacao_titulo);
         textViewDescricao1 = (TextView) findViewById(R.id.textView_avaliacao_descritivo1);
         textViewDescricao2 = (TextView) findViewById(R.id.textView_avaliacao_descritivo2);
         textViewComentario = (TextView) findViewById(R.id.textView_avaliacao_comentario);
 
-
         //Button
         buttonAvaliar      = (Button) findViewById(R.id.button_avaliacao_avaliar);
         buttonFechar       = (Button) findViewById(R.id.button_avaliacao_fechar);
 
-
         //EditText
         editTextComentario = (EditText) findViewById(R.id.editText_avaliacao_comentario);
-
 
         //Rating
         ratingBar          = (RatingBar) findViewById(R.id.ratingBar);

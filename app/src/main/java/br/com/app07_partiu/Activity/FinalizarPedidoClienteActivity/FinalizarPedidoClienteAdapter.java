@@ -17,6 +17,8 @@ import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomViewHolde
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
+import static br.com.app07_partiu.Util.Util.doubleToReal;
+
 public class FinalizarPedidoClienteAdapter extends BaseAdapter implements SectionIndexer {
 
     private Activity activity;
@@ -67,7 +69,7 @@ public class FinalizarPedidoClienteAdapter extends BaseAdapter implements Sectio
 
         FinalizarPedidoClienteViewHolder viewHolder = (FinalizarPedidoClienteViewHolder) view.getTag();
         viewHolder.getTextViewDetalhes().setText(itens[position].getNome());
-        viewHolder.getTextViewValor().setText(itens[position].getValorString());
+        viewHolder.getTextViewValor().setText(doubleToReal(itens[position].getValor()*itens[position].getPorcPaga()/100));
         // ---- item não tem img
         /*Drawable drawable = Util.getDrawable(activity, itens[position].getIcone().toLowerCase());
         if(drawable == null){

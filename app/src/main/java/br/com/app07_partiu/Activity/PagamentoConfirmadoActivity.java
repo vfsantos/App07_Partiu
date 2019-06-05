@@ -2,6 +2,7 @@ package br.com.app07_partiu.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.R;
 
 public class PagamentoConfirmadoActivity extends AppCompatActivity {
@@ -53,12 +55,7 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
     public void onClickFeedback(View view) {
         intentAvaliacao = new Intent(this, AvaliacaoActivity.class);
-        buttonFechar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentAvaliacao);
-            }
-        });
+        startActivityForResult(intentAvaliacao, ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
     }
 
 
@@ -78,4 +75,14 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
         buttonFeedback      = (Button) findViewById(R.id.button_pagamentoConfirmado_feedback);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS){
+            setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+            finish();
+        }
+
+    }
 }
