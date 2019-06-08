@@ -95,7 +95,9 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
     private Button btnFinalizarPedidos;
 
+    private Timer timerAtualizacao;
     String dataAtualizacao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +143,13 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         super.onRestart();
         reloadPedidos();
         carregarItens();
+        setReloadInterval();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timerAtualizacao.cancel();
     }
 
     private void carregarItens() {
@@ -161,6 +170,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void reloadPedidos(){
         if (Connection.isConnected(this)) {
@@ -289,7 +300,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     }
 
     private void setReloadInterval(){
-        Timer timer = new Timer();
+        timerAtualizacao = new Timer();
         TimerTask task = new TimerTask() {
             public void run()
             {
@@ -298,7 +309,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
-//                            Log.d("TESTES", "ComandaCliente_novaDataAtualizacao = "+novaDataAtualizacao);
+                            Log.d("TESTES", "ComandaCliente_novaDataAtualizacao = "+novaDataAtualizacao);
                             if (!dataAtualizacao.equals(novaDataAtualizacao)){
 //                                Log.d("TESTES", "ComandaCliente_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
                                 dataAtualizacao = novaDataAtualizacao;
@@ -321,6 +332,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                 }).start();
             }
         };
-        timer.schedule( task, 0L ,3000L);
+        timerAtualizacao.schedule( task, 0L ,3000L);
     }
 }

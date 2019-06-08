@@ -3,7 +3,6 @@ package br.com.app07_partiu.Activity.ComandaGarcomActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,10 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,7 +25,6 @@ import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
-import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
@@ -92,6 +86,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     private String dataAtualizacao;
 
+    private Timer timerAtualizacao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +130,18 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         setReloadInterval();
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setReloadInterval();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timerAtualizacao.cancel();
     }
 
     private void carregarItens() {
@@ -219,7 +227,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     }
 
     private void setReloadInterval(){
-        Timer timer = new Timer();
+        timerAtualizacao = new Timer();
         TimerTask task = new TimerTask() {
             public void run()
             {
@@ -229,22 +237,24 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                         try {
                             String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
                             Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
-                            //TODO verificar pq data atualizacao vem null
-                            if (!(dataAtualizacao==novaDataAtualizacao)){
-                                Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
-                                dataAtualizacao = novaDataAtualizacao;
-                                final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                            if (dataAtualizacao != null) {
+                                if (!(dataAtualizacao.equals(novaDataAtualizacao))){
+                                    Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
+                                    dataAtualizacao = novaDataAtualizacao;
+                                    final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
 
-                                runOnUiThread(new Runnable() {
-                                                  @Override
-                                                  public void run() {
-                                                    itens = itensNovos;
-                                                    carregarItens();
+                                    runOnUiThread(new Runnable() {
+                                                      @Override
+                                                      public void run() {
+                                                          itens = itensNovos;
+                                                          carregarItens();
+                                                      }
                                                   }
-                                              }
-                                );
+                                    );
+                                }
+                            }else {
+                                dataAtualizacao = novaDataAtualizacao;
                             }
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -252,7 +262,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                 }).start();
             }
         };
-        timer.schedule( task, 0L ,3000L);
+        timerAtualizacao.schedule( task, 0L ,3000L);
     }
 
 

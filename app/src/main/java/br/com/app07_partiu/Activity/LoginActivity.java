@@ -94,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
     //Progressbar
     ProgressBar progressBarTime;
 
-    private final boolean testeGarcom  = false;
-    private final boolean testeCliente = true;
+    private final boolean testeGarcom  = true;
+    private final boolean testeCliente = false;
 
     Usuario     usuario;
     Restaurante restaurante;
