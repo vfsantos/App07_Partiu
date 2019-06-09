@@ -281,7 +281,9 @@
     <string name="title_activity_loading">LoadingActivity</string>
 
     <!-- Snackbar -->
-    <string name="snackbar_erro_login">Descupe! Ocorreu um erro :(</string>
+    <string name="snackbar_erro_login">Email ou senha errados! :(</string>
+    <string name="snackbar_erro_backend">Estamos com problemas técnicos, desculpe :(</string>
+
     <string name="title_activity_item_comanda_detalhe_garcom">Pedido</string>
     <string name="title_activity_adicionar_item_garcom">AdicionarItemGarcomActivity</string>
     <string name="title_activity_editar_item_comanda">EditarItemComandaActivity</string>

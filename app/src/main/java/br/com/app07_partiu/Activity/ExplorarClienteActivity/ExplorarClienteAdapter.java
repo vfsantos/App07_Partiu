@@ -46,9 +46,6 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
     public void onBindViewHolder(final ExplorarClienteAdapter.MyViewHolder viewHolder, int i){
         viewHolder.textViewNomeRestaurante.setText(restauranteConvertViewsList.get(i).getNomeFantasia());
         String poster = restauranteConvertViewsList.get(i).getLogo();
-        if (restauranteConvertViewsList.get(i).getCodigoComanda().equals("OAF")){
-            Log.d("TESTES", "Logo: "+restauranteConvertViewsList.get(i).getLogo());
-        }
         Glide.with(context)
                 .load(poster)
                 .placeholder(R.drawable.ic_load)

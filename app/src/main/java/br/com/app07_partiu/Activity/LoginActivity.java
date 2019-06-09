@@ -30,6 +30,7 @@ import br.com.app07_partiu.Network.RecomendacaoNetwork;
 import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -94,8 +95,8 @@ public class LoginActivity extends AppCompatActivity {
     //Progressbar
     ProgressBar progressBarTime;
 
-    private final boolean testeGarcom  = true;
-    private final boolean testeCliente = false;
+    private final boolean testeGarcom  = false;
+    private final boolean testeCliente = true;
 
     Usuario     usuario;
     Restaurante restaurante;
@@ -159,18 +160,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        buttonEntrar.setEnabled(true);
     }
 
-    public void login(String email, String senha){
-        final String enderecoEmailUsuario = email;
-        final String senhaUsuario         = senha;
-
-        //intentLoginGarcom = new Intent(this, HomeGarcomActivity.class);
-        //intentLoginCliente = new Intent(this, ExplorarClienteActivity.class);
+    public void login(final String email, final String senha){
 
         if(Connection.isConnected(this)) {
             //TODO consertar progressBarTime
 //            progressBarTime.setVisibility(View.VISIBLE);
+
+            buttonEntrar.setEnabled(false);
 
             intentListarComanda = new Intent(this, HomeGarcomActivity.class);
             intentListarRecomendacoes = new Intent(this, ExplorarClienteActivity.class);
@@ -180,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                usuario = UsuarioNetwork.login(Connection.URL, enderecoEmailUsuario, senhaUsuario);
+                                usuario = UsuarioNetwork.login(Connection.URL, email, senha);
                                 Log.d("TESTES", usuario.toString());
                                 if (usuario.getTipo().equals("garcom")){
 
@@ -195,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                                                           intentListarComanda.putExtra(COMANDAS, comandas);
                                                           startActivity(intentListarComanda);
                                                           //TODO consertar progressBarTime
-                                                          //progressBarTime.setVisibility(View.INVISIBLE);
+//                                                          progressBarTime.setVisibility(View.INVISIBLE);
                                                       }
                                                   }
                                     );
@@ -217,31 +216,35 @@ public class LoginActivity extends AppCompatActivity {
 //                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_ESPECIALIDADEUSUARIO, recomendacaoEspecialidade);
 //                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_VISITADOSRECENTEMENTE, recomendacaoRecente);
                                             startActivity(intentListarRecomendacoes);
-                                            try {
-                                                Thread.sleep(2000);
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                            }
+
                                         }
                                     });
                                 }
 
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                Log.d("TESTES", "Erro no webservice ou na conexão");
-                                snackbarErroLogin = Snackbar.make(findViewById(R.id.constraintLayoutLogin), "Erro no webservice ou na conexão", Snackbar.LENGTH_LONG);
-                                snackbarErroLogin.show();
+                                Log.e("TESTES", "Erro no webservice ou na conexão");
+                                Util.showSnackbar(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_backend);
 
+
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      buttonEntrar.setEnabled(true);
+                                                  }
+                                              }
+                                );
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Log.e("TESTES", "Retornou 'Usuario Inválido!'");
-                                runOnUiThread(new Runnable(){
-                                    public void run() {
-                                        snackbarErroLogin = Snackbar.make(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_login, Snackbar.LENGTH_LONG);
-                                        snackbarErroLogin.show();
-
-                                    }
-                                });
+                                Log.d("TESTES", "Retornou 'Usuario Inválido!'");
+                                Util.showSnackbar(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_login);
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      buttonEntrar.setEnabled(true);
+                                                  }
+                                              }
+                                );
                             }
 
 
@@ -249,18 +252,6 @@ public class LoginActivity extends AppCompatActivity {
                     },"LoginThread");
 
             loginThread.start();
-//            while(true){
-//                if(loginThread.isAlive()){
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }else{
-//                    buttonEntrar.setEnabled(true);
-//                    return;
-//                }
-//            }
         }
     }
 

@@ -2,11 +2,14 @@ package br.com.app07_partiu.Util;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -71,13 +74,15 @@ public class Util {
     public static Item[] formatItens(Item[] itens){
 
         Set idPedidos = new HashSet();
-        List<Item> itensF = new ArrayList<>();
+        List<Item> itensComeco = new ArrayList<>(); //selecionados e nao selecionados
+        List<Item> itensFim = new ArrayList<>(); //pagos
+
         for (Item i : itens) {
 
             //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
             if (idPedidos.contains(i.getIdPedido())) {
                 //pega o item que tem idPedido ==
-                for (Item item : itensF) {
+                for (Item item : itensComeco) {
                     if (item.getIdPedido() == i.getIdPedido()) {
                         List<Usuario> us = item.getUsuariosPedido();
                         //adciona usuario e devolve ao item
@@ -91,6 +96,21 @@ public class Util {
                         item.setUsuariosPedido(us);
                     }
                 }
+                for (Item item : itensFim) {
+                    if (item.getIdPedido() == i.getIdPedido()) {
+                        List<Usuario> us = item.getUsuariosPedido();
+                        //adciona usuario e devolve ao item
+                        Usuario u = new Usuario();
+                        u.setId(i.getIdUsuario());
+                        u.setNome(i.getNomeUsuario());
+                        u.setEmail(i.getEmailUsuario());
+                        u.setPorcPedido(i.getPorcPaga());
+                        u.setStatusPedido(i.getStatusPedidoUsuario());
+                        us.add(u);
+                        item.setUsuariosPedido(us);
+                    }
+                }
+
                 // Se não existir idPedido, adciona direto na lista
             } else {
                 idPedidos.add(i.getIdPedido());
@@ -109,19 +129,34 @@ public class Util {
 
                     i.setUsuariosPedido(new ArrayList<Usuario>());
                 }
-                itensF.add(i);
+                if (i.getStatusPedido().equals("P")){
+                    itensFim.add(i);
+                }else {
+                    itensComeco.add(i);
+                }
+
+//                itensF.add(i);
 
             }
 
         }
-        //volta a ser Array em vez de List
-        Object[] objects = itensF.toArray();
-        Item[] itensArray = new Item[objects.length];
-        for (int i = 0; i < objects.length; i++) {
-            itensArray[i] = (Item) objects[i];
-        }
-        return itensArray;
 
+        List<Item> itensAll = new ArrayList<>();
+        itensAll.addAll(itensComeco);
+        itensAll.addAll(itensFim);
+
+        return itensAll.toArray(new Item[itensAll.size()]);
+
+    }
+
+    public static void showSnackbar(View view, String texto){
+        Snackbar snackbarErroLogin = Snackbar.make(view, texto, Snackbar.LENGTH_LONG);
+        snackbarErroLogin.show();
+    }
+
+    public static void showSnackbar(View view, int idString){
+        Snackbar snackbarErroLogin = Snackbar.make(view, idString, Snackbar.LENGTH_LONG);
+        snackbarErroLogin.show();
     }
 
 }

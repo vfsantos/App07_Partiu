@@ -386,8 +386,7 @@ public class ComandaNetwork {
             e.printStackTrace();
             return null;
         }
-
-        Log.d("TESTES", "ComandaNetwork getComandaByCodigo.Comanda=" + comanda.toString());
+//        Log.d("TESTES", "ComandaNetwork getComandaByCodigo.Comanda=" + comanda.toString());
         return comanda;
     }
 
@@ -500,8 +499,6 @@ public class ComandaNetwork {
         OkHttpClient client = new OkHttpClient();
         ArrayList<Item> itens = new ArrayList<>();
         url += "/getPedidosByUsuario?idComanda=" + idComanda+"&idUsuario="+idUsuario;
-        Log.d("TESTES", "URL="+url);
-
         Request request = new Request.Builder()
                 .url(url)
                 .build();

@@ -1,11 +1,13 @@
 package br.com.app07_partiu.Activity.ComandaMesaCliente;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -62,7 +64,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     public static final String ITEM = "br.com.app07_partiu.ComandaMesaClienteActivity.item";
     public static final String COMANDA = "ComandaCliente.Comanda";
     public static final String CLIENTE_LOGADO = "ComandaCliente.ClienteLogado";
-    public static final String ITENS_FINALIZAR ="ComandaCliente.ItensFInalizar";
+    public static final String ITENS_FINALIZAR = "ComandaCliente.ItensFInalizar";
 
     public static final int RESULT_PEDIDOSFINALIZADOS = 3333;
 
@@ -84,7 +86,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     public Item[] itensFormatados;
 
     private Context context;
-    private Double valorTotalComanda = 0.0;
+    private double valorTotalComanda = 0.0;
+    private double valorPagoComanda = 0.0;
 
     private int[] idUsuario;
     private Item itemDetalhe;
@@ -114,8 +117,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         dataAtualizacao = (String) intent.getSerializableExtra(CodigoComandaClienteActivity.DATA_ATUALIZACAO_COMANDA);
 
 
-
-
         implementacaoComponentes();
 
         Log.d("TESTES", "Comanda = " + comanda.toString());
@@ -124,12 +125,12 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         textViewItemCodigoComanda.setText(comanda.getCodigoComanda());
         textViewItemPessoaComandaNumero.setText("" + idUsuario.length);
         textViewItemMesaNumero.setText(String.valueOf(comanda.getMesa()));
-        textViewItemHora.setText(comanda.getDataEntrada());
+        textViewItemHora.setText(comanda.getHoraEntrada());
 
         //Carraga listView de itens da comanda
         if (itens != null) {
             carregarItens();
-        }else{
+        } else {
             textViewItemTotalComandaValor.setText(doubleToReal(0));
         }
 
@@ -172,8 +173,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     }
 
 
-
-    private void reloadPedidos(){
+    private void reloadPedidos() {
         if (Connection.isConnected(this)) {
             new Thread(
                     new Runnable() {
@@ -197,14 +197,26 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         }
 
 
-
     }
 
     private void getTotalComanda() {
         valorTotalComanda = 0.0;
+        valorPagoComanda = 0.0;
         for (Item i : itensFormatados) {
             valorTotalComanda += i.getValor();
+            if (i.getStatusPedido().equals("P")) {
+                valorPagoComanda += i.getValor();
+            } else if (i.getStatusPedido().equals("S")) {
+
+                for (Usuario u : i.getUsuariosPedido()) {
+                    if (u.getStatusPedido().equals("P")) {
+                        valorPagoComanda += u.getPorcPedido() * i.getValor() / 100;
+                    }
+                }
+            }
+
         }
+        Log.d("TESTES", "ComandaValor Total: " + valorTotalComanda + "; Pago: " + valorPagoComanda);
     }
 
 
@@ -266,24 +278,41 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         pedidosFinalizarCliente = ComandaNetwork.getPedidosByUsuarioComanda(Connection.URL, comanda.getId(), clienteLogado.getId());
+                        if (pedidosFinalizarCliente == null) {
 
-                        runOnUiThread(new Runnable() {
-                                          @Override
-                                          public void run() {
-                                              Intent intentFinalizarPedidos = new Intent(context, FinalizarPedidoClienteActivity.class);
-                                              intentFinalizarPedidos.putExtra(CLIENTE_LOGADO, clienteLogado);
-                                              intentFinalizarPedidos.putExtra(COMANDA, comanda);
-                                              intentFinalizarPedidos.putExtra(ITENS_FINALIZAR, pedidosFinalizarCliente);
-                                              startActivityForResult(intentFinalizarPedidos, RESULT_PEDIDOSFINALIZADOS);
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+
+                                                  alertPedidos();
+
+
+                                              }
                                           }
-                                      }
-                        );
+                            );
+
+                        } else {
+
+
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  Intent intentFinalizarPedidos = new Intent(context, FinalizarPedidoClienteActivity.class);
+                                                  intentFinalizarPedidos.putExtra(CLIENTE_LOGADO, clienteLogado);
+                                                  intentFinalizarPedidos.putExtra(COMANDA, comanda);
+                                                  intentFinalizarPedidos.putExtra(ITENS_FINALIZAR, pedidosFinalizarCliente);
+                                                  startActivityForResult(intentFinalizarPedidos, RESULT_PEDIDOSFINALIZADOS);
+                                              }
+                                          }
+                            );
+                        }
+
 
                     } catch (IOException e) {
                         Log.d("TESTES", "onClickIrAoCarrinho: IOException");
 //                        e.printStackTrace();
                     }
-                    
+
 //                    btnFinalizarPedidos.setEnabled(true);
                 }
             }).start();
@@ -294,23 +323,60 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_PEDIDOSFINALIZADOS){
+        if (resultCode == RESULT_PEDIDOSFINALIZADOS) {
             finish();
         }
     }
 
-    private void setReloadInterval(){
+    private void alertPedidos() {
+
+        AlertDialog.Builder builder
+                = new AlertDialog
+                .Builder(context);
+
+        builder.setTitle("Nenhum pedido a pagar!");
+        builder.setMessage("Deseja sair da comanda? :(");
+
+        // setCancelable = se o usuario pode clicar fora da caixa para feixar tbm
+        builder.setCancelable(false);
+
+        // Set the positive button with yes name
+        // OnClickListener method is use of
+        // DialogInterface interface.
+
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("TESTES", "DialogClicked: Yes");
+            }
+        });
+
+        // Set the Negative button with No name
+        // OnClickListener method is use
+        // of DialogInterface interface.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("TESTES", "DialogClicked: No");
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+    private void setReloadInterval() {
         timerAtualizacao = new Timer();
         TimerTask task = new TimerTask() {
-            public void run()
-            {
+            public void run() {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
-                            Log.d("TESTES", "ComandaCliente_novaDataAtualizacao = "+novaDataAtualizacao);
-                            if (!dataAtualizacao.equals(novaDataAtualizacao)){
+//                            Log.d("TESTES", "ComandaCliente_novaDataAtualizacao = "+novaDataAtualizacao);
+                            if (!dataAtualizacao.equals(novaDataAtualizacao)) {
 //                                Log.d("TESTES", "ComandaCliente_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
                                 dataAtualizacao = novaDataAtualizacao;
                                 final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
@@ -332,6 +398,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                 }).start();
             }
         };
-        timerAtualizacao.schedule( task, 0L ,3000L);
+        timerAtualizacao.schedule(task, 0L, 3000L);
     }
 }

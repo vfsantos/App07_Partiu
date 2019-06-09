@@ -25,6 +25,7 @@ import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.ItemNetwork;
@@ -78,6 +79,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private Context context;
 
     private Double valorTotalComanda = 0.0;
+    private Double valorPagoComanda = 0.0;
     private ComandaConvertView comandaConvertView;
     private Restaurante restaurante;
     private Intent intentPedidoSelecaoGarcom;
@@ -204,10 +206,25 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
 
     private void getTotalComanda() {
+        valorTotalComanda = 0.0;
+        valorPagoComanda = 0.0;
         for (Item i : itensFormatados) {
             valorTotalComanda += i.getValor();
+            if (i.getStatusPedido().equals("P")){
+                valorPagoComanda += i.getValor();
+            }else if(i.getStatusPedido().equals("S")){
+
+                for (Usuario u : i.getUsuariosPedido()){
+                    if (u.getStatusPedido().equals("P")){
+                        valorPagoComanda += u.getPorcPedido()*i.getValor()/100;
+                    }
+                }
+            }
+
         }
+        Log.d("TESTES", "ComandaValor Total: "+valorTotalComanda+"; Pago: "+valorPagoComanda);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -236,7 +253,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
-                            Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
+//                            Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
                             if (dataAtualizacao != null) {
                                 if (!(dataAtualizacao.equals(novaDataAtualizacao))){
                                     Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");

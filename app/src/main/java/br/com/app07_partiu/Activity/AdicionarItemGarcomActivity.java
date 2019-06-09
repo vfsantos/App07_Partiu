@@ -102,7 +102,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     }
 
     public void onClickRemoverQunatidade(View v) {
-        if(quantidade>2) {
+        if(quantidade>1) {
             quantidade--;
             String mensagem = Integer.toString(quantidade);
             textViewQuantidade.setText(mensagem);

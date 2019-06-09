@@ -50,6 +50,10 @@ public class Comanda implements Serializable, Comparable {
         return dataEntrada;
     }
 
+    public String getHoraEntrada(){
+        return dataEntrada.split(" ")[1];
+    }
+
     public void setDataEntrada(String dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
