@@ -66,6 +66,7 @@ public class CardapioGarcomAdapter extends BaseAdapter implements SectionIndexer
         CardapioGarcomViewHolder viewHolder = (CardapioGarcomViewHolder) view.getTag();
         viewHolder.getTextViewNomeItem().setText(itens[position].getNome());
         viewHolder.getTextViewValor().setText(doubleToReal(itens[position].getValor()));
+        viewHolder.getTextViewDetalheItem().setText(itens[position].getDetalhe());
         return view;
     }
 

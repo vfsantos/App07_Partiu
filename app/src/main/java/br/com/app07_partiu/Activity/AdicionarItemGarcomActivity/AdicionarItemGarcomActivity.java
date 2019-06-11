@@ -1,8 +1,9 @@
-package br.com.app07_partiu.Activity;
+package br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -46,6 +47,8 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     private ImageView imageViewAdd;
     private ImageView imageViewSub;
 
+    private ConstraintLayout viewObservacao;
+
 
     //int
     private int quantidade;
@@ -56,6 +59,8 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     Context context;
 
     public static final String ITENS_RETORNADOS = "AdicionarItemGarcom.ItensRetornados";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +78,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
 
         textViewNomeItem.setText(item.getNome());
         textViewValorItem.setText(item.getValorString());
-        textViewDetalhesItem.setText("DETALHE PLACEHOLDER");
+        textViewDetalhesItem.setText(item.getDetalhe());
         textViewQuantidade.setText("1");
         quantidade = 1;
 
@@ -105,6 +110,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     public void onClickAdicionarQuantidade(View v) {
         if(quantidade<9) {
             quantidade++;
+            viewObservacao.setVisibility(View.INVISIBLE);
             String mensagem = Integer.toString(quantidade);
             textViewQuantidade.setText(mensagem);
         }
@@ -113,6 +119,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     public void onClickRemoverQunatidade(View v) {
         if(quantidade>1) {
             quantidade--;
+            if (quantidade == 1) viewObservacao.setVisibility(View.VISIBLE);
             String mensagem = Integer.toString(quantidade);
             textViewQuantidade.setText(mensagem);
         }
@@ -122,6 +129,9 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         Item[] itensRetornar = new Item[quantidade];
         for(int i = 0; i < quantidade; i++){
             itensRetornar[i] = item;
+        }
+        if (quantidade == 1){
+            itensRetornar[0].setObsPedido(editTextObservacao.getText().toString());
         }
         Intent returnIntent = new Intent();
         Log.d("TESTES", "AdicionarItemGarcom.qtdItensRetornadso="+itensRetornar.length);
@@ -152,5 +162,7 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         //ImageView
         imageViewAdd             = (ImageView) findViewById(R.id.imageView_adicionarItem_add);
         imageViewSub             = (ImageView) findViewById(R.id.imageView_adicionarItem_retirar);
+
+        viewObservacao           = (ConstraintLayout) findViewById(R.id.constraintLayout4);
     }
 }

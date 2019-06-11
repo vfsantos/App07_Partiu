@@ -19,6 +19,7 @@ public class Item implements Serializable {
     private String tipo;
     private double valor;
     private String status;
+    private String detalhe;
 
     //Pedido
     private Usuario usuario;
@@ -27,6 +28,7 @@ public class Item implements Serializable {
     private String idComanda;
     private String data;
     private String statusPedido;
+    private String obsPedido;
 
     //Usuario
     private int idUsuario;
@@ -39,6 +41,22 @@ public class Item implements Serializable {
     private double porcPaga;
     private String statusPedidoUsuario;
 
+
+    public String getDetalhe() {
+        return detalhe;
+    }
+
+    public void setDetalhe(String detalhe) {
+        this.detalhe = detalhe;
+    }
+
+    public String getObsPedido() {
+        return obsPedido;
+    }
+
+    public void setObsPedido(String obsPedido) {
+        this.obsPedido = obsPedido;
+    }
 
     public double getPorcPaga() {
         return porcPaga;
@@ -256,15 +274,20 @@ public class Item implements Serializable {
                 ", tipo='" + tipo + '\'' +
                 ", valor=" + valor +
                 ", status='" + status + '\'' +
+                ", detalhe='" + detalhe + '\'' +
                 ", usuario=" + usuario +
                 ", idPedido=" + idPedido +
                 ", porc_desconto=" + porc_desconto +
                 ", idComanda='" + idComanda + '\'' +
                 ", data='" + data + '\'' +
                 ", statusPedido='" + statusPedido + '\'' +
+                ", obsPedido='" + obsPedido + '\'' +
                 ", idUsuario=" + idUsuario +
                 ", nomeUsuario='" + nomeUsuario + '\'' +
                 ", emailUsuario='" + emailUsuario + '\'' +
+                ", usuariosPedido=" + usuariosPedido +
+                ", porcPaga=" + porcPaga +
+                ", statusPedidoUsuario='" + statusPedidoUsuario + '\'' +
                 '}';
     }
 }

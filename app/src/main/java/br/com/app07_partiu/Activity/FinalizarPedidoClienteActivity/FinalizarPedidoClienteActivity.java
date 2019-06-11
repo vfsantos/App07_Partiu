@@ -13,12 +13,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
 import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
-import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteAdapter;
 import br.com.app07_partiu.Activity.FormasPagamentoActivity;
 import br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
@@ -34,7 +32,7 @@ import static br.com.app07_partiu.Util.Util.doubleToReal;
 public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
 
-    public static final String  USUARIO_LOGADO ="FinalizarPedido.Usuario";
+    public static final String USUARIO_LOGADO = "FinalizarPedido.Usuario";
     public static final String COMANDA = "FinalizarPEdido.Comadna";
 
     //Toolbar
@@ -64,7 +62,7 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
     Intent intentItem;
 
-
+    private View viewSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +78,8 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
         context = this;
         intent = getIntent();
 
+        viewSnackbar = findViewById(R.id.finalizarPedidoClienteActivityView);
+
         clienteLogado = (Usuario) intent.getSerializableExtra(ComandaMesaClienteActivity.CLIENTE_LOGADO);
         comanda = (Comanda) intent.getSerializableExtra(ComandaMesaClienteActivity.COMANDA);
         itens = (Item[]) intent.getSerializableExtra(ComandaMesaClienteActivity.ITENS_FINALIZAR);
@@ -87,8 +87,6 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
         implementarComponentes();
 
         carregarItens();
-        verifyPagos();
-
 
     }
 
@@ -119,24 +117,8 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
         reloadPedidos();
     }
 
-    private void verifyPagos(){
-        int countPagos = 0;
-        for (Item i : itens){
-            Log.d("TESTES", i.getStatusPedidoUsuario());
-            if (i.getStatusPedidoUsuario().equals("P")){
-
-                countPagos++;
-            }
-        }
-        if (countPagos == itens.length){
-            Toast.makeText(context, "Carrinho Vazio!", Toast.LENGTH_LONG).show();
-            finish();
-        }
-    }
-
-
-    private void reloadPedidos(){
-        if (Connection.isConnected(this)) {
+    private void reloadPedidos() {
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(
                     new Runnable() {
                         @Override
@@ -147,19 +129,17 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
                                                   @Override
                                                   public void run() {
                                                       carregarItens();
-                                                      verifyPagos();
-
                                                   }
                                               }
                                 );
                             } catch (IOException e) {
-                                Log.e("TESTES", "IOException reloadPedidos'");
                                 e.printStackTrace();
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                                Log.d("TESTES", "FinalizarPedidoCliente: IOException reloadPedidos");
                             }
                         }
                     }).start();
         }
-
 
 
     }
@@ -180,13 +160,13 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
             });
 
         } catch (NullPointerException e) {
-            Toast.makeText(context, "Carrinho Vazio!", Toast.LENGTH_LONG).show();
-            finish();
+            Log.d("TESTES", "carregarItens; n sei como chegou aqui");
+//            finish();
         }
     }
 
     private void getItemComandaDetalhe(final int idPedido) {
-        if (Connection.isConnected(context)) {
+        if (Connection.isConnected(context, viewSnackbar)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -206,8 +186,9 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
                                       }
                         );
                     } catch (IOException e) {
-                        Log.d("TESTES", "getItemComandaDetalhe - Erro ao pegar pedido de id=" + idPedido);
                         e.printStackTrace();
+                        Log.d("TESTES", "FinalizarPedidoCLiente: getItemComandaDetalhe - Erro ao pegar pedido de id=" + idPedido);
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                     }
                 }
             }).start();
@@ -219,7 +200,7 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
         valorTotalComanda = 0.0;
         for (Item i : itens) {
-            valorTotalComanda += i.getValor() * i.getPorcPaga()/100;
+            valorTotalComanda += i.getValor() * i.getPorcPaga() / 100;
         }
 
     }
@@ -254,7 +235,7 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS){
+        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS) {
             setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
             finish();
         }

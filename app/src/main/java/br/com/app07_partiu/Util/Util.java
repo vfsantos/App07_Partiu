@@ -150,12 +150,12 @@ public class Util {
     }
 
     public static void showSnackbar(View view, String texto){
-        Snackbar snackbarErroLogin = Snackbar.make(view, texto, Snackbar.LENGTH_LONG);
+        Snackbar snackbarErroLogin = Snackbar.make(view, texto, Snackbar.LENGTH_SHORT);
         snackbarErroLogin.show();
     }
 
     public static void showSnackbar(View view, int idString){
-        Snackbar snackbarErroLogin = Snackbar.make(view, idString, Snackbar.LENGTH_LONG);
+        Snackbar snackbarErroLogin = Snackbar.make(view, idString, Snackbar.LENGTH_SHORT);
         snackbarErroLogin.show();
     }
 

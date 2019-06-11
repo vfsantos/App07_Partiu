@@ -1,5 +1,6 @@
 package br.com.app07_partiu.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,16 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import org.json.JSONException;
 import java.io.IOException;
-import java.util.zip.Inflater;
 
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Estabelecimento;
-import br.com.app07_partiu.Model.ItemRestauranteConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
@@ -95,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
     //Progressbar
     ProgressBar progressBarTime;
 
-    private final boolean testeGarcom  = false;
-    private final boolean testeCliente = true;
+    private final boolean testeGarcom  = true;
+    private final boolean testeCliente = false;
 
     Usuario     usuario;
     Restaurante restaurante;
@@ -104,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
     //String
     private String email;
     private String senha;
+
+    private View viewSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,16 +113,17 @@ public class LoginActivity extends AppCompatActivity {
         inicializarComponentes();
 
         contexto = this;
+        viewSnackbar = findViewById(R.id.loginActivityView);
 
         //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
-            editTextEmail.setText("benjamin.bento@gmail.com");
+            editTextEmail.setText("garcom1");
             editTextSenha.setText("123");
             validarLogin();
         }
 
         if (testeCliente){
-            editTextEmail.setText("brenda.mariah@gmail.com");
+            editTextEmail.setText("cliente1");
             editTextSenha.setText("123");
             validarLogin();
         }
@@ -165,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(final String email, final String senha){
 
-        if(Connection.isConnected(this)) {
+        if(Connection.isConnected(this, viewSnackbar)) {
             //TODO consertar progressBarTime
 //            progressBarTime.setVisibility(View.VISIBLE);
 
@@ -173,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
 
             intentListarComanda = new Intent(this, HomeGarcomActivity.class);
             intentListarRecomendacoes = new Intent(this, ExplorarClienteActivity.class);
-
+            final ProgressDialog mProgressDialog = ProgressDialog.show(this, null,"Carregando informações ;)", true);
             Thread loginThread = new Thread(
                     new Runnable() {
                         @Override
@@ -195,6 +196,12 @@ public class LoginActivity extends AppCompatActivity {
                                                           startActivity(intentListarComanda);
                                                           //TODO consertar progressBarTime
 //                                                          progressBarTime.setVisibility(View.INVISIBLE);
+                                                          try {
+                                                              Thread.sleep(500);
+                                                          } catch (InterruptedException e) {
+                                                              e.printStackTrace();
+                                                          }
+                                                          mProgressDialog.dismiss();
                                                       }
                                                   }
                                     );
@@ -216,6 +223,13 @@ public class LoginActivity extends AppCompatActivity {
 //                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_ESPECIALIDADEUSUARIO, recomendacaoEspecialidade);
 //                                            intentListarRecomendacoes.putExtra(RECOMENDACOES_VISITADOSRECENTEMENTE, recomendacaoRecente);
                                             startActivity(intentListarRecomendacoes);
+                                            try {
+                                                Thread.sleep(500);
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                            mProgressDialog.dismiss();
+
 
                                         }
                                     });
@@ -223,25 +237,27 @@ public class LoginActivity extends AppCompatActivity {
 
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                Log.e("TESTES", "Erro no webservice ou na conexão");
-                                Util.showSnackbar(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_backend);
+                                Log.e("TESTES", "LoginActivity: IOException login");
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
 
 
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
                                                       buttonEntrar.setEnabled(true);
+                                                      mProgressDialog.dismiss();
                                                   }
                                               }
                                 );
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.d("TESTES", "Retornou 'Usuario Inválido!'");
-                                Util.showSnackbar(findViewById(R.id.constraintLayoutLogin), R.string.snackbar_erro_login);
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_login);
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
                                                       buttonEntrar.setEnabled(true);
+                                                      mProgressDialog.dismiss();
                                                   }
                                               }
                                 );
@@ -280,6 +296,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         } catch (IOException e) {
                             e.printStackTrace();
+                            Log.e("TESTES", "LoginActivity: IOException getRestauranteComandasGarcom");
+                            Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -298,7 +316,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void getRecomendacoesCliente() {
         intentListarRecomendacoes = new Intent(this, ExplorarClienteActivity.class);
-        if (Connection.isConnected(this)) {
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(
                     new Runnable() {
                         @Override
@@ -324,8 +342,9 @@ public class LoginActivity extends AppCompatActivity {
                                                   }
                                               });
                             } catch (IOException e) {
-                                Log.d("TESTES", "Erro no getRecomendacoesCliente");
                                 e.printStackTrace();
+                                Log.e("TESTES", "LoginActivity: IOException getRecomendacoesCLiente");
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                             }
 
                         }

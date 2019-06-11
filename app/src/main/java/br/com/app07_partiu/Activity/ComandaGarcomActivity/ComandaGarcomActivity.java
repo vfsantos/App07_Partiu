@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -96,6 +95,9 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     private Timer timerAtualizacao;
 
+    private View viewSnackbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +110,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
 
         context = this;
+        viewSnackbar = findViewById(R.id.comandaGarcomActivityView);
 
         buttonPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +184,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
             itensFormatados = Util.formatItens(itens);
             getTotalComanda();
+            textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
+
             listViewItensComanda.setVisibility(View.VISIBLE);
             //Listview com itens da comanda selecionada
             listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
@@ -209,7 +214,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     private void visualizarItensRestaurante() {
         intentPedidoSelecaoGarcom = new Intent(context, CardapioGarcomActivity.class);
-        if (Connection.isConnected(this)) {
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -228,6 +233,8 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                         );
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Log.d("TESTES", "ComandaGarcom: IOException visualizarItensRestaurante");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                     }
                 }
             }).start();
@@ -260,11 +267,12 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_PEDIDOS_CRIADOS) {
+            Util.showSnackbar(viewSnackbar, "Itens Adicionados!");
             Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ResumoCardapioGarcomActivity.RETORNO_ITENS_COMANDA);
             itens = itensRecarregar;
             carregarItens();
         } else if (resultCode == RESULT_PEDIDO_REMOVIDO) {
-            Toast.makeText(context, "Pedido Cancelado!", Toast.LENGTH_LONG).show();
+            Util.showSnackbar(viewSnackbar, "Pedido Cancelado!");
 
             Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ItemDetalheGarcomActivity.PEDIDOS_REFRESH);
 
@@ -278,35 +286,40 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             public void run()
             {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
-//                            Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
-                            if (dataAtualizacao != null) {
-                                if (!(dataAtualizacao.equals(novaDataAtualizacao))){
-                                    Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
-                                    dataAtualizacao = novaDataAtualizacao;
-                                    final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+                if (Connection.isConnected(context, viewSnackbar)) {
 
-                                    runOnUiThread(new Runnable() {
-                                                      @Override
-                                                      public void run() {
-                                                          itens = itensNovos;
-                                                          carregarItens();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String novaDataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
+//                            Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao = "+novaDataAtualizacao);
+                                if (dataAtualizacao != null) {
+                                    if (!(dataAtualizacao.equals(novaDataAtualizacao))) {
+                                        Log.d("TESTES", "ComandaGarcom_novaDataAtualizacao; DataAtualização diferentes, recarregando List Pedidos");
+                                        dataAtualizacao = novaDataAtualizacao;
+                                        final Item[] itensNovos = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
+
+                                        runOnUiThread(new Runnable() {
+                                                          @Override
+                                                          public void run() {
+                                                              itens = itensNovos;
+                                                              carregarItens();
+                                                          }
                                                       }
-                                                  }
-                                    );
+                                        );
+                                    }
+                                } else {
+                                    dataAtualizacao = novaDataAtualizacao;
                                 }
-                            }else {
-                                dataAtualizacao = novaDataAtualizacao;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Log.d("TESTES", "ComandaGarcom: IOException setReloadInterval");
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
-                    }
-                }).start();
+                    }).start();
+                }
             }
         };
         timerAtualizacao.schedule( task, 0L ,3000L);

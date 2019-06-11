@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -34,6 +33,7 @@ import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class HomeGarcomActivity extends AppCompatActivity {
 
@@ -92,6 +92,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //SwipeRefreshLayout
     private SwipeRefreshLayout pullToRefresh;
 
+    private View viewSnackbar;
 
 
     @Override
@@ -113,6 +114,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
         context = this;
         Intent intent = getIntent();
+        viewSnackbar = findViewById(R.id.homeGarcomActivityView);
 
         restaurante = (Restaurante) intent.getSerializableExtra(LoginActivity.RESTAURANTE);
         comandas = (ComandaConvertView[]) intent.getSerializableExtra(LoginActivity.COMANDAS);
@@ -144,7 +146,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
         refreshComandas();
     }
 
-    private void loadComandas(){
+    private void loadComandas() {
         listViewComandas = (ListView) findViewById(R.id.list_view_comanda_garcom);
         final HomeGarcomAdapter adapter = new HomeGarcomAdapter(comandas, this);
         listViewComandas.setAdapter(adapter);
@@ -164,7 +166,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
         });
     }
 
-    private void refreshComandas(){
+    private void refreshComandas() {
         new Thread(
                 new Runnable() {
                     @Override
@@ -182,7 +184,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                             Log.d("TESTES", "ResfreshComandas(): Erro no webservice ou na conexão");
-                            Toast.makeText(context, "Erro Conexão ou Webservice!", Toast.LENGTH_LONG).show();
+                            Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                             runOnUiThread(new Runnable() {
                                               @Override
                                               public void run() {
@@ -228,7 +230,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //Criar comadanda
     public void criarComanda(final int idGarcom, final int numeroDaMesa) {
         intentNovaComanda = new Intent(context, ComandaGarcomActivity.class);
-        if (Connection.isConnected(this)) {
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -251,18 +253,13 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                       }
                         );
                     } catch (IOException e) {
-                        Log.d("TESTES", "criarComanda: IOException");
                         e.printStackTrace();
+                        Log.d("TESTES", "homeGarcom: IOException criarComanda");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                     } catch (JSONException e) {
-                        Log.d("TESTES", "criarComanda: JSONException");
-                        runOnUiThread(new Runnable() {
-                                          @Override
-                                          public void run() {
-                                              Toast.makeText(context, "Comanda de mesa " + numeroDaMesa + " já existe!", Toast.LENGTH_SHORT).show();
-                                          }
-                                      }
-                        );
-                        e.printStackTrace();
+                        Log.d("TESTES", "criarComanda: JSONException; Mesa já existe");
+                        Util.showSnackbar(viewSnackbar, "Comanda de mesa " + numeroDaMesa + " já existe!");
+//                        e.printStackTrace();
                     }
                 }
             }).start();
@@ -272,7 +269,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //ver comanda
     public void visualizarComanda(final int idComanda) {
         intentComanda = new Intent(context, ComandaGarcomActivity.class);
-        if (Connection.isConnected(this)) {
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -297,8 +294,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
 
                     } catch (IOException e) {
-                        Log.d("TESTES", "visualizarComanda: IOException");
                         e.printStackTrace();
+                        Log.d("TESTES", "HomeGarcom: IOException visualizarComanda");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                     } catch (JSONException e) {
                         Log.d("TESTES", "visualizarComanda: JSONException");
                         e.printStackTrace();
@@ -319,7 +317,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //fecha o alertNovaComanda quando clicar no cancelar
     private void fecharAlertNovaComanda() {
-        final Dialog dialog   = alertaNumeroMesa.show();
+        final Dialog dialog = alertaNumeroMesa.show();
         final Handler handler = new Handler();
         dialog.dismiss();
         final Runnable runnable = new Runnable() {

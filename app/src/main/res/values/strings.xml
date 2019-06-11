@@ -72,7 +72,7 @@
     <string name="textview_recomendacaovisitadosrecentemente">Visite Novamente</string>
     <string name="textview_recomendacaovisitadosrecentemente_descricao">quem gosta, sempre volta</string>
     <string name="textview_recomendacaorestauranteavaliado">Os Melhores</string>
-    <string name="textview_recomendacaorestauranteavaliado_descricao">os tops do Partiu</string>
+    <string name="textview_recomendacaorestauranteavaliado_descricao">os tops do partiu</string>
     <string name="textview_recomendacaomaisvisitados">Em Alta</string>
     <string name="textview_recomendacaomaisvisitados_descricao">onde tá todo mundo?</string>
     <string name="textview_recomendacaoespecialidadeusuario">Sugestões pra Você</string>
@@ -284,6 +284,9 @@
     <string name="item_comanda_garcom_data">Entrada</string>
     <string name="btn_comandacliente_carrinho">IR AO CARRINHO</string>
     <string name="title_activity_finalizar_pedido_cliente">FinalizarPedidoClienteActivity</string>
+    <string name="snackbar_erro_connection">Erro de Conexão!</string>
+    <string name="text_itemResumoCardapio_tituloPage">DETALHE RESUMO</string>
+    <string name="title_activity_item_resumo_cardapio">Detalhe Cardapio</string>
 
 
 </resources>

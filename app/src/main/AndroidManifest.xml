@@ -84,7 +84,7 @@
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
-            android:name=".Activity.AdicionarItemGarcomActivity"
+            android:name=".Activity.AdicionarItemGarcomActivity.AdicionarItemGarcomActivity"
             android:label="@string/text_adicionaritemgarcom_titulopagina"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
@@ -97,6 +97,10 @@
             android:name=".Activity.ItemDetalheGarcomActivity"
             android:label="@string/title_activity_item_comanda_detalhe_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+
+        <activity android:name=".Activity.ItemResumoCardapioGarcomActivity"
+            android:label="@string/title_activity_item_resumo_cardapio"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
 
         <activity
             android:name=".Activity.LoadingActivity"
@@ -125,11 +129,6 @@
         <activity
             android:name=".Activity.HomeGarcomActivity.HomeGarcomActivity"
             android:label="@string/title_activity_visualizar_comanda"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
-        <activity
-            android:name=".Activity.ComandaClienteActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity

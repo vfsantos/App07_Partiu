@@ -4,24 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import java.io.IOException;
 
 import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity;
-import br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
-import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
@@ -42,6 +36,8 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
     private Intent intentTelaPago;
 
+    private View viewSnackbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +51,7 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
         context = this;
         intent = this.getIntent();
+        viewSnackbar = findViewById(R.id.formasPagamentoActivityView);
 
         clienteLogado = (Usuario) intent.getSerializableExtra(FinalizarPedidoClienteActivity.USUARIO_LOGADO);
         comanda = (Comanda) intent.getSerializableExtra(FinalizarPedidoClienteActivity.COMANDA);
@@ -106,10 +103,10 @@ public class FormasPagamentoActivity extends AppCompatActivity {
     }
 
 
-    public void onClickConcluir(View view) {
+    public void onClickConcluir(final View view) {
         intentTelaPago = new Intent(this, PagamentoConfirmadoActivity.class);
 
-        if (Connection.isConnected(context)) {
+        if (Connection.isConnected(context, viewSnackbar)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -118,7 +115,7 @@ public class FormasPagamentoActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
-                                              Toast.makeText(context, "Pedidos Pagos!", Toast.LENGTH_LONG).show();
+                                              Util.showSnackbar(viewSnackbar, "Pedidos Pagos!");
 //                                              setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
 //                                              finish();
 
@@ -128,6 +125,8 @@ public class FormasPagamentoActivity extends AppCompatActivity {
                         );
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Log.d("TESTES", "FormasPagamento: IOException onClickConcluir");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                     }
                 }
             }).start();

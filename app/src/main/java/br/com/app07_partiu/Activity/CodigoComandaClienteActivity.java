@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -29,6 +27,7 @@ import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.USUARIO;
 
@@ -85,6 +84,8 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
     private boolean test = true;
 
+    private View viewSnackbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,8 +94,10 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         context = this;
-
         intent = getIntent();
+
+        viewSnackbar = findViewById(R.id.codigoComandaClienteActivityView);
+
         cliente = (Usuario) intent.getSerializableExtra(USUARIO);
 
 
@@ -130,7 +133,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
     private void getComandaPedidos(final String codigo) {
         intentComanda = new Intent(context, ComandaMesaClienteActivity.class);
-        if (Connection.isConnected(this)) {
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(
                     new Runnable() {
                         @Override
@@ -153,16 +156,14 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                                     }
                                 });
                             } catch (IOException e) {
-                                Log.e("TESTES", "IOException getComandaPedidos'");
                                 e.printStackTrace();
+                                Log.e("TESTES", "CodigoComandaClienteActivity: IOException getComandaPedidos'");
+                                Util.showSnackbar(viewSnackbar,R.string.snackbar_erro_backend);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Log.d("TESTES", "Retornou 'Comanda Inválido!'");
-                                runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        Toast.makeText(context, "Comanda Inválida!", Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                Log.d("TESTES", "CodigoComandaClienteActivity: Código Comanda Inválida");
+                                Util.showSnackbar(viewSnackbar,"Comanda Inválida!");
                             }
                         }
                     }).start();

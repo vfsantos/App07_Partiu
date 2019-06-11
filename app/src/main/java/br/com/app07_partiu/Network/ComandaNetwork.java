@@ -138,6 +138,8 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
+                it.setDetalhe(item.getString("detalhe"));
+                it.setObsPedido(item.getString("observacao"));
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -250,6 +252,8 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
+                it.setDetalhe(item.getString("detalhe"));
+                it.setObsPedido(item.getString("observacao"));
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -306,6 +310,8 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
+                it.setDetalhe(item.getString("detalhe"));
+                it.setObsPedido(item.getString("observacao"));
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -423,10 +429,9 @@ public class ComandaNetwork {
 
         int[] idItens = new int[itensAdicionar.length];
         String[] obsItens = new String[itensAdicionar.length];
-        //TODO pegar observacao
         for (int i = 0; i < itensAdicionar.length; i++) {
             idItens[i] = itensAdicionar[i].getId();
-            obsItens[i] = "";
+            obsItens[i] = itensAdicionar[i].getObsPedido();
         }
 
         url += "/createItemPedido?idComanda=" + idComanda;
@@ -475,6 +480,8 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
+                it.setDetalhe(item.getString("detalhe"));
+                it.setObsPedido(item.getString("observacao"));
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -526,6 +533,8 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
+                it.setDetalhe(item.getString("detalhe"));
+                it.setObsPedido(item.getString("observacao"));
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));

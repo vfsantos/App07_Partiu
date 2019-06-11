@@ -3,25 +3,32 @@ package br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
+import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
+import br.com.app07_partiu.Activity.ItemResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity.RESULT_RESUMO_FINALIZADO;
 import static br.com.app07_partiu.Model.Item.itemListToArray;
@@ -31,7 +38,9 @@ import static br.com.app07_partiu.Util.Util.doubleToReal;
 public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
     public static final String RETORNO_ITENS_COMANDA = "ResumoCardapio.ItensRequest";
-
+    public static final String ITEM = "ResumoCardapio.ItemDEtalhe";
+    public static final String POSICAO = "ResumoCardapio.Posicao";
+    public static final int RESULT_SEMPEDIDOS = 1234;
 
     //Toolbar
     private Toolbar toolbar;
@@ -59,6 +68,9 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
     private List<Item> itensComanda;
 
+    private View viewSnackbar;
+
+    private ResumoCardapioGarcomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +81,7 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
         context = this;
         intent = this.getIntent();
+        viewSnackbar = findViewById(R.id.resumoCardapioGarcomActivityView);
 
         comanda = (Comanda) intent.getSerializableExtra(CardapioGarcomActivity.COMANDA);
         itensAdicionar = (Item[]) intent.getSerializableExtra(CardapioGarcomActivity.ITENS_ADICIONAR);
@@ -78,7 +91,6 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
         }
 
         inicializarComponentes();
-        textViewTotalValor.setText(calcularTotal());
         carregarItens();
 
 
@@ -95,8 +107,27 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
     private void carregarItens() {
         //Recycler com itens da cardapio do restaurante
-        ResumoCardapioGarcomAdapter adapter = new ResumoCardapioGarcomAdapter(itensAdicionar, this);
+
+
+        adapter = new ResumoCardapioGarcomAdapter(itensAdicionar, this);
         listViewItensResumo.setAdapter(adapter);
+        listViewItensResumo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intentItemDetalheResumo = new Intent(context, ItemResumoCardapioGarcomActivity.class);
+                intentItemDetalheResumo.putExtra(ITEM, itensAdicionar[position]);
+                intentItemDetalheResumo.putExtra(POSICAO, position);
+                startActivityForResult(intentItemDetalheResumo, 999);
+            }
+        });
+
+        textViewTotalValor.setText(calcularTotal());
+
+
+
     }
 
     private void inicializarComponentes() {
@@ -114,7 +145,7 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
     private void criarPedidos() {
         buttonFinalizarPedido.setEnabled(false);
-        if (Connection.isConnected(this)) {
+        if (Connection.isConnected(this, viewSnackbar)) {
 
             new Thread(new Runnable() {
                 @Override
@@ -124,7 +155,6 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
-                                              Toast.makeText(context, "Itens Adicionados!", Toast.LENGTH_LONG).show();
                                               Log.d("TESTES", "Itens Adicionados à comanda com sucesso");
                                               Intent intent = new Intent();
                                               intent.putExtra(RETORNO_ITENS_COMANDA, itemListToArray(itensComanda));
@@ -134,16 +164,8 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
                                       }
                         );
                     } catch (IOException e) {
-
-                        runOnUiThread(new Runnable() {
-                                          @Override
-                                          public void run() {
-                                              Toast.makeText(context, "ERRO INTERNO", Toast.LENGTH_SHORT).show();
-
-                                          }
-                                      }
-                        );
-                        Log.d("TESTES", "IOException; não conseguiu criar pedidos");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                        Log.d("TESTES", "ResumoCardapioGarcom: IOException criarPedidos; não conseguiu criar pedidos");
                         e.printStackTrace();
                     }
                 }
@@ -153,5 +175,39 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
     public void onClickFinalizarCardapio(View view) {
         criarPedidos();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+            case ItemResumoCardapioGarcomActivity.RESULT_ALTERAR_PEDIDO:
+                int posicaoRetornada = (Integer) data.getSerializableExtra(ItemResumoCardapioGarcomActivity.POSICAO_ALTERAR);
+                Item itemRetornado = (Item) data.getSerializableExtra(ItemResumoCardapioGarcomActivity.ITEM_ALTERADO);
+                Log.d("TESTES", "ItemResumo.Result: Alterando item posicao=" + posicaoRetornada);
+
+                itensAdicionar[posicaoRetornada] = itemRetornado;
+                carregarItens();
+
+                break;
+
+            case ItemResumoCardapioGarcomActivity.RESULT_REMOVER_PEDIDO:
+                int posicaoRemover = (Integer) data.getSerializableExtra(ItemResumoCardapioGarcomActivity.POSICAO_REMOVER);
+                List<Item> itensTemp = new LinkedList<>(Arrays.asList(itensAdicionar));
+                itensTemp.remove(posicaoRemover);
+                itensAdicionar = itemListToArray(itensTemp);
+                if (itensAdicionar.length == 0){
+                    setResult(RESULT_SEMPEDIDOS);
+                    finish();
+                }else{
+                    carregarItens();
+                }
+                break;
+
+            default:
+                break;
+
+        }
     }
 }

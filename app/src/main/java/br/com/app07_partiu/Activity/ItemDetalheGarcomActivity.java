@@ -1,10 +1,10 @@
 package br.com.app07_partiu.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,18 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONException;
-
 import java.io.IOException;
-
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
-import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class ItemDetalheGarcomActivity extends AppCompatActivity {
     //Toolbar
@@ -31,6 +26,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
 
 
     //TextView
+    //item
     private TextView textViewNomeItem;
     private TextView textViewDetalhesItem;
     private TextView textViewValorItem;
@@ -40,7 +36,6 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     private TextView textViewQuantidadeValor;
     private TextView textViewStatus;
     private TextView textViewStatusValor;
-
 
     //Button
     private Button buttonRemover;
@@ -53,6 +48,8 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     Context context;
 
     private int idComanda;
+
+    private View viewSnackbar;
 
     public static final String PEDIDOS_REFRESH = "ItemDetalhe.Remover.Pedidos";
 
@@ -69,17 +66,17 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
 
         intent = getIntent();
         context = this;
+        viewSnackbar = findViewById(R.id.itemDetalheGarcomActivityView);
+
         item = (Item) intent.getSerializableExtra(ComandaGarcomActivity.ITEM);
         idComanda = (Integer) intent.getSerializableExtra(ComandaGarcomActivity.ID_COMANDA);
 
         textViewNomeItem.setText(item.getNome());
         textViewValorItem.setText(item.getValorString());
-        textViewDetalhesItem.setText("Descrição Placeholder de Item_Descricao");
+        textViewDetalhesItem.setText(item.getDetalhe());
+        textViewDetalhesObservacao.setText(item.getObsPedido());
 
-        textViewQuantidade.setText("");
-        textViewQuantidadeValor.setText("");
-
-        String status = "";
+        String status;
         switch (item.getStatusPedido()) {
             case "N":
                 status = "Não Selecionado";
@@ -111,12 +108,34 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         buttonRemover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Fazer verificação antes de remover
-                removerPedido();
+                AlertDialog.Builder builder
+                        = new AlertDialog
+                        .Builder(context);
+
+                builder.setTitle("O pedido será excluído!");
+                builder.setMessage("Continuar?");
+
+                builder.setCancelable(true);
+                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("TESTES", "DialogClicked: Yes");
+                        removerPedido();
+                    }
+                });
+
+                builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("TESTES", "DialogClicked: No");
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
@@ -138,17 +157,15 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         }
     }
 
+
     private void removerPedido() {
-        if (Connection.isConnected(this)) {
-            //TODO consertar progressBarTime
-//            progressBarTime.setVisibility(View.VISIBLE);
+        if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(
                     new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 pedidosRefresh = ComandaNetwork.removerPedidoComanda(Connection.URL, item.getIdPedido(), idComanda);
-                                //TODO verificar erro
                                 Log.d("TESTES", "Removeu pedido id " + item.getIdPedido());
                                 runOnUiThread(new Runnable() {
                                                   @Override
@@ -162,12 +179,8 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
                                 );
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                Log.d("TESTES", "Erro no webservice ou na conexão");
-                                runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        Toast.makeText(context, "Erro no webservice ou na conexão", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                Log.d("TESTES", "ItemDetalheGarcom: IOException removerPedido");
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
                             }
                         }
                     }).start();
@@ -185,8 +198,6 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         textViewValorItem          = (TextView) findViewById(R.id.textView_itemDetalhe_valorItem);
         textViewAlgumaObservacao   = (TextView) findViewById(R.id.textView_itemDetalhes_algumaObservacao);
         textViewDetalhesObservacao = (TextView) findViewById(R.id.textView_itemDetalhes_detalheObservacao);
-        textViewQuantidade         = (TextView) findViewById(R.id.textView_itemDetalhe_quantidade);
-        textViewQuantidadeValor    = (TextView) findViewById(R.id.textView_itemDetalhes_quantidadeValor);
         textViewStatus             = (TextView) findViewById(R.id.textView_itemDetalhes_status);
         textViewStatusValor        = (TextView) findViewById(R.id.textView_itemDetalhes_statusValor);
 

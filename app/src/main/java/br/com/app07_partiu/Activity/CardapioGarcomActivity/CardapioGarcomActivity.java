@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,12 +16,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity;
+import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity.RESULT_PEDIDOS_CRIADOS;
 import static br.com.app07_partiu.Model.Item.itemListToArray;
@@ -61,6 +61,8 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     //RecyclerView
     private ListView listViewItensCardapio;
 
+    private View viewSnackbar;
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,8 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
         intent = getIntent();
         context = this;
+
+        viewSnackbar = findViewById(R.id.cardapioGarcomActivityView);
 
         buttonCarrinho.setEnabled(false);
         buttonCarrinho.setBackgroundTintList(getResources().getColorStateList(R.drawable.button_float_tintlist));
@@ -145,20 +149,28 @@ public class CardapioGarcomActivity extends AppCompatActivity {
 
         //Retornando sinal para fechar Activity de Cardapio (Resumo confirmado; volta à Comanda)
         Log.d("TESTES", "CardapioGarcomActivity.resultCode = "+resultCode);
-        if (resultCode == RESULT_RESUMO_FINALIZADO) {
+        switch(resultCode){
+            case RESULT_RESUMO_FINALIZADO:
+                setResult(RESULT_PEDIDOS_CRIADOS, data);
+                finish();
+                break;
 
-            setResult(RESULT_PEDIDOS_CRIADOS, data);
-            finish();
+            case RESULT_DETALHE_RETORNADO:
+                buttonCarrinho.setEnabled(true);
+                Item[] novosItens = (Item[]) data.getSerializableExtra(AdicionarItemGarcomActivity.ITENS_RETORNADOS);
+                Log.d("TESTES", "CardapioGarcom.qtdItensRetornadosNovos="+novosItens.length);
+                for (Item item : novosItens) {
+                    addItem(item);
+                }
+                break;
 
-            //Retornando itens do AdicionarItemGarcomActivity
-        } else if (resultCode == RESULT_DETALHE_RETORNADO) {
-            buttonCarrinho.setEnabled(true);
-            Item[] novosItens = (Item[]) data.getSerializableExtra(AdicionarItemGarcomActivity.ITENS_RETORNADOS);
-            Log.d("TESTES", "CardapioGarcom.qtdItensRetornadosNovos="+novosItens.length);
-            for (Item item : novosItens) {
-                addItem(item);
-            }
+            case ResumoCardapioGarcomActivity.RESULT_SEMPEDIDOS:
+                buttonCarrinho.setEnabled(false);
+                itensAdicionar = new ArrayList<>();
+                Util.showSnackbar(viewSnackbar, "Carrinho Vazio! Retornado ao Cardápio");
+                break;
         }
+
     }
 
     //click finalizar

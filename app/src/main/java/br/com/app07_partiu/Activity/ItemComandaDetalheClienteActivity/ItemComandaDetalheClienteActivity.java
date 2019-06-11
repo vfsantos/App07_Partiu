@@ -4,23 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import java.io.IOException;
 
-import br.com.app07_partiu.Activity.ComandaClienteActivity;
 import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
@@ -70,6 +65,8 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
     private Button btnDeselecionar;
     private Button btnSelecionar;
 
+    private View viewSnackbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +80,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
         context = this;
         intent = getIntent();
+        viewSnackbar = findViewById(R.id.itemComandaDetalheClienteActivityView);
 
         comanda = (Comanda) intent.getSerializableExtra(ComandaMesaClienteActivity.COMANDA);
         item = (Item) intent.getSerializableExtra(ComandaMesaClienteActivity.ITEM);
@@ -122,8 +120,8 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 //
 //            for (Usuario u : item.getUsuariosPedido()) {
 //                if (u.getId() == clienteLogado.getId() && u.getStatusPedido() == "P") {
-                    btnSelecionar.setVisibility(View.INVISIBLE);
-                    btnDeselecionar.setVisibility(View.INVISIBLE);
+        btnSelecionar.setVisibility(View.INVISIBLE);
+        btnDeselecionar.setVisibility(View.INVISIBLE);
 //                }
 //            }
 //        } catch (NullPointerException e) {
@@ -136,7 +134,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
         textViewNomeDoItem.setText(item.getNome());
         textViewValor.setText(item.getValorString());
-        textViewDescricao.setText("Descrição");
+        textViewDescricao.setText(item.getDetalhe());
         try {
 
             boolean usuarioJaSelecionou = false;
@@ -150,7 +148,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 //                Log.d("TESTES", u.toString());
                 if (u.getId() == clienteLogado.getId()) {
                     usuarioJaSelecionou = true;
-                    if (u.getStatusPedido().toUpperCase().equals("P")){
+                    if (u.getStatusPedido().toUpperCase().equals("P")) {
                         usuarioJaPagou = true;
                     }
                 }
@@ -184,44 +182,50 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         btnSelecionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("TESTES", "Botao Selecionar Clicado");
+                if (Connection.isConnected(context, viewSnackbar)) {
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            ComandaNetwork.selecionarPedidoUsuario(Connection.URL, item.getIdPedido(), clienteLogado.getId(), comanda.getId());
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                ComandaNetwork.selecionarPedidoUsuario(Connection.URL, item.getIdPedido(), clienteLogado.getId(), comanda.getId());
 /*
                             Item[] pedidoNaoFormatado = ComandaNetwork.getPedidoUsuarioBydId(Connection.URL, item.getIdPedido());
                             item = Util.formatItens(pedidoNaoFormatado)[0];*/
-
-                            runOnUiThread(new Runnable() {
-                                              @Override
-                                              public void run() {
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
                                                   /*carregarViews();
                                                   switchButtons(true);*/
-                                                  Toast.makeText(context, "Pedido Selecionado!", Toast.LENGTH_SHORT).show();
-                                                  finish();
+                                                      setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSELECIONADO);
+                                                      finish();
+                                                  }
                                               }
-                                          }
-                            );
-                        } catch (IOException e) {
-                            Log.e("TESTES", "Erro ao selecionar; idPedido=" + item.getId() + ", idUsuario=" + clienteLogado.getId());
-                            e.printStackTrace();
+                                );
+                            } catch (IOException e) {
+                                Log.e("TESTES", "ItemComandaDetalheCliente: IOException setButtons ;Erro ao selecionar; idPedido=" + item.getId() + ", idUsuario=" + clienteLogado.getId());
+                                e.printStackTrace();
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+
+                            }
                         }
-                    }
-                }).start();
+                    }).start();
+                }
             }
+
         });
 
         btnDeselecionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("TESTES", "Botao Selecionar Clicado");
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            ComandaNetwork.deselecionarPedidoUsuario(Connection.URL, item.getIdPedido(), clienteLogado.getId(), comanda.getId());
+                if (Connection.isConnected(context, viewSnackbar)) {
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                ComandaNetwork.deselecionarPedidoUsuario(Connection.URL, item.getIdPedido(), clienteLogado.getId(), comanda.getId());
 /*
 
                             Item[] pedidoNaoFormatado = ComandaNetwork.getPedidoUsuarioBydId(Connection.URL, item.getIdPedido());
@@ -231,23 +235,24 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
                             }
 
 */
-                            runOnUiThread(new Runnable() {
-                                              @Override
-                                              public void run() {
+                                runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
                                                   /*carregarViews();
                                                   switchButtons(false);*/
-                                                  Toast.makeText(context, "Pedido Deselecionado!", Toast.LENGTH_SHORT).show();
-
-                                                  finish();
+                                                      setResult(ComandaMesaClienteActivity.RESULT_PEDIDODESELECIONADO);
+                                                      finish();
+                                                  }
                                               }
-                                          }
-                            );
-                        } catch (IOException e) {
-                            Log.e("TESTES", "Erro ao selecionar; idPedido=" + item.getId() + ", idUsuario=" + clienteLogado.getId());
-                            e.printStackTrace();
+                                );
+                            } catch (IOException e) {
+                                Log.e("TESTES", "ItemComandaDetalheCliente: IOException setButtons ;Erro ao DESelecionar; idPedido=" + item.getId() + ", idUsuario=" + clienteLogado.getId());
+                                e.printStackTrace();
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                            }
                         }
-                    }
-                }).start();
+                    }).start();
+                }
             }
         });
     }

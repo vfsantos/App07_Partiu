@@ -1,22 +1,20 @@
 package br.com.app07_partiu.Activity.ExplorarClienteActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
-
-import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,17 +23,14 @@ import java.util.List;
 
 
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
-import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Activity.PerfilClienteActivity;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
-import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.RecomendacaoNetwork;
-import br.com.app07_partiu.Network.RestauranteNetwork;
-import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class ExplorarClienteActivity extends AppCompatActivity {
 
@@ -117,6 +112,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
 
     public static final String USUARIO = "ExplorarClienteActivity.Cliente";
 
+    private View viewSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +121,10 @@ public class ExplorarClienteActivity extends AppCompatActivity {
 
         context = this;
         intent = getIntent();
+
+        viewSnackbar = findViewById(R.id.explorarClienteActivityView);
+
+
         cliente = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
 
 //        recomendacoesDiaSemana = (Restaurante[]) intent.getSerializableExtra(LoginActivity.RECOMENDACOES_DIASEMANA);
@@ -296,8 +296,8 @@ public class ExplorarClienteActivity extends AppCompatActivity {
 
 
     public void getRecomendacoes(){
-
-        if(Connection.isConnected(this)) {
+        final ProgressDialog mProgressDialog = ProgressDialog.show(this, null,"Carregando seus restaurantes preferidos", true);
+        if(Connection.isConnected(this, viewSnackbar)) {
             Thread loginThread = new Thread(
                     new Runnable() {
                         @Override
@@ -315,6 +315,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                                         public void run() {
 
                                             popularRecomendacoes();
+                                            mProgressDialog.dismiss();
 
                                         }
                                     });
@@ -322,7 +323,9 @@ public class ExplorarClienteActivity extends AppCompatActivity {
 
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                Log.d("TESTES", "Erro no webservice ou na conexão");
+                                Log.d("TESTES", "ExplorarCLiente: IOException getRecomendacoes");
+                                Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                                mProgressDialog.dismiss();
                             }
 
                         }

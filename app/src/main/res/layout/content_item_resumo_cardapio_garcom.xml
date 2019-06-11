@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.ItemDetalheGarcomActivity"
-    tools:showIn="@layout/activity_item_detalhe_garcom">
+    tools:context=".Activity.ItemResumoCardapioGarcomActivity"
+    tools:showIn="@layout/activity_item_resumo_cardapio_garcom">
 
 
 
@@ -20,13 +20,13 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
         <TextView
-            android:id="@+id/textView_itemDetalhes_nome"
+            android:id="@+id/textView_itemResumoCardapio_nome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="18dp"
-            android:text="TextView"
+            android:text="Nome Item"
             android:textAllCaps="false"
             android:textColor="@color/chumbo_100"
             android:textSize="16sp"
@@ -36,29 +36,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_itemDetalhes_detalhes"
+            android:id="@+id/textView_itemResumoCardapio_detalhes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
-            android:text="TextView"
+            android:text="Detalhes"
             android:textColor="@color/chumbo_50"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_itemDetalhes_nome" />
+            app:layout_constraintTop_toBottomOf="@id/textView_itemResumoCardapio_nome" />
 
         <TextView
-            android:id="@+id/textView_itemDetalhe_valorItem"
+            android:id="@+id/textView_itemResumoCardapio_valorItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="18dp"
-            android:text="TextView"
+            android:text="R$00,00"
             android:textAllCaps="false"
             android:textColor="@color/mostarda_100"
             android:textSize="16sp"
@@ -66,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_itemDetalhes_detalhes" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_itemResumoCardapio_detalhes" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -94,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
 
         <TextView
-            android:id="@+id/textView_itemDetalhes_algumaObservacao"
+            android:id="@+id/textView_itemResumoCardapio_algumaObservacao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -109,23 +109,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView_itemDetalhes_detalheObservacao"
+        <EditText
+            android:id="@+id/editText_itemResumoCardapio_observacao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
-            android:text="-"
-            android:textAllCaps="false"
-            android:textColor="@color/chumbo_50"
-            android:textSize="14sp"
-            android:textStyle="normal"
+            android:background="@drawable/input_layout_primary"
+            android:ems="10"
+            android:hint="ex: mal passado"
+            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_itemDetalhes_algumaObservacao" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_itemResumoCardapio_algumaObservacao" />
 
 
     </android.support.constraint.ConstraintLayout>
@@ -159,52 +157,7 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout20">
 
-
-        <TextView
-            android:id="@+id/textView_itemDetalhes_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="18dp"
-            android:text="@string/text_itemdetalhecomandagarcom_status"
-            android:textAllCaps="false"
-            android:textColor="@color/chumbo_100"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView_itemDetalhes_statusValor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_itemDetalhes_statusValor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
-            android:text="TextView"
-            android:textAllCaps="false"
-            android:textColor="@color/chumbo_50"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout8"
@@ -216,7 +169,22 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button_itemDetalhes_voltar"
+            android:id="@+id/button_itemResumoCardapio_remover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/button_vermelho"
+            android:text="@string/btn_itemdetalhecomandagarcom_remover"
+            android:textColor="@color/branco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_itemResumoCardapio_voltar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -233,24 +201,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_itemDetalhes_remover"
+            app:layout_constraintTop_toBottomOf="@+id/button_itemResumoCardapio_remover"
             app:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            android:id="@+id/button_itemDetalhes_remover"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
-            android:background="@drawable/button_vermelho"
-            android:text="@string/btn_itemdetalhecomandagarcom_remover"
-            android:textColor="@color/branco"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </android.support.constraint.ConstraintLayout>
 

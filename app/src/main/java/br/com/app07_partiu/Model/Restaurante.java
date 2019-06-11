@@ -116,8 +116,6 @@ public class Restaurante implements Serializable {
         if (logo!=null) logoTemp = "codigo_logo_gigante";
         else logoTemp = "codigo_inexistente";
 
-        if (descricao!=null) descrTemp = "descricao_gigante";
-        else descrTemp = "descricao_inexistente";
         return "Restaurante{" +
                 "cnpj=" + cnpj +
                 ", qtdMesas=" + qtdMesas +
@@ -126,7 +124,7 @@ public class Restaurante implements Serializable {
                 ", nomeFantasia='" + nomeFantasia + '\'' +
                 ", status='" + status + '\'' +
                 ", logo='" + logoTemp + '\'' +
-                ", descricao='" + descrTemp + '\'' +
+                ", descricao='" + descricao + '\'' +
                 ", hrEntrada='" + hrEntrada + '\'' +
                 ", hrFim='" + hrFim + '\'' +
                 ", especialidade='" + especialidade + '\'' +

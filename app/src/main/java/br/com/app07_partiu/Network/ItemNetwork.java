@@ -47,6 +47,7 @@ public class ItemNetwork {
                 itemCardapio.setTipo(item.getString("tipo"));
                 itemCardapio.setValor(item.getDouble("valor"));
                 itemCardapio.setStatus(item.getString("status"));
+                itemCardapio.setDetalhe(item.getString("detalhe"));
 
                 //adiciona cada objeto comanda recebido em um arraylist de itens
                 Log.d("TESTES", item.toString());
