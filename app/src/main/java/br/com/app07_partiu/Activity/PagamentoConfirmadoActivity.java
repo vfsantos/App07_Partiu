@@ -53,9 +53,11 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
-            case android.R.id.home: finishAffinity();
+            case android.R.id.home:
+                finishAffinity();
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
     }
@@ -63,7 +65,7 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
     protected void setUpToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar != null){
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);                              //Mostrar o botão
             getSupportActionBar().setHomeButtonEnabled(true);                                   //Ativar o botão
@@ -71,13 +73,9 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickFechar(View view) {
-        buttonFechar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    public void onClickVoltarFeedback(View view) {
+        setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+        finish();
     }
 
     public void onClickFeedback(View view) {
@@ -89,7 +87,7 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS){
+        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS) {
             setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
             finish();
         }
@@ -98,10 +96,10 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
     private void implementarComponentes() {
         //Toolbar
-        toolbar             = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //ImageView
-        imageViewCerveja    = (ImageView) findViewById(R.id.imageView_pagamentoConfirmado_cerveja);
+        imageViewCerveja = (ImageView) findViewById(R.id.imageView_pagamentoConfirmado_cerveja);
 
 
         //TextView
@@ -110,7 +108,7 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
 
         //Button
-        buttonFechar        = (Button) findViewById(R.id.button_pagamentoConfirmado_fechar);
-        buttonFeedback      = (Button) findViewById(R.id.button_pagamentoConfirmado_feedback);
+        buttonFechar = (Button) findViewById(R.id.button_pagamentoConfirmado_fechar);
+        buttonFeedback = (Button) findViewById(R.id.button_pagamentoConfirmado_feedback);
     }
 }

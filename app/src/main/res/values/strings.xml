@@ -35,7 +35,7 @@
     <!-- CodigoComandaClienteActivity -->
     <string name="textview_codigocomandacliente_titulo">Código da Comanda</string>
     <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda digite o código no campo seguir</string>
-    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua, entre em contato com o garçom do estabelecimento para estar gerandoo mesmo</string>
+    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua, entre em contato com o garçom do estabelecimento</string>
     <string name="textview_codigocomandacliente_insiracodigo">Insira o código da comanda</string>
     <string name="button_codigocomandacliente_entranacomanda">Entrar na comanda</string>
 
@@ -226,7 +226,7 @@
     <string name="title_alert_codigo_comanda_invalido">OPS! Algo esta errado</string>
     <string name="subtitle1_alert_codigo_comanda_invalido">Por favor digite o código da comanda para continuar</string>
 
-    <string name="title_alert_criar_comanda">Selecione a mesa para gerar um nova comanda:</string>
+    <string name="title_alert_criar_comanda">Selecione a mesa para gerar uma nova comanda:</string>
     <string name="subtitle1_alert_selecione_numero_mesa">Insirá o número da mesa para criar a comanda</string>
 
     <string name="title_alert_disponivel_em_breve">Em breve!</string>
@@ -282,11 +282,14 @@
     <string name="button_cardapio_finalizar">FINALIZAR</string>
     <string name="title_activity_item_comanda_detalhe_cliente">Detalhe item</string>
     <string name="item_comanda_garcom_data">Entrada</string>
-    <string name="btn_comandacliente_carrinho">IR AO CARRINHO</string>
+    <string name="btn_comandacliente_carrinho">PAGAR SEUS PEDIDOS</string>
     <string name="title_activity_finalizar_pedido_cliente">FinalizarPedidoClienteActivity</string>
     <string name="snackbar_erro_connection">Erro de Conexão!</string>
     <string name="text_itemResumoCardapio_tituloPage">DETALHE RESUMO</string>
     <string name="title_activity_item_resumo_cardapio">Detalhe Cardapio</string>
+    <string name="button_comandagarcom_finalizar">finalizar</string>
+    <string name="text_finalizarComandaGarcom_titulo">Finalizar Comanda</string>
+    <string name="btn_finalizarComandaGarcom_finalizarComanda">Confirmar Pagamento</string>
 
 
 </resources>

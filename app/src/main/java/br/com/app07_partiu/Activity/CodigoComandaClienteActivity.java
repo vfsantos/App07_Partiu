@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,8 @@ import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
 
+import static br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS;
+import static br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity.RESULT_SAIUDACOMANDA;
 import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.USUARIO;
 
 public class CodigoComandaClienteActivity extends AppCompatActivity{
@@ -82,8 +85,6 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     public Item[] itens;
     private int[] idUsuario;
 
-    private boolean test = true;
-
     private View viewSnackbar;
 
     @Override
@@ -116,18 +117,17 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                     case R.id.menu_comanda:
                         break;
                     case R.id.menu_perfil:
-                        Intent b = new Intent(CodigoComandaClienteActivity.this, PerfilClienteActivity.class);
-                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(b);
+//                        Intent b = new Intent(CodigoComandaClienteActivity.this, PerfilClienteActivity.class);
+//                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                        startActivity(b);
+                        Util.showManutencaoDialog(context);
+
                         break;
                 }
                 return false;
             }
         });
 
-        if (test){
-            getComandaPedidos("OAF01");
-        }
     }
 
 
@@ -152,7 +152,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                                         intentComanda.putExtra(ITENS, itens);
                                         intentComanda.putExtra(USUARIO_IDS, idUsuario);
                                         intentComanda.putExtra(DATA_ATUALIZACAO_COMANDA, dataAtualizacao);
-                                        startActivity(intentComanda);
+                                        startActivityForResult(intentComanda,0);
                                     }
                                 });
                             } catch (IOException e) {
@@ -170,7 +170,25 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        switch (resultCode){
+            case RESULT_PEDIDOSFINALIZADOS:
+                Intent a = new Intent(CodigoComandaClienteActivity.this, ExplorarClienteActivity.class);
+                a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(a);
+                break;
+
+            case RESULT_SAIUDACOMANDA:
+                Intent b= new Intent(CodigoComandaClienteActivity.this, ExplorarClienteActivity.class);
+                b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(b);
+                break;
+
+        }
+    }
 
     private void implentarComponentes() {
         //Toolbar

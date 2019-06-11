@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import org.json.JSONException;
 import java.io.IOException;
 
@@ -91,10 +90,9 @@ public class LoginActivity extends AppCompatActivity {
     Context contexto;
 
     //Progressbar
-    ProgressBar progressBarTime;
 
     private final boolean testeGarcom  = false;
-    private final boolean testeCliente = true;
+    private final boolean testeCliente = false;
 
     Usuario     usuario;
     Restaurante restaurante;
@@ -127,6 +125,8 @@ public class LoginActivity extends AppCompatActivity {
             editTextSenha.setText("123");
             validarLogin();
         }
+        editTextSenha.setText("123");
+
     }
 
     public void validarLogin() {
@@ -167,8 +167,6 @@ public class LoginActivity extends AppCompatActivity {
     public void login(final String email, final String senha){
 
         if(Connection.isConnected(this, viewSnackbar)) {
-            //TODO consertar progressBarTime
-//            progressBarTime.setVisibility(View.VISIBLE);
 
             buttonEntrar.setEnabled(false);
 
@@ -194,8 +192,6 @@ public class LoginActivity extends AppCompatActivity {
                                                           intentListarComanda.putExtra(RESTAURANTE, restaurante);
                                                           intentListarComanda.putExtra(COMANDAS, comandas);
                                                           startActivity(intentListarComanda);
-                                                          //TODO consertar progressBarTime
-//                                                          progressBarTime.setVisibility(View.INVISIBLE);
                                                           try {
                                                               Thread.sleep(500);
                                                           } catch (InterruptedException e) {
@@ -288,8 +284,6 @@ public class LoginActivity extends AppCompatActivity {
                                                   intentListarComanda.putExtra(RESTAURANTE, restaurante);
                                                   intentListarComanda.putExtra(COMANDAS, comandas);
                                                   startActivity(intentListarComanda);
-                                                  //TODO consertar progressBarTime
-                                                  //progressBarTime.setVisibility(View.INVISIBLE);
                                               }
                                           }
                             );
@@ -371,6 +365,21 @@ public class LoginActivity extends AppCompatActivity {
         buttonEntrar           = (Button) findViewById(R.id.button_login_entrar);
         buttonCadastrese       = (Button) findViewById(R.id.button_login_cadastrarse);
         buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
+
+        buttonCadastrese.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                Util.showManutencaoDialog(contexto);
+            }
+        });
+
+        buttonEsqueceuSuaSenha.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                Util.showManutencaoDialog(contexto);
+            }
+        });
+
 
     }
 

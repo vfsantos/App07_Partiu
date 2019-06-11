@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,14 +17,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
+import br.com.app07_partiu.Activity.FinalizarComandaGarcom.FinalizarComandaGarcomActivity;
 import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
@@ -122,11 +127,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
 //        Log.d("TESTES", comandas.toString());
 
 
-        String[] sTemp = new String[restaurante.getQtdMesas()];
-        for (int i = 0; i < restaurante.getQtdMesas(); i++) {
-            sTemp[i] = String.valueOf(i + 1);
-        }
-        mesas = sTemp;
+        getStringArrayMesas();
 
         loadComandas();
 
@@ -144,6 +145,18 @@ public class HomeGarcomActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         refreshComandas();
+    }
+
+    private void getStringArrayMesas(){
+        List<String> sTemp = new ArrayList<>();
+        for (int i = 0; i < restaurante.getQtdMesas(); i++) {
+            sTemp.add(String.valueOf(i + 1));
+        }
+
+        for (ComandaConvertView c : comandas){
+            sTemp.remove(c.getMesa());
+        }
+        mesas = sTemp.toArray(new String[sTemp.size()]);
     }
 
     private void loadComandas() {
@@ -177,6 +190,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               @Override
                                               public void run() {
                                                   loadComandas();
+                                                  getStringArrayMesas();
+
                                                   pullToRefresh.setRefreshing(false);
                                               }
                                           }
@@ -201,19 +216,38 @@ public class HomeGarcomActivity extends AppCompatActivity {
 
     //Alert com númerodas mesas
     private void alertNovaComanda() {
+
+        mesaSelecionadaAlert = -1;
         alertaNumeroMesa = new AlertDialog.Builder(this);
         alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda);
 
 
-        alertaNumeroMesa.setItems(mesas, new DialogInterface.OnClickListener() {
+       /* alertaNumeroMesa.setItems(mesas, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mesaSelecionadaAlert = which + 1;
+                mesaSelecionadaAlert = Integer.parseInt(mesas[which]);
                 criarComanda(garcom.getId(), mesaSelecionadaAlert);
 
             }
-        });
+        });*/
 
+        alertaNumeroMesa.setSingleChoiceItems(mesas, 0, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Log.d("TESTES", "SelectPosicao="+item);
+                mesaSelecionadaAlert = Integer.parseInt(mesas[item]);
+            }});
+
+
+
+        alertaNumeroMesa.setPositiveButton("GERAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+
+                if(mesaSelecionadaAlert!=-1)
+                    criarComanda(garcom.getId(), mesaSelecionadaAlert);
+
+            }
+        });
 
         alertaNumeroMesa.setNegativeButton(R.string.btn_alert_cancelar, new DialogInterface.OnClickListener() {
             @Override
@@ -287,7 +321,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                                               intentComanda.putExtra(RESTAURANTE, restaurante);
                                               intentComanda.putExtra(USUARIO_IDS, idUsuario);
                                               intentComanda.putExtra(DATA_ATUALIZACAO_COMANDA, dataAtualizacao);
-                                              startActivity(intentComanda);
+                                              startActivityForResult(intentComanda, 0);
                                           }
                                       }
                         );
@@ -340,6 +374,16 @@ public class HomeGarcomActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 10000);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode){
+            case FinalizarComandaGarcomActivity.RESULT_COMANDA_FINALIZADA:
+                Util.showSnackbar(viewSnackbar, "Comanda finalizada!");
+        }
+    }
+
     public void inicializarComponentes() {
 
         //Toolbar
@@ -354,6 +398,8 @@ public class HomeGarcomActivity extends AppCompatActivity {
         //SwipeRefreshLayout
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
     }
+
+
 
 
 }

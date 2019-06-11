@@ -62,6 +62,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     public static final int RESULT_PEDIDOSFINALIZADOS = 3333;
     public static final int RESULT_PEDIDOSELECIONADO = 4000;
     public static final int RESULT_PEDIDODESELECIONADO = 5000;
+    public static final int RESULT_SAIUDACOMANDA = 6000;
 
     //ListView
     private ListView listViewItensComanda;
@@ -330,6 +331,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
         switch (resultCode) {
             case RESULT_PEDIDOSFINALIZADOS:
+                setResult(RESULT_PEDIDOSFINALIZADOS);
                 finish();
                 break;
             case RESULT_PEDIDOSELECIONADO:
@@ -358,6 +360,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.d("TESTES", "DialogClicked: Yes");
+                setResult(RESULT_SAIUDACOMANDA);
+                finish();
             }
         });
 

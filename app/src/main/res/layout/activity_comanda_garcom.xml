@@ -27,6 +27,23 @@
     <include layout="@layout/content_comanda_garcom" />
 
     <Button
+        android:id="@+id/button_comandagarcom_finalizarComanda"
+        android:onClick="onClickFinalizarComanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_float_icone_nome"
+        android:drawableLeft="@drawable/ic_action_carrinho"
+        android:elevation="16sp"
+        android:textAllCaps="true"
+        android:textColor="@color/branco"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:layout_gravity="start|bottom"
+        android:text="@string/button_comandagarcom_finalizar"/>
+
+    <Button
         android:id="@+id/button_comandaGarcom_pedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,8 +56,5 @@
         android:text="@string/button_comandaGarcom_pedido"
         android:textAllCaps="true"
         android:textColor="@color/branco"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/include" />
-
+        android:textSize="14sp"/>
 </android.support.design.widget.CoordinatorLayout>

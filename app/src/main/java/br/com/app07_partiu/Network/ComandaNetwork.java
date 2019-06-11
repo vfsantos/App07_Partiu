@@ -184,9 +184,21 @@ public class ComandaNetwork {
                 .build();
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        Log.d("TESTES", "DataAtualização: " + resultado);
+        Log.d("TESTES", "finalizarItemPedidoUsuario: " + resultado);
 
         return resultado;
+    }
+
+    public static void finalizarPedidosComanda(String url, int idComanda) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/finalizarPedidosComanda?idComanda="+idComanda;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        Log.d("TESTES", "finalizarPedidosComanda: " + resultado);
+
     }
 
 
@@ -514,6 +526,61 @@ public class ComandaNetwork {
         String resultado = response.body().string();
 
         Log.d("TESTES", "getPedidosByUsuarioComanda="+resultado);
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject item = (JSONObject) vetor.get(i);
+                Item it = new Item();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                it.setId(item.getInt("id"));
+                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCategoria(item.getString("categoria"));
+                it.setNome(item.getString("nome"));
+                it.setTipo(item.getString("tipo"));
+                it.setValor(item.getDouble("valor"));
+                it.setStatus(item.getString("status"));
+                it.setIdPedido(item.getInt("idPedido"));
+                it.setPorc_desconto(item.getInt("porc_desconto"));
+                it.setData(item.getString("data"));
+                it.setStatusPedido(item.getString("statusPedido"));
+                it.setDetalhe(item.getString("detalhe"));
+                it.setObsPedido(item.getString("observacao"));
+                try {
+                    it.setIdUsuario(item.getInt("idUsuario"));
+                    it.setNomeUsuario(item.getString("nomeUsuario"));
+                    it.setEmailUsuario(item.getString("emailUsuario"));
+                    it.setPorcPaga(item.getDouble("porcPaga"));
+                    it.setStatusPedidoUsuario(item.getString("statusPedidoUsuario"));
+                } catch (JSONException e) {
+                    Log.d("TESTES", "Pedido sem usuario");
+                    e.printStackTrace();
+                }
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                itens.add(it);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (itens.size() > 0) {
+            return itens.toArray(new Item[0]);
+        }
+        return null;
+    }
+
+    public static Item[] getPedidosEmAbertoByComanda(String url, int idComanda) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<Item> itens = new ArrayList<>();
+        url += "/getPedidosEmAbertoByComanda?idComanda=" + idComanda;
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+        Log.d("TESTES", "getPedidosEmAbertoByComanda="+resultado);
 
         try {
             JSONArray vetor = new JSONArray(resultado);

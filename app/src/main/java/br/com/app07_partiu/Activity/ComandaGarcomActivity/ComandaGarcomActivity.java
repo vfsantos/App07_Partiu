@@ -18,6 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
+import br.com.app07_partiu.Activity.FinalizarComandaGarcom.FinalizarComandaGarcomActivity;
 import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.ItemDetalheGarcomActivity;
 import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity;
@@ -38,6 +39,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
 
     public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
+    public static final String ITENS_FINALIZAR = "br.com.app07_partiu.ComandaGarcomActivity.ItensFInalizarComanda";
     public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
     public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
 
@@ -69,6 +71,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
     //Button
     private Button buttonPedido;
+    private Button buttonFinalizar;
 
 
     //Itent
@@ -112,6 +115,9 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         context = this;
         viewSnackbar = findViewById(R.id.comandaGarcomActivityView);
 
+        buttonFinalizar.setBackgroundTintList(getResources().getColorStateList(R.drawable.button_float_tintlist));
+
+
         buttonPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,12 +143,16 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         if (itens != null) {
             carregarItens();
+        }else{
+            buttonFinalizar.setEnabled(false);
         }
 
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
         textViewItemPessoaComandaNumero.setText("" + idUsuario.length);
 
         setReloadInterval();
+
+
 
     }
 
@@ -179,6 +189,37 @@ public class ComandaGarcomActivity extends AppCompatActivity {
         timerAtualizacao.cancel();
     }
 
+    public void onClickFinalizarComanda(View view){
+        final Intent intentFinalizar = new Intent(context, FinalizarComandaGarcomActivity.class);
+        if(Connection.isConnected(context, viewSnackbar)){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final Item[] itensFinalizar = ComandaNetwork.getPedidosEmAbertoByComanda(Connection.URL, comanda.getId());
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+
+                                              //Comanda necessaria para saber em que id inserir pedidos
+                                              intentFinalizar.putExtra(ITENS_FINALIZAR, itensFinalizar);
+                                              intentFinalizar.putExtra(COMANDA, comanda);
+                                              startActivityForResult(intentFinalizar, 0);
+                                          }
+                                      }
+                        );
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("TESTES", "ComandaGarcom: IOException visualizarItensRestaurante");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                    }
+                }
+            }).start();
+
+
+        }
+    }
+
     private void carregarItens() {
         try {
 
@@ -189,7 +230,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
             listViewItensComanda.setVisibility(View.VISIBLE);
             //Listview com itens da comanda selecionada
             listViewItensComanda = (ListView) findViewById(R.id.listView_comandaGarcom_itensDaComanda);
-            ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itens, this);
+            ComandaGarcomAdapter adapter = new ComandaGarcomAdapter(itensFormatados, this);
             listViewItensComanda.setAdapter(adapter);
             listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -200,13 +241,15 @@ public class ComandaGarcomActivity extends AppCompatActivity {
                     intentItem = new Intent(context, ItemDetalheGarcomActivity.class);
                     intentItem.putExtra(ITEM, itens[position]);
                     intentItem.putExtra(ID_COMANDA, comanda.getId());
-                    startActivityForResult(intentItem, RESULT_PEDIDO_REMOVIDO);
+                    startActivityForResult(intentItem, 0);
                 }
             });
 
         }catch(NullPointerException e){
             Log.d("TESTES", "carregarItens: Sem Pedidos na Comanda");
             listViewItensComanda.setVisibility(View.INVISIBLE);
+            buttonFinalizar.setEnabled(false);
+
 
         }
 
@@ -266,18 +309,28 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_PEDIDOS_CRIADOS) {
-            Util.showSnackbar(viewSnackbar, "Itens Adicionados!");
-            Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ResumoCardapioGarcomActivity.RETORNO_ITENS_COMANDA);
-            itens = itensRecarregar;
-            carregarItens();
-        } else if (resultCode == RESULT_PEDIDO_REMOVIDO) {
-            Util.showSnackbar(viewSnackbar, "Pedido Cancelado!");
+        Item[] itensRecarregar;
+        switch(resultCode){
+            case RESULT_PEDIDOS_CRIADOS:
+                Util.showSnackbar(viewSnackbar, "Itens Adicionados!");
+                itensRecarregar = (Item[]) data.getSerializableExtra(ResumoCardapioGarcomActivity.RETORNO_ITENS_COMANDA);
+                itens = itensRecarregar;
+                carregarItens();
+                buttonFinalizar.setEnabled(true);
+                break;
 
-            Item[] itensRecarregar = (Item[]) data.getSerializableExtra(ItemDetalheGarcomActivity.PEDIDOS_REFRESH);
+            case RESULT_PEDIDO_REMOVIDO:
+                Util.showSnackbar(viewSnackbar, "Pedido Cancelado!");
+                 itensRecarregar = (Item[]) data.getSerializableExtra(ItemDetalheGarcomActivity.PEDIDOS_REFRESH);
+                itens = itensRecarregar;
+                carregarItens();
+                break;
 
-            itens = itensRecarregar;
-            carregarItens();
+            case FinalizarComandaGarcomActivity.RESULT_COMANDA_FINALIZADA:
+                setResult(FinalizarComandaGarcomActivity.RESULT_COMANDA_FINALIZADA);
+                finish();
+                break;
+
         }
     }
 
@@ -348,6 +401,7 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         //Button
         buttonPedido = (Button) findViewById(R.id.button_comandaGarcom_pedido);
+        buttonFinalizar = findViewById(R.id.button_comandagarcom_finalizarComanda);
 
     }
 }

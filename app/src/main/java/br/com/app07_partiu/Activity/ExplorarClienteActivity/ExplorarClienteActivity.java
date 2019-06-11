@@ -2,11 +2,13 @@ package br.com.app07_partiu.Activity.ExplorarClienteActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -151,9 +153,10 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                         startActivity(a);
                         break;
                     case R.id.menu_perfil:
-                        Intent b = new Intent(ExplorarClienteActivity.this, PerfilClienteActivity.class);
-                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(b);
+//                        Intent b = new Intent(ExplorarClienteActivity.this, PerfilClienteActivity.class);
+//                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                        startActivity(b);
+                        Util.showManutencaoDialog(context);
                         break;
                 }
                 return false;

@@ -100,13 +100,9 @@ public class AvaliacaoActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onClickfechar(View view){
-        buttonFechar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    public void onClickFechar(View view){
+        setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+        finish();
     }
 
 

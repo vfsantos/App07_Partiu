@@ -1,8 +1,12 @@
 package br.com.app07_partiu.Util;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Field;
@@ -13,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
@@ -74,7 +79,7 @@ public class Util {
     public static Item[] formatItens(Item[] itens){
 
         Set idPedidos = new HashSet();
-        List<Item> itensComeco = new ArrayList<>(); //selecionados e nao selecionados
+        List<Item> itensAll = new ArrayList<>(); //selecionados e nao selecionados
         List<Item> itensFim = new ArrayList<>(); //pagos
 
         for (Item i : itens) {
@@ -82,7 +87,7 @@ public class Util {
             //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
             if (idPedidos.contains(i.getIdPedido())) {
                 //pega o item que tem idPedido ==
-                for (Item item : itensComeco) {
+                for (Item item : itensAll) {
                     if (item.getIdPedido() == i.getIdPedido()) {
                         List<Usuario> us = item.getUsuariosPedido();
                         //adciona usuario e devolve ao item
@@ -132,7 +137,7 @@ public class Util {
                 if (i.getStatusPedido().equals("P")){
                     itensFim.add(i);
                 }else {
-                    itensComeco.add(i);
+                    itensAll.add(i);
                 }
 
 //                itensF.add(i);
@@ -141,8 +146,6 @@ public class Util {
 
         }
 
-        List<Item> itensAll = new ArrayList<>();
-        itensAll.addAll(itensComeco);
         itensAll.addAll(itensFim);
 
         return itensAll.toArray(new Item[itensAll.size()]);
@@ -159,4 +162,30 @@ public class Util {
         snackbarErroLogin.show();
     }
 
+    public static void showManutencaoDialog(final Context context) {
+        AlertDialog.Builder builder
+                = new AlertDialog
+                .Builder(context);
+
+        builder.setTitle("Em construção!");
+        builder.setMessage("Feature planejada para o 2º Release");
+
+        builder.setCancelable(true);
+
+        builder.setNegativeButton("Voltar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("TESTES", "DialogClicked: No");
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public static void logoff(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
 }

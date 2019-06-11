@@ -67,6 +67,7 @@
         android:background="@drawable/button_mostarda_outline"
         android:text="@string/button_avaliacao_fechar"
         android:textColor="@color/branco"
+        android:onClick="onClickFechar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

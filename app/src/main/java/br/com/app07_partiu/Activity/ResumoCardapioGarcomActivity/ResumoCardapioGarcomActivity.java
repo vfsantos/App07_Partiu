@@ -34,7 +34,6 @@ import static br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcom
 import static br.com.app07_partiu.Model.Item.itemListToArray;
 import static br.com.app07_partiu.Util.Util.doubleToReal;
 
-//TODO Classe PLACEHOLDER
 public class ResumoCardapioGarcomActivity extends AppCompatActivity {
 
     public static final String RETORNO_ITENS_COMANDA = "ResumoCardapio.ItensRequest";

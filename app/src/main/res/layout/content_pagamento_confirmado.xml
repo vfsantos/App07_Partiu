@@ -85,6 +85,7 @@
         android:textColor="@color/branco"
         android:text="@string/button_pagamentoconfirmado_fechar"
         android:background="@drawable/button_mostarda_outline"
+        android:onClick="onClickVoltarFeedback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
