@@ -2,6 +2,7 @@ package br.com.app07_partiu.Activity.ComandaMesaCliente;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
         sectionHeaders = ComandaMesaClienteSectionIndexBuilder.buildSectionHeaders(itens);
         positionForSectionMap = ComandaMesaClienteSectionIndexBuilder.buildPositionForSectionMap(itens);
         sectionForPositionMap = ComandaMesaClienteSectionIndexBuilder.buildSectionForPositionMap(itens);
+
     }
 
     @Override
@@ -48,13 +50,34 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
     }
 
     @Override
+    public int getItemViewType(int position) {
+        Item item  = (Item) getItem(position);
+        switch (item.getStatusPedido()){
+            case "P":
+                return 1;
+            case "N":
+                return 2;
+            case "S":
+                return 3;
+
+        }
+        return item.getStatusPedido().equals("P") ? 1:0;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return itens.length;
+    }
+
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
-        if(view == null) {
-            LayoutInflater inflater = (LayoutInflater)
-                    activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_item_nome_valor_status, parent, false);
+
+        if (view == null) {
+            int type = getItemViewType(position);
+            view = getInflatedLayoutForType(type, parent);
             TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_descricao);
             TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_valor);
             TextView textViewStatus = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_status);
@@ -63,19 +86,28 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
         }
 
 
+
         ComandaMesaClienteViewHolder viewHolder = (ComandaMesaClienteViewHolder) view.getTag();
+
+//        if (itens[position].getStatusPedido().equals("P")) {
+//            view.setAlpha((float) 0.6);
+//            int chumbo50 = activity.getResources().getColor(R.color.chumbo_50);
+//            viewHolder.getTextViewStatus().setTextColor(chumbo50);
+//            viewHolder.getTextViewDetalhes().setTextColor(chumbo50);
+//            viewHolder.getTextViewValor().setTextColor(chumbo50);
+//        }
+
         viewHolder.getTextViewDetalhes().setText(itens[position].getNome());
         viewHolder.getTextViewValor().setText(itens[position].getValorString());
-        try{
+        try {
 
             viewHolder.getTextViewStatus().setText(itens[position].getStatusString());
-        }catch(NullPointerException e){
-            Log.e("TESTES", "Erro status pedido de id="+itens[position].getIdPedido());
+        } catch (NullPointerException e) {
+            Log.e("TESTES", "Erro status pedido de id=" + itens[position].getIdPedido());
             viewHolder.getTextViewStatus().setText("ERRO");
         }
         return view;
     }
-
 
 
     @Override
@@ -91,6 +123,19 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
     @Override
     public int getSectionForPosition(int position) {
         return sectionForPositionMap.get(position).intValue();
+    }
+
+    private View getInflatedLayoutForType(int type, ViewGroup parent){
+        if (type == 1){
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.list_item_nome_valor_status_verde, parent, false);
+        }else if(type==2){
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.list_item_nome_valor_status, parent, false);
+        }else{
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.list_item_nome_valor_status_amarelo, parent, false);
+        }
     }
 
 

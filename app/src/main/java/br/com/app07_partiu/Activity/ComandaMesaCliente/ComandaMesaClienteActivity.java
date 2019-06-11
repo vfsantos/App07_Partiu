@@ -166,6 +166,9 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                                     int position, long id) {
                 if (!itensFormatados[position].getStatusPedido().equals("P"))
                     getItemComandaDetalhe(itensFormatados[position].getIdPedido());
+                else{
+                    Util.showSnackbar(viewSnackbar, "Esse pedido já foi pago!");
+                }
             }
         });
     }
@@ -349,12 +352,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         builder.setTitle("Nenhum pedido a pagar!");
         builder.setMessage("Deseja sair da comanda? :(");
 
-        // setCancelable = se o usuario pode clicar fora da caixa para feixar tbm
         builder.setCancelable(false);
-
-        // Set the positive button with yes name
-        // OnClickListener method is use of
-        // DialogInterface interface.
 
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
@@ -363,9 +361,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             }
         });
 
-        // Set the Negative button with No name
-        // OnClickListener method is use
-        // of DialogInterface interface.
         builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
