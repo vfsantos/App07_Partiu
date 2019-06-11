@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,9 @@ import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivit
 import br.com.app07_partiu.R;
 
 public class PagamentoConfirmadoActivity extends AppCompatActivity {
+
+    //Toolbar
+    private Toolbar toolbar;
 
     //ImageView
     private ImageView imageViewCerveja;
@@ -38,10 +42,33 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagamento_confirmado);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
-        implementarComponentes();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finishAffinity();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                              //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                                   //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_pagamentoconfirmado_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     public void onClickFechar(View view) {
@@ -58,8 +85,20 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
         startActivityForResult(intentAvaliacao, ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS){
+            setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
+            finish();
+        }
+
+    }
 
     private void implementarComponentes() {
+        //Toolbar
+        toolbar             = (Toolbar) findViewById(R.id.toolbar);
 
         //ImageView
         imageViewCerveja    = (ImageView) findViewById(R.id.imageView_pagamentoConfirmado_cerveja);
@@ -73,16 +112,5 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
         //Button
         buttonFechar        = (Button) findViewById(R.id.button_pagamentoConfirmado_fechar);
         buttonFeedback      = (Button) findViewById(R.id.button_pagamentoConfirmado_feedback);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS){
-            setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
-            finish();
-        }
-
     }
 }

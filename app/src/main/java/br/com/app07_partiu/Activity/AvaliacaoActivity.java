@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,9 @@ import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivit
 import br.com.app07_partiu.R;
 
 public class AvaliacaoActivity extends AppCompatActivity {
+
+    //Toolbar
+    private Toolbar toolbar;
 
     //TextView
     private TextView textViewTitulo;
@@ -45,10 +49,33 @@ public class AvaliacaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avaliacao);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
-        implementarComponentes();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_avaliacao_titulopagina);     //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     public double getAvalicao() {
@@ -84,6 +111,8 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
 
     private void implementarComponentes() {
+        //Toolbar
+        toolbar            = (Toolbar) findViewById(R.id.toolbar);
 
         //TextView
         textViewTitulo     = (TextView) findViewById(R.id.textView_avaliacao_titulo);

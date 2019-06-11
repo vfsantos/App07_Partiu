@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,6 +30,9 @@ import br.com.app07_partiu.Util.Util;
 
 public class FormasPagamentoActivity extends AppCompatActivity {
 
+    //Toolbar
+    private Toolbar toolbar;
+
 
     private Usuario clienteLogado;
     private Comanda comanda;
@@ -43,7 +47,10 @@ public class FormasPagamentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formas_pagamento);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
         context = this;
@@ -54,6 +61,29 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:  finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_formaspagamento_titulopagina);     //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
+    }
+
 
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -113,5 +143,10 @@ public class FormasPagamentoActivity extends AppCompatActivity {
             setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
             finish();
         }
+    }
+
+    private void implementarComponentes() {
+        //Toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
     }
 }

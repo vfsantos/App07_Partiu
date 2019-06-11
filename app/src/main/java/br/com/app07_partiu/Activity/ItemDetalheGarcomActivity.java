@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,10 +26,11 @@ import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 
 public class ItemDetalheGarcomActivity extends AppCompatActivity {
+    //Toolbar
+    private Toolbar toolbar;
+
 
     //TextView
-    private TextView textViewTituloPagina;
-    //item
     private TextView textViewNomeItem;
     private TextView textViewDetalhesItem;
     private TextView textViewValorItem;
@@ -38,6 +40,7 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     private TextView textViewQuantidadeValor;
     private TextView textViewStatus;
     private TextView textViewStatusValor;
+
 
     //Button
     private Button buttonRemover;
@@ -57,9 +60,12 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detalhe_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
-        inicializaComponentes();
+
 
         intent = getIntent();
         context = this;
@@ -109,8 +115,27 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
                 removerPedido();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
 
 
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                                       //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                                            //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_itemdetalhecomandagarcom_titulopagina);     //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     private void removerPedido() {
@@ -149,21 +174,25 @@ public class ItemDetalheGarcomActivity extends AppCompatActivity {
         }
     }
 
-    private void inicializaComponentes() {
-//        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
-        textViewNomeItem = (TextView) findViewById(R.id.textView_itemDetalhes_nome);
-        textViewDetalhesItem = (TextView) findViewById(R.id.textView_itemDetalhes_detalhes);
-        textViewValorItem = (TextView) findViewById(R.id.textView_itemDetalhe_valorItem);
-        textViewAlgumaObservacao = (TextView) findViewById(R.id.textView_itemDetalhes_algumaObservacao);
+    private void implementarComponentes() {
+        //Toolbar
+        toolbar                    = (Toolbar) findViewById(R.id.toolbar);
+
+
+        //TextView
+        textViewNomeItem           = (TextView) findViewById(R.id.textView_itemDetalhes_nome);
+        textViewDetalhesItem       = (TextView) findViewById(R.id.textView_itemDetalhes_detalhes);
+        textViewValorItem          = (TextView) findViewById(R.id.textView_itemDetalhe_valorItem);
+        textViewAlgumaObservacao   = (TextView) findViewById(R.id.textView_itemDetalhes_algumaObservacao);
         textViewDetalhesObservacao = (TextView) findViewById(R.id.textView_itemDetalhes_detalheObservacao);
-        textViewQuantidade = (TextView) findViewById(R.id.textView_itemDetalhe_quantidade);
-        textViewQuantidadeValor = (TextView) findViewById(R.id.textView_itemDetalhes_quantidadeValor);
-        textViewStatus = (TextView) findViewById(R.id.textView_itemDetalhes_status);
-        textViewStatusValor = (TextView) findViewById(R.id.textView_itemDetalhes_statusValor);
+        textViewQuantidade         = (TextView) findViewById(R.id.textView_itemDetalhe_quantidade);
+        textViewQuantidadeValor    = (TextView) findViewById(R.id.textView_itemDetalhes_quantidadeValor);
+        textViewStatus             = (TextView) findViewById(R.id.textView_itemDetalhes_status);
+        textViewStatusValor        = (TextView) findViewById(R.id.textView_itemDetalhes_statusValor);
 
 
-        buttonRemover = (Button) findViewById(R.id.button_itemDetalhes_remover);
-        buttonVoltar = (Button) findViewById(R.id.button_itemDetalhes_voltar);
+        buttonRemover              = (Button) findViewById(R.id.button_itemDetalhes_remover);
+        buttonVoltar               = (Button) findViewById(R.id.button_itemDetalhes_voltar);
     }
 
 }

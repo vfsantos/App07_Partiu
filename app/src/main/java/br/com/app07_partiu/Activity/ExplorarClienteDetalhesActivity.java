@@ -25,6 +25,9 @@ import br.com.app07_partiu.Util.Util;
 
 public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
+    //Toolbar
+    private Toolbar toolbar;
+
 
     //TextView
     private TextView textViewRecomendacaoDetalheNomeRestaurante;
@@ -83,18 +86,20 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
 
     public void implementarComponentes() {
+        //Toolbar
+        toolbar = findViewById(R.id.toolbar);
 
 
         //ImageView
-        imageViewRecomendacaoDetalheLogo = (ImageView) findViewById(R.id.imageView_recomendacaoDetalhe_logo);
+        imageViewRecomendacaoDetalheLogo                     = (ImageView) findViewById(R.id.imageView_recomendacaoDetalhe_logo);
 
 
         //TextView
-        textViewRecomendacaoDetalheNomeRestaurante = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_nomeRestaurante);
-        textViewRecomendacaoDetalheHorarioFuncionamento = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_horarioFuncionamento);
+        textViewRecomendacaoDetalheNomeRestaurante           = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_nomeRestaurante);
+        textViewRecomendacaoDetalheHorarioFuncionamento      = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_horarioFuncionamento);
         textViewRecomendacaoDetalheHorarioFuncionamentoValor = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_horarioFuncionamentoValor);
-        textViewRecomendacaoDetalheEndereco = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_endereco);
-        textViewRecomendacaoDetalheEnderecoValor = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_enderecoValor);
+        textViewRecomendacaoDetalheEndereco                  = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_endereco);
+        textViewRecomendacaoDetalheEnderecoValor             = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_enderecoValor);
 
 
         //Button

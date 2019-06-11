@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     public static final int RESULT_RESUMO_FINALIZADO = 1000;
     public static final int RESULT_DETALHE_RETORNADO = 2000;
 
+    //Toolbar
+    private Toolbar toolbar;
 
     //Button
     private Button buttonCarrinho;
@@ -63,10 +66,11 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardapio_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
+        setSupportActionBar(toolbar);
 
         intent = getIntent();
         context = this;
@@ -87,6 +91,29 @@ public class CardapioGarcomActivity extends AppCompatActivity {
         //TODO Trocar icone do FloatingActionButton
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                     //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                          //Ativar o botão
+            getSupportActionBar().setTitle(R.string.text_cardapiogarcom_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
+    }
+
 
     private void carregarItens() {
         //Recycler com itens da cardapio do restaurante
@@ -145,6 +172,9 @@ public class CardapioGarcomActivity extends AppCompatActivity {
     }
 
     private void implementarComponentes() {
+        //Toolbar
+        toolbar = findViewById(R.id.toolbar);
+
         //Button
         buttonCarrinho = (Button) findViewById(R.id.button_cardapioGarcom_carrinho);
 

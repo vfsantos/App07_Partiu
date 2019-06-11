@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -35,6 +36,10 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
     public static final String  USUARIO_LOGADO ="FinalizarPedido.Usuario";
     public static final String COMANDA = "FinalizarPEdido.Comadna";
+
+    //Toolbar
+    private Toolbar toolbar;
+
     //ListView
     private ListView listViewResumoPedido;
 
@@ -65,8 +70,13 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar_pedido_cliente);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
+
+
         context = this;
         intent = getIntent();
 
@@ -80,6 +90,27 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
         verifyPagos();
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_comandagarcom_titulopagina);     //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     @Override
@@ -195,6 +226,9 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
 
     private void implementarComponentes() {
+        //Toolbar
+        toolbar = findViewById(R.id.toolbar);
+
         //ListView
         listViewResumoPedido = (ListView) findViewById(R.id.listview_finalizarPedidoCliente_lista);
 

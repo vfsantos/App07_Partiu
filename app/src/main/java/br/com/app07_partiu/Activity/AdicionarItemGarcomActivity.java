@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,10 @@ import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 
 public class AdicionarItemGarcomActivity extends AppCompatActivity {
+    //Toolbar
+    private Toolbar toolbar;
+
+
     //TextView
     private TextView textViewTituloPagina;
     private TextView textViewNomeItem;
@@ -56,10 +61,11 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_item_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        implementarComponentes();
 
-        inicializaComponentes();
+        //Toolbar
+        setUpToolbar();
+        setSupportActionBar(toolbar);
 
         intent = getIntent();
         context = this;
@@ -73,25 +79,28 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
 
     }
 
-    private void inicializaComponentes() {
-        //TextView
-        textViewTituloPagina = (TextView) findViewById(R.id.textView_adicionarItemGarcom_tituloPage);
-        textViewNomeItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_nome);
-        textViewDetalhesItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_detalhes);
-        textViewValorItem = (TextView) findViewById(R.id.textView_adicionarItemGarcom_valorItem);
-        textViewAlgumaObservacao = (TextView) findViewById(R.id.textView_adicionarItemGarcom_algumaObservacao);
-        textViewQuantidade = (TextView) findViewById(R.id.textView_adicionarItem_quantidade);
 
-        //EditText
-        editTextObservacao = (EditText) findViewById(R.id.editText_adicionarItemGarcom_observacao);
-
-        //Button
-        buttonAdicionarItem = (Button) findViewById(R.id.button_adicionarItem_addComanda);
-
-        //ImageView
-        imageViewAdd = (ImageView) findViewById(R.id.imageView_adicionarItem_add);
-        imageViewSub = (ImageView) findViewById(R.id.imageView_adicionarItem_retirar);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
     }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                          //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                               //Ativar o botão
+            getSupportActionBar().setTitle(R.string.text_adicionaritemgarcom_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
+    }
+
 
     public void onClickAdicionarQuantidade(View v) {
         if(quantidade<9) {
@@ -119,6 +128,29 @@ public class AdicionarItemGarcomActivity extends AppCompatActivity {
         returnIntent.putExtra(ITENS_RETORNADOS,itensRetornar);
         setResult(CardapioGarcomActivity.RESULT_DETALHE_RETORNADO, returnIntent);
         finish();
+    }
 
+    private void implementarComponentes() {
+        //Toolbar
+        toolbar                  = (Toolbar) findViewById(R.id.toolbar);
+
+
+        //TextView
+        textViewNomeItem         = (TextView) findViewById(R.id.textView_adicionarItemGarcom_nome);
+        textViewDetalhesItem     = (TextView) findViewById(R.id.textView_adicionarItemGarcom_detalhes);
+        textViewValorItem        = (TextView) findViewById(R.id.textView_adicionarItemGarcom_valorItem);
+        textViewAlgumaObservacao = (TextView) findViewById(R.id.textView_adicionarItemGarcom_algumaObservacao);
+        textViewQuantidade       = (TextView) findViewById(R.id.textView_adicionarItem_quantidade);
+
+
+        //EditText
+        editTextObservacao       = (EditText) findViewById(R.id.editText_adicionarItemGarcom_observacao);
+
+        //Button
+        buttonAdicionarItem      = (Button) findViewById(R.id.button_adicionarItem_addComanda);
+
+        //ImageView
+        imageViewAdd             = (ImageView) findViewById(R.id.imageView_adicionarItem_add);
+        imageViewSub             = (ImageView) findViewById(R.id.imageView_adicionarItem_retirar);
     }
 }

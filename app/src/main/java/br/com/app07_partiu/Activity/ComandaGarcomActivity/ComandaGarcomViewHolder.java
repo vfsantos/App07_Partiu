@@ -8,13 +8,13 @@ import br.com.app07_partiu.Model.ComandaConvertView;
 public class ComandaGarcomViewHolder {
     public TextView textViewDetalhes;
     public TextView textViewValor;
-    public ImageView imageViewIcon;
+    public TextView textViewStatus;
 
 
-    public ComandaGarcomViewHolder(TextView detalhe, TextView valor, ImageView icon) {
+    public ComandaGarcomViewHolder(TextView detalhe, TextView valor, TextView status) {
         this.textViewDetalhes = detalhe;
         this.textViewValor = valor;
-        this.imageViewIcon = icon;
+        this.textViewStatus = status;
     }
 
     public TextView getTextViewDetalhes() {
@@ -33,11 +33,11 @@ public class ComandaGarcomViewHolder {
         this.textViewValor = textViewValor;
     }
 
-    public ImageView getImageViewIcon() {
-        return imageViewIcon;
+    public TextView getTextViewStatus() {
+        return textViewStatus;
     }
 
-    public void setImageViewIcon(ImageView imageViewIcon) {
-        this.imageViewIcon = imageViewIcon;
+    public void setTextViewStatus(TextView textViewStatus) {
+        this.textViewStatus = textViewStatus;
     }
 }

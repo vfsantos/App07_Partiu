@@ -29,29 +29,36 @@ import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 //TODO Classe PLACEHOLDER
 public class ResumoCardapioGarcomActivity extends AppCompatActivity {
+
+    public static final String RETORNO_ITENS_COMANDA = "ResumoCardapio.ItensRequest";
+
+
+    //Toolbar
+    private Toolbar toolbar;
+
+
     //ListView
-    ListView listViewItensResumo;
+    private ListView listViewItensResumo;
 
 
     //Button
-    Button buttonAdicionarMaisItens;
-    Button buttonFinalizarPedido;
+    private Button buttonAdicionarMaisItens;
+    private Button buttonFinalizarPedido;
 
 
     //TextView;
-    TextView textViewTotal;
-    TextView textViewTotalValor;
+    private TextView textViewTotal;
+    private TextView textViewTotalValor;
 
-    ConstraintLayout constraintLayout12;
+    private ConstraintLayout constraintLayout12;
 
-    Context context;
-    Intent intent;
-    Item[] itensAdicionar;
-    Comanda comanda;
+    private Context context;
+    private Intent intent;
+    private Item[] itensAdicionar;
+    private Comanda comanda;
 
-    List<Item> itensComanda;
+    private List<Item> itensComanda;
 
-    public static final String RETORNO_ITENS_COMANDA = "ResumoCardapio.ItensRequest";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

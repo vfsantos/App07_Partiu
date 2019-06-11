@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,38 +15,63 @@ import br.com.app07_partiu.R;
 
 public class ResumoGarcomActivity extends AppCompatActivity {
 
+    //Toolbar
+    private Toolbar toolbar;
+
     //ListView
-    ListView listViewItensResumo;
+    private ListView listViewItensResumo;
 
 
     //Button
-    Button buttonAdicionarMaisItens;
-    Button buttonFinalizarPedido;
+    private Button buttonAdicionarMaisItens;
+    private Button buttonFinalizarPedido;
 
 
     //TextView;
-    TextView textViewTotal;
-    TextView getTextViewTotalValor;
+    private TextView textViewTotal;
+    private TextView getTextViewTotalValor;
 
-    Context context;
-    Intent intent;
+    private Context context;
+    private Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumo_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
         context = this;
         intent = this.getIntent();
 
-
-        inicializarComponentes();
     }
 
-    private void inicializarComponentes(){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                     //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                          //Ativar o botão
+            getSupportActionBar().setTitle(R.string.text_cardapiogarcom_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
+    }
+
+    private void implementarComponentes(){
         //ListView
         listViewItensResumo = (ListView) findViewById(R.id.listView_resumoGarcom_itensDoPedido);
 

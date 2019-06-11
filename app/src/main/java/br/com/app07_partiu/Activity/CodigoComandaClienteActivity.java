@@ -34,10 +34,15 @@ import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClien
 
 public class CodigoComandaClienteActivity extends AppCompatActivity{
 
+
+    //Toolbar
+    private  Toolbar toolbar;
+
+
+    //BottomNavigationView
     private BottomNavigationView bottomNavigationView;
 
     //TextView
-    private TextView textViewTitulo;
     private TextView textViewDescricao1;
     private TextView textViewDescricao2;
     private TextView textViewInserirCodigo;
@@ -84,10 +89,9 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_codigo_comanda_cliente);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        implentarComponentes();
         setSupportActionBar(toolbar);
 
-        implentarComponentes();
         context = this;
 
         intent = getIntent();
@@ -168,10 +172,12 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
 
     private void implentarComponentes() {
+        //Toolbar
+        toolbar               = (Toolbar) findViewById(R.id.toolbar);
+
         //TextView
-        textViewTitulo = (TextView) findViewById(R.id.textView_codigoComandaTitulo);
-        textViewDescricao1 = (TextView) findViewById(R.id.textView_codigoComandaDescricao1);
-        textViewDescricao2 = (TextView) findViewById(R.id.textView_codigoComandaDescricao2);
+        textViewDescricao1    = (TextView) findViewById(R.id.textView_codigoComandaDescricao1);
+        textViewDescricao2    = (TextView) findViewById(R.id.textView_codigoComandaDescricao2);
         textViewInserirCodigo = (TextView) findViewById(R.id.textView_codigoComandaInserirCodido);
 
 
@@ -180,7 +186,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
 
 
         //ImageView
-        imageViewCode = (ImageView) findViewById(R.id.imageView_codigocomandaclienteCodigo);
+        imageViewCode         = (ImageView) findViewById(R.id.imageView_codigocomandaclienteCodigo);
 
 
         //Button

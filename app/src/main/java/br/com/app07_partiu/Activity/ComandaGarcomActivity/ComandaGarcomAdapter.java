@@ -54,11 +54,11 @@ public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer{
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_item_nome_valor_icone, parent, false);
-            TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_list_item_nome);
-            TextView textViewValor = (TextView) view.findViewById(R.id.textView_list_item_valor);
-            ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageView_list_item_icon);
-            ComandaGarcomViewHolder viewHolder = new ComandaGarcomViewHolder(textViewDescricao, textViewValor, imageViewIcon);
+            view = inflater.inflate(R.layout.list_item_nome_valor_status, parent, false);
+            TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_descricao);
+            TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_valor);
+            TextView textViewStatus = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_status);
+            ComandaGarcomViewHolder viewHolder = new ComandaGarcomViewHolder(textViewDescricao, textViewValor, textViewStatus);
             view.setTag(viewHolder);
         }
 

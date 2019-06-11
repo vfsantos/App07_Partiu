@@ -1,5 +1,6 @@
 package br.com.app07_partiu.Activity.ComandaMesaCliente;
 
+import android.support.v7.widget.Toolbar;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import org.json.JSONException;
 
@@ -47,9 +49,11 @@ import br.com.app07_partiu.Util.Util;
 import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class ComandaMesaClienteActivity extends AppCompatActivity {
+    //Toolbar
+    private Toolbar toolbar;
+
 
     //TextView
-    private TextView textViewTituloPagina;
     private TextView textViewItemCodigoComanda;
     private TextView textViewItemTotalComanda;
     private TextView textViewItemTotalComandaValor;
@@ -105,6 +109,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comanda_mesa_cliente);
+        implementarComponentes();
+        setSupportActionBar(toolbar);
 
         context = this;
 
@@ -115,9 +121,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         idUsuario = (int[]) intent.getSerializableExtra(CodigoComandaClienteActivity.USUARIO_IDS);
         clienteLogado = (Usuario) intent.getSerializableExtra(CodigoComandaClienteActivity.CLIENTE);
         dataAtualizacao = (String) intent.getSerializableExtra(CodigoComandaClienteActivity.DATA_ATUALIZACAO_COMANDA);
-
-
-        implementacaoComponentes();
 
         Log.d("TESTES", "Comanda = " + comanda.toString());
 
@@ -138,6 +141,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
 
     }
+
 
     @Override
     protected void onRestart() {
@@ -220,24 +224,6 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     }
 
 
-    public void implementacaoComponentes() {
-
-        //TextView
-        textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemCodigoComanda);
-        textViewItemTotalComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemTotalComanda);
-        textViewItemTotalComandaValor = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemTotalComandaValor);
-        textViewItemPessoaComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComanda);
-        textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComandaNumero);
-        textViewItemMesa = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesa);
-        textViewItemMesaNumero = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesaNumero);
-        textViewItemHora = (TextView) findViewById(R.id.textView_comandaMesaCliente_dataValor);
-        textViewItensDaComanda = (TextView) findViewById(R.id.textView_comandaMesaCliente_itensNaComanda);
-
-        //ListView
-        listViewItensComanda = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
-        btnFinalizarPedidos = findViewById(R.id.button_cardapioResumoGarcom_finalizar);
-
-    }
 
     private void getItemComandaDetalhe(final int idPedido) {
         if (Connection.isConnected(context)) {
@@ -399,5 +385,26 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             }
         };
         timerAtualizacao.schedule(task, 0L, 3000L);
+    }
+
+    private void implementarComponentes() {
+        //Toolbar
+        toolbar                         = (Toolbar) findViewById(R.id.toolbar);
+
+        //TextView
+        textViewItemCodigoComanda       = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemCodigoComanda);
+        textViewItemTotalComanda        = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemTotalComanda);
+        textViewItemTotalComandaValor   = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemTotalComandaValor);
+        textViewItemPessoaComanda       = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComanda);
+        textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComandaNumero);
+        textViewItemMesa                = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesa);
+        textViewItemMesaNumero          = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesaNumero);
+        textViewItemHora                = (TextView) findViewById(R.id.textView_comandaMesaCliente_dataValor);
+        textViewItensDaComanda          = (TextView) findViewById(R.id.textView_comandaMesaCliente_itensNaComanda);
+
+        //ListView
+        listViewItensComanda            = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
+        btnFinalizarPedidos             = findViewById(R.id.button_cardapioResumoGarcom_finalizar);
+
     }
 }

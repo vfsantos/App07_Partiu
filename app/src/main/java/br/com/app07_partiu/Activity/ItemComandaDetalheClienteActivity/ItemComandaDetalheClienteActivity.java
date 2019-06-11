@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,6 +31,10 @@ import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
 
 public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
+
+    //Toolbar
+    private Toolbar toolbar;
+
 
     //TextView
     private TextView textViewNomeDoItem;
@@ -69,7 +74,11 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_comanda_detalhe_cliente);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        implementarComponentes();
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
         context = this;
@@ -79,14 +88,33 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         item = (Item) intent.getSerializableExtra(ComandaMesaClienteActivity.ITEM);
         clienteLogado = (Usuario) intent.getSerializableExtra(ComandaMesaClienteActivity.CLIENTE_LOGADO);
 
-
-        implementarComponentes();
         carregarViews();
         setButtonListeners();
 
 
 //        checkUsuarioJaPagou();
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                              //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                                   //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_itemdetalhescliente_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     private void checkUsuarioJaPagou() {
@@ -226,25 +254,29 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
 
     private void implementarComponentes() {
+        //Toolbar
+        toolbar                           = (Toolbar) findViewById(R.id.toolbar);
+
+
         //TextView
-        textViewNomeDoItem = (TextView) findViewById(R.id.textView_itemDetalhesCliente_nome);
-        textViewDescricao = (TextView) findViewById(R.id.textView_itemDetalhesCliente_detalhes);
-        textViewValor = (TextView) findViewById(R.id.textView_itemDetalhesCliente_valor);
+        textViewNomeDoItem                = (TextView) findViewById(R.id.textView_itemDetalhesCliente_nome);
+        textViewDescricao                 = (TextView) findViewById(R.id.textView_itemDetalhesCliente_detalhes);
+        textViewValor                     = (TextView) findViewById(R.id.textView_itemDetalhesCliente_valor);
 
 
         //ListView
-        listViewPessoaItemSelecionado = (ListView) findViewById(R.id.listView_itemDetalhesCliente_pessoaItemSelecionado);
+        listViewPessoaItemSelecionado     = (ListView) findViewById(R.id.listView_itemDetalhesCliente_pessoaItemSelecionado);
 
 
         //Button
-//        buttonSelecionar = (Button) findViewById(R.id.button_itemDetalhesCliente_selecionar);
+//        buttonSelecionar                = (Button) findViewById(R.id.button_itemDetalhesCliente_selecionar);
 
 
         //ConstraintLayout
         constraintLayoutItemDeselecionado = (ConstraintLayout) findViewById(R.id.constraintLayoutDeselecionar);
         btnDeselecionar = findViewById(R.id.button_itemDetalhesCliente_dsselecionar);
 
-        constraintLayoutItemSelecioando = (ConstraintLayout) findViewById(R.id.constraintLayoutSelecionado);
+        constraintLayoutItemSelecioando   = (ConstraintLayout) findViewById(R.id.constraintLayoutSelecionado);
         btnSelecionar = findViewById(R.id.button_itemDetalhesCliente_selecionar);
     }
 

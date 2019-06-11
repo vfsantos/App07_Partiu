@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.CodigoComandaClienteActivity"
     tools:showIn="@layout/activity_codigo_comanda_cliente"
-    android:background="@color/chumbo_100">
+    android:background="@color/chumbo_110">
 
     <TextView
         android:id="@+id/textView_codigoComandaTitulo"

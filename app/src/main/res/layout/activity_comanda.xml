@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.PerfilClienteActivity"
-    tools:showIn="@layout/activity_perfil_cliente"
-    android:background="@color/chumbo_110">
+    tools:context=".Activity.ComandaActivity">
 
 </android.support.constraint.ConstraintLayout>

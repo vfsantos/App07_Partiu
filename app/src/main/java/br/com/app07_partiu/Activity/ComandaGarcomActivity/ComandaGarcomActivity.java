@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,8 +37,21 @@ import static br.com.app07_partiu.Util.Util.doubleToReal;
 
 public class ComandaGarcomActivity extends AppCompatActivity {
 
+
+    public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
+    public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
+    public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
+
+    public static final String ID_COMANDA = "CardapioGarcom.idComanda";
+
+    public static final int RESULT_PEDIDOS_CRIADOS = 1000;
+    public static final int RESULT_PEDIDO_REMOVIDO = 2000;
+
+    //Toolbar
+    private Toolbar toolbar;
+
+
     //TextView
-    private TextView textViewTituloPagina;
     private TextView textViewItemCodigoComanda;
     private TextView textViewItemTotalComanda;
     private TextView textViewItemTotalComandaValor;
@@ -49,14 +63,6 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     private TextView textViewItemDataValor;
     private TextView textViewItensDaComanda;
 
-    public static final String ITEM = "br.com.app07_partiu.ComandaGarcomActivity.item";
-    public static final String COMANDA = "br.com.app07_partiu.ComandaGarcomActivity.comanda";
-    public static final String ITENS_RESTAURANTE = "br.com.app07_partiu.ComandaGarcomActivity.itensRestaurante";
-
-    public static final String ID_COMANDA = "CardapioGarcom.idComanda";
-
-    public static final int RESULT_PEDIDOS_CRIADOS = 1000;
-    public static final int RESULT_PEDIDO_REMOVIDO = 2000;
 
     //ListView
     private ListView listViewItensComanda;
@@ -94,11 +100,14 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comanda_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        context = this;
+        implementarComponentes();
 
-        inicializarComponentes();
+        //Toolbar
+        setUpToolbar();
+        setSupportActionBar(toolbar);
+
+
+        context = this;
 
         buttonPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +141,27 @@ public class ComandaGarcomActivity extends AppCompatActivity {
 
         setReloadInterval();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
+
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_comandagarcom_titulopagina);     //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     @Override
@@ -283,7 +313,10 @@ public class ComandaGarcomActivity extends AppCompatActivity {
     }
 
 
-    private void inicializarComponentes() {
+    private void implementarComponentes() {
+        //Toolbar
+        toolbar = findViewById(R.id.toolbar);
+
 
         //TextView
         textViewItemCodigoComanda = (TextView) findViewById(R.id.textView_comandaGarcom_itemCodigoComanda);

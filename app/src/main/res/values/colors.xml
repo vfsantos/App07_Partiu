@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#383838</color>
-    <color name="colorPrimaryDark">#383838</color>
+    <color name="colorPrimary">#313131</color>
+    <color name="colorPrimaryDark">#313131</color>
     <color name="colorAccent">#F8B864</color>
-    <color name="colorBackground">#383838</color>
+    <color name="colorBackground">#313131</color>
     <color name="colorFont">#FFFFFF</color>
     <color name="colorFontDark">#383838</color>
     <color name="colorFontPrimary">#F8B864</color>
     <color name="colorError">#9932CC</color>
-    <color name="colorToolbarSecundary">#383838</color>
+    <color name="colorToolbarSecundary">#212121</color>
 
     <color name="colorTextInputLayoutBackground">#414141</color>
     <color name="colorTextInputLayoutStroke">#414141</color>
@@ -17,7 +17,8 @@
 
     <color name="branco">#FFFFFF</color>
     <color name="cinza_10">#ECECEC</color>
-    <color name="chumbo_100">#383838</color>
+    <color name="chumbo_110">#212121</color>
+    <color name="chumbo_100">#313131</color>
     <color name="chumbo_50">#848484</color>
     <color name="chumbo_40">#9D9D9D</color>
     <color name="chumbo_30">#4C4C4C</color>

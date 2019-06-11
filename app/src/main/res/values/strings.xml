@@ -4,14 +4,14 @@
     <string name="action_settings">Settings</string>
 
     <!-- AdicionarItemGarcomActivity -->
-    <string name="text_adicionaritemgarcom_titulopagina">Detalhes do item</string>
+    <string name="text_adicionaritemgarcom_titulopagina">Adicionar Item</string>
     <string name="btn_adicionaritemgarcom_add">+</string>
     <string name="btn_adicionaritemgarcom_sub">-</string>
     <string name="btn_adicionarcomanda">Adicionar</string>
 
 
     <!-- AvaliacaoActivity -->
-    <string name="title_activity_avaliacao">Feedback</string>
+    <string name="textview_avaliacao_titulopagina">Feedback</string>
     <string name="textview_avaliacao_titulo">estamos indo bem?</string>
     <string name="textview_avaliacao_descritivo1">Seu feedback é muito importante.
         Nos ajude a melhorar cada vez mais.</string>
@@ -33,7 +33,7 @@
 
 
     <!-- CodigoComandaClienteActivity -->
-    <string name="textview_codigocomandacliente_titulo">comanda da mesa</string>
+    <string name="textview_codigocomandacliente_titulo">Código da Comanda</string>
     <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda digite o código no campo seguir</string>
     <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua, entre em contato com o garçom do estabelecimento para estar gerandoo mesmo</string>
     <string name="textview_codigocomandacliente_insiracodigo">Insira o código da comanda</string>
@@ -41,7 +41,7 @@
 
 
     <!-- ComandaGarcomActivity -->
-    <string name="text_comandagarcom_titulopagina">Comanda</string>
+    <string name="textview_comandagarcom_titulopagina">Comanda</string>
     <string name="text_comandagarcom_itensnacomanda">Itens na comanda</string>
     <string name="button_comandaGarcom_pedido">Pedido</string>
     <string name="textview_comandagarcom_totalcomanda">Total: </string>
@@ -51,25 +51,12 @@
 
 
     <!-- ComandaMesaClienteActivity -->
-    <string name="title_activity_comanda_mesa_cliente">Comanda da Mesa</string>
+    <string name="textview_comandamesacliente_titulopagina">Comanda da Mesa</string>
     <string name="text_comandamesacliente_titulopagina">Comanda da mesa</string>
     <string name="textview_comandamesacliente_totalcomanda">Total: </string>
     <string name="textview_comandamesacliente_mesa">Mesa: </string>
     <string name="textview_comandamesacliente_data">Entrada: </string>
     <string name="textview_comandamesacliente_pessoascomanda">Integrantes: </string>
-
-
-    <!-- ComandaVaziaGarcomActivity -->
-    <string name="textview_comandavaziagarcom_titulopagina">Comanda</string>
-    <string name="textview_comandavaziagarcom_itensnacomanda">Itens na comanda</string>
-    <string name="button_comandavaziagarcom_pedido">Pedido</string>
-    <string name="textview_comandavaziagarcom_informacaotitulo">Comanda vazia.</string>
-    <string name="textview_comandavaziagarcom_informacaodescricao">Não conseguimos consultar o
-        consumo desta comanda.</string>
-    <string name="textview_comandavaziagarcom_totalcomanda">Total: </string>
-    <string name="textview_comandavaziagarcom_mesa">Mesa: </string>
-    <string name="textview_comandavaziagarcom_data">Entrada: </string>
-    <string name="textview_comandavaziagarcom_pessoascomanda">Integrantes: </string>
 
 
     <!-- EditarItemGarcom -->
@@ -101,12 +88,13 @@
 
 
     <!-- FinalizarPedidoClienteActivity -->
+    <string name="textview_finalizarpedidocliente_titulopagina">Confirmar Pedido</string>
     <string name="textview_finalizarpedidocliente_total">Total</string>
     <string name="button_finalizarpedidocliente_confirmar">Confirmar</string>
     <string name="textview_finalizarpedidocliente_itensselecionados">Itens selecionados</string>
 
     <!-- FormasPagamentoActivity -->
-    <string name="title_activity_formas_pagamento">Formas Pagamento</string>
+    <string name="textview_formaspagamento_titulopagina">Formas de Pagamento</string>
     <string name="textview_formaspagamento_debito">Débito</string>
     <string name="textview_formaspagamento_credito">Crédito</string>
     <string name="textview_formaspagamento_dinheiro">Dinheiro</string>
@@ -115,7 +103,7 @@
 
 
     <!-- ItemDetalheComandaGarcomActivity -->
-    <string name="text_itemdetalhecomandagarcom_titulopagina">Detalhes</string>
+    <string name="textview_itemdetalhecomandagarcom_titulopagina">Item Selecionado</string>
     <string name="text_itemdetalhecomandagarcom_algumaobservacao">Observações</string>
     <string name="text_itemdetalhecomandagarcom_quantidade">Quantidade</string>
     <string name="text_itemdetalhecomandagarcom_status">Status</string>
@@ -133,6 +121,7 @@
 
 
     <!-- PagamentoConfirmado -->
+    <string name="textview_pagamentoconfirmado_titulopagina">Pagamento Confirmado</string>
     <string name="textview_pagamentoconfirmado_descritivo1">ISSO AI!</string>
     <string name="textview_pagamentoconfirmado_descritivo2">SEU PAGAMENTO FOI CONFIRMADO.</string>
     <string name="button_pagamentoconfirmado_fechar">fechar</string>
@@ -154,6 +143,7 @@
 
 
     <!-- ItemComandaDetalheCliente -->
+    <string name="textview_itemdetalhescliente_titulopagina">Detalhes do Item</string>
     <string name="button_itemDetalhesCliente_selecionar">Selecionar</string>
     <string name="button_itemDetalhesCliente_deselecionar">Deselecionar</string>
 
@@ -163,7 +153,7 @@
 
 
     <!-- PerfilClienteActivity -->
-    <string name="title_activity_perfil_cliente">Perfil</string>
+    <string name="textview_perfilcliente_titulopagina">Perfil</string>
 
     <!-- BottomBar -->
     <string name="text_bottombar_explorar">explorar</string>
