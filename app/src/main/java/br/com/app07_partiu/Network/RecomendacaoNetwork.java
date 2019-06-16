@@ -80,7 +80,7 @@ public class RecomendacaoNetwork {
                 restaurante.setStatus(objeto.getString("status"));
                 restaurante.setEndereco(endereco);
                 endereco.setId(objeto.getJSONObject("endereco").getInt("id"));
-                endereco.getLogradouro(objeto.getJSONObject("endereco").getString("logradouro"));
+                endereco.setLogradouro(objeto.getJSONObject("endereco").getString("logradouro"));
                 endereco.setNumero(objeto.getJSONObject("endereco").getString("numero"));
                 endereco.setComplemento(objeto.getJSONObject("endereco").getString("complemento"));
                 endereco.setBairro(objeto.getJSONObject("endereco").getString("bairro"));

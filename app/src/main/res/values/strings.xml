@@ -94,6 +94,10 @@
     <string name="button_finalizarpedidocliente_confirmar">Confirmar</string>
     <string name="textview_finalizarpedidocliente_itensselecionados">Itens selecionados</string>
 
+
+    <!--FinalizarComandaGarcom -->
+    <string name="textview_finalizarcomandagarcom_titulopagina">Resumo</string>
+
     <!-- FormasPagamentoActivity -->
     <string name="textview_formaspagamento_titulopagina">Formas de Pagamento</string>
     <string name="textview_formaspagamento_debito">Débito</string>
@@ -136,7 +140,7 @@
     <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
 
 
-    <!-- ResumoGarcomActivity -->
+    <!-- ResumoCOmandaGarcomActivity -->
     <string name="text_resumocomandagarcom_titulopagina">Resumo</string>
     <string name="text_resumocomandagarcom_total">Total</string>
     <string name="btn_resumocomandagarcom_adicionarmaisitens">Adicionar mais itens</string>

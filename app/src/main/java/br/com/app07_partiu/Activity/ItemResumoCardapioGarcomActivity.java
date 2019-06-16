@@ -27,6 +27,10 @@ import br.com.app07_partiu.Util.Util;
 
 public class ItemResumoCardapioGarcomActivity extends AppCompatActivity {
 
+    //Toolbar
+    private Toolbar toolbar;
+
+
     //TextView
     //item
     private TextView textViewNomeItem;
@@ -62,9 +66,11 @@ public class ItemResumoCardapioGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_resumo_cardapio_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         inicializaComponentes();
+
+        //Toolbar
+        setUpToolbar();
+        setSupportActionBar(toolbar);
 
         intent = getIntent();
         context = this;
@@ -171,6 +177,16 @@ public class ItemResumoCardapioGarcomActivity extends AppCompatActivity {
         return true;
     }
 
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                                       //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                                            //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_itemdetalhecomandagarcom_titulopagina);     //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
+    }
+
 
     private void removerPedido() {
 
@@ -194,6 +210,11 @@ public class ItemResumoCardapioGarcomActivity extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
+
+        //Toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
 //        textViewTituloPagina = (TextView) findViewById(R.id.textView_itemDetalhes_tituloPage);
         textViewNomeItem = (TextView) findViewById(R.id.textView_itemResumoCardapio_nome);
         textViewDetalhesItem = (TextView) findViewById(R.id.textView_itemResumoCardapio_detalhes);

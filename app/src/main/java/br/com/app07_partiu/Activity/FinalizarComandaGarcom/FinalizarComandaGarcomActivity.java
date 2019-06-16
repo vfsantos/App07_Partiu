@@ -62,7 +62,9 @@ public class FinalizarComandaGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar_comanda_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
         context = this;
@@ -94,6 +96,15 @@ public class FinalizarComandaGarcomActivity extends AppCompatActivity {
             default:break;
         }
         return true;
+    }
+
+    protected void setUpToolbar() {
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                                  //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                                       //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_finalizarcomandagarcom_titulopagina);  //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     private String calcularTotal() {
@@ -140,14 +151,20 @@ public class FinalizarComandaGarcomActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes() {
+        //Toolbar
+        toolbar                = (Toolbar) findViewById(R.id.toolbar);
+
+
         //ListView
         listViewItensFinalizar = (ListView) findViewById(R.id.listview_finalizarComandaGarcom);
+
 
         //Button
         buttonFinalizarComanda = (Button) findViewById(R.id.button_finalizarComandaGarcom_finalizar);
 
+
         //TextView
-        textViewTotalValor = (TextView) findViewById(R.id.textView_finalizarComandaGarcom_totalvalor);
+        textViewTotalValor     = (TextView) findViewById(R.id.textView_finalizarComandaGarcom_totalvalor);
     }
 
 

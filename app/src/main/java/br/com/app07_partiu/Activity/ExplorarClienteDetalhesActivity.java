@@ -40,10 +40,6 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
     private ImageView imageViewRecomendacaoDetalheLogo;
 
 
-    //ButtonView
-    private Button buttonRecomendacaoDetalhesVoltar;
-
-
     //Intent
     private Intent intentRecomendacao;
 
@@ -69,13 +65,6 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         implementarComponentes();
-
-        buttonRecomendacaoDetalhesVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         intentRecomendacao = getIntent();
 
@@ -135,8 +124,6 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         textViewRecomendacaoDetalheEnderecoValor             = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_enderecoValor);
 
 
-        //Button
-        buttonRecomendacaoDetalhesVoltar = (Button) findViewById(R.id.button_recomendacao_voltar);
     }
 
 }

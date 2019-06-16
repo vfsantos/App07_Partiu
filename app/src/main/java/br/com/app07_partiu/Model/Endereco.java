@@ -21,7 +21,7 @@ public class Endereco  implements Serializable {
         this.id = id;
     }
 
-    public String getLogradouro(String string) {
+    public String getLogradouro() {
         return logradouro;
     }
 

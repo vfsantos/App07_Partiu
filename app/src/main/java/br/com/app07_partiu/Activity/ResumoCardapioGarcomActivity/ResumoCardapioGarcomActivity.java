@@ -77,7 +77,10 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardapio_resumo_garcom);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        inicializarComponentes();
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
         context = this;
@@ -90,8 +93,6 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
         for (Item i : itensAdicionar) {
             Log.d("TESTES", "ResumoCardapio.ItensRecebidos.Item=" + i.toString());
         }
-
-        inicializarComponentes();
         carregarItens();
 
 
@@ -115,6 +116,16 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    protected void setUpToolbar() {
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                     //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                          //Ativar o botão
+            getSupportActionBar().setTitle(R.string.text_resumocomandagarcom_titulopagina);  //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
+    }
+
 
     private String calcularTotal() {
         double total = 0;
@@ -150,15 +161,18 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes() {
+        //Toolbar
+        toolbar               = (Toolbar)  findViewById(R.id.toolbar);
+
         //ListView
-        listViewItensResumo = (ListView) findViewById(R.id.listview_cardapioresumo);
+        listViewItensResumo   = (ListView) findViewById(R.id.listview_cardapioresumo);
 
         //Button
-        buttonFinalizarPedido = (Button) findViewById(R.id.button_cardapioResumoGarcom_finalizar);
+        buttonFinalizarPedido = (Button)   findViewById(R.id.button_cardapioResumoGarcom_finalizar);
 
         //TextView
-        textViewTotal = (TextView) findViewById(R.id.textView_cardapioResumoGarcom_total);
-        textViewTotalValor = (TextView) findViewById(R.id.textView_cardapioResumoGarcom_totalvalor);
+        textViewTotal         = (TextView) findViewById(R.id.textView_cardapioResumoGarcom_total);
+        textViewTotalValor    = (TextView) findViewById(R.id.textView_cardapioResumoGarcom_totalvalor);
     }
 
 
