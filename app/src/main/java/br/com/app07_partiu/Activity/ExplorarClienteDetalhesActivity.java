@@ -5,20 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
+import com.bumptech.glide.Glide;
+
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteAdapter;
-import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Model.Endereco;
-import br.com.app07_partiu.Model.ItemRestauranteConvertView;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
@@ -31,8 +30,8 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
     //TextView
     private TextView textViewRecomendacaoDetalheNomeRestaurante;
-    private TextView textViewRecomendacaoDetalheHorarioFuncionamento;
-    private TextView textViewRecomendacaoDetalheHorarioFuncionamentoValor;
+    private TextView textViewRecomendacaoDetalheDetalhe;
+    private TextView textViewRecomendacaoDetalheDetalheValor;
     private TextView textViewRecomendacaoDetalheEndereco;
     private TextView textViewRecomendacaoDetalheEnderecoValor;
 
@@ -50,7 +49,7 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
 
     //Context
-    private Context context;
+    public Context context;
     public Activity activity;
 
 
@@ -62,7 +61,11 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorar_cliente_detalhes);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        context = this;
+
+        //Toolbar
+        setUpToolbar();
         setSupportActionBar(toolbar);
 
         implementarComponentes();
@@ -79,9 +82,39 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         restaurante = (Restaurante) intentRecomendacao.getSerializableExtra(ExplorarClienteAdapter.RECOMENDACAO_DETALHE);
 
         textViewRecomendacaoDetalheNomeRestaurante.setText(restaurante.getNomeFantasia());
-        textViewRecomendacaoDetalheHorarioFuncionamentoValor.setText(null);
+        textViewRecomendacaoDetalheDetalheValor.setText(restaurante.getDescricao());
         textViewRecomendacaoDetalheEnderecoValor.setText(restaurante.getEndereco().toString());
 
+        Glide.with(this).load(restaurante.getLogo()).into(imageViewRecomendacaoDetalheLogo);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home: finish();
+                break;
+            case R.id.action_settings: {
+                Util.logoff(context);
+            }
+            default:break;
+        }
+        return true;
+    }
+
+    protected void setUpToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                                   //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);                                        //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_explorarclientedetalhes_titulopagina);  //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
 
@@ -96,8 +129,8 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
 
         //TextView
         textViewRecomendacaoDetalheNomeRestaurante           = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_nomeRestaurante);
-        textViewRecomendacaoDetalheHorarioFuncionamento      = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_horarioFuncionamento);
-        textViewRecomendacaoDetalheHorarioFuncionamentoValor = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_horarioFuncionamentoValor);
+        textViewRecomendacaoDetalheDetalhe                   = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_detalhe);
+        textViewRecomendacaoDetalheDetalheValor              = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_detalheValor);
         textViewRecomendacaoDetalheEndereco                  = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_endereco);
         textViewRecomendacaoDetalheEnderecoValor             = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_enderecoValor);
 

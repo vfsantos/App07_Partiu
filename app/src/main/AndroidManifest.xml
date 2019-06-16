@@ -22,33 +22,30 @@
             android:name=".Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity"
             android:label="@string/textview_finalizarpedidocliente_titulopagina"
             android:parentActivityName=".Activity.ComandaGarcomActivity.ComandaGarcomActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
             android:name=".Activity.AvaliacaoActivity"
             android:label="@string/textview_avaliacao_titulopagina"
-            android:parentActivityName=".Activity.PagamentoConfirmadoActivity"
-            android:launchMode="singleInstance"
+            android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
             android:name=".Activity.FormasPagamentoActivity"
             android:label="@string/textview_formaspagamento_titulopagina"
             android:parentActivityName=".Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
             android:name=".Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity"
             android:label="@string/title_activity_item_comanda_detalhe_cliente"
             android:parentActivityName=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
             android:name=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
             android:label="@string/textview_comandamesacliente_titulopagina"
+            android:parentActivityName=".Activity.CodigoComandaClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
@@ -110,7 +107,6 @@
             android:name=".Activity.PagamentoConfirmadoActivity"
             android:label="@string/textview_pagamentoconfirmado_titulopagina"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
-            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity
@@ -141,7 +137,8 @@
 
         <activity
             android:name=".Activity.ExplorarClienteDetalhesActivity"
-            android:label="@string/app_name"
+            android:label="@string/textview_explorarclientedetalhes_titulopagina"
+            android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity

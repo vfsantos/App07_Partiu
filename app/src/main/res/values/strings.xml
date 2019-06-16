@@ -82,7 +82,8 @@
 
 
     <!-- ExplorarClienteDetalheActivity -->
-    <string name="textview_recomendacaodetalhehorariodefuncionamento">Horário de funcionamento</string>
+    <string name="textview_explorarclientedetalhes_titulopagina">Detalhes do Estabelecimento</string>
+    <string name="textview_explorarclientedetalhes_detalhe">Detalhe</string>
     <string name="textview_recomendacaodetalheendereco">Endereço</string>
     <string name="button_recomendacaodetalhevoltar">Voltar</string>
 
@@ -160,7 +161,8 @@
     <string name="text_bottombar_comanda">Comanda</string>
     <string name="text_bottombar_perfil">Perfil</string>
 
-
+    <!-- Menu -->
+    <string name="menu_sair">Sair</string>
     <string name="placeholder_endereco_de_email">endereço de e-mail</string>
     <string name="placeholder_senha">senha</string>
 

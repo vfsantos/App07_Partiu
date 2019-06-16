@@ -183,9 +183,34 @@ public class Util {
         alertDialog.show();
     }
 
-    public static void logoff(Context context){
-        Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
+
+    public static void logoff(final Context context){
+        AlertDialog.Builder builder
+                = new AlertDialog
+                .Builder(context);
+
+        builder.setTitle("Sair");
+        builder.setMessage("Deseja realmente saiar?");
+
+        builder.setCancelable(true);
+
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                Intent intent = new Intent(context, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

@@ -115,13 +115,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
-            editTextEmail.setText("garcom1");
+            editTextEmail.setText("benjamin.bento@gmail.com");
             editTextSenha.setText("123");
             validarLogin();
         }
 
         if (testeCliente){
-            editTextEmail.setText("cliente1");
+            editTextEmail.setText("brenda.mariah@gmail.com");
             editTextSenha.setText("123");
             validarLogin();
         }
@@ -156,6 +156,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickButtonLoginEntrar (View view) {
 //        buttonEntrar.setEnabled(false);
         validarLogin();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
     }
 
     @Override

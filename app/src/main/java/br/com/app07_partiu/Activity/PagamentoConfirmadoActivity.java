@@ -1,10 +1,12 @@
 package br.com.app07_partiu.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
@@ -38,11 +41,17 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
     private Intent intentAvaliacao;
 
 
+    //Context
+    private Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagamento_confirmado);
         implementarComponentes();
+
+        context = this;
 
         //Toolbar
         setUpToolbar();
@@ -51,13 +60,20 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
         switch (item.getItemId()) {
-            case android.R.id.home:
-                finishAffinity();
+            case android.R.id.home: finishAffinity();
                 break;
-            default:
-                break;
+            case R.id.action_settings: {
+                Util.logoff(context);
+            }
+            default:break;
         }
         return true;
     }
@@ -67,8 +83,8 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                              //Mostrar o botão
-            getSupportActionBar().setHomeButtonEnabled(true);                                   //Ativar o botão
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(true);       //Ativar o botão
             getSupportActionBar().setTitle(R.string.textview_pagamentoconfirmado_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
         }
     }
@@ -96,10 +112,10 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
     private void implementarComponentes() {
         //Toolbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar             = (Toolbar) findViewById(R.id.toolbar);
 
         //ImageView
-        imageViewCerveja = (ImageView) findViewById(R.id.imageView_pagamentoConfirmado_cerveja);
+        imageViewCerveja    = (ImageView) findViewById(R.id.imageView_pagamentoConfirmado_cerveja);
 
 
         //TextView
@@ -108,7 +124,7 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
 
         //Button
-        buttonFechar = (Button) findViewById(R.id.button_pagamentoConfirmado_fechar);
-        buttonFeedback = (Button) findViewById(R.id.button_pagamentoConfirmado_feedback);
+        buttonFechar        = (Button) findViewById(R.id.button_pagamentoConfirmado_fechar);
+        buttonFeedback      = (Button) findViewById(R.id.button_pagamentoConfirmado_feedback);
     }
 }

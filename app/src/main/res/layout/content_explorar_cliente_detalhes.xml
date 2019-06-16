@@ -13,6 +13,7 @@
         android:id="@+id/constraintLayout15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -61,25 +62,25 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout15">
 
         <TextView
-            android:id="@+id/textView_recomendacaoDetalhe_horarioFuncionamento"
+            android:id="@+id/textView_recomendacaoDetalhe_detalhe"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="4dp"
-            android:text="@string/textview_recomendacaodetalhehorariodefuncionamento"
+            android:text="@string/textview_explorarclientedetalhes_detalhe"
             android:textAllCaps="false"
-            android:textColor="@color/branco"
+            android:textColor="@color/mostarda_100"
             android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoDetalhe_horarioFuncionamentoValor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoDetalhe_detalheValor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_recomendacaoDetalhe_horarioFuncionamentoValor"
+            android:id="@+id/textView_recomendacaoDetalhe_detalheValor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -88,19 +89,20 @@
             android:text="TextView"
             android:textAllCaps="false"
             android:textColor="@color/branco"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoDetalhe_horarioFuncionamento" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoDetalhe_detalhe" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout7"
         android:layout_width="406dp"
         android:layout_height="98dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout14">
 
@@ -114,9 +116,9 @@
             android:layout_marginBottom="4dp"
             android:text="@string/textview_recomendacaodetalheendereco"
             android:textAllCaps="false"
-            android:textColor="@color/branco"
+            android:textColor="@color/mostarda_100"
             android:textSize="16sp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoDetalhe_enderecoValor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +135,7 @@
             android:text="TextView"
             android:textAllCaps="false"
             android:textColor="@color/branco"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,14 +150,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="17dp"
+        android:background="@drawable/button_mostarda_outline"
         android:text="@string/button_recomendacaodetalhevoltar"
         android:textColor="@color/branco"
-        android:background="@drawable/button_mostarda_outline"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
 
 </android.support.constraint.ConstraintLayout>

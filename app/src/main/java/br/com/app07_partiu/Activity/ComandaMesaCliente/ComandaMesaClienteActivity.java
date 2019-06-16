@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,6 +27,7 @@ import java.util.TimerTask;
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
 import br.com.app07_partiu.Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity;
 import br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity;
+import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
@@ -137,6 +140,31 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case R.id.action_settings: {
+                Util.logoff(context);
+            }
+            default:break;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
+    }
 
     @Override
     protected void onRestart() {
