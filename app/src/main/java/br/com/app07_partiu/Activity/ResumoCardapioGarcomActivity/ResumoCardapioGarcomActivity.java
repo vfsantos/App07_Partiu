@@ -203,7 +203,7 @@ public class ResumoCardapioGarcomActivity extends AppCompatActivity {
                     }
                 }
             }).start();
-        }
+        }else buttonFinalizarPedido.setEnabled(true);
     }
 
     public void onClickFinalizarCardapio(View view) {

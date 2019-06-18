@@ -129,6 +129,8 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
             }
         });
 
+        editTextCodigoComanda.setText("OAF01");
+
     }
 
     @Override

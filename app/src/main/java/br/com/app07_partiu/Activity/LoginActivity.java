@@ -116,14 +116,12 @@ public class LoginActivity extends AppCompatActivity {
         //Setar um e-mail e senha fixo para texte
         if (testeGarcom){
             editTextEmail.setText("benjamin.bento@gmail.com");
-            editTextSenha.setText("123");
-            validarLogin();
+//            validarLogin();
         }
 
         if (testeCliente){
             editTextEmail.setText("brenda.mariah@gmail.com");
-            editTextSenha.setText("123");
-            validarLogin();
+//            validarLogin();
         }
         editTextSenha.setText("123");
 
@@ -272,7 +270,7 @@ public class LoginActivity extends AppCompatActivity {
                     },"LoginThread");
 
             loginThread.start();
-        }
+        }else buttonEntrar.setEnabled(true);
     }
 
     public void getRestauranteComandasGarcom() {
@@ -351,7 +349,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     }).start();
-        }
+        }else buttonEntrar.setEnabled(true);
     }
 
     public void inicializarComponentes(){

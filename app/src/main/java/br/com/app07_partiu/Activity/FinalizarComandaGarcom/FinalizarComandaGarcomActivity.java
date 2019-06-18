@@ -254,6 +254,6 @@ public class FinalizarComandaGarcomActivity extends AppCompatActivity {
                     }
                 }
             }).start();
-        }
+        }else buttonFinalizarComanda.setEnabled(true);
     }
 }

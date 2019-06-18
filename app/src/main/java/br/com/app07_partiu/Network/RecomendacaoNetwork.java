@@ -34,24 +34,14 @@ public class RecomendacaoNetwork {
     }
 
     public static Restaurante[] getRecomendacaoEspecialidadeUsuario(String url, int idUsuario) throws IOException {
-        url += "/recomendacao/getRecomendacaoEspecialidadeUsuario?idUsuario="+idUsuario;
+        url += "/recomendacao/restaurantesByScoreContent?idUsuario="+idUsuario;
+//        url += "/recomendacao/getRecomendacaoEspecialidadeUsuario?idUsuario="+idUsuario;
         return getRestaurantes(url);
     }
     public static Restaurante[] getRecomendacaoRestauranteAvaliado(String url) throws IOException {
         url += "/recomendacao/getRecomendacaoRestauranteAvaliado";
         return getRestaurantes(url);
     }
-
-    //TODO adicionar ENDERECO
-    /*endereco.setId(item.getJSONObject("endereco").getInt("id"));
-                endereco.getLogradouro(item.getJSONObject("endereco").getString("logradouro"));
-                endereco.setNumero(item.getJSONObject("endereco").getString("numero"));
-                endereco.setComplemento(item.getJSONObject("endereco").getString("complemento"));
-                endereco.setBairro(item.getJSONObject("endereco").getString("bairro"));
-                endereco.setCidade(item.getJSONObject("endereco").getString("cidade"));
-                endereco.setUf(item.getJSONObject("endereco").getString("uf"));
-                endereco.setCep(item.getJSONObject("endereco").getString("cep"));
-                */
 
     private static Restaurante[] getRestaurantes(String url) throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -88,13 +78,10 @@ public class RecomendacaoNetwork {
                 endereco.setUf(objeto.getJSONObject("endereco").getString("uf"));
                 endereco.setCep(objeto.getJSONObject("endereco").getString("cep"));
 
-                //TODO reparar imagens
                 restaurante.setLogo(objeto.getString("logo"));
-//                restaurante.setLogo(null);
                 restaurante.setDescricao(objeto.getString("descricao"));
 
                 //TODO pegar horarios
-
                 restaurantes.add(restaurante);
             }
         } catch (JSONException e) {

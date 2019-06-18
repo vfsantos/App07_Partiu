@@ -236,19 +236,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
     //Alert com númerodas mesas
     private void alertNovaComanda() {
 
-        mesaSelecionadaAlert = -1;
+        mesaSelecionadaAlert = Integer.parseInt(mesas[0]);;
         alertaNumeroMesa = new AlertDialog.Builder(this);
         alertaNumeroMesa.setTitle(R.string.title_alert_criar_comanda);
-
-
-       /* alertaNumeroMesa.setItems(mesas, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mesaSelecionadaAlert = Integer.parseInt(mesas[which]);
-                criarComanda(garcom.getId(), mesaSelecionadaAlert);
-
-            }
-        });*/
 
         alertaNumeroMesa.setSingleChoiceItems(mesas, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
@@ -363,7 +353,7 @@ public class HomeGarcomActivity extends AppCompatActivity {
                     listViewComandas.setEnabled(true);
                 }
             }).start();
-        }
+        }else listViewComandas.setEnabled(true);
 
 
     }
@@ -409,16 +399,11 @@ public class HomeGarcomActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //Button
         buttonCriarComanda = (Button) findViewById(R.id.button_homegarcom_criarComanda);
-
 
         //SwipeRefreshLayout
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
     }
-
-
-
 
 }
