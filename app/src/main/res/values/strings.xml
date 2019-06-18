@@ -81,6 +81,7 @@
     <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>
 
 
+
     <!-- ExplorarClienteDetalheActivity -->
     <string name="textview_explorarclientedetalhes_titulopagina">Detalhes do Estabelecimento</string>
     <string name="textview_explorarclientedetalhes_detalhe">Detalhe</string>
