@@ -158,10 +158,8 @@ public class FinalizarComandaGarcomActivity extends AppCompatActivity {
         //ListView
         listViewItensFinalizar = (ListView) findViewById(R.id.listview_finalizarComandaGarcom);
 
-
         //Button
         buttonFinalizarComanda = (Button) findViewById(R.id.button_finalizarComandaGarcom_finalizar);
-
 
         //TextView
         textViewTotalValor     = (TextView) findViewById(R.id.textView_finalizarComandaGarcom_totalvalor);

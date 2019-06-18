@@ -60,7 +60,7 @@
 
         <activity
             android:name=".Activity.ResumoGarcomActivity.ResumoGarcomActivity"
-            android:label="@string/title_activity_resumo_garcom"
+            android:label="@string/textview_resumogarcom_titulopagina"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <activity

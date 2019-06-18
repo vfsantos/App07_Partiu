@@ -134,7 +134,7 @@
 
 
     <!-- ResumoGarcomActivity -->
-    <string name="text_resumogarcom_titulopagina">Resumo</string>
+    <string name="textview_resumogarcom_titulopagina">Resumo</string>
     <string name="text_resumogarcom_total">Total</string>
     <string name="btn_resumogarcom_adicionarmaisitens">Adicionar mais itens</string>
     <string name="btn_resumogarcom_finalizarpedido">Finalizar Pedido</string>
