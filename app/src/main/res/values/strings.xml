@@ -20,7 +20,7 @@
         mas lemos tudo com atenção.</string>
     <string name="button_avaliacao_feedback">avaliar</string>
     <string name="button_avaliacao_fechar">fechar</string>
-    <string name="textview_avaliacao_labelcomentario">Conte-nos um pouco mais</string>
+    <string name="textview_avaliacao_labelcomentario">Conte mais pra gente</string>
 
 
     <!-- CardapioGarcomActivity -->
@@ -34,8 +34,8 @@
 
     <!-- CodigoComandaClienteActivity -->
     <string name="textview_codigocomandacliente_titulo">Código da Comanda</string>
-    <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda digite o código no campo seguir</string>
-    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua, entre em contato com o garçom do estabelecimento</string>
+    <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda, digite o código no campo abaixo</string>
+    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua o código, entre em contato com o garçom do estabelecimento</string>
     <string name="textview_codigocomandacliente_insiracodigo">Insira o código da comanda</string>
     <string name="button_codigocomandacliente_entranacomanda">Entrar na comanda</string>
 
@@ -79,6 +79,8 @@
     <string name="textview_recomendacaoespecialidadeusuario_descricao">acho que vai curtir esses aqui</string>
     <string name="textview_recomendacaodiasemana">Recomendações do Dia</string>
     <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>
+    <string name="textview_recomendacaorestauranteavaliado1">Parecido com você</string>
+    <string name="textview_recomendacaorestauranteavaliado_descricao1">baseado no seu perfil</string>
 
 
 
@@ -129,7 +131,7 @@
     <!-- PagamentoConfirmado -->
     <string name="textview_pagamentoconfirmado_titulopagina">Pagamento Confirmado</string>
     <string name="textview_pagamentoconfirmado_descritivo1">ISSO AI!</string>
-    <string name="textview_pagamentoconfirmado_descritivo2">SEU PAGAMENTO FOI CONFIRMADO.</string>
+    <string name="textview_pagamentoconfirmado_descritivo2">SEU PAGAMENTO FOI CONFIRMADO!</string>
     <string name="button_pagamentoconfirmado_fechar">fechar</string>
     <string name="button_pagamentoconfirmado_feedback">feedback</string>
 
@@ -155,6 +157,7 @@
 
 
     <!-- HomeGarcomActivity -->
+    <string name="textview_homegarcom_titulopagina">Partiu</string>
     <string name="button_homegarcom_comanda">Comanda</string>
 
 

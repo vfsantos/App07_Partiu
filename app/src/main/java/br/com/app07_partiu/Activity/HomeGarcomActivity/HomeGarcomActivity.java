@@ -50,6 +50,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
     public static final String USUARIO_IDS = "HomeGarcomActivity.UsuariosId";
     public static final String DATA_ATUALIZACAO_COMANDA = "HomeGarcom.DataAtualizacao";
 
+    //Toolbar
+    private Toolbar toolbar;
+
 
     //AlertDialog / Buider
     private AlertDialog alertaProximaSprint;
@@ -84,9 +87,6 @@ public class HomeGarcomActivity extends AppCompatActivity {
     ListView listViewComandas;
 
 
-    //Toolbar
-    private Toolbar toolbar;
-
     //FAB
     private FloatingActionButton fab;
     private Button buttonCriarComanda;
@@ -108,6 +108,10 @@ public class HomeGarcomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_garcom);
 
         inicializarComponentes();
+
+        //Toolbar
+        setUpToolbar();
+        setSupportActionBar(toolbar);
 
         //setting an setOnRefreshListener on the SwipeDownLayout
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -158,6 +162,16 @@ public class HomeGarcomActivity extends AppCompatActivity {
             default:break;
         }
         return true;
+    }
+
+
+    protected void setUpToolbar() {
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);                     //Mostrar o botão
+            getSupportActionBar().setHomeButtonEnabled(false);                          //Ativar o botão
+            getSupportActionBar().setTitle(R.string.textview_homegarcom_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
+        }
     }
 
     @Override

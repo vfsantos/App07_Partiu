@@ -73,7 +73,6 @@ public class ResumoGarcomActivity extends AppCompatActivity {
 
 
     protected void setUpToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar != null){
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);                     //Mostrar o botão
@@ -83,8 +82,12 @@ public class ResumoGarcomActivity extends AppCompatActivity {
     }
 
     private void implementarComponentes(){
+        //Toolbar
+        toolbar               = (Toolbar) findViewById(R.id.toolbar);
+
+
         //ListView
-        listViewItensResumo = (ListView) findViewById(R.id.listView_resumoGarcom_itensDoPedido);
+        listViewItensResumo   = (ListView) findViewById(R.id.listView_resumoGarcom_itensDoPedido);
 
 
         //Button
@@ -92,7 +95,7 @@ public class ResumoGarcomActivity extends AppCompatActivity {
 
 
         //TextView
-        textViewTotal = (TextView) findViewById(R.id.textView_resumoGarcom_total);
+        textViewTotal         = (TextView) findViewById(R.id.textView_resumoGarcom_total);
         getTextViewTotalValor = (TextView) findViewById(R.id.textView_resumoGarcom_totalvalor);
     }
 

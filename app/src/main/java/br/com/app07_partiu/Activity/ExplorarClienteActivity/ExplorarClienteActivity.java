@@ -46,6 +46,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     private TextView textViewRecomendacaoVisitadosRecentemente;
     private TextView textViewRecomendacaoEspecialidadeUsuario;
     private TextView textViewRecomendacaoRestauranteAvaliado;
+    private TextView textViewRecomendacaoRestauranteAvaliado1;
 
 
     //TextView - Descrição
@@ -54,6 +55,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     private TextView textViewRecomendacaoVisitadosDescricao;
     private TextView textViewRecomendacaoEspecialidadeUsuarioDescricao;
     private TextView textViewRecomendacaoRestauranteAvaliadoDescricao;
+    private TextView textViewRecomendacaoRestauranteAvaliadoDescricao1;
 
 
     //RecyclerView - Carrossel
@@ -62,6 +64,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     private MultiSnapRecyclerView recyclerViewRecomendacaoVisitadosRecentemente;
     private MultiSnapRecyclerView recyclerViewRecomendacaoEspecialidadeUsuario;
     private MultiSnapRecyclerView recyclerViewRecomendacaoRestauranteAvaliado;
+    private MultiSnapRecyclerView recyclerViewRecomendacaoRestauranteAvaliado1;
 
 
     //ExplorarClienteAdapter
@@ -70,6 +73,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     ExplorarClienteAdapter recomendacaoVisitadosRecentementeAdapter;
     ExplorarClienteAdapter recomendacaoEspecialidadeUsuarioAdapter;
     ExplorarClienteAdapter recomendacaoRestauranteAvaliadoAdapter;
+    ExplorarClienteAdapter recomendacaoRestauranteAvaliadoAdapter1;
 
 
     //LinearLayoutManager;
@@ -78,6 +82,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManagerVisitadosRecentemente;
     private LinearLayoutManager linearLayoutManagerEspecialidadeUsuario;
     private LinearLayoutManager linearLayoutManagerRestauranteAvaliado;
+    private LinearLayoutManager linearLayoutManagerRestauranteAvaliado1;
 
 
     private ConstraintLayout constraintLayoutDiaSemana;
@@ -85,6 +90,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     private ConstraintLayout constraintLayoutVisitadodsRecentemente;
     private ConstraintLayout constraintLayoutEspecialidadeUsuario;
     private ConstraintLayout constraintLayoutRestauranteAvaliado;
+    private ConstraintLayout constraintLayoutRestauranteAvaliado1;
 
 
     //List
@@ -93,6 +99,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     List listaRecomendacaoVisitadosRecentemente;
     List listaRecomendacaoEspecialidadeUsuario;
     List listaRecomendacaoRestauranteAvaliado;
+    List listaRecomendacaoRestauranteAvaliado1;
 
 
     //Array
@@ -101,6 +108,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     private Restaurante[] recomendacoesVisitadosRecentemente;
     private Restaurante[] recomendacoesEspecialidadeUsuario;
     private Restaurante[] recomendacoesRestauranteAvaliado;
+    private Restaurante[] recomendacoesRestauranteAvaliado1;
 
 
     //Objetos
@@ -259,6 +267,18 @@ public class ExplorarClienteActivity extends AppCompatActivity {
             recyclerViewRecomendacaoRestauranteAvaliado.setAdapter(recomendacaoRestauranteAvaliadoAdapter);
         }
 
+        //RecomendacaoRestauranteAvaliado1
+        if (recomendacoesRestauranteAvaliado1.length == 0) {
+            Log.d("TESTES", "Recomendacao_RestauranteAvaliado Vazio");
+            constraintLayoutRestauranteAvaliado1.removeAllViews();
+        } else {
+            listaRecomendacaoRestauranteAvaliado1 = Arrays.asList(recomendacoesRestauranteAvaliado1);//converte array para list para poder ser trabalho no RecyclerView
+            recomendacaoRestauranteAvaliadoAdapter1 = new ExplorarClienteAdapter(getApplicationContext(), listaRecomendacaoRestauranteAvaliado1);
+            linearLayoutManagerRestauranteAvaliado1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+            recyclerViewRecomendacaoRestauranteAvaliado1.setLayoutManager(linearLayoutManagerRestauranteAvaliado1);
+            recyclerViewRecomendacaoRestauranteAvaliado1.setAdapter(recomendacaoRestauranteAvaliadoAdapter1);
+        }
+
     }
 
 
@@ -272,6 +292,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         textViewRecomendacaoEspecialidadeUsuario = (TextView) findViewById(R.id.textView_recomendacaoEspecialidadeUsuario);
         textViewRecomendacaoMaisVisitados = (TextView) findViewById(R.id.textView_recomendacaoMaisVisitados);
         textViewRecomendacaoRestauranteAvaliado = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado);
+        textViewRecomendacaoRestauranteAvaliado1 = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado1);
         textViewRecomendacaoVisitadosRecentemente = (TextView) findViewById(R.id.textView_recomendacaoVisitadosRecentemente);
 
         //TextView - Descrição
@@ -279,6 +300,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         textViewRecomendacaoEspecialidadeUsuarioDescricao = (TextView) findViewById(R.id.textView_recomendacaoEspecialidadeUsuario_descricao);
         textViewRecomendacaoMaisVisitadosDescricao = (TextView) findViewById(R.id.textView_recomendacaoMaisVisitados_descricao);
         textViewRecomendacaoRestauranteAvaliadoDescricao = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao);
+        textViewRecomendacaoRestauranteAvaliadoDescricao1 = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao1);
         textViewRecomendacaoVisitadosDescricao = (TextView) findViewById(R.id.textView_recomendacaoVisitadosRecentemente_descricao);
 
         //RecyclerView - Carrossel
@@ -286,6 +308,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         recyclerViewRecomendacaoEspecialidadeUsuario = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoEspecialidadeUsuario);
         recyclerViewRecomendacaoMaisVisitados = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoMaisVisitados);
         recyclerViewRecomendacaoRestauranteAvaliado = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado);
+        recyclerViewRecomendacaoRestauranteAvaliado1 = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado1);
         recyclerViewRecomendacaoVisitadosRecentemente = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoVisitadosRecentemente);
 
         //ConstraintLayout
@@ -293,6 +316,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         constraintLayoutEspecialidadeUsuario = (ConstraintLayout) findViewById(R.id.constraintLayout_especialidadeUsuario);
         constraintLayoutMaisVisitados = (ConstraintLayout) findViewById(R.id.constraintLayout_maisVisitados);
         constraintLayoutRestauranteAvaliado = (ConstraintLayout) findViewById(R.id.constraintLayout_restauranteAvaliado);
+        constraintLayoutRestauranteAvaliado1 = (ConstraintLayout) findViewById(R.id.constraintLayout_restauranteAvaliado1);
         constraintLayoutVisitadodsRecentemente = (ConstraintLayout) findViewById(R.id.constraintLayout_visitadodsRecentemente);
 
     }
@@ -308,6 +332,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                             try {
 
                                 recomendacoesRestauranteAvaliado       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado(Connection.URL);
+                                recomendacoesRestauranteAvaliado1       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado1(Connection.URL);
                                 recomendacoesDiaSemana             = RecomendacaoNetwork.getRecomendacaoDiaSemana(Connection.URL);
                                 recomendacoesMaisVisitados          = RecomendacaoNetwork.getRecomendacaoMaisVisitados(Connection.URL);
                                 recomendacoesEspecialidadeUsuario   = RecomendacaoNetwork.getRecomendacaoEspecialidadeUsuario(Connection.URL, cliente.getId());

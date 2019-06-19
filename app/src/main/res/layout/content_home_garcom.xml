@@ -14,7 +14,6 @@
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +24,8 @@
             android:id="@+id/list_view_comanda_garcom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="80dp"
-            android:clipToPadding="false"></ListView>
+            android:clipToPadding="false"
+            android:paddingBottom="80dp"></ListView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
