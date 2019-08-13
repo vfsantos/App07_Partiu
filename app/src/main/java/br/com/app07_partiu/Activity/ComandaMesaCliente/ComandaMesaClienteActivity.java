@@ -186,13 +186,12 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         textViewItemTotalComandaValor.setText(doubleToReal(valorTotalComanda));
 
         //Listview com itens da comanda selecionada
-        listViewItensComanda = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
+        listViewItensComanda = findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
         ComandaMesaClienteAdapter adapter = new ComandaMesaClienteAdapter(itensFormatados, this);
         listViewItensComanda.setAdapter(adapter);
         listViewItensComanda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (!itensFormatados[position].getStatusPedido().equals("P"))
                     getItemComandaDetalhe(itensFormatados[position].getIdPedido());
                 else{
@@ -444,21 +443,21 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
     private void implementarComponentes() {
         //Toolbar
-        toolbar                         = (Toolbar) findViewById(R.id.toolbar);
+        toolbar                         = findViewById(R.id.toolbar);
 
         //TextView
-        textViewItemCodigoComanda       = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemCodigoComanda);
-        textViewItemTotalComanda        = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemTotalComanda);
-        textViewItemTotalComandaValor   = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemTotalComandaValor);
-        textViewItemPessoaComanda       = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComanda);
-        textViewItemPessoaComandaNumero = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemPessoasComandaNumero);
-        textViewItemMesa                = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesa);
-        textViewItemMesaNumero          = (TextView) findViewById(R.id.textView_comandaMesaCliente_itemMesaNumero);
-        textViewItemHora                = (TextView) findViewById(R.id.textView_comandaMesaCliente_dataValor);
-        textViewItensDaComanda          = (TextView) findViewById(R.id.textView_comandaMesaCliente_itensNaComanda);
+        textViewItemCodigoComanda       = findViewById(R.id.textView_comandaMesaCliente_itemCodigoComanda);
+        textViewItemTotalComanda        = findViewById(R.id.textView_comandaMesaCliente_itemTotalComanda);
+        textViewItemTotalComandaValor   = findViewById(R.id.textView_comandaMesaCliente_itemTotalComandaValor);
+        textViewItemPessoaComanda       = findViewById(R.id.textView_comandaMesaCliente_itemPessoasComanda);
+        textViewItemPessoaComandaNumero = findViewById(R.id.textView_comandaMesaCliente_itemPessoasComandaNumero);
+        textViewItemMesa                = findViewById(R.id.textView_comandaMesaCliente_itemMesa);
+        textViewItemMesaNumero          = findViewById(R.id.textView_comandaMesaCliente_itemMesaNumero);
+        textViewItemHora                = findViewById(R.id.textView_comandaMesaCliente_dataValor);
+        textViewItensDaComanda          = findViewById(R.id.textView_comandaMesaCliente_itensNaComanda);
 
         //ListView
-        listViewItensComanda            = (ListView) findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
+        listViewItensComanda            = findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
         btnFinalizarPedidos             = findViewById(R.id.button_cardapioResumoGarcom_finalizar);
 
     }

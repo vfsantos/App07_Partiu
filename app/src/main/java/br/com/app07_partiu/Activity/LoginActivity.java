@@ -91,8 +91,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //Progressbar
 
-    private final boolean testeGarcom  = true;
-    private final boolean testeCliente = false;
+    private final boolean testeGarcom  = false;
+    private final boolean testeCliente = true;
 
     Usuario     usuario;
     Restaurante restaurante;
@@ -354,23 +354,23 @@ public class LoginActivity extends AppCompatActivity {
 
     public void inicializarComponentes(){
         //ImageView
-        imageViewLogo = (ImageView) findViewById(R.id.image_view_login_logo);
+        imageViewLogo = findViewById(R.id.image_view_login_logo);
 
 
         //EditText
-        editTextEmail = (EditText) findViewById(R.id.edit_text_login_email);
-        editTextSenha = (EditText) findViewById(R.id.edit_text_login_senha);
+        editTextEmail = findViewById(R.id.edit_text_login_email);
+        editTextSenha = findViewById(R.id.edit_text_login_senha);
 
 
         //TextInputLayout
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.text_input_layout_login_email);
-        textInputLayoutSenha = (TextInputLayout) findViewById(R.id.text_input_layout_login_senha);
+        textInputLayoutEmail = findViewById(R.id.text_input_layout_login_email);
+        textInputLayoutSenha = findViewById(R.id.text_input_layout_login_senha);
 
 
         //Button
-        buttonEntrar           = (Button) findViewById(R.id.button_login_entrar);
-        buttonCadastrese       = (Button) findViewById(R.id.button_login_cadastrarse);
-        buttonEsqueceuSuaSenha = (Button) findViewById(R.id.button_esqueceu_sua_senha);
+        buttonEntrar           = findViewById(R.id.button_login_entrar);
+        buttonCadastrese       = findViewById(R.id.button_login_cadastrarse);
+        buttonEsqueceuSuaSenha = findViewById(R.id.button_esqueceu_sua_senha);
 
         buttonCadastrese.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)

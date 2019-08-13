@@ -288,36 +288,36 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavegation);
 
         //TextView - Título
-        textViewRecomendacaoDiaSemana = (TextView) findViewById(R.id.textView_recomendacaoDiaSemana);
-        textViewRecomendacaoEspecialidadeUsuario = (TextView) findViewById(R.id.textView_recomendacaoEspecialidadeUsuario);
-        textViewRecomendacaoMaisVisitados = (TextView) findViewById(R.id.textView_recomendacaoMaisVisitados);
-        textViewRecomendacaoRestauranteAvaliado = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado);
-        textViewRecomendacaoRestauranteAvaliado1 = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado1);
-        textViewRecomendacaoVisitadosRecentemente = (TextView) findViewById(R.id.textView_recomendacaoVisitadosRecentemente);
+        textViewRecomendacaoDiaSemana = findViewById(R.id.textView_recomendacaoDiaSemana);
+        textViewRecomendacaoEspecialidadeUsuario = findViewById(R.id.textView_recomendacaoEspecialidadeUsuario);
+        textViewRecomendacaoMaisVisitados = findViewById(R.id.textView_recomendacaoMaisVisitados);
+        textViewRecomendacaoRestauranteAvaliado = findViewById(R.id.textView_recomendacaoRestauranteAvaliado);
+        textViewRecomendacaoRestauranteAvaliado1 = findViewById(R.id.textView_recomendacaoRestauranteAvaliado1);
+        textViewRecomendacaoVisitadosRecentemente = findViewById(R.id.textView_recomendacaoVisitadosRecentemente);
 
         //TextView - Descrição
-        textViewRecomendacaoDiaSemanaDescricao = (TextView) findViewById(R.id.textView_recomendacaoDiaSemana_descricao);
-        textViewRecomendacaoEspecialidadeUsuarioDescricao = (TextView) findViewById(R.id.textView_recomendacaoEspecialidadeUsuario_descricao);
-        textViewRecomendacaoMaisVisitadosDescricao = (TextView) findViewById(R.id.textView_recomendacaoMaisVisitados_descricao);
-        textViewRecomendacaoRestauranteAvaliadoDescricao = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao);
-        textViewRecomendacaoRestauranteAvaliadoDescricao1 = (TextView) findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao1);
-        textViewRecomendacaoVisitadosDescricao = (TextView) findViewById(R.id.textView_recomendacaoVisitadosRecentemente_descricao);
+        textViewRecomendacaoDiaSemanaDescricao = findViewById(R.id.textView_recomendacaoDiaSemana_descricao);
+        textViewRecomendacaoEspecialidadeUsuarioDescricao = findViewById(R.id.textView_recomendacaoEspecialidadeUsuario_descricao);
+        textViewRecomendacaoMaisVisitadosDescricao = findViewById(R.id.textView_recomendacaoMaisVisitados_descricao);
+        textViewRecomendacaoRestauranteAvaliadoDescricao = findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao);
+        textViewRecomendacaoRestauranteAvaliadoDescricao1 = findViewById(R.id.textView_recomendacaoRestauranteAvaliado_descricao1);
+        textViewRecomendacaoVisitadosDescricao = findViewById(R.id.textView_recomendacaoVisitadosRecentemente_descricao);
 
         //RecyclerView - Carrossel
-        recyclerViewRecomendacaoDiaSemana = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoDiaSemana);
-        recyclerViewRecomendacaoEspecialidadeUsuario = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoEspecialidadeUsuario);
-        recyclerViewRecomendacaoMaisVisitados = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoMaisVisitados);
-        recyclerViewRecomendacaoRestauranteAvaliado = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado);
-        recyclerViewRecomendacaoRestauranteAvaliado1 = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado1);
-        recyclerViewRecomendacaoVisitadosRecentemente = (MultiSnapRecyclerView) findViewById(R.id.recyclerView_recomendacaoVisitadosRecentemente);
+        recyclerViewRecomendacaoDiaSemana = findViewById(R.id.recyclerView_recomendacaoDiaSemana);
+        recyclerViewRecomendacaoEspecialidadeUsuario = findViewById(R.id.recyclerView_recomendacaoEspecialidadeUsuario);
+        recyclerViewRecomendacaoMaisVisitados = findViewById(R.id.recyclerView_recomendacaoMaisVisitados);
+        recyclerViewRecomendacaoRestauranteAvaliado = findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado);
+        recyclerViewRecomendacaoRestauranteAvaliado1 = findViewById(R.id.recyclerView_recomendacaoRestauranteAvaliado1);
+        recyclerViewRecomendacaoVisitadosRecentemente = findViewById(R.id.recyclerView_recomendacaoVisitadosRecentemente);
 
         //ConstraintLayout
-        constraintLayoutDiaSemana = (ConstraintLayout) findViewById(R.id.constraintLayout_diaSemana);
-        constraintLayoutEspecialidadeUsuario = (ConstraintLayout) findViewById(R.id.constraintLayout_especialidadeUsuario);
-        constraintLayoutMaisVisitados = (ConstraintLayout) findViewById(R.id.constraintLayout_maisVisitados);
-        constraintLayoutRestauranteAvaliado = (ConstraintLayout) findViewById(R.id.constraintLayout_restauranteAvaliado);
-        constraintLayoutRestauranteAvaliado1 = (ConstraintLayout) findViewById(R.id.constraintLayout_restauranteAvaliado1);
-        constraintLayoutVisitadodsRecentemente = (ConstraintLayout) findViewById(R.id.constraintLayout_visitadodsRecentemente);
+        constraintLayoutDiaSemana = findViewById(R.id.constraintLayout_diaSemana);
+        constraintLayoutEspecialidadeUsuario = findViewById(R.id.constraintLayout_especialidadeUsuario);
+        constraintLayoutMaisVisitados = findViewById(R.id.constraintLayout_maisVisitados);
+        constraintLayoutRestauranteAvaliado = findViewById(R.id.constraintLayout_restauranteAvaliado);
+        constraintLayoutRestauranteAvaliado1 = findViewById(R.id.constraintLayout_restauranteAvaliado1);
+        constraintLayoutVisitadodsRecentemente = findViewById(R.id.constraintLayout_visitadodsRecentemente);
 
     }
 
@@ -332,7 +332,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                             try {
 
                                 recomendacoesRestauranteAvaliado       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado(Connection.URL);
-                                recomendacoesRestauranteAvaliado1       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado1(Connection.URL);
+                                recomendacoesRestauranteAvaliado1       = RecomendacaoNetwork.getRecomendacaoRestauranteAvaliado(Connection.URL);
                                 recomendacoesDiaSemana             = RecomendacaoNetwork.getRecomendacaoDiaSemana(Connection.URL);
                                 recomendacoesMaisVisitados          = RecomendacaoNetwork.getRecomendacaoMaisVisitados(Connection.URL);
                                 recomendacoesEspecialidadeUsuario   = RecomendacaoNetwork.getRecomendacaoEspecialidadeUsuario(Connection.URL, cliente.getId());

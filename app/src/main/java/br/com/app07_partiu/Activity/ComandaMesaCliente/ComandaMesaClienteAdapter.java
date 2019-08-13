@@ -66,7 +66,8 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
 
     @Override
     public int getViewTypeCount() {
-        return itens.length;
+        return 4;
+        // TODO O problema do TCC apresentacao foi nessa coisa aqui; estava retornando length.itens; provavelmente retorna 4 pois sao 4 os possiveis tipos (0,1,2,3; sendo que 0 é caso de erro)
     }
 
 
@@ -78,9 +79,9 @@ public class ComandaMesaClienteAdapter extends BaseAdapter implements SectionInd
         if (view == null) {
             int type = getItemViewType(position);
             view = getInflatedLayoutForType(type, parent);
-            TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_descricao);
-            TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_valor);
-            TextView textViewStatus = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_status);
+            TextView textViewDescricao = view.findViewById(R.id.textView_itemComandaMesaCliente_descricao);
+            TextView textViewValor = view.findViewById(R.id.textView_itemComandaMesaCliente_valor);
+            TextView textViewStatus = view.findViewById(R.id.textView_itemComandaMesaCliente_status);
             ComandaMesaClienteViewHolder viewHolder = new ComandaMesaClienteViewHolder(textViewDescricao, textViewValor, textViewStatus);
             view.setTag(viewHolder);
         }
