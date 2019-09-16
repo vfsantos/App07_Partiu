@@ -30,7 +30,7 @@
             android:onClick="onClickFinalizarCardapio"
             android:text="@string/btn_resumogarcom_finalizarpedido"
             android:textAllCaps="true"
-            android:textColor="@color/branco"
+            android:textColor="@color/branco_100"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -15,7 +15,6 @@
 
     <color name="colorTransparente">#414141</color>
 
-    <color name="branco">#FFFFFF</color>
     <color name="chumbo_110">#212121</color>
     <color name="chumbo_100">#313131</color>
     <color name="chumbo_75">#646464</color>
@@ -24,9 +23,17 @@
     <color name="chumbo_30">#4C4C4C</color>
     <color name="mostarda_dark">#E9A64E</color>
     <color name="mostarda_100">#F8B864</color>
-    <color name="vermelho_100">#F54B4B</color>
     <color name="cinza_10">#ECECEC</color>
     <color name="cinza_15">#E6E6E6</color>
     <color name="cinza_20">#C4C4C4</color>
     <color name="verde">#FF50CA47</color>
+
+    <color name="branco_100">#FFFFFF</color>
+    <color name="cinza_50">#F5F5F5</color>
+    <color name="rosa_100">#F9657F</color>
+    <color name="vermelho_100">#F14433</color>
+    <color name="amarelo_100">#F8BF66</color>
+    <color name="laranja_100">#FF8D59</color>
+    <color name="preto">#2E3149</color>
+    <color name="cinza_100">#C3C4CB</color>
 </resources>

@@ -216,7 +216,7 @@
             android:onClick="onClickIrAoCarrinho"
             android:text="@string/btn_comandacliente_carrinho"
             android:textAllCaps="true"
-            android:textColor="@color/branco"
+            android:textColor="@color/branco_100"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

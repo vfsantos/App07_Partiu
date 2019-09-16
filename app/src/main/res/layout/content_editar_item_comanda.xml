@@ -135,7 +135,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_primary"
             android:text="Button"
-            android:textColor="@color/branco"
+            android:textColor="@color/branco_100"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

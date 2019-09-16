@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+    <!-- Pressionado e Habilitado -->
+    <item android:state_pressed="true" android:state_enabled="true">
+        <shape>
+            <solid android:color="#FFFFFF"/>
+            <corners
+                android:radius="50dp"
+                />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+            <size
+                android:width="328dp"
+                android:height="48dp"
+                />
+        </shape>
+    </item>
+    <!-- Habilitado e não pressionado -->
+    <item android:state_enabled="true" android:state_pressed="false">
+        <shape>
+            <solid android:color="#FFFFFF" />
+            <corners
+                android:radius="50dp"
+                />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+            <size
+                android:width="328dp"
+                android:height="48dp"
+                />
+        </shape>
+    </item>
+    <!-- Desabilitado -->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="#E6E6E6" />
+            <corners
+                android:radius="50dp"
+                />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+            <size
+                android:width="328dp"
+                android:height="48dp"
+                />
+        </shape>
+    </item>
+</selector>

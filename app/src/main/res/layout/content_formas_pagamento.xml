@@ -121,7 +121,7 @@
             android:layout_marginBottom="18dp"
             android:background="@drawable/button_mostarda"
             android:text="@string/button_formaspagamento_concluir"
-            android:textColor="@color/branco"
+            android:textColor="@color/branco_100"
             android:onClick="onClickConcluir"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

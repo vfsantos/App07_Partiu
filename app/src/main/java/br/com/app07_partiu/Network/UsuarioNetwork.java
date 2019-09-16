@@ -1,17 +1,12 @@
 package br.com.app07_partiu.Network;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -68,4 +63,50 @@ public class UsuarioNetwork {
 
     }
 
+    public static boolean getUsuario(String url, String variavel, String valor) throws IOException, JSONException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/getUsuario?variavel=" + variavel + "&valor=" + valor;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        JSONObject objeto = new JSONObject(resultado);
+
+        Usuario usuario = new Usuario();
+
+        try {
+
+            usuario.setEmail(objeto.getString("email"));
+
+            if (usuario.getEmail().equals("email")) {
+                return true;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.d("TESTES", "Não acho usuario Login");
+        }
+        return false;
+
+    }
+
+    public static void criarCadastroCliente(String url,String tipo, String cpf, String nome, String dta_nascimento, String email, String ddd,
+                                                  String telefone, String genero, String senha, String logradouro, String numero, String complemento,
+                                                  String bairro, String cidade, String uf, String cep) throws IOException, JSONException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/createUsuario?tipo=" + tipo + "&cpf=" + cpf + "&nome=" + nome + "&dta_nascimento=" + dta_nascimento + "&email=" + email + "&ddd=" + ddd +
+                "&telefone=" + telefone + "&genero=" + genero + "&senha=" + senha + "&logradouro=" + logradouro + "&numero=" + numero + "&complemento=" + complemento +
+                "&bairro=" + bairro + "&cidade=" + cidade + "&uf=" + uf + "&cep=" + cep;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+    }
 }

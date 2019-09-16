@@ -27,7 +27,7 @@ android:adjustViewBounds="true">
             android:textStyle="bold"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/branco"
+            android:textColor="@color/branco_100"
             android:textSize="14sp"/>
 
 

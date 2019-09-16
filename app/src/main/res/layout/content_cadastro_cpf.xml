@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.CadastroActivity.CadastroCPFActivity"
+    tools:showIn="@layout/activity_cadastro_cpf">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrarcpf_voltar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="onClickVoltarMainCliente"
+        app:layout_constraintEnd_toStartOf="@+id/textView_cadastrarcpf_titulo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imageview_cadastrarcpf_voltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_white" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/textView_cadastrarcpf_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="168dp"
+        android:text="@string/title_activity_cadastrocpf"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout_cadastrarcpf_voltar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:id="@+id/textview_cadastrarcpf_cpf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/textview_cadastrocpf_cpf"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cadastrarcpf_titulo" />
+
+    <EditText
+        android:id="@+id/edittext_cadastrarcpf_cpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight=".75"
+        android:background="@drawable/edittext_branco"
+        android:hint="@string/textview_cadastrocpf_cpf_hint"
+        android:inputType="number"
+        android:textAllCaps="false"
+        android:textColor="@color/preto"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarcpf_cpf" />
+
+
+    <TextView
+        android:id="@+id/textview_cadastrarcpf_complemento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/textview_cadastrocpf_cpf_complemento"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_cadastrarcpf_cpf" />
+
+    <TextView
+        android:id="@+id/textview_cadastrarcpf_telefone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/textview_cadastrocpf_telefone"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarcpf_complemento" />
+
+    <EditText
+        android:id="@+id/edittext_cadastrarcpf_telefone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_branco"
+        android:ems="10"
+        android:hint="@string/textview_cadastrocpf_telefone_hint"
+        android:inputType="number"
+        android:textAllCaps="false"
+        android:textColor="@color/preto"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarcpf_telefone" />
+
+    <Button
+        android:id="@+id/button_cadastrarcpf_avancar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_branco_solid"
+        android:onClick="onClickToNome"
+        android:text="@string/button_cadastrocpf_avancar"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/rosa_100"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_cadastrarcpf_telefone" />
+
+</android.support.constraint.ConstraintLayout>

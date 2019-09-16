@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent homeIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                Intent homeIntent = new Intent(SplashScreenActivity.this, MainClienteActivity.class);
                 startActivity(homeIntent);
                 //adiciona efeito de transição suave entre as activities
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.CadastroActivity.CadastroGeneroActivity"
+    tools:showIn="@layout/activity_cadastro_genero">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrargenero_voltar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="onClickVoltarMainCliente"
+        app:layout_constraintEnd_toStartOf="@+id/textView_cadastrargenero_titulo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imageview_cadastrargenero_voltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_white" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/textView_cadastrargenero_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="168dp"
+        android:text="@string/title_activity_cadastrogenero"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:id="@+id/textview_cadastrargenero_genero"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/textview_cadastrogenero_genero"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cadastrargenero_titulo" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_cadastrargenero_genero">
+
+        <Button
+            android:id="@+id/button_cadastrargenero_selectmasculino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_select_branco_solid"
+            android:text="@string/checkbox_cadastrogenero_masculino"
+            android:textAllCaps="false"
+            android:textColor="@color/rosa_100"
+            android:textStyle="bold"
+            android:onClick="onClickSelectMasculino"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_cadastrargenero_selectfeminino"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/button_cadastrargenero_selectfeminino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/button_select_branco_outline"
+            android:text="@string/checkbox_cadastrogenero_feminino"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textStyle="bold"
+            android:onClick="onClickSelectFeminino"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_cadastrargenero_selectnaobinario"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button_cadastrargenero_selectnaobinario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_cadastrogenero_naobinario"
+            android:textColor="@color/branco_100"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:onClick="onClickSelectNaoBinario"
+            android:background="@drawable/button_select_branco_outline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/button_cadastrargenero_avancar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_branco_solid"
+        android:onClick="onClickAvancarToEndereco"
+        android:text="@string/button_cadastrogenero_avancar"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/cinza_100"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout21" />
+
+
+</android.support.constraint.ConstraintLayout>

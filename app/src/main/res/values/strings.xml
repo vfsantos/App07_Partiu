@@ -83,7 +83,6 @@
     <string name="textview_recomendacaorestauranteavaliado_descricao1">baseado no seu perfil</string>
 
 
-
     <!-- ExplorarClienteDetalheActivity -->
     <string name="textview_explorarclientedetalhes_titulopagina">Detalhes do Estabelecimento</string>
     <string name="textview_explorarclientedetalhes_detalhe">Detalhe</string>
@@ -300,6 +299,109 @@
     <string name="button_comandagarcom_finalizar">finalizar</string>
     <string name="text_finalizarComandaGarcom_titulo">Finalizar Comanda</string>
     <string name="btn_finalizarComandaGarcom_finalizarComanda">Confirmar Pagamento</string>
+    <string name="title_activity_cadastro_email">CadastroEmailActivity</string>
+
+
+    <!-- Versão nova -->
+
+
+    <!-- MainClienteActivity -->
+    <string name="textview_mainactivity_escolhaumaopcaoparacontinuar">Escolha uma opção para continuar</string>
+    <string name="button_mainactivity_cadastrar">Cadastrar-se</string>
+    <string name="button_mainactivity_entrar">Entrar</string>
+    <string name="button_mainactivity_souumgarcom">Sou um garcom</string>
+    <string name="title_activity_login_cliente">LoginClienteActivity</string>
+
+    <!-- MainGarcomActivity -->
+    <string name="button_maingarcomactivity_entrar">Entrar</string>
+    <string name="button_maingarcomactivity_naosouumgarcom">Não sou um garçom</string>
+
+    <!-- CadastroEmailActivity -->
+    <string name="title_activity_cadastroemail">Criar conta</string>
+    <string name="textview_cadastroemail_email">Qual é o seu e-mail?</string>
+    <string name="textview_cadastroemail_email_complemento">Você vai utilizar essa e-mail sempre que precisar entrar no Partiu.</string>
+    <string name="button_cadastroemail_avancar">Avançar</string>
+    <string name="textview_cadastroemail_hint">digite seu e-mail</string>
+    <string name="snackbar_cadastroemail_erro">E-mail incorreto</string>
+
+    <!-- CadastroSenhaActivity -->
+    <string name="title_activity_cadastrosenha">Criar conta</string>
+    <string name="textview_cadastrosenha_senha">Crie uma senha</string>
+    <string name="textview_cadastrosenha_senha_complemento">Use pelo menos 8 caracter</string>
+    <string name="button_cadastrosenha_avancar">Avançar</string>
+    <string name="textview_cadastrosenha_hint">digite sua senha</string>
+
+    <!-- CadastroDadaNascimento -->
+    <string name="title_activity_cadastrodatanascimento">Criar conta</string>
+    <string name="textview_cadastrodatanascimento_datanascimento">Qual é a sua data de nascimento?</string>
+    <string name="button_cadastrodatanascimento_avancar">Avançar</string>
+    <string name="textview_datepicker_cadastrodatanascimento">Selecione uma data</string>
+
+    <!-- CadastroGeneroActivity -->
+    <string name="title_activity_cadastrogenero">Criar conta</string>
+    <string name="textview_cadastrogenero_genero">Qual seu genero?</string>
+    <string name="checkbox_cadastrogenero_feminino">Feminino</string>
+    <string name="checkbox_cadastrogenero_masculino">Masculino</string>
+    <string name="checkbox_cadastrogenero_naobinario">Não binário</string>
+    <string name="button_cadastrogenero_avancar">Avançar</string>
+
+    <!-- CadastroNomeActivity -->
+    <string name="title_activity_cadastronome">Criar conta</string>
+    <string name="textview_cadastronome_nome">Como você gostaria de ser chamado?</string>
+    <string name="textview_cadastronome_nome_complemento">Isso vai aparecer no seu perfil do Partiu</string>
+    <string name="textview_cadastronome_termosepoliticas_part1">Ao criar uma conta, você concorda com os Termos de Serviços do Partiu.</string>
+    <string name="textview_cadastronome_termosepoliticas_part2">Para saber mais sob re o Partiu coleta, utiliza, compartilha, e proteje os seus dados pessoais, leia a politica de privacidade do Partiu</string>
+    <string name="button_cadastronome_criar">Criar</string>
+    <string name="title_activity_main_cliente">MainClienteActivity</string>
+    <string name="title_activity_main_garcom">MainGarcomActivity</string>
+    <string name="title_activity_login_garcom">LoginGarcomActivity</string>
+    <string name="title_activity_cadastro_senha">CadastroSenhaActivity</string>
+    <string name="title_activity_cadastro_data_nascimento">CadastroDataNascimentoActivity</string>
+    <string name="textview_cadastronome_hint">digite seu nome</string>
+
+    <!-- CadastroEnderecoActivity -->
+    <string name="title_activity_cadastroendereco">Criar conta</string>
+    <string name="textview_cadastroendereco_cep">Número do CEP</string>
+    <string name="textview_cadastroendereco_cep_hint">00000-000</string>
+    <string name="textview_cadastroendereco_cep_complemento">Informe seu cep e te ajudaremos a prencher seu endereço</string>
+    <string name="textview_cadastroendereco_endereco">Rua / Avenida</string>
+    <string name="textview_cadastroendereco_numero">Número</string>
+    <string name="textview_cadastroendereco_complemento">Complemento</string>
+    <string name="textview_cadastroendereco_bairro">Bairro</string>
+    <string name="textview_cadastroendereco_municipio">Cidade</string>
+    <string name="textview_cadastroendereco_uf">Estado</string>
+    <string name="button_cadastroendereco_avancar">Avançar</string>
+    <string name="snackbar_cadastroendereco_cep_erro">CEP não encontrado</string>
+
+    <!-- CadastroCPFActivity -->
+    <string name="title_activity_cadastrocpf">Criar conta</string>
+    <string name="textview_cadastrocpf_cpf">Qual o seu CPF?</string>
+    <string name="textview_cadastrocpf_cpf_complemento">Precisamos dessa informação para caso você esqueça acesso</string>
+    <string name="textview_cadastrocpf_telefone">Qual o seu telefone?</string>
+    <string name="button_cadastrocpf_avancar">Avançar</string>
+    <string name="textview_cadastrocpf_cpf_hint">000.000.000-00</string>
+    <string name="textview_cadastrocpf_telefone_hint">(00) 00000-0000</string>
+    <string name="snackbar_cadastrocpf_cpf_erro">CPF inválido</string>
+
+
+    <!-- CadastroSucesso -->
+    <string name="title_activity_cadastrosucesso">Criar conta</string>
+    <string name="textview_cadastrosucesso_sucesso">Cadastro realizado com sucesso</string>
+    <string name="button_cadastrosucesso_entrar">Entrar</string>
+    <string name="button_cadastrosucesso_voltar">Voltar para a página inicial</string>
+
+
+    <!-- LoginClienteActivity -->
+    <string name="title_activity_logincliente">Entrar</string>
+
+
+    <!-- LoginGarcomActivity -->
+    <string name="title_activity_logingarcom">Entrar</string>
+    <string name="title_activity_cadastro_nome">CadastroNomeActivity</string>
+    <string name="title_activity_cadastro_genero">CadastroGeneroActivity</string>
+    <string name="title_activity_endereco">EnderecoActivity</string>
+    <string name="title_activity_cadastro_cpf">CadastroCPFActivity</string>
+    <string name="title_activity_cadastro_sucesso">CadastroSucesso</string>
 
 
 </resources>

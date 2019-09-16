@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.CadastroActivity.CadastroEnderecoActivity"
+    tools:showIn="@layout/activity_cadastro_endereco">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrarendereco_voltar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="onClickVoltarMainCliente"
+        app:layout_constraintEnd_toStartOf="@+id/textView_cadastrarendereco_titulo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imageview_cadastrarendereco_voltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_white" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/textView_cadastrarendereco_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="168dp"
+        android:text="@string/title_activity_cadastroendereco"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textview_cadastrarendereco_cep"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textview_cadastroendereco_cep"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cadastrarendereco_titulo" />
+
+    <EditText
+        android:id="@+id/edittext_cadastrarendereco_cep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight=".75"
+        android:background="@drawable/edittext_branco"
+        android:hint="@string/textview_cadastroendereco_cep_hint"
+        android:inputType="number"
+        android:textAllCaps="false"
+        android:textColor="@color/preto"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_cep" />
+
+
+    <TextView
+        android:id="@+id/textview_cadastrarendereco_cep_complemento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/textview_cadastroendereco_cep_complemento"
+        android:textAllCaps="false"
+        android:textColor="@color/branco_100"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_cadastrarendereco_cep" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrarendereco_endereco"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_cep_complemento">
+
+        <TextView
+            android:id="@+id/textview_cadastrarendereco_endereco"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_cadastroendereco_endereco"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_cadastrarendereco_endereco"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_branco"
+            android:textAllCaps="false"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_endereco"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textview_cadastrarendereco_numero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/textview_cadastroendereco_numero"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textview_cadastrarendereco_endereco"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_cadastrarendereco_numero"
+            android:layout_width="120dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/edittext_branco"
+            android:textAllCaps="false"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edittext_cadastrarendereco_endereco" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrarendereco_complemento"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_cadastrarendereco_endereco">
+
+        <TextView
+            android:id="@+id/textview_cadastrarendereco_complemento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_cadastroendereco_complemento"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_cadastrarendereco_complemento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_branco"
+            android:textAllCaps="false"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_complemento" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrarendereco_bairro"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_cadastrarendereco_complemento">
+
+        <TextView
+            android:id="@+id/textview_cadastrarendereco_bairro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_cadastroendereco_bairro"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_cadastrarendereco_bairro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_branco"
+            android:textAllCaps="false"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_bairro" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_cadastrarendereco_municipio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_cadastrarendereco_bairro">
+
+        <TextView
+            android:id="@+id/textview_cadastrarendereco_municipio"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_cadastroendereco_municipio"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textview_cadastrarendereco_uf"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_cadastrarendereco_municipio"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_branco"
+            android:textAllCaps="false"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_municipio" />
+
+        <TextView
+            android:id="@+id/textview_cadastrarendereco_uf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/textview_cadastroendereco_uf"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textview_cadastrarendereco_municipio"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_cadastrarendereco_uf"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_branco"
+            android:textAllCaps="false"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/edittext_cadastrarendereco_municipio"
+            app:layout_constraintTop_toBottomOf="@+id/textview_cadastrarendereco_uf" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/button_cadastrarendereco_avancar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_branco_solid"
+            android:enabled="false"
+            android:onClick="onClickAvancarToCadastroCPF"
+            android:text="@string/button_cadastroemail_avancar"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/cinza_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_cadastrarendereco_municipio" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

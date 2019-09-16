@@ -16,144 +16,174 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Activity.ComandaActivity"></activity>
-
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroSucesso"
+            android:label="@string/title_activity_cadastro_sucesso"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroCPFActivity"
+            android:label="@string/title_activity_cadastro_cpf"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroEnderecoActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroGeneroActivity"
+            android:label="@string/title_activity_cadastro_genero"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroNomeActivity"
+            android:label="@string/title_activity_cadastro_nome"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroDataNascimentoActivity"
+            android:label="@string/title_activity_cadastro_data_nascimento"
+            android:parentActivityName=".Activity.CadastroActivity.CadastroSenhaActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroSenhaActivity"
+            android:label="@string/title_activity_cadastro_senha"
+            android:parentActivityName=".Activity.CadastroActivity.CadastroEmailActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.LoginClienteActivity"
+            android:label="@string/title_activity_login_cliente"
+            android:parentActivityName=".Activity.MainClienteActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.LoginGarcomActivity"
+            android:label="@string/title_activity_login_garcom"
+            android:parentActivityName=".Activity.MainGarcomActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.MainGarcomActivity"
+            android:label="@string/title_activity_main_garcom"
+            android:parentActivityName=".Activity.MainClienteActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.MainClienteActivity"
+            android:label="@string/title_activity_main_cliente"
+            android:parentActivityName=".Activity.SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroActivity.CadastroEmailActivity"
+            android:label="@string/title_activity_cadastro_email"
+            android:parentActivityName=".Activity.MainClienteActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity android:name=".Activity.ComandaActivity" />
         <activity
             android:name=".Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity"
             android:label="@string/textview_finalizarpedidocliente_titulopagina"
             android:parentActivityName=".Activity.ComandaGarcomActivity.ComandaGarcomActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.AvaliacaoActivity"
             android:label="@string/textview_avaliacao_titulopagina"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.FormasPagamentoActivity"
             android:label="@string/textview_formaspagamento_titulopagina"
             android:parentActivityName=".Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity"
             android:label="@string/title_activity_item_comanda_detalhe_cliente"
             android:parentActivityName=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
             android:label="@string/textview_comandamesacliente_titulopagina"
             android:parentActivityName=".Activity.CodigoComandaClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.PerfilClienteActivity"
             android:label="@string/textview_perfilcliente_titulopagina"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:label="@string/title_activity_explorar_cliente"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ResumoGarcomActivity.ResumoGarcomActivity"
             android:label="@string/textview_resumogarcom_titulopagina"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity"
             android:label="@string/text_resumocomandagarcom_titulopagina"
             android:parentActivityName=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:label="@string/title_activity_cardapio_garcom"
             android:parentActivityName=".Activity.ComandaGarcomActivity.ComandaGarcomActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.EditarItemComandaActivity"
             android:label="@string/title_activity_editar_item_comanda"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.AdicionarItemGarcomActivity.AdicionarItemGarcomActivity"
             android:label="@string/text_adicionaritemgarcom_titulopagina"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ItemComandaDetalheGarcomActivity"
             android:label="@string/title_activity_item_comanda_detalhe_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ItemDetalheGarcomActivity"
             android:label="@string/title_activity_item_comanda_detalhe_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
-        <activity android:name=".Activity.ItemResumoCardapioGarcomActivity"
+        <activity
+            android:name=".Activity.ItemResumoCardapioGarcomActivity"
             android:label="@string/title_activity_item_resumo_cardapio"
             android:parentActivityName=".Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.LoadingActivity"
             android:label="@string/title_activity_loading"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.PagamentoConfirmadoActivity"
             android:label="@string/textview_pagamentoconfirmado_titulopagina"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.PedidoConfirmacaoGarcomActivity"
             android:label="@string/title_activity_pedido_confirmacao_garcom"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ComandaGarcomActivity.ComandaGarcomActivity"
             android:label="@string/textview_comandagarcom_titulopagina"
             android:parentActivityName=".Activity.HomeGarcomActivity.HomeGarcomActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.HomeGarcomActivity.HomeGarcomActivity"
             android:label="@string/textview_homegarcom_titulopagina"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.CodigoComandaClienteActivity"
             android:label="@string/textview_codigocomandacliente_titulo"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ErroConexaoActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.ExplorarClienteDetalhesActivity"
             android:label="@string/textview_explorarclientedetalhes_titulopagina"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.FinalizarComandaGarcom.FinalizarComandaGarcomActivity"
             android:label="@string/textview_finalizarcomandagarcom_titulopagina"
             android:parentActivityName=".Activity.CardapioGarcomActivity.CardapioGarcomActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-
         <activity
             android:name=".Activity.SplashScreenActivity"
             android:label="@string/app_name"

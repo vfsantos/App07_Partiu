@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorTransparente</item>
         <item name="colorPrimaryDark">@color/colorTransparente</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorTransparente</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -55,5 +55,10 @@
     <style name="TwoWayView">
         <item name="android:orientation">horizontal</item>
     </style>
+
+    <style name="RadioButtonCustom" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/radio_button_custom</item>
+    </style>
+
 
 </resources>
