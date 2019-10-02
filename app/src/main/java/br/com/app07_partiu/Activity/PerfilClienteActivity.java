@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Model.Usuario;
@@ -58,7 +55,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                         a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(a);
                     case R.id.menu_comanda:
-                        Intent b = new Intent(PerfilClienteActivity.this, CodigoComandaClienteActivity.class);
+                        Intent b = new Intent(PerfilClienteActivity.this, HistoricoComandasActivity.class);
                         b.putExtra(USUARIO, cliente);
                         b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(b);

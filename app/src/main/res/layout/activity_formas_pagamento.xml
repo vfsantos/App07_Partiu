@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.FormasPagamentoActivity"
-    android:id="@+id/formasPagamentoActivityView">
+    android:id="@+id/formasPagamentoActivityView"
+    android:background="@color/cinza_5">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

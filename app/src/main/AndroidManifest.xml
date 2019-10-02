@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.app07_partiu">
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,9 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".Activity.HistoricoComandasActivity"
+            android:label="@string/title_activity_historico_comandas"
+            android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
+
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".Activity.CadastroActivity.CadastroSucesso"
             android:label="@string/title_activity_cadastro_sucesso"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.CadastroActivity.CadastroCPFActivity"
             android:label="@string/title_activity_cadastro_cpf"
@@ -79,7 +78,7 @@
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.AvaliacaoActivity"
-            android:label="@string/textview_avaliacao_titulopagina"
+            android:label="@string/title_activity_avaliacao"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
@@ -165,6 +164,7 @@
         <activity
             android:name=".Activity.CodigoComandaClienteActivity"
             android:label="@string/textview_codigocomandacliente_titulo"
+            android:parentActivityName=".Activity.HistoricoComandasActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ErroConexaoActivity"
@@ -174,10 +174,6 @@
             android:name=".Activity.ExplorarClienteDetalhesActivity"
             android:label="@string/textview_explorarclientedetalhes_titulopagina"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity
-            android:name=".Activity.LoginActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.FinalizarComandaGarcom.FinalizarComandaGarcomActivity"
@@ -195,5 +191,12 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <uses-permission android:name="android.permission.READ_PROFILE" />
 
 </manifest>

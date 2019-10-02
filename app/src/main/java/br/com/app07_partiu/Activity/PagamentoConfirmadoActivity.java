@@ -15,10 +15,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
+import br.com.app07_partiu.Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity;
+import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
 
 public class PagamentoConfirmadoActivity extends AppCompatActivity {
+
+    public static final String COMANDA = "br.com.app07_partiu.PagamentoConfirmado.comanda";
+    public static final String USUARIO = "br.com.app07_partiu.PagamentoConfirmado.usuario";
 
     //Toolbar
     private Toolbar toolbar;
@@ -39,10 +45,16 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
     //Intent
     private Intent intentAvaliacao;
+    private Intent intentFormaPagamento;
 
 
     //Context
     private Context context;
+
+
+    //Objetos
+    private Usuario usuario;
+    private Comanda comanda;
 
 
     @Override
@@ -56,6 +68,13 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
         //Toolbar
         setUpToolbar();
         setSupportActionBar(toolbar);
+
+
+        usuario = new Usuario();
+        comanda= new Comanda();
+        intentFormaPagamento = this.getIntent();
+        usuario = (Usuario) intentFormaPagamento.getSerializableExtra(FormasPagamentoActivity.USUARIO);
+        comanda = (Comanda) intentFormaPagamento.getSerializableExtra(FormasPagamentoActivity.COMANDA);
 
     }
 
@@ -96,6 +115,8 @@ public class PagamentoConfirmadoActivity extends AppCompatActivity {
 
     public void onClickFeedback(View view) {
         intentAvaliacao = new Intent(this, AvaliacaoActivity.class);
+        intentAvaliacao.putExtra(USUARIO, usuario);
+        intentAvaliacao.putExtra(COMANDA, comanda);
         startActivityForResult(intentAvaliacao, ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
     }
 

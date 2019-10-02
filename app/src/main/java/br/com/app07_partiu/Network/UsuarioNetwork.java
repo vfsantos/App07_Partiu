@@ -100,7 +100,7 @@ public class UsuarioNetwork {
         url += "/createUsuario?tipo=" + tipo + "&cpf=" + cpf + "&nome=" + nome + "&dta_nascimento=" + dta_nascimento + "&email=" + email + "&ddd=" + ddd +
                 "&telefone=" + telefone + "&genero=" + genero + "&senha=" + senha + "&logradouro=" + logradouro + "&numero=" + numero + "&complemento=" + complemento +
                 "&bairro=" + bairro + "&cidade=" + cidade + "&uf=" + uf + "&cep=" + cep;
-
+        Log.d("TESTI",url);
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -108,5 +108,6 @@ public class UsuarioNetwork {
 
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
+        Log.d("TESTI",resultado);
     }
 }

@@ -18,8 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,7 +25,7 @@ import java.util.TimerTask;
 import br.com.app07_partiu.Activity.CodigoComandaClienteActivity;
 import br.com.app07_partiu.Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity;
 import br.com.app07_partiu.Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity;
-import br.com.app07_partiu.Activity.LoginActivity;
+import br.com.app07_partiu.Activity.LoginClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
@@ -160,7 +158,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LoginClienteActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
         startActivity(intent);

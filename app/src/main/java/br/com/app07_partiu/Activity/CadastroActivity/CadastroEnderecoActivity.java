@@ -86,6 +86,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
         intentCadastroCliente = getIntent();
         cadastroCliente = new Usuario();
+        enderecoCliente = new Endereco();
         cadastroCliente = (Usuario) intentCadastroCliente.getSerializableExtra(CadastroGeneroActivity.CADASTROGENERO);
         System.out.println("Teste retorna valor da página anterior --->" +
                 "\n " + cadastroCliente.getTipo() +
@@ -193,7 +194,6 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     }
 
     public void onClickAvancarToCadastroCPF(View view) {
-        enderecoCliente         = new Endereco();
         String cepInput         = editTextCEP.getText().toString();
         String enderecoInput    = editTextEndereco.getText().toString();
         String numeroInput      = editTextNumero.getText().toString();

@@ -10,19 +10,6 @@
     <string name="btn_adicionarcomanda">Adicionar</string>
 
 
-    <!-- AvaliacaoActivity -->
-    <string name="textview_avaliacao_titulopagina">Feedback</string>
-    <string name="textview_avaliacao_titulo">estamos indo bem?</string>
-    <string name="textview_avaliacao_descritivo1">Seu feedback é muito importante.
-        Nos ajude a melhorar cada vez mais.</string>
-    <string name="textview_avaliacao_descritivo2">Queremos saber o que você gosta ou não gosta e
-        como acha que poderíamos melhorar. Não poderemos responder a cada feedback individualmente,
-        mas lemos tudo com atenção.</string>
-    <string name="button_avaliacao_feedback">avaliar</string>
-    <string name="button_avaliacao_fechar">fechar</string>
-    <string name="textview_avaliacao_labelcomentario">Conte mais pra gente</string>
-
-
     <!-- CardapioGarcomActivity -->
     <string name="text_cardapiogarcom_titulopagina">Cardapio</string>
     <string name="text_cardapiogarcom_resumo">Resumo</string>
@@ -30,14 +17,6 @@
     <string name="text_cardapiogarcom_detalhesitem">Pão artesanal, queijo, calabresa, bacon, milho,
         1 salsicha, ervilha, maionese, batata palha</string>
     <string name="button_cardapiogarcom_carrinho">Carrinho</string>
-
-
-    <!-- CodigoComandaClienteActivity -->
-    <string name="textview_codigocomandacliente_titulo">Código da Comanda</string>
-    <string name="textview_codigocomandacliente_decricao1">Para entrar na comanda, digite o código no campo abaixo</string>
-    <string name="textview_codigocomandacliente_decricao2">Caso ainda não possua o código, entre em contato com o garçom do estabelecimento</string>
-    <string name="textview_codigocomandacliente_insiracodigo">Insira o código da comanda</string>
-    <string name="button_codigocomandacliente_entranacomanda">Entrar na comanda</string>
 
 
     <!-- ComandaGarcomActivity -->
@@ -67,21 +46,6 @@
     <string name="btn_editaritemgarcom_remover">Remover</string>
 
 
-    <!-- ExplorarClienteActivity -->
-    <string name="title_activity_explorar_cliente">Explorar</string>
-    <string name="textview_recomendacaovisitadosrecentemente">Visite Novamente</string>
-    <string name="textview_recomendacaovisitadosrecentemente_descricao">quem gosta, sempre volta</string>
-    <string name="textview_recomendacaorestauranteavaliado">Os Melhores</string>
-    <string name="textview_recomendacaorestauranteavaliado_descricao">os tops do partiu</string>
-    <string name="textview_recomendacaomaisvisitados">Em Alta</string>
-    <string name="textview_recomendacaomaisvisitados_descricao">onde tá todo mundo?</string>
-    <string name="textview_recomendacaoespecialidadeusuario">Sugestões pra Você</string>
-    <string name="textview_recomendacaoespecialidadeusuario_descricao">acho que vai curtir esses aqui</string>
-    <string name="textview_recomendacaodiasemana">Recomendações do Dia</string>
-    <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>
-    <string name="textview_recomendacaorestauranteavaliado1">Parecido com você</string>
-    <string name="textview_recomendacaorestauranteavaliado_descricao1">baseado no seu perfil</string>
-
 
     <!-- ExplorarClienteDetalheActivity -->
     <string name="textview_explorarclientedetalhes_titulopagina">Detalhes do Estabelecimento</string>
@@ -99,14 +63,6 @@
 
     <!--FinalizarComandaGarcom -->
     <string name="textview_finalizarcomandagarcom_titulopagina">Resumo</string>
-
-    <!-- FormasPagamentoActivity -->
-    <string name="textview_formaspagamento_titulopagina">Formas de Pagamento</string>
-    <string name="textview_formaspagamento_debito">Débito</string>
-    <string name="textview_formaspagamento_credito">Crédito</string>
-    <string name="textview_formaspagamento_dinheiro">Dinheiro</string>
-    <string name="textview_formaspagamento_ticket">Ticket</string>
-    <string name="button_formaspagamento_concluir">Concluir</string>
 
 
     <!-- ItemDetalheComandaGarcomActivity -->
@@ -305,6 +261,17 @@
     <!-- Versão nova -->
 
 
+    <!-- AvaliacaoActivity -->
+    <string name="title_activity_avaliacao">Feedback</string>
+    <string name="textview_avaliacao_titulo">Avalie seu atendimento</string>
+    <string name="textview_avaliacao_descritivo">Seu feedback é muito importe!</string>
+    <string name="textview_avaliacao_garcom">Atendimento do garcom</string>
+    <string name="textview_avaliacao_estabeleciomento">Ambiente do estabelecimento</string>
+    <string name="textview_avaliacao_garcomcomentario">Comentário</string>
+    <string name="textview_avaliacao_estabeleciomentocomentario">Comentário</string>
+    <string name="button_avaliacao_feedback">Avaliar</string>
+
+
     <!-- MainClienteActivity -->
     <string name="textview_mainactivity_escolhaumaopcaoparacontinuar">Escolha uma opção para continuar</string>
     <string name="button_mainactivity_cadastrar">Cadastrar-se</string>
@@ -391,8 +358,15 @@
     <string name="button_cadastrosucesso_voltar">Voltar para a página inicial</string>
 
 
-    <!-- LoginClienteActivity -->
+    <!-- LoginCliente -->
     <string name="title_activity_logincliente">Entrar</string>
+    <string name="textview_logincliente_email">Seu e-mail?</string>
+    <string name="textview_logincliente_senha">Sua senha?</string>
+    <string name="button_logincliente_entrar">Entrar</string>
+    <string name="textview_logincliente_email_hint">johndoe@mail.com</string>
+    <string name="textview_logincliente_senha_hint">digite sua senha</string>
+    <string name="textview_logincliente_emailcomplemento">Informe seu e-mail cadastrado</string>
+    <string name="textview_logincliente_senhacomplemento">Informe sua senha com mais de 8 digitos</string>
 
 
     <!-- LoginGarcomActivity -->
@@ -403,5 +377,48 @@
     <string name="title_activity_cadastro_cpf">CadastroCPFActivity</string>
     <string name="title_activity_cadastro_sucesso">CadastroSucesso</string>
 
+
+    <!-- FormasPagamentoActivity -->
+    <string name="textview_formaspagamento_titulopagina">Formas de pagamento</string>
+    <string name="textview_formaspagamento_cartaocredito">Cartao de crédito</string>
+    <string name="textview_formaspagamento_cartaodebito">Cartao de débito</string>
+    <string name="textview_formaspagamento_outros">Outros</string>
+    <string name="button_formaspagamento_cartaocreditovisa">visa</string>
+    <string name="button_formaspagamento_cartaocreditomastercard">mastercard</string>
+    <string name="button_formaspagamento_cartaodebitovisa">visa</string>
+    <string name="button_formaspagamento_cartaodebitomastercard">mastercard</string>
+    <string name="button_formaspagamento_ticket">ticket</string>
+    <string name="button_formaspagamento_dinheiro">dinheiro</string>
+    <string name="title_activity_nova_comanda_cliente">NovaComandaClienteActivity</string>
+
+
+    <!-- CodigoComandaClienteActivity -->
+    <string name="textview_codigocomandacliente_titulopage">Nova comanda</string>
+    <string name="textview_codigocomandacliente_titulo">Código da comanda</string>
+    <string name="textview_codigocomandacliente_decricao1">Digite o código da comanda que deseja entrar no campo asseguir</string>
+    <string name="button_codigocomandacliente_entranacomanda">Entrar</string>
+    <string name="title_activity_historico_comandas">HistoricoComandasActivity</string>
+
+
+    <!-- HistoricoComandaActivity -->
+    <string name="textview_hitoricoComanda_titulopage">Minhas comandas</string>
+
+
+
+    <!-- ExplorarClienteActivity -->
+    <string name="title_activity_explorar_cliente">Explorar</string>
+    <string name="textview_explorecliente_nomecliente">Partiu</string>
+    <string name="textview_recomendacaovisitadosrecentemente">Visite Novamente</string>
+    <string name="textview_recomendacaovisitadosrecentemente_descricao">quem gosta, sempre volta</string>
+    <string name="textview_recomendacaorestauranteavaliado">Os Melhores</string>
+    <string name="textview_recomendacaorestauranteavaliado_descricao">os tops do partiu</string>
+    <string name="textview_recomendacaomaisvisitados">Em Alta</string>
+    <string name="textview_recomendacaomaisvisitados_descricao">onde tá todo mundo?</string>
+    <string name="textview_recomendacaoespecialidadeusuario">Sugestões pra Você</string>
+    <string name="textview_recomendacaoespecialidadeusuario_descricao">acho que vai curtir esses aqui</string>
+    <string name="textview_recomendacaodiasemana">Recomendações do Dia</string>
+    <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>
+    <string name="textview_recomendacaorestauranteavaliado1">Parecido com você</string>
+    <string name="textview_recomendacaorestauranteavaliado_descricao1">baseado no seu perfil</string>
 
 </resources>

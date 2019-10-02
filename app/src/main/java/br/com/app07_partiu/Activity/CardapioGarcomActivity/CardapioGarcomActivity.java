@@ -2,10 +2,8 @@ package br.com.app07_partiu.Activity.CardapioGarcomActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,7 +19,6 @@ import java.util.List;
 
 import br.com.app07_partiu.Activity.AdicionarItemGarcomActivity.AdicionarItemGarcomActivity;
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
-import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Activity.ResumoCardapioGarcomActivity.ResumoCardapioGarcomActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;

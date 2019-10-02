@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,30 +39,6 @@ import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClien
 public class CodigoComandaClienteActivity extends AppCompatActivity{
 
 
-    //Toolbar
-    private  Toolbar toolbar;
-
-
-    //BottomNavigationView
-    private BottomNavigationView bottomNavigationView;
-
-    //TextView
-    private TextView textViewDescricao1;
-    private TextView textViewDescricao2;
-    private TextView textViewInserirCodigo;
-
-
-    //ImageView
-    private ImageView imageViewCode;
-
-
-    //EditText
-    private EditText editTextCodigoComanda;
-
-
-    //Button
-    private Button buttonEntrarComanda;
-
     public static final String COMANDA = "br.com.app07_partiu.CodigoComandaClienteActivity.comanda";
     public static final String RESTAURANTE = "br.com.app07_partiu.CodigoComandaClienteActivity.restaurante";
 
@@ -70,6 +47,30 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     public static final String USUARIO_IDS = "CodigoComandaClienteActivity.UsuariosId";
 
     public static final String DATA_ATUALIZACAO_COMANDA = "CodigoComandaCliente.DataAtualizacao";
+
+
+    //ConstraintLayout
+    private ConstraintLayout constraintLayoutHeader;
+    private ConstraintLayout constraintLayoutFechar;
+    private ConstraintLayout constraintLayoutBody;
+
+
+    //TextView
+    private TextView textViewTituloPage;
+    private TextView textViewDescricao1;
+    private TextView textViewInserirCodigo;
+
+
+    //ImageView
+    private ImageView imageViewFechar;
+
+
+    //EditText
+    private EditText editTextCodigoComanda;
+
+
+    //Button
+    private Button buttonEntrarComanda;
 
 
     //Objeto
@@ -82,10 +83,13 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
     private Intent intentComanda;
     private Intent intent;
 
+
     //Array
     public Item[] itens;
     private int[] idUsuario;
 
+
+    //Snackbar
     private View viewSnackbar;
 
     @Override
@@ -93,62 +97,18 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_codigo_comanda_cliente);
         implentarComponentes();
-        setSupportActionBar(toolbar);
 
         context = this;
         intent = getIntent();
 
         viewSnackbar = findViewById(R.id.codigoComandaClienteActivityView);
 
-        cliente = (Usuario) intent.getSerializableExtra(USUARIO);
-
-
-        //BottomNavigationBar
-        bottomNavigationView = findViewById(R.id.bottomNavegation);
-        bottomNavigationView.setSelectedItemId(R.id.menu_comanda);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_explorar:
-                        Intent a = new Intent(CodigoComandaClienteActivity.this, ExplorarClienteActivity.class);
-                        a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(a);
-                        break;
-                    case R.id.menu_comanda:
-                        break;
-                    case R.id.menu_perfil:
-//                        Intent b = new Intent(CodigoComandaClienteActivity.this, PerfilClienteActivity.class);
-//                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                        startActivity(b);
-                        Util.showManutencaoDialog(context);
-
-                        break;
-                }
-                return false;
-            }
-        });
+        cliente = (Usuario) intent.getSerializableExtra(HistoricoComandasActivity.HISTORICOCOMANDAS);
 
         editTextCodigoComanda.setText("OAF01");
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case R.id.action_settings: {
-                Util.logoff(context);
-            }
-            default:break;
-        }
-        return true;
-    }
 
     private void getComandaPedidos(final String codigo) {
         intentComanda = new Intent(context, ComandaMesaClienteActivity.class);
@@ -209,26 +169,36 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         }
     }
 
+
+    public void onClickVoltaHistoricoComandas(View view) {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
+
     private void implentarComponentes() {
-        //Toolbar
-        toolbar               = (Toolbar) findViewById(R.id.toolbar);
+
+
+        //ConstraintLayout
+        constraintLayoutHeader = (ConstraintLayout) findViewById(R.id.constraintLayout_codigoComanda_header);
+        constraintLayoutFechar = (ConstraintLayout) findViewById(R.id.constraintLayout_codigoComanda_fechar);
+        constraintLayoutBody   = (ConstraintLayout) findViewById(R.id.constraintLayout_codigoComanda_body);
+
 
         //TextView
-        textViewDescricao1    = (TextView) findViewById(R.id.textView_codigoComandaDescricao1);
-        textViewDescricao2    = (TextView) findViewById(R.id.textView_codigoComandaDescricao2);
-        textViewInserirCodigo = (TextView) findViewById(R.id.textView_codigoComandaInserirCodido);
-
-
-        //EditText
-        editTextCodigoComanda = (EditText) findViewById(R.id.editTexte_codigoComandaCodigo);
+        textViewTituloPage     = (TextView) findViewById(R.id.textView_codigoComanda_tituloPagina);
+        textViewDescricao1     = (TextView) findViewById(R.id.textView_codigoComandaDescricao1);
 
 
         //ImageView
-        imageViewCode         = (ImageView) findViewById(R.id.imageView_codigocomandaclienteCodigo);
+        imageViewFechar        = (ImageView) findViewById(R.id.imageview_codigoComanda_fechar);
+
+
+        //EditText
+        editTextCodigoComanda  = (EditText) findViewById(R.id.editTexte_codigoComandaCodigo);
 
 
         //Button
-        buttonEntrarComanda = (Button) findViewById(R.id.button_codigoComandaEntrar);
+        buttonEntrarComanda    = (Button) findViewById(R.id.button_codigoComandaEntrar);
         buttonEntrarComanda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,8 +208,6 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
             }
         });
 
-        //BottomNavigationView
-        bottomNavigationView = findViewById(R.id.bottomNavegation);
     }
 
 }

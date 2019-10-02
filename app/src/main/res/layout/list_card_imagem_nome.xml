@@ -1,35 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="148dp"
-android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+android:layout_height="match_parent"
 xmlns:card_view="http://schemas.android.com/apk/res-auto"
 android:adjustViewBounds="true">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="152dp"
+        android:layout_height="190dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/card_branco_solid_modelo1">
 
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:id="@+id/imageView_logoRestaurante"
-            android:background="@drawable/img_recomendacao" />
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="0dp"
+            android:layout_height="11dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/textView_nomeRestaurante"
+            card_view:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView_nomeRestaurante"
-            android:layout_width="130dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView_logoRestaurante"
-            android:paddingTop="8dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
             android:textAllCaps="false"
-            android:textColor="@color/branco_100"
-            android:textSize="14sp"/>
+            android:textColor="@color/rosa_100"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/constraintLayout22" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout22"
+            android:layout_width="152dp"
+            android:layout_height="120dp"
+            android:background="@drawable/card_foto_salmon"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+        </android.support.constraint.ConstraintLayout>
 
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

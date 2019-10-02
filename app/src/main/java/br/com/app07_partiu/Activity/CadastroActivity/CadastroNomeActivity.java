@@ -133,10 +133,10 @@ public class CadastroNomeActivity extends AppCompatActivity {
     }
 
     public void onClickCriarConta(View view) {
-        cadastroCliente = new Usuario();
         String nomeInput = editTextNome.getText().toString();
-        cadastroCliente.setEmail(nomeInput);
-
+        cadastroCliente.setNome(nomeInput);
+        cadastroCliente.setTipo("cliente");
+        Log.d("TESTI", "clickcriarcont");
         criarUsuario(cadastroCliente.getTipo(), Integer.toString((int) cadastroCliente.getCpf()), cadastroCliente.getNome(), cadastroCliente.getDta_nascimento(), cadastroCliente.getEmail(), Integer.toString((int) cadastroCliente.getDdd()),
                 Integer.toString((int) cadastroCliente.getTelefone()), Character.toString((char) cadastroCliente.getGenero()), cadastroCliente.getSenha(), enderecoCliente.getLogradouro(), enderecoCliente.getNumero(), enderecoCliente.getComplemento(),
                 enderecoCliente.getBairro(), enderecoCliente.getCidade(), enderecoCliente.getUf(), enderecoCliente.getCep());
@@ -155,6 +155,8 @@ public class CadastroNomeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+
+                            Log.d("TESTI", "dentrothread");
                             UsuarioNetwork.criarCadastroCliente(Connection.URL, tipo, cpf, nome, dta_nascimento, email, ddd,
                                     telefone, genero, senha, logradouro, numero, complemento, bairro, cidade, uf, cep);
                             runOnUiThread(new Runnable() {

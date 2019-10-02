@@ -10,11 +10,13 @@
 
     <ImageView
         android:id="@+id/imageView_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:src="@drawable/ic_logo_bemvindo_partiu_negativo"
+        android:layout_width="200dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="167dp"
+        android:layout_marginEnd="100dp"
+        android:src="@drawable/logonovo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
@@ -43,7 +45,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/button_rosa_solid"
+        android:background="@drawable/button_degrade_rosa_amarelo"
         android:onClick="onClickCadastro"
         android:text="@string/button_mainactivity_cadastrar"
         android:textAlignment="center"

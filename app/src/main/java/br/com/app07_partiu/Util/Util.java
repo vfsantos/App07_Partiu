@@ -13,11 +13,10 @@ import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import br.com.app07_partiu.Activity.LoginActivity;
+import br.com.app07_partiu.Activity.LoginClienteActivity;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
@@ -205,7 +204,7 @@ public class Util {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                Intent intent = new Intent(context, LoginActivity.class);
+                Intent intent = new Intent(context, LoginClienteActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
             }

@@ -1,6 +1,5 @@
 package br.com.app07_partiu.Activity.HomeGarcomActivity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -31,7 +29,7 @@ import java.util.List;
 
 import br.com.app07_partiu.Activity.ComandaGarcomActivity.ComandaGarcomActivity;
 import br.com.app07_partiu.Activity.FinalizarComandaGarcom.FinalizarComandaGarcomActivity;
-import br.com.app07_partiu.Activity.LoginActivity;
+import br.com.app07_partiu.Activity.LoginClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
 import br.com.app07_partiu.Model.Item;
@@ -127,9 +125,9 @@ public class HomeGarcomActivity extends AppCompatActivity {
         Intent intent = getIntent();
         viewSnackbar = findViewById(R.id.homeGarcomActivityView);
 
-        restaurante = (Restaurante) intent.getSerializableExtra(LoginActivity.RESTAURANTE);
-        comandas = (ComandaConvertView[]) intent.getSerializableExtra(LoginActivity.COMANDAS);
-        garcom = (Usuario) intent.getSerializableExtra(LoginActivity.USUARIO);
+        restaurante = (Restaurante) intent.getSerializableExtra(LoginClienteActivity.RESTAURANTE);
+        comandas = (ComandaConvertView[]) intent.getSerializableExtra(LoginClienteActivity.COMANDAS);
+        garcom = (Usuario) intent.getSerializableExtra(LoginClienteActivity.USUARIO);
 //        Log.d("TESTES", comandas.toString());
 
 

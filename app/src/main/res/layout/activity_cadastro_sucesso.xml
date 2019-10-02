@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.CadastroActivity.CadastroSucesso"
-    android:background="@drawable/color_degrade_rosa_amarelo">
+    android:background="@color/preto">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

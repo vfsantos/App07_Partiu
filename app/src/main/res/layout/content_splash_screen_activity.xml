@@ -7,18 +7,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.SplashScreenActivity"
     tools:showIn="@layout/activity_splash_screen_activity"
-    android:background="@drawable/color_degrade_rosa_amarelo">
+    android:background="@color/preto">
 
     <ImageView
         android:id="@+id/imageView_splashScreen_logo"
-        android:layout_width="157dp"
-        android:layout_height="73dp"
+        android:layout_width="150dp"
+        android:layout_height="86dp"
         android:layout_alignParentBottom="true"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.423"
-        app:srcCompat="@drawable/ic_logo_bemvindo_partiu_negativo" />
+        app:srcCompat="@drawable/logonovo" />
 
 </android.support.constraint.ConstraintLayout>

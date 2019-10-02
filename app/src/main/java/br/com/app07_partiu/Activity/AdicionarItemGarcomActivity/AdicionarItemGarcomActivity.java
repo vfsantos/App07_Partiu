@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.app07_partiu.Activity.CardapioGarcomActivity.CardapioGarcomActivity;
-import br.com.app07_partiu.Activity.LoginActivity;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
