@@ -92,7 +92,13 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
         datePikerDataDeNascimento = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                cadastroCliente.setDta_nascimento(dayOfMonth+"/"+month+"/"+year);
+                if (month<10){
+
+                    cadastroCliente.setDta_nascimento(dayOfMonth+"/0"+month+"/"+year);
+                }else{
+                    cadastroCliente.setDta_nascimento(dayOfMonth+"/"+month+"/"+year);
+
+                }
                 textViewdatePikerDataDeNascimento.setText(cadastroCliente.getDta_nascimento().toString());
                 buttonAvancar.setEnabled(true);
                 buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));

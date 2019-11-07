@@ -706,5 +706,84 @@ public class ComandaNetwork {
         return null;
     }
 
+    public static Comanda[] getComandasById(String url, int id) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<Object> comandas = new ArrayList<>();
+        url += "/getComandasById?id=" + id;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+        Log.d("TESTES", "url="+url);
+        Log.d("TESTES", "getComandasById="+resultado);
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject comanda = (JSONObject) vetor.get(i);
+                Comanda cm = new Comanda();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                try{
+                    cm.setId(comanda.getInt("id"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+                try{
+                    cm.setCodigoComanda(comanda.getString("codigo"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+                try{
+                    cm.setStatus(comanda.getString("status"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+                try{
+                    cm.setMesa(comanda.getInt("mesa"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+                try{
+                    cm.setDataEntrada(comanda.getString("dtaEntrada"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+                try{
+                    cm.setDataSaida(comanda.getString("dtaSaida"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+
+                cm.setNomeEstabelecimento(comanda.getString("nomeRestaurante"));
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                comandas.add(cm);
+
+                Iterator it = comandas.iterator();
+                while (it.hasNext()) {
+                    System.out.println("ComandaNetwork: " + it.next());
+                }
+
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("TESTE",""+comandas.size());
+        if (comandas.size() > 0) {
+            return comandas.toArray(new Comanda[0]);
+        }
+        return null;
+    }
+
 
 }

@@ -132,7 +132,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        comandas = ComandaNetwork.getComandasByCpf(Connection.URL, cpf);
+                        comandas = ComandaNetwork.getComandasById(Connection.URL, cliente.getId());
 
                         runOnUiThread(new Runnable() {
                                           @Override

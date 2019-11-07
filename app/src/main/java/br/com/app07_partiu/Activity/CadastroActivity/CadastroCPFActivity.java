@@ -97,6 +97,7 @@ public class CadastroCPFActivity extends AppCompatActivity {
         enderecoCliente = (Endereco) intentCadastroCliente.getSerializableExtra(CadastroEnderecoActivity.ENDERECO);
         System.out.println("Teste retorna valor da página anterior --->" +
                 "\n "+cadastroCliente.getTipo()+
+                "\n "+cadastroCliente.getCpf()+" cpf era aqi"+
                 "\n "+cadastroCliente.getEmail()+
                 "\n "+cadastroCliente.getSenha()+
                 "\n "+cadastroCliente.getDta_nascimento()+
@@ -178,6 +179,7 @@ public class CadastroCPFActivity extends AppCompatActivity {
         System.out.println(">-------- ddd: " + dddInput);
         System.out.println(">-------- telefone: " + telefoneInput);
         cadastroCliente.setCpf(editTextCPF.getText().toString());
+        Log.i("XXXXXX", cadastroCliente.getCpf());
         cadastroCliente.setDdd(Integer.parseInt(dddInput));
         cadastroCliente.setTelefone(Integer.parseInt(telefoneInput));
 

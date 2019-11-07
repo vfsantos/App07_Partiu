@@ -189,7 +189,7 @@ public class HistoricoComandasActivity extends AppCompatActivity {
             }
         });
 
-        loadComandas();
+        if (comandas!=null) loadComandas();
 
     }
 
@@ -228,11 +228,11 @@ public class HistoricoComandasActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            comandas = ComandaNetwork.getComandasByCpf(Connection.URL, cliente.getCpf());
+                            comandas = ComandaNetwork.getComandasById(Connection.URL, cliente.getId());
                             runOnUiThread(new Runnable() {
                                               @Override
                                               public void run() {
-                                                  loadComandas();
+                                                  if (comandas!=null)loadComandas();
 
                                                   pullToRefresh.setRefreshing(false);
                                               }
