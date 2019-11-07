@@ -210,7 +210,7 @@ public class LoginClienteActivity extends AppCompatActivity {
                             try {
                                 usuario = UsuarioNetwork.login(Connection.URL, email, senha);
                                 Log.d("TESTES", usuario.toString());
-                                if (usuario.getTipo().equals("garcom")){
+                                if (usuario.getTipo().equals("garcom") || usuario.getTipo().equals("gerente")){
 
                                     restaurante = RestauranteNetwork.getRestauranteByIdGarcom(Connection.URL, usuario.getId());
                                     comandas = ComandaNetwork.buscarComandas(Connection.URL, usuario.getId(), 'A');
