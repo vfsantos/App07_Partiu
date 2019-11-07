@@ -112,11 +112,11 @@ public class CadastroNomeActivity extends AppCompatActivity {
             boolean nomeInputValidation = false;
             if (nomeInput.length() >=1 ) {
                 buttonCriar.setEnabled(true);
-                buttonCriar.setTextColor(getResources().getColor(R.color.rosa_100));
+                buttonCriar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                buttonCriar.setTextColor(getResources().getColor(R.color.branco_100));
             } else{
                 buttonCriar.setEnabled(false);
                 buttonCriar.setTextColor(getResources().getColor(R.color.cinza_100));
-
             }
         }
 
@@ -137,7 +137,7 @@ public class CadastroNomeActivity extends AppCompatActivity {
         cadastroCliente.setNome(nomeInput);
         cadastroCliente.setTipo("cliente");
         Log.d("TESTI", "clickcriarcont");
-        criarUsuario(cadastroCliente.getTipo(), Integer.toString((int) cadastroCliente.getCpf()), cadastroCliente.getNome(), cadastroCliente.getDta_nascimento(), cadastroCliente.getEmail(), Integer.toString((int) cadastroCliente.getDdd()),
+        criarUsuario(cadastroCliente.getTipo(), cadastroCliente.getCpf(), cadastroCliente.getNome(), cadastroCliente.getDta_nascimento(), cadastroCliente.getEmail(), Integer.toString((int) cadastroCliente.getDdd()),
                 Integer.toString((int) cadastroCliente.getTelefone()), Character.toString((char) cadastroCliente.getGenero()), cadastroCliente.getSenha(), enderecoCliente.getLogradouro(), enderecoCliente.getNumero(), enderecoCliente.getComplemento(),
                 enderecoCliente.getBairro(), enderecoCliente.getCidade(), enderecoCliente.getUf(), enderecoCliente.getCep());
 

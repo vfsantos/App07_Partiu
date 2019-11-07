@@ -86,12 +86,13 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String senhaInput = editTextSenha.getText().toString().trim();
             boolean senhaInputValidation = false;
-            if (senhaInput.length() < 8) {
+            if (senhaInput.length() >= 8) {
+                buttonAvancar.setEnabled(true);
+                buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
+            } else {
                 buttonAvancar.setEnabled(false);
                 buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
-            } else {
-                buttonAvancar.setEnabled(true);
-                buttonAvancar.setTextColor(getResources().getColor(R.color.rosa_100));
 
             }
         }

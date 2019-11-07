@@ -107,6 +107,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
         editTextCEP.addTextChangedListener(cepTextWatcher);
 
+        editTextBairro.setText("Soberana");
+        editTextCEP.setText("07161340");
+        editTextComplemento.setText("Casa");
+        editTextEndereco.setText("Rua antonina");
+        editTextMunicipio.setText("Guarulhos");
+        editTextUF.setText("SP");
+
 
     }
 
@@ -175,7 +182,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                 }*/
 
                 buttonAvancar.setEnabled(true);
-                buttonAvancar.setTextColor(getResources().getColor(R.color.rosa_100));
+                buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
 
             }
         }

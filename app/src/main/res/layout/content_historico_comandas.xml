@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.HistoricoComandasActivity"
-    tools:showIn="@layout/activity_historico_comandas">
+    tools:context=".Activity.HistoricoComandaActivity.HistoricoComandasActivity"
+    tools:showIn="@layout/activity_historico_comandas"
+    android:background="@color/branco_100">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout_historicoComanda_header"
@@ -21,10 +22,11 @@
 
         <TextView
             android:id="@+id/textView_historicoComanda_tituloPagina"
-            android:layout_width="115dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="156dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="28dp"
             android:layout_marginBottom="16dp"
             android:text="@string/textview_hitoricoComanda_titulopage"
             android:textAlignment="center"
@@ -33,11 +35,11 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout_historicoComanda_novo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.8" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout_historicoComanda_novo"
@@ -64,5 +66,29 @@
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/listView_historicoComanda_pullToRefresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_historicoComanda_header">
+
+        <ListView
+            android:id="@+id/listView_historicoComanda_listacomanda"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ListView>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

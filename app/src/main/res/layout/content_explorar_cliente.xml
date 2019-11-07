@@ -1,4 +1,758 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/preto"
+    android:paddingBottom="32dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:paddingBottom="32dp"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_especialidadeUsuario"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_recomendacaoEspecialidadeUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
+                android:text="@string/textview_recomendacaoespecialidadeusuario"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoEspecialidadeUsuario_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_recomendacaoEspecialidadeUsuario_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/chumbo_40"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:text="@string/textview_recomendacaoespecialidadeusuario_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoEspecialidadeUsuario" />
+
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                android:id="@+id/recyclerView_recomendacaoEspecialidadeUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoEspecialidadeUsuario_descricao"
+                app:msrv_gravity="start"
+                app:msrv_ms_per_inch="100"
+                app:msrv_snap_count="1" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_diaSemana"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_recomendacaoDiaSemana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
+                android:text="@string/textview_recomendacaodiasemana"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoDiaSemana_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_recomendacaoDiaSemana_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/chumbo_40"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:text="@string/textview_recomendacaodiasemana_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoDiaSemana" />
+
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                android:id="@+id/recyclerView_recomendacaoDiaSemana"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoDiaSemana_descricao"
+                app:msrv_gravity="start"
+                app:msrv_ms_per_inch="100"
+                app:msrv_snap_count="1" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_visitadodsRecentemente"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_recomendacaoVisitadosRecentemente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
+                android:text="@string/textview_recomendacaovisitadosrecentemente"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoVisitadosRecentemente_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_recomendacaoVisitadosRecentemente_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/chumbo_40"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:text="@string/textview_recomendacaovisitadosrecentemente_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoVisitadosRecentemente" />
+
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                android:id="@+id/recyclerView_recomendacaoVisitadosRecentemente"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoVisitadosRecentemente_descricao"
+                app:msrv_gravity="start"
+                app:msrv_ms_per_inch="100"
+                app:msrv_snap_count="1" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_maisVisitados"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_recomendacaoMaisVisitados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
+                android:text="@string/textview_recomendacaomaisvisitados"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoMaisVisitados_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_recomendacaoMaisVisitados_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/chumbo_40"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:text="@string/textview_recomendacaomaisvisitados_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoMaisVisitados" />
+
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                android:id="@+id/recyclerView_recomendacaoMaisVisitados"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoMaisVisitados_descricao"
+                app:msrv_gravity="start"
+                app:msrv_ms_per_inch="100"
+                app:msrv_snap_count="1" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_restauranteAvaliado"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_recomendacaoRestauranteAvaliado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
+                android:text="@string/textview_recomendacaorestauranteavaliado"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_recomendacaoRestauranteAvaliado_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/chumbo_40"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:text="@string/textview_recomendacaorestauranteavaliado_descricao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado" />
+
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                android:id="@+id/recyclerView_recomendacaoRestauranteAvaliado"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao"
+                app:msrv_gravity="start"
+                app:msrv_ms_per_inch="100"
+                app:msrv_snap_count="1" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_restauranteAvaliado1"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_recomendacaoRestauranteAvaliado1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
+                android:text="@string/textview_recomendacaorestauranteavaliado1"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_recomendacaoRestauranteAvaliado_descricao1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="18dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/chumbo_40"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:text="@string/textview_recomendacaorestauranteavaliado_descricao1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado1" />
+
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                android:id="@+id/recyclerView_recomendacaoRestauranteAvaliado1"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao1"
+                app:msrv_gravity="start"
+                app:msrv_ms_per_inch="100"
+                app:msrv_snap_count="1" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</ScrollView>
+
+<!--
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/chumbo_110"
+    android:paddingBottom="32dp">
+
+<LinearLayout
+    android:id="@+id/linearLayoutTest"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="64dp"
+    android:paddingBottom="32dp"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/textView_explorecliente_nomecliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/textview_explorecliente_nomecliente"
+            android:textAlignment="center"
+            android:textColor="@color/branco_100"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_visitadodsRecentemente"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView_recomendacaoVisitadosRecentemente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaovisitadosrecentemente"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/recyclerView_recomendacaovisitadosrecentemente"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoVisitadosRecentemente"
+            app:msrv_gravity="start"
+            app:msrv_ms_per_inch="100"
+            app:msrv_snap_count="1" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_diaSemana"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/textView_recomendacaoDiaSemana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaodiasemana"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoDiaSemana_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_recomendacaoDiaSemana_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaodiasemana_descricao"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/chumbo_40"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoDiaSemana" />
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/recyclerView_recomendacaoDiaSemana"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoDiaSemana_descricao"
+            app:msrv_gravity="start"
+            app:msrv_ms_per_inch="100"
+            app:msrv_snap_count="1" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_maisVisitados"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_recomendacaoMaisVisitados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaovisitadosrecentemente"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoVisitadosRecentemente_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_recomendacaoVisitadosRecentemente_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textColor="@color/chumbo_40"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:text="@string/textview_recomendacaovisitadosrecentemente_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoMaisVisitados" />
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/recyclerView_recomendacaoVisitadosRecentemente"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoVisitadosRecentemente_descricao"
+            app:msrv_gravity="start"
+            app:msrv_ms_per_inch="100"
+            app:msrv_snap_count="1" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_recomendacaoEspecialidadeUsuario"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_recomendacaoEspecialidadeUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaomaisvisitados"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoEspecialidadeUsuario_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_recomendacaoEspecialidadeUsuario_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textColor="@color/chumbo_40"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:text="@string/textview_recomendacaomaisvisitados_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoEspecialidadeUsuario" />
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/recyclerView_recomendacaoEspecialidadeUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoEspecialidadeUsuario_descricao"
+            app:msrv_gravity="start"
+            app:msrv_ms_per_inch="100"
+            app:msrv_snap_count="1" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_restauranteAvaliado"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_recomendacaoRestauranteAvaliado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaorestauranteavaliado"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_recomendacaoRestauranteAvaliado_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textColor="@color/chumbo_40"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:text="@string/textview_recomendacaorestauranteavaliado_descricao"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado" />
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/recyclerView_recomendacaoRestauranteAvaliado"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao"
+            app:msrv_gravity="start"
+            app:msrv_ms_per_inch="100"
+            app:msrv_snap_count="1" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_restauranteAvaliado1"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_recomendacaoRestauranteAvaliado1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/textview_recomendacaorestauranteavaliado1"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_recomendacaoRestauranteAvaliado_descricao1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textColor="@color/chumbo_40"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:text="@string/textview_recomendacaorestauranteavaliado_descricao1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado1" />
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/recyclerView_recomendacaoRestauranteAvaliado1"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_recomendacaoRestauranteAvaliado_descricao1"
+            app:msrv_gravity="start"
+            app:msrv_ms_per_inch="100"
+            app:msrv_snap_count="1" />
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
+</ScrollView>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -373,5 +1127,4 @@
 
 </LinearLayout>
 </ScrollView>
-
-
+-->

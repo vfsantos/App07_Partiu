@@ -8,264 +8,124 @@
     tools:context=".Activity.ComandaMesaCliente.ComandaMesaClienteActivity"
     tools:showIn="@layout/activity_comanda_mesa_cliente">
 
-    <!--constraintLayout2
-    linearLayout2
-    textView_comandaMesaCliente_itemCodigoComanda
-    textView_comandaMesaCliente_itemTotalComanda
-    textView_comandaMesaCliente_itemTotalComandaValor
-    textView_comandaMesaCliente_itemPessoasComanda
-    textView_comandaMesaCliente_itemPessoasComandaNumero
-    textView_comandaMesaCliente_itemMesa
-    textView_comandaMesaCliente_itemMesaNumero
-    textView_comandaMesaCliente_itemHora
-    -->
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/constraintLayour_comandamesacliente_meuconsumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayout3">
-
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <!-- Código da comanda -->
-            <TextView
-                android:id="@+id/textView_comandaMesaCliente_itemCodigoComanda"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="left"
-                android:text="AAA00"
-                android:textAllCaps="true"
-                android:textColor="@color/mostarda_100"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-
-
-            <!-- Valor total da comanda -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_itemTotalComanda"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="@string/item_comanda_garcom_total_comanda"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_itemTotalComandaValor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="R$120,00"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="2" />
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_itemMesa"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="@string/item_comanda_garcom_mesa"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_itemMesaNumero"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="01"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <!-- Pessoas na comanda -->
-
-
-            <!-- Número da mesa -->
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_data"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="@string/item_comanda_garcom_data"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_dataValor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="19h24"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="2"/>
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_itemPessoasComanda"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="@string/item_comanda_garcom_pessoas_comanda"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/textView_comandaMesaCliente_itemPessoasComandaNumero"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="12"
-                    android:textAllCaps="false"
-                    android:textColor="@color/chumbo_100"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintBotaoFinalizar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cinza_10"
-        app:layout_constraintTop_toBottomOf="@id/constraintLista"
+        android:background="@drawable/button_degrade_rosa_amarelo_full"
+        android:onClick="onClickIrAoCarrinho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/button_cardapioResumoGarcom_finalizar"
+        <TextView
+            android:id="@+id/textView_comandamesacliente_meuconsumo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
-            android:background="@drawable/button_mostarda"
-            android:onClick="onClickIrAoCarrinho"
-            android:text="@string/btn_comandacliente_carrinho"
-            android:textAllCaps="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/textView_comandamesacliente_meuconsumo"
             android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_comandamesacliente_avancar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:srcCompat="@drawable/ic_arrow_back_white" />
+
+        <TextView
+            android:id="@+id/textView_comandamesacliente_valortotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:text="TextView"
+            android:textColor="@color/branco_100"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_comandamesacliente_meuconsumo" />
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayout_comandamesacliente_header"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/cinza_10"
+        android:layout_height="56dp"
+        android:background="@color/preto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
-            android:id="@+id/textView_comandaMesaCliente_itensNaComanda"
-            android:layout_width="match_parent"
+            android:id="@+id/textView_comandamesacliente_tituloPagina"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="156dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="18dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/text_comandagarcom_itensnacomanda"
+            android:text="@string/textview_comandamesacliente_titulopage"
+            android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/chumbo_100"
-            android:textSize="14dp"
-            android:textStyle="normal"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayour_comandamesacliente_voltar"
+            app:layout_constraintHorizontal_bias="0.026"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.6" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayour_comandamesacliente_voltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="onClickVoltaHistoricoComandas"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageview_comandamesacliente_voltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_backwad__arrow" />
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLista"
+        android:id="@+id/constraintLayout_comandamesacliente_body"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/constraintBotaoFinalizar"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayour_comandamesacliente_meuconsumo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_comandamesacliente_header">
 
         <ListView
             android:id="@+id/listView_comandaMesaCliente_itensDaComanda"
@@ -273,11 +133,13 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></ListView>
+            app:layout_constraintTop_toTopOf="parent">
 
+        </ListView>
 
     </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

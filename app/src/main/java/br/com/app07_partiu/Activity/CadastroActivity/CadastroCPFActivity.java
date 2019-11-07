@@ -121,8 +121,8 @@ public class CadastroCPFActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String cpfInput = editTextCPF.getText().toString().trim();
 
-            if (ValidaCPF.isCPF(cpfInput) == true) {
-                System.out.printf("%s\n", ValidaCPF.imprimeCPF(cpfInput));
+            if (cpfInput.length() >=1 && cpfInput.length() <=9 ) {
+                System.out.printf("%s\n", cpfInput);
                 cpfPreenchido = true;
 
             } else{
@@ -170,20 +170,21 @@ public class CadastroCPFActivity extends AppCompatActivity {
     }
 
     public void onClickToNome(View view) {
-        String cpfInput         = editTextCPF.getText().toString();
         String telefoneCompleto = editTextTelefone.getText().toString();
-        String telefoneInput    = telefoneCompleto.substring(2,8);
-        String dddInput         = telefoneInput.substring(0,1);
+        String telefoneInput    = telefoneCompleto.substring(2,11);
+        String dddInput         = telefoneCompleto.substring(0,2);
 
-        cadastroCliente.setCpf(Long.parseLong(cpfInput));
+        System.out.println(">-------- telefonecompleto: " + editTextTelefone.getText().toString());
+        System.out.println(">-------- ddd: " + dddInput);
+        System.out.println(">-------- telefone: " + telefoneInput);
+        cadastroCliente.setCpf(editTextCPF.getText().toString());
         cadastroCliente.setDdd(Integer.parseInt(dddInput));
         cadastroCliente.setTelefone(Integer.parseInt(telefoneInput));
 
         intentToCadastroCPF = new Intent(this, CadastroNomeActivity.class);
         intentToCadastroCPF.putExtra(CADASTROCPF, cadastroCliente);
         intentToCadastroCPF.putExtra(CADASTROCPFENDERECO, enderecoCliente);
-        startActivity(intentToCadastroCPF);
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
         System.out.println("Teste retorna valor desta página --->" +
                 "\n "+cadastroCliente.getTipo()+
                 "\n "+cadastroCliente.getEmail()+
@@ -200,6 +201,9 @@ public class CadastroCPFActivity extends AppCompatActivity {
                 "\n "+cadastroCliente.getCpf()+
                 "\n "+cadastroCliente.getDdd()+
                 "\n "+cadastroCliente.getTelefone());
+
+        startActivity(intentToCadastroCPF);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 
 

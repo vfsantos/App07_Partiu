@@ -33,11 +33,9 @@ public class FormasPagamentoActivity extends AppCompatActivity {
     public static final String USUARIO = "br.com.app07_partiu.FormasPagamento.usuario";
 
 
-    //Toolbar
-    private Toolbar toolbar;
-
 
     //TextView
+    private TextView textViewTitulo;
     private TextView textViewCategoriasCartaoCredito;
     private TextView textViewCategoriasCartaoDebito;
     private TextView textViewCategoriasOutros;
@@ -49,8 +47,8 @@ public class FormasPagamentoActivity extends AppCompatActivity {
     private TextView textViewTicket;
 
 
-
     //ImageView
+    private ImageView imageViewVoltar;
     private ImageView imageViewCartaoCreditoVisa;
     private ImageView imageViewCartaoCreditoMasterCard;
     private ImageView imageViewCartaoDebitoVisa;
@@ -61,6 +59,7 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
 
     //ConstraintLayout
+    private ConstraintLayout constraintLayoutHeader;
     private ConstraintLayout constraintLayoutCartaoCreditoVisa;
     private ConstraintLayout constraintLayoutCartaoCreditoMasterCard;
     private ConstraintLayout constraintLayoutCartaoDebitoVisa;
@@ -93,10 +92,6 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
         implementarComponentes();
 
-        //Toolbar
-        setUpToolbar();
-        setSupportActionBar(toolbar);
-
         context = this;
         viewSnackbar = findViewById(R.id.formasPagamentoActivityView);
 
@@ -107,37 +102,6 @@ public class FormasPagamentoActivity extends AppCompatActivity {
         comanda = (Comanda) intent.getSerializableExtra(FinalizarPedidoClienteActivity.COMANDA);
 
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case android.R.id.home: finish();
-                break;
-            case R.id.action_settings: {
-                Util.logoff(context);
-            }
-            default:break;
-        }
-        return true;
-    }
-
-
-    protected void setUpToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-            getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-            getSupportActionBar().setTitle(R.string.textview_formaspagamento_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
-        }
     }
 
 
@@ -363,19 +327,24 @@ public class FormasPagamentoActivity extends AppCompatActivity {
 
     }
 
+    public void onClickVoltarFinalizarComandaCliente(View view) {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
+
 
     private void implementarComponentes() {
-        //Toolbar
-        toolbar                                     = (Toolbar) findViewById(R.id.toolbar);
 
 
         //TextView
+        textViewTitulo                              = (TextView) findViewById(R.id.textView_formaspagamento_tituloPagina);
         textViewCategoriasCartaoCredito             = (TextView) findViewById(R.id.textView_formaspagamento_categoriacartaocredito);
         textViewCategoriasCartaoDebito              = (TextView) findViewById(R.id.textView_formaspagamento_categoriacartaodebito);
         textViewCategoriasOutros                    = (TextView) findViewById(R.id.textView_formaspagamento_categoriaoutro);
 
 
         //ImageView
+        imageViewVoltar                             = (ImageView) findViewById(R.id.imageview_formaspagamento_voltar);
         imageViewCartaoCreditoMasterCard            = (ImageView) findViewById(R.id.imageView_formaspagamento_arrowright_ctcreditomastercard);
         imageViewCartaoCreditoVisa                  = (ImageView) findViewById(R.id.imageView_formaspagamento_arrowright_ctcreditovisa);
         imageViewCartaoDebitoMasterCard             = (ImageView) findViewById(R.id.imageView_formaspagamento_arrowright_ctdebitomastercard);
@@ -384,7 +353,8 @@ public class FormasPagamentoActivity extends AppCompatActivity {
         imageViewDinheiro                           = (ImageView) findViewById(R.id.imageView_formaspagamento_arrowright_dinhiero);
 
 
-        //Button
+        //ConstraintLayout
+        constraintLayoutHeader                      = (ConstraintLayout) findViewById(R.id.constraintLayout_formaspagamento_header);
         constraintLayoutCartaoCreditoMasterCard     = (ConstraintLayout) findViewById(R.id.constraintLayout_formaspagamento_ctcreditomastercard);
         constraintLayoutCartaoCreditoVisa           = (ConstraintLayout) findViewById(R.id.constraintLayout_formaspagamento_ctcreditovisa);
         constraintLayoutCartaoDebitoMasterCard      = (ConstraintLayout) findViewById(R.id.constraintLayout_formaspagamento_ctdebitomastercard);

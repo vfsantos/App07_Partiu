@@ -24,7 +24,6 @@ public class MainClienteActivity extends AppCompatActivity {
     //Button
     private Button    buttonCadatrar;
     private Button    buttonEntrar;
-    private Button    buttonSouUmGarcom;
 
 
     //Intent
@@ -55,12 +54,6 @@ public class MainClienteActivity extends AppCompatActivity {
     }
 
 
-    public void onClickSouUmGarcom(View view) {
-        intentToMainGarcom = new Intent(this, MainGarcomActivity.class);
-        startActivity(intentToMainGarcom);
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-    }
-
 
     private void implementarComponentes() {
         //ImageView
@@ -72,7 +65,6 @@ public class MainClienteActivity extends AppCompatActivity {
         //Button
         buttonCadatrar                       = (Button) findViewById(R.id.button_cadastrar);
         buttonEntrar                         = (Button) findViewById(R.id.button_cadastrosucesso_entrar);
-        buttonSouUmGarcom                    = (Button) findViewById(R.id.button_souumgarcom);
     }
 
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Restaurante implements Serializable {
 
-    private long cnpj;
+    private String cnpj;
     //	private int dia;
     private int qtdMesas;
     private String codigoComanda;
@@ -43,10 +43,10 @@ public class Restaurante implements Serializable {
     public void setHrFim(String hrFim) {
         this.hrFim = hrFim;
     }
-    public long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
-    public void setCnpj(long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
     public String getCodigoComanda() {

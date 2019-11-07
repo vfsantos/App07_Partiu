@@ -39,10 +39,11 @@
 
     <TextView
         android:id="@+id/textView_cadastraremail_titulo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="48dp"
         android:text="@string/title_activity_cadastroemail"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -50,6 +51,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -96,11 +98,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="92dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/button_degrade_rosa_amarelo"
+        android:background="@drawable/button_branco_solid"
         android:text="@string/button_cadastroemail_avancar"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/branco_100"
+        android:textColor="@color/cinza_100"
         android:textSize="14sp"
         android:textStyle="bold"
         android:enabled="false"

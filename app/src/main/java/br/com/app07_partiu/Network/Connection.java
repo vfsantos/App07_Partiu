@@ -10,7 +10,10 @@ import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
 
 public class Connection {
-    public static final String URL = "http://10.0.2.2:8080/partiu";
+
+    //public static final String URL = "http://172.20.10.2:8080/partiu";
+    public static final String URL = "http://192.168.15.120:8080/partiu";
+//    public static final String URL = "http://10.42.0.1:8080/partiu";
 
     public static boolean isConnected(Context context, View viewSnackbar) {
         ConnectivityManager connectivityManager = (ConnectivityManager)

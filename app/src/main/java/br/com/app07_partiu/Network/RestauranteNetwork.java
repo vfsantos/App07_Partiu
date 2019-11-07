@@ -38,7 +38,7 @@ public class RestauranteNetwork {
 
         try {
 
-            restaurante.setCnpj(objeto.getLong("cnpj"));
+            restaurante.setCnpj(objeto.getString("cnpj"));
             restaurante.setQtdMesas(objeto.getInt("qtdMesas"));
             restaurante.setCodigoComanda(objeto.getString("codigoComanda"));
             restaurante.setRazaoSocial(objeto.getString("razaoSocial"));
@@ -81,7 +81,7 @@ public class RestauranteNetwork {
                 Restaurante itemRestauranteConvertView = new Restaurante();
 
                 //pegar os itens do json e atribui a um objeto restaurante
-                restaurante.setCnpj(item.getInt("cnpj"));
+                restaurante.setCnpj(item.getString("cnpj"));
                 restaurante.setNomeFantasia(item.getString("nomeFantasia"));
                 restaurante.setLogo(null);
                 restaurante.setAvaliacao(item.getString("avaliacao"));

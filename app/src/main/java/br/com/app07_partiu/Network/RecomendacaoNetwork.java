@@ -62,7 +62,7 @@ public class RecomendacaoNetwork {
                 Restaurante restaurante = new Restaurante();
                 Endereco endereco = new Endereco();
 
-                restaurante.setCnpj(objeto.getLong("cnpj"));
+                restaurante.setCnpj(objeto.getString("cnpj"));
                 restaurante.setQtdMesas(objeto.getInt("qtdMesas"));
                 restaurante.setCodigoComanda(objeto.getString("codigoComanda"));
                 restaurante.setRazaoSocial(objeto.getString("razaoSocial"));

@@ -13,6 +13,7 @@ public class Comanda implements Serializable, Comparable {
     private String dataEntrada;
     private String dataSaida;
     private double valorTotalComanda;
+    private String nomeEstabelecimento;
 
     public int getId() {
         return id;
@@ -72,6 +73,14 @@ public class Comanda implements Serializable, Comparable {
 
     public void setValorTotalComanda(double valorTotalComanda) {
         this.valorTotalComanda = valorTotalComanda;
+    }
+
+    public String getNomeEstabelecimento() {
+        return nomeEstabelecimento;
+    }
+
+    public void setNomeEstabelecimento(String nomeEstabelecimento) {
+        this.nomeEstabelecimento = nomeEstabelecimento;
     }
 
     @Override

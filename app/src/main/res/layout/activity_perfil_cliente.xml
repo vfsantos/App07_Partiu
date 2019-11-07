@@ -6,101 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".Activity.PerfilClienteActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
+        <include
+            layout="@layout/content_perfil_cliente"
+            android:layout_width="410dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavegation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavegation"
             android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_gravity="bottom"
             android:background="@color/chumbo_100"
-            android:elevation="0dp"
-            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay">
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_action_menu"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+            android:theme="@style/CustomBottomBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_menu"
+            app:itemIconTint="@drawable/navbar_cliente_colors"
+            app:itemTextColor="@drawable/navbar_cliente_colors"/>
 
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="90dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_img_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView3"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+    </android.support.constraint.ConstraintLayout>
 
-
-                <ImageView
-                    android:id="@+id/ic_action_notificacao"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_action_notifications"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ic_action_busca"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/ic_action_busca"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_action_add_busca"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ic_action_detalhe"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/ic_action_detalhe"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_action_detalhe"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </android.support.constraint.ConstraintLayout>
-
-
-
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_perfil_cliente" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -45,7 +45,7 @@ public class UsuarioNetwork {
 
             usuario.setId(objeto.getInt("id"));
             usuario.setTipo(objeto.getString("tipo"));
-            usuario.setCpf(objeto.getInt("cpf"));
+            usuario.setCpf(objeto.getString("cpf"));
             usuario.setNome(objeto.getString("nome"));
             usuario.setDta_nascimento(objeto.getString("dta_nascimento"));
             usuario.setEmail(objeto.getString("email"));

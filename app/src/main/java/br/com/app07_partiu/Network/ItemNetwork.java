@@ -18,7 +18,7 @@ import okhttp3.Response;
 
 public class ItemNetwork {
 
-    public static Item[] getItensCardapioGarcom(String url, long cnpj) throws IOException {
+    public static Item[] getItensCardapioGarcom(String url, String cnpj) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<Item> itens = new ArrayList<>();
         url += "/getItensRestaurante?cnpj="+cnpj;
@@ -34,14 +34,14 @@ public class ItemNetwork {
 
         try {
             JSONArray vetor = new JSONArray(resultado);
-            Log.d("TESTES", "Carregando itens do restaurante");
+            Log.d("TESTES", "Carregando itens do restaurante "+cnpj);
             for (int i = 0; i < vetor.length(); i++) {
                 JSONObject item = (JSONObject) vetor.get(i);
                 Item itemCardapio = new Item();
 
                 //pegar os itens do json e atribui a um objeto itemCardápio
                 itemCardapio.setId(item.getInt("id"));
-                itemCardapio.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                itemCardapio.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 itemCardapio.setCategoria(item.getString("categoria"));
                 itemCardapio.setNome(item.getString("nome"));
                 itemCardapio.setTipo(item.getString("tipo"));

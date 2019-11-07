@@ -95,7 +95,8 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                 cadastroCliente.setDta_nascimento(dayOfMonth+"/"+month+"/"+year);
                 textViewdatePikerDataDeNascimento.setText(cadastroCliente.getDta_nascimento().toString());
                 buttonAvancar.setEnabled(true);
-                buttonAvancar.setTextColor(getResources().getColor(R.color.rosa_100));
+                buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
             }
         };
 

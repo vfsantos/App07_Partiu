@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/include2"
@@ -27,6 +26,7 @@
             android:id="@+id/bottomNavegation"
             android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_gravity="bottom"
             android:background="@color/chumbo_100"
             android:theme="@style/CustomBottomBar"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,4 +37,5 @@
             app:itemIconTint="@drawable/navbar_cliente_colors"
             app:itemTextColor="@drawable/navbar_cliente_colors"/>
     </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

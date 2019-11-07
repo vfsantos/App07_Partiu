@@ -7,66 +7,103 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.PagamentoConfirmadoActivity"
     tools:showIn="@layout/activity_pagamento_confirmado"
-    android:background="@color/chumbo_100">
+    android:background="@color/preto">
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_pagamentoConfirmado_header"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/preto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView_comandamesacliente_tituloPagina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/textview_pagamentoConfirmado_titulopage"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayour_comandamesacliente_voltar"
+            app:layout_constraintHorizontal_bias="0.026"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayour_pagamentoConfirmado_voltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="onClickFecharPagamentoConfirmado"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageview_pagamentoConfirmado_voltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_fechar_degrade" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView_pagamentoConfirmado_cerveja"
-        android:layout_width="225dp"
-        android:layout_height="225dp"
+        android:id="@+id/imageView_pagamentoConfirmado_confirmacao"
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_img_beer" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_pagamentoConfirmado_header"
+        app:srcCompat="@drawable/ic_star_favorites" />
 
     <TextView
         android:id="@+id/textView_pagamentoConfirmado_descritivo1"
-        android:layout_width="270dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="176dp"
-        android:text="@string/textview_pagamentoconfirmado_descritivo1"
-        android:textAllCaps="true"
+        android:layout_width="268dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/textview_pagamentoconfirmado_descritivo"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/branco_100"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_pagamentoConfirmado_cerveja" />
-
-    <TextView
-        android:id="@+id/textView_pagamentoConfirmado_descritivo2"
-        android:layout_width="204dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/textview_pagamentoconfirmado_descritivo2"
-        android:textAllCaps="true"
-        android:textColor="@color/branco_100"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.324"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_pagamentoConfirmado_descritivo1" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_pagamentoConfirmado_confirmacao" />
 
     <Button
         android:id="@+id/button_pagamentoConfirmado_feedback"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_mostarda"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_degrade_rosa_amarelo"
+        android:onClick="onClickFeedback"
         android:text="@string/button_pagamentoconfirmado_feedback"
         android:textAllCaps="true"
-        android:onClick="onClickFeedback"
         android:textColor="@color/branco_100"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -77,15 +114,15 @@
 
     <Button
         android:id="@+id/button_pagamentoConfirmado_fechar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="18dp"
-        android:textColor="@color/branco_100"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_branco_outline"
+        android:onClick="onClickFecharPagamentoConfirmado"
         android:text="@string/button_pagamentoconfirmado_fechar"
-        android:background="@drawable/button_mostarda_outline"
-        android:onClick="onClickVoltarFeedback"
+        android:textColor="@color/branco_100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

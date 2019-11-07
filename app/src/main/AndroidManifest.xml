@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".Activity.HistoricoComandasActivity"
+            android:name=".Activity.HistoricoComandaActivity.HistoricoComandasActivity"
             android:label="@string/title_activity_historico_comandas"
             android:parentActivityName=".Activity.ExplorarClienteActivity.ExplorarClienteActivity"
 
@@ -51,16 +51,6 @@
             android:parentActivityName=".Activity.MainClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".Activity.LoginGarcomActivity"
-            android:label="@string/title_activity_login_garcom"
-            android:parentActivityName=".Activity.MainGarcomActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity
-            android:name=".Activity.MainGarcomActivity"
-            android:label="@string/title_activity_main_garcom"
-            android:parentActivityName=".Activity.MainClienteActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity
             android:name=".Activity.MainClienteActivity"
             android:label="@string/title_activity_main_cliente"
             android:parentActivityName=".Activity.SplashScreenActivity"
@@ -83,7 +73,7 @@
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.FormasPagamentoActivity"
-            android:label="@string/textview_formaspagamento_titulopagina"
+            android:label="@string/textview_formaspagamento_titulopage"
             android:parentActivityName=".Activity.FinalizarPedidoClienteActivity.FinalizarPedidoClienteActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
@@ -164,7 +154,7 @@
         <activity
             android:name=".Activity.CodigoComandaClienteActivity"
             android:label="@string/textview_codigocomandacliente_titulo"
-            android:parentActivityName=".Activity.HistoricoComandasActivity"
+            android:parentActivityName=".Activity.HistoricoComandaActivity.HistoricoComandasActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".Activity.ErroConexaoActivity"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,8 +38,18 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
     public static final String USUARIO_LOGADO = "FinalizarPedido.Usuario";
     public static final String COMANDA = "FinalizarPEdido.Comadna";
 
-    //Toolbar
-    private Toolbar toolbar;
+
+    //ConstraintLayout
+    private ConstraintLayout constraintLayoutHeader;
+    private ConstraintLayout constraintLayoutFechar;
+    private ConstraintLayout constraintLayoutDadosRestaurante;
+    private ConstraintLayout constraintLayoutBody;
+    private ConstraintLayout constraintLayoutButton;
+
+
+    //ImageView
+    private ImageView imageViewFechar;
+
 
     //ListView
     private ListView listViewResumoPedido;
@@ -48,22 +60,30 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
 
     //TextView
-    private TextView textViewTotal;
-    private TextView textViewTotalValor;
-    private TextView textViewItensSelecionado;
+    private TextView textViewTitulo;
+    private TextView textViewNomeRestaurante;
+    private TextView textViewEnderecoRestaurante;
 
+
+    //Objeto
     private Usuario clienteLogado;
     private Comanda comanda;
     private Item[] itens;
-
     private Context context;
-    private Intent intent;
 
+
+    //Double
     private double valorTotalComanda = 0.0;
 
-    Intent intentItem;
 
+    //Intent
+    private Intent intent;
+    private Intent intentItem;
+
+
+    //SnackBar
     private View viewSnackbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,55 +91,22 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finalizar_pedido_cliente);
         implementarComponentes();
 
-        //Toolbar
-        setUpToolbar();
-        setSupportActionBar(toolbar);
-
-
-        context = this;
-        intent = getIntent();
-
-        viewSnackbar = findViewById(R.id.finalizarPedidoClienteActivityView);
-
+        comanda = new Comanda();
+        context       = this;
+        intent        = getIntent();
+        viewSnackbar  = findViewById(R.id.finalizarPedidoClienteActivityView);
         clienteLogado = (Usuario) intent.getSerializableExtra(ComandaMesaClienteActivity.CLIENTE_LOGADO);
-        comanda = (Comanda) intent.getSerializableExtra(ComandaMesaClienteActivity.COMANDA);
-        itens = (Item[]) intent.getSerializableExtra(ComandaMesaClienteActivity.ITENS_FINALIZAR);
+        comanda       = (Comanda) intent.getSerializableExtra(ComandaMesaClienteActivity.COMANDA);
+        itens         = (Item[]) intent.getSerializableExtra(ComandaMesaClienteActivity.ITENS_FINALIZAR);
 
-        implementarComponentes();
+
+        textViewNomeRestaurante.setText("Comanda " + comanda.getCodigoComanda());
+        textViewEnderecoRestaurante.setText("Valor total R$ " + doubleToReal(valorTotalComanda));
 
         carregarItens();
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case android.R.id.home: finish();
-                break;
-            case R.id.action_settings: {
-                Util.logoff(context);
-            }
-            default:break;
-        }
-        return true;
-    }
-
-
-    protected void setUpToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                                    //Mostrar o botão
-            getSupportActionBar().setHomeButtonEnabled(true);                                         //Ativar o botão
-            getSupportActionBar().setTitle(R.string.textview_finalizarpedidocliente_titulopagina);    //Titulo para ser exibido na sua Action Bar em frente à seta
-        }
-    }
 
     @Override
     protected void onRestart() {
@@ -157,7 +144,6 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
     private void carregarItens() {
         try {
             getTotalComanda();
-            textViewTotalValor.setText(doubleToReal(valorTotalComanda));
 
             FinalizarPedidoClienteAdapter adapter = new FinalizarPedidoClienteAdapter(itens, this);
             listViewResumoPedido.setAdapter(adapter);
@@ -215,25 +201,6 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
     }
 
-
-    private void implementarComponentes() {
-        //Toolbar
-        toolbar = findViewById(R.id.toolbar);
-
-        //ListView
-        listViewResumoPedido = (ListView) findViewById(R.id.listview_finalizarPedidoCliente_lista);
-
-
-        //Button
-        buttonConfirmar = (Button) findViewById(R.id.button_finalizarPedido_confirmar);
-
-
-        //TextView
-        textViewTotal = (TextView) findViewById(R.id.textview_finalizarpedido_total);
-        textViewTotalValor = (TextView) findViewById(R.id.textview_finalizarpedido_totalvalor);
-        textViewItensSelecionado = (TextView) findViewById(R.id.textView_finalizarPedido_itensSelecionados);
-    }
-
     public void onClickFInalizarPedidos(View view) {
         Intent intentPagamento = new Intent(this, FormasPagamentoActivity.class);
         intentPagamento.putExtra(USUARIO_LOGADO, clienteLogado);
@@ -249,5 +216,40 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
             setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
             finish();
         }
+    }
+
+
+    public void onClickFecharComandaMesaCliente(View view) {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
+
+
+    private void implementarComponentes() {
+
+        //ConstraintLayout
+        constraintLayoutHeader          = (ConstraintLayout) findViewById(R.id.constraintLayout_finalizarpedido_header);
+        constraintLayoutFechar          = (ConstraintLayout) findViewById(R.id.constraintLayour_finalizarpedido_fechar);
+        constraintLayoutDadosRestaurante= (ConstraintLayout) findViewById(R.id.constraintLayour_finalizarpedido_dadosRestaurante);
+        constraintLayoutBody            = (ConstraintLayout) findViewById(R.id.constraintLayout_finalizarpedido_body);
+        constraintLayoutButton          = (ConstraintLayout) findViewById(R.id.constraintLayour_finalizarpedido_button);
+
+
+        //TextView
+        textViewTitulo                  = (TextView) findViewById(R.id.textView_finalizarpedido_tituloPagina);
+        textViewNomeRestaurante         = (TextView) findViewById(R.id.textView_finalizarpedido_nomeRestaurante);
+        textViewEnderecoRestaurante     = (TextView) findViewById(R.id.textView_finalizarpedido_enderecoRestaurante);
+
+
+        //ImageView
+        imageViewFechar                 = (ImageView) findViewById(R.id.imageview_finalizarpedido_fechar);
+
+
+        //ListView
+        listViewResumoPedido            = (ListView) findViewById(R.id.listview_finalizarPedidoCliente_lista);
+
+
+        //Button
+        buttonConfirmar                 = (Button) findViewById(R.id.button_finalizarPedido_confirmar);
     }
 }

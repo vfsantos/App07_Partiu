@@ -3,15 +3,10 @@ package br.com.app07_partiu.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +19,7 @@ import java.io.IOException;
 
 import br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity;
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
+import br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity;
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Usuario;
@@ -34,7 +30,11 @@ import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS;
 import static br.com.app07_partiu.Activity.ComandaMesaCliente.ComandaMesaClienteActivity.RESULT_SAIUDACOMANDA;
-import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.USUARIO;
+import static br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity.HISTORICOCOMANDASCOMANDA;
+import static br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity.HISTORICOCOMANDASDATA_ATUALIZACAO_COMANDA;
+import static br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity.HISTORICOCOMANDASPEDIDOS;
+import static br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity.HISTORICOCOMANDASUSUARIO_IDS;
+import static br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity.HISTORICOCOMANDAUSUARIO;
 
 public class CodigoComandaClienteActivity extends AppCompatActivity{
 
@@ -104,6 +104,11 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         viewSnackbar = findViewById(R.id.codigoComandaClienteActivityView);
 
         cliente = (Usuario) intent.getSerializableExtra(HistoricoComandasActivity.HISTORICOCOMANDAS);
+        System.out.println("Teste retorna valor da página anterior --->" +
+                "\n "+cliente.getId()+
+                "\n "+cliente.getNome()+
+                "\n "+cliente.getEmail()+
+                "\n "+cliente.getSenha());
 
         editTextCodigoComanda.setText("OAF01");
 
@@ -121,16 +126,20 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                                 comanda = ComandaNetwork.getComandaByCodigo(Connection.URL, codigo);
                                 itens = ComandaNetwork.buscarPedidosComanda(Connection.URL, comanda.getId());
                                 idUsuario = ComandaNetwork.getIdsUsuarioComanda(Connection.URL, comanda.getId());
+                                Log.d("XXX",comanda.getId()+" "+cliente.getId());
                                 ComandaNetwork.insertUsuarioComanda(Connection.URL, cliente.getId(), comanda.getId());
                                 final String dataAtualizacao = ComandaNetwork.getDataAtualizacaoComanda(Connection.URL, comanda.getId());
 
                                 runOnUiThread(new Runnable() {
                                     public void run() {
-                                        intentComanda.putExtra(CLIENTE, cliente);
-                                        intentComanda.putExtra(COMANDA, comanda);
-                                        intentComanda.putExtra(ITENS, itens);
-                                        intentComanda.putExtra(USUARIO_IDS, idUsuario);
-                                        intentComanda.putExtra(DATA_ATUALIZACAO_COMANDA, dataAtualizacao);
+
+//                                        intentComanda.putExtra(HISTORICOCOMANDASRESTAURANTE, restaurante);
+
+                                        intentComanda.putExtra(HISTORICOCOMANDAUSUARIO, cliente);
+                                        intentComanda.putExtra(HISTORICOCOMANDASCOMANDA, comanda);
+                                        intentComanda.putExtra(HISTORICOCOMANDASPEDIDOS, itens);
+                                        intentComanda.putExtra(HISTORICOCOMANDASUSUARIO_IDS, idUsuario);
+                                        intentComanda.putExtra(HISTORICOCOMANDASDATA_ATUALIZACAO_COMANDA, dataAtualizacao);
                                         startActivityForResult(intentComanda,0);
                                     }
                                 });
@@ -174,6 +183,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
         finish();
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
+
 
     private void implentarComponentes() {
 

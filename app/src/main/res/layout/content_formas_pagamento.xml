@@ -8,6 +8,62 @@
     tools:context=".Activity.FormasPagamentoActivity"
     tools:showIn="@layout/activity_formas_pagamento">
 
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_formaspagamento_header"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/preto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView_formaspagamento_tituloPagina"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/textview_formaspagamento_titulopage"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayour_comandamesacliente_voltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="onClickVoltarFinalizarComandaCliente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageview_formaspagamento_voltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_backwad__arrow" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
     <TextView
         android:id="@+id/textView_formaspagamento_categoriacartaocredito"
         android:layout_width="wrap_content"
@@ -15,11 +71,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="30dp"
         android:text="@string/textview_formaspagamento_cartaocredito"
-        android:textStyle="bold"
-        android:textSize="14sp"
         android:textColor="@color/cinza_60"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_formaspagamento_header" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout_formaspagamento_ctcreditovisa"

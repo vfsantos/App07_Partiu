@@ -13,7 +13,7 @@ public class Item implements Serializable {
 
     //Item
     private int id;
-    private long cnpjRestaurante;
+    private String cnpjRestaurante;
     private String categoria;
     private String nome;
     private String tipo;
@@ -94,11 +94,8 @@ public class Item implements Serializable {
         return id;
     }
 
-    public long getCnpjRestaurante() {
+    public String getCnpjRestaurante() {
         return cnpjRestaurante;
-    }
-    public String getCnpjRestauranteString() {
-        return Long.toString(cnpjRestaurante);
     }
 
     public void setUsuario(Usuario usuario) {
@@ -121,7 +118,7 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public void setCnpjRestaurante(long cnpjRestaurante) {
+    public void setCnpjRestaurante(String cnpjRestaurante) {
         this.cnpjRestaurante = cnpjRestaurante;
     }
 

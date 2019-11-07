@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ItemRestauranteConvertView implements Serializable {
 
     private String nome;
-    private long cnpj;
+    private String cnpj;
     private int qtdMesas;
     private String codigoComanda;
     private String razaoSocial;
@@ -26,11 +26,11 @@ public class ItemRestauranteConvertView implements Serializable {
         this.nome = nome;
     }
 
-    public long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

@@ -81,7 +81,8 @@ public class CadastroEmailActivity extends AppCompatActivity {
             boolean emailInputValidation = false;
             if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
                 buttonAvancar.setEnabled(true);
-                buttonAvancar.setTextColor(getResources().getColor(R.color.rosa_100));
+                buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
             } else{
                 buttonAvancar.setEnabled(false);
                 buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));

@@ -61,15 +61,9 @@ public class CadastroSucesso extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 
-    public void onClickVoltarToMainCliente(View view) {
-        intentToMainCliente = new Intent(CadastroSucesso.this, MainClienteActivity.class);
-        startActivity(intentToLoginCliente);
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-    }
-
     public void onClickFecharToMainCliente(View view) {
         intentToMainCliente = new Intent(CadastroSucesso.this, MainClienteActivity.class);
-        startActivity(intentToLoginCliente);
+        startActivity(intentToMainCliente);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 

@@ -6,43 +6,104 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.ItemComandaDetalheClienteActivity.ItemComandaDetalheClienteActivity"
-    tools:showIn="@layout/activity_item_comanda_detalhe_cliente">
+    tools:showIn="@layout/activity_item_comanda_detalhe_cliente"
+    android:background="@color/cinza_50">
 
-
+    <!-- Header -->
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/constraintLayout_itemDetalhesCliente_header"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/preto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <TextView
+            android:id="@+id/textView_itemDetalhesCliente_tituloPagina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/textView_itemDetalhesCliente_tituloPagina"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayour_comandamesacliente_voltar"
+            app:layout_constraintHorizontal_bias="0.026"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayour_itemDetalhesCliente_voltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="onClickVoltaFinalizarPedidoCliente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageview_itemDetalhesCliente_voltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_backwad__arrow" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!-- Body -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_itemDetalhesCliente_body"
+        android:layout_width="0dp"
+        android:layout_height="224dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/branco_100"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_itemDetalhesCliente_header">
+
         <TextView
             android:id="@+id/textView_itemDetalhesCliente_nome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
             android:text="TextView"
             android:textAllCaps="false"
-            android:textColor="@color/chumbo_100"
-            android:textSize="16sp"
+            android:textColor="@color/preto"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_itemDetalhesCliente_detalhes"
+            android:id="@+id/textView_itemDetalhesCliente_valor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="18dp"
+            android:layout_marginEnd="24dp"
             android:text="TextView"
-            android:textColor="@color/chumbo_50"
+            android:textColor="@color/preto"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,49 +111,136 @@
             app:layout_constraintTop_toBottomOf="@+id/textView_itemDetalhesCliente_nome" />
 
         <TextView
-            android:id="@+id/textView_itemDetalhesCliente_valor"
+            android:id="@+id/textView_itemDetalhesCliente_detalhes"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:text="TextView"
             android:textAllCaps="false"
-            android:textColor="@color/mostarda_100"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_itemDetalhesCliente_detalhes" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_itemDetalhesCliente_valor" />
 
     </android.support.constraint.ConstraintLayout>
 
+
+    <!-- Boão selecionar -->
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayour_itemDetalhesCliente_selecionar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/cinza_10"
+        android:layout_height="wrap_content"
+        android:background="@color/branco_100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_itemDetalhesCliente_body">
+
+
+        <ImageView
+            android:id="@+id/imageView_itemDetalhesCliente_flag_selecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_flag_deselecionada" />
+
+        <TextView
+            android:id="@+id/textView_itemDetalhesCliente_flag_selecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/textView_itemDetalhesCliente_deselecionar"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!-- Boão deselecionar -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayour_itemDetalhesCliente_deselecionar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@color/branco_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_itemDetalhesCliente_body">
+
+
+        <ImageView
+            android:id="@+id/imageView_itemDetalhesCliente_flag_deselecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_flag_selecionada" />
+
+        <TextView
+            android:id="@+id/textView_itemDetalhesCliente_flag_deselecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/textView_itemDetalhesCliente_deselecionar"
+            android:textColor="@color/rosa_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!-- Título lista divisão -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayour_itemDetalhesCliente_titulolista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cinza_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayour_itemDetalhesCliente_deselecionar">
 
         <TextView
             android:id="@+id/textView_itemDetalhesCliente_pessoaItemSelecionado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="16dp"
             android:text="@string/text_comandagarcom_itensnacomanda"
             android:textAllCaps="false"
-            android:textColor="@color/chumbo_100"
+            android:textColor="@color/cinza_60"
             android:textSize="14dp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -100,87 +248,30 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-
     </android.support.constraint.ConstraintLayout>
 
+
+    <!-- Lista divião-->
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayour_itemDetalhesCliente_lista"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayoutDeselecionar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayour_itemDetalhesCliente_titulolista"
+        android:background="@color/cinza_50">
 
         <ListView
             android:id="@+id/listView_itemDetalhesCliente_pessoaItemSelecionado"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></ListView>
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayoutSelecionado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cinza_10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/button_itemDetalhesCliente_selecionar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
-            android:background="@drawable/button_mostarda"
-            android:text="@string/button_itemDetalhesCliente_selecionar"
-            android:textAllCaps="true"
-            android:textColor="@color/branco_100"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayoutDeselecionar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cinza_10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/button_itemDetalhesCliente_dsselecionar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
-            android:background="@drawable/button_vermelho"
-            android:text="@string/button_itemDetalhesCliente_deselecionar"
-            android:textAllCaps="true"
-            android:textColor="@color/branco_100"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

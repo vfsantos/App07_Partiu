@@ -54,8 +54,6 @@ public class CadastroGeneroActivity extends AppCompatActivity {
 
         implementarComponentes();
         buttonAvancar.setEnabled(true);
-        buttonAvancar.setTextColor(getResources().getColor(R.color.rosa_100));
-
         intentCadastroCliente = getIntent();
         cadastroCliente = new Usuario();
         cadastroCliente = (Usuario) intentCadastroCliente.getSerializableExtra(CadastroDataNascimentoActivity.CADASTRODATANASCIMENTO);
@@ -121,14 +119,20 @@ public class CadastroGeneroActivity extends AppCompatActivity {
 
     public void onClickSelectMasculino(View view) {
         selectGenero(true, false, false);
+        buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+        buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
     }
 
     public void onClickSelectFeminino(View view) {
         selectGenero(false, true, false);
+        buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+        buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
     }
 
     public void onClickSelectNaoBinario(View view) {
       selectGenero(false, false, true);
+        buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+        buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
     }
 
     public void onClickVoltarMainCliente(View view) {

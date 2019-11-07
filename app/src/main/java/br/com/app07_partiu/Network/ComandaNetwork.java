@@ -8,10 +8,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import br.com.app07_partiu.Model.Comanda;
 import br.com.app07_partiu.Model.ComandaConvertView;
+import br.com.app07_partiu.Model.Estabelecimento;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
@@ -128,7 +130,7 @@ public class ComandaNetwork {
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
-                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
@@ -254,7 +256,7 @@ public class ComandaNetwork {
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
-                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
@@ -312,7 +314,7 @@ public class ComandaNetwork {
                 Item it = new Item();
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
-                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
@@ -482,7 +484,7 @@ public class ComandaNetwork {
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
-                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
@@ -535,7 +537,7 @@ public class ComandaNetwork {
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
-                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
@@ -590,7 +592,7 @@ public class ComandaNetwork {
 
                 //pegar os itens do json e atribui a um objeto comanda
                 it.setId(item.getInt("id"));
-                it.setCnpjRestaurante(item.getLong("cnpjRestaurante"));
+                it.setCnpjRestaurante(item.getString("cnpjRestaurante"));
                 it.setCategoria(item.getString("categoria"));
                 it.setNome(item.getString("nome"));
                 it.setTipo(item.getString("tipo"));
@@ -623,4 +625,86 @@ public class ComandaNetwork {
         }
         return null;
     }
+
+
+    public static Comanda[] getComandasByCpf(String url, String cpf) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<Object> comandas = new ArrayList<>();
+        url += "/getComandasByCpf?cpf=" + cpf;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+
+        Log.d("TESTES", "url="+url);
+        Log.d("TESTES", "getComandasByCpf="+resultado);
+
+        try {
+            JSONArray vetor = new JSONArray(resultado);
+            for (int i = 0; i < vetor.length(); i++) {
+                JSONObject comanda = (JSONObject) vetor.get(i);
+                Comanda cm = new Comanda();
+
+                //pegar os itens do json e atribui a um objeto comanda
+                try{
+                    cm.setId(comanda.getInt("id"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+                try{
+                    cm.setCodigoComanda(comanda.getString("codigo"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+                try{
+                    cm.setStatus(comanda.getString("status"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+                try{
+                    cm.setMesa(comanda.getInt("mesa"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+                try{
+                    cm.setDataEntrada(comanda.getString("dtaEntrada"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+                try{
+                    cm.setDataSaida(comanda.getString("dtaSaida"));
+                }catch(Exception e){
+                    cm.setDataSaida("");
+                }
+
+
+                cm.setNomeEstabelecimento(comanda.getString("nomeRestaurante"));
+                //adiciona cada objeto comanda recebido em um arraylist de comandas
+                comandas.add(cm);
+
+                Iterator it = comandas.iterator();
+                while (it.hasNext()) {
+                    System.out.println("ComandaNetwork: " + it.next());
+                }
+
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("TESTE",""+comandas.size());
+        if (comandas.size() > 0) {
+            return comandas.toArray(new Comanda[0]);
+        }
+        return null;
+    }
+
+
 }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -77,7 +76,7 @@ public class ComandaGarcomAdapter extends BaseAdapter implements SectionIndexer{
             int type = getItemViewType(position);
             view = getInflatedLayoutForType(type, parent);
             TextView textViewDescricao = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_descricao);
-            TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_valor);
+            TextView textViewValor = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_status);
             TextView textViewStatus = (TextView) view.findViewById(R.id.textView_itemComandaMesaCliente_status);
             ComandaGarcomViewHolder viewHolder = new ComandaGarcomViewHolder(textViewDescricao, textViewValor, textViewStatus);
             view.setTag(viewHolder);

@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/branco_100">
+
 
     <TextView
         android:id="@+id/textView_list_item_nome"
@@ -12,32 +14,34 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:text="TextView"
         android:textAllCaps="false"
-        android:textColor="@color/chumbo_100"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/preto"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/textView_list_item_valor"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
-        android:textAllCaps="false"
-        android:textColor="@color/chumbo_100"
-        android:textSize="16sp"
+        android:textSize="12sp"
+        android:textAllCaps="true"
+        android:textColor="@color/preto"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_list_item_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_list_item_nome"
+        app:layout_constraintVertical_bias="1.0" />
+
 
     <ImageView
         android:id="@+id/imageView_list_item_icon"
@@ -50,5 +54,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_action_detalhe" />
+
 
 </android.support.constraint.ConstraintLayout>

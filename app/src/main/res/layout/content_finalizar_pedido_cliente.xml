@@ -9,110 +9,131 @@
     tools:showIn="@layout/activity_finalizar_pedido_cliente">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayout_finalizarpedido_header"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/cinza_10"
+        android:layout_height="56dp"
+        android:background="@color/preto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
-            android:id="@+id/textView_finalizarPedido_itensSelecionados"
-            android:layout_width="match_parent"
+            android:id="@+id/textView_finalizarpedido_tituloPagina"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="160dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="18dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/textview_finalizarpedidocliente_itensselecionados"
+            android:text="@string/textview_finalizarpedidocliente_titulopage"
+            android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/chumbo_100"
-            android:textSize="14dp"
-            android:textStyle="normal"
+            android:textColor="@color/branco_100"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.6" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayour_finalizarpedido_fechar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="onClickFecharComandaMesaCliente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageview_finalizarpedido_fechar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_fechar_degrade" />
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 
+
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayour_finalizarpedido_dadosRestaurante"
+        android:layout_width="match_parent"
+        android:layout_height="106dp"
+        android:background="@color/branco_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_finalizarpedido_header">
+
+        <TextView
+            android:id="@+id/textView_finalizarpedido_nomeRestaurante"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:text="TextView"
+            android:textColor="@color/preto"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_finalizarpedido_enderecoRestaurante"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:text="TextView"
+            android:textColor="@color/preto"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_finalizarpedido_nomeRestaurante" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_finalizarpedido_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout12"
+        android:background="@color/cinza_50"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayour_finalizarpedido_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayour_finalizarpedido_dadosRestaurante">
 
         <ListView
             android:id="@+id/listview_finalizarPedidoCliente_lista"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"></ListView>
+            app:layout_constraintTop_toTopOf="parent"></ListView>
 
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout12"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout17"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textview_finalizarpedido_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="22dp"
-            android:text="@string/textview_finalizarpedidocliente_total"
-            android:textAllCaps="true"
-            android:textColor="@color/chumbo_100"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textview_finalizarpedido_totalvalor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="22dp"
-            android:text="R$00,00"
-            android:textAllCaps="true"
-            android:textColor="@color/chumbo_50"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout17"
+        android:id="@+id/constraintLayour_finalizarpedido_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:background="@color/cinza_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,15 +142,14 @@
         <Button
             android:id="@+id/button_finalizarPedido_confirmar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="18dp"
-            android:background="@drawable/button_mostarda"
+            android:layout_height="56dp"
+            android:background="@drawable/button_degrade_rosa_amarelo_full"
+            android:onClick="onClickFInalizarPedidos"
             android:text="@string/button_finalizarpedidocliente_confirmar"
             android:textColor="@color/branco_100"
-            android:onClick="onClickFInalizarPedidos"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -138,5 +158,8 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>

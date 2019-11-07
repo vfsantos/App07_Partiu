@@ -11,9 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -28,14 +31,30 @@ import br.com.app07_partiu.Util.Util;
 
 public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
-    //Toolbar
-    private Toolbar toolbar;
+
+    //ConstraintLayout
+    private ConstraintLayout constraintLayoutHeader;
+    private ConstraintLayout constraintLayoutVoltar;
+    private ConstraintLayout constraintLayoutBody;
+    private ConstraintLayout constraintLayoutDeselecionar;
+    private ConstraintLayout constraintLayoutSelecionar;
+    private ConstraintLayout constraintLayoutLista;
+    private ConstraintLayout constraintLayoutTituloLista;
 
 
     //TextView
+    private TextView textViewTitulo;
     private TextView textViewNomeDoItem;
     private TextView textViewDescricao;
     private TextView textViewValor;
+    private TextView textViewSelecionar;
+    private TextView textViewDeselecionar;
+
+
+    //ImageView
+    private ImageView imageViewVoltar;
+    private ImageView imageViewFlagSelecionar;
+    private ImageView imageViewFlagDeselecionar;
 
 
     //ListView
@@ -44,6 +63,8 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
     //Button
     private Button buttonSelecionar;
+    private Button btnDeselecionar;
+    private Button btnSelecionar;
 
 
     public Context context;
@@ -59,13 +80,8 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
     private Usuario clienteLogado;
 
 
-    //ConstraintLayout
-    private ConstraintLayout constraintLayoutItemSelecioando;
-    private ConstraintLayout constraintLayoutItemDeselecionado;
 
-    private Button btnDeselecionar;
-    private Button btnSelecionar;
-
+    //SnackBar
     private View viewSnackbar;
 
     @Override
@@ -74,10 +90,6 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_comanda_detalhe_cliente);
 
         implementarComponentes();
-
-        //Toolbar
-        setUpToolbar();
-        setSupportActionBar(toolbar);
 
         context = this;
         intent = getIntent();
@@ -95,35 +107,6 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case android.R.id.home: finish();
-                break;
-            case R.id.action_settings: {
-                Util.logoff(context);
-            }
-            default:break;
-        }
-        return true;
-    }
-
-
-    protected void setUpToolbar() {
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);                              //Mostrar o botão
-            getSupportActionBar().setHomeButtonEnabled(true);                                   //Ativar o botão
-            getSupportActionBar().setTitle(R.string.textview_itemdetalhescliente_titulopagina); //Titulo para ser exibido na sua Action Bar em frente à seta
-        }
-    }
 
     private void checkUsuarioJaPagou() {
 //        try {
@@ -178,18 +161,17 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
     private void switchButtons(boolean selecionado) {
         if (selecionado) {
-            constraintLayoutItemSelecioando.setVisibility(View.INVISIBLE);
-            constraintLayoutItemDeselecionado.setVisibility(View.VISIBLE);
+            constraintLayoutSelecionar.setVisibility(View.INVISIBLE);
+            constraintLayoutDeselecionar.setVisibility(View.VISIBLE);
 
         } else {
-            constraintLayoutItemSelecioando.setVisibility(View.VISIBLE);
-            constraintLayoutItemDeselecionado.setVisibility(View.INVISIBLE);
+            constraintLayoutSelecionar.setVisibility(View.VISIBLE);
+            constraintLayoutDeselecionar.setVisibility(View.INVISIBLE);
         }
     }
 
     private void setButtonListeners() {
-
-        btnSelecionar.setOnClickListener(new View.OnClickListener() {
+         imageViewFlagSelecionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("TESTES", "Botao Selecionar Clicado");
                 if (Connection.isConnected(context, viewSnackbar)) {
@@ -225,7 +207,7 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
 
         });
 
-        btnDeselecionar.setOnClickListener(new View.OnClickListener() {
+        imageViewFlagDeselecionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("TESTES", "Botao Selecionar Clicado");
 
@@ -267,32 +249,42 @@ public class ItemComandaDetalheClienteActivity extends AppCompatActivity {
         });
     }
 
+    public void onClickVoltaFinalizarPedidoCliente(View view) {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
+
 
     private void implementarComponentes() {
-        //Toolbar
-        toolbar                           = (Toolbar) findViewById(R.id.toolbar);
+        //ConstraintLayout
+        constraintLayoutHeader          = (ConstraintLayout) findViewById(R.id.constraintLayout_itemDetalhesCliente_header);
+        constraintLayoutVoltar          = (ConstraintLayout) findViewById(R.id.constraintLayour_itemDetalhesCliente_voltar);
+        constraintLayoutBody            = (ConstraintLayout) findViewById(R.id.constraintLayout_itemDetalhesCliente_body);
+        constraintLayoutSelecionar      = (ConstraintLayout) findViewById(R.id.constraintLayour_itemDetalhesCliente_selecionar);
+        constraintLayoutDeselecionar    = (ConstraintLayout) findViewById(R.id.constraintLayour_itemDetalhesCliente_deselecionar);
+        constraintLayoutLista           = (ConstraintLayout) findViewById(R.id.constraintLayour_itemDetalhesCliente_lista);
+        constraintLayoutTituloLista     = (ConstraintLayout) findViewById(R.id.constraintLayour_itemDetalhesCliente_titulolista);
 
 
         //TextView
+        textViewTitulo                    = (TextView) findViewById(R.id.textView_itemDetalhesCliente_tituloPagina);
         textViewNomeDoItem                = (TextView) findViewById(R.id.textView_itemDetalhesCliente_nome);
         textViewDescricao                 = (TextView) findViewById(R.id.textView_itemDetalhesCliente_detalhes);
         textViewValor                     = (TextView) findViewById(R.id.textView_itemDetalhesCliente_valor);
+        textViewSelecionar                = (TextView) findViewById(R.id.textView_itemDetalhesCliente_flag_selecionar);
+        textViewDeselecionar              = (TextView) findViewById(R.id.textView_itemDetalhesCliente_flag_deselecionar);
+
+
+
+        //ImageView
+        imageViewVoltar                   = (ImageView) findViewById(R.id.imageview_itemDetalhesCliente_voltar);
+        imageViewFlagDeselecionar         = (ImageView) findViewById(R.id.imageView_itemDetalhesCliente_flag_deselecionar);
+        imageViewFlagSelecionar           = (ImageView) findViewById(R.id.imageView_itemDetalhesCliente_flag_selecionar);
 
 
         //ListView
         listViewPessoaItemSelecionado     = (ListView) findViewById(R.id.listView_itemDetalhesCliente_pessoaItemSelecionado);
 
-
-        //Button
-//        buttonSelecionar                = (Button) findViewById(R.id.button_itemDetalhesCliente_selecionar);
-
-
-        //ConstraintLayout
-        constraintLayoutItemDeselecionado = (ConstraintLayout) findViewById(R.id.constraintLayoutDeselecionar);
-        btnDeselecionar = findViewById(R.id.button_itemDetalhesCliente_dsselecionar);
-
-        constraintLayoutItemSelecioando   = (ConstraintLayout) findViewById(R.id.constraintLayoutSelecionado);
-        btnSelecionar = findViewById(R.id.button_itemDetalhesCliente_selecionar);
     }
 
 }

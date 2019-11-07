@@ -105,12 +105,6 @@
     <string name="button_resumogarcom_lancaritenscomanda">Confirmar pedido</string>
 
 
-    <!-- ItemComandaDetalheCliente -->
-    <string name="textview_itemdetalhescliente_titulopagina">Detalhes do Item</string>
-    <string name="button_itemDetalhesCliente_selecionar">Selecionar</string>
-    <string name="button_itemDetalhesCliente_deselecionar">Deselecionar</string>
-
-
     <!-- HomeGarcomActivity -->
     <string name="textview_homegarcom_titulopagina">Partiu</string>
     <string name="button_homegarcom_comanda">Comanda</string>
@@ -294,7 +288,7 @@
     <!-- CadastroSenhaActivity -->
     <string name="title_activity_cadastrosenha">Criar conta</string>
     <string name="textview_cadastrosenha_senha">Crie uma senha</string>
-    <string name="textview_cadastrosenha_senha_complemento">Use pelo menos 8 caracter</string>
+    <string name="textview_cadastrosenha_senha_complemento">Use pelo menos 8 caracteres</string>
     <string name="button_cadastrosenha_avancar">Avançar</string>
     <string name="textview_cadastrosenha_hint">digite sua senha</string>
 
@@ -302,7 +296,7 @@
     <string name="title_activity_cadastrodatanascimento">Criar conta</string>
     <string name="textview_cadastrodatanascimento_datanascimento">Qual é a sua data de nascimento?</string>
     <string name="button_cadastrodatanascimento_avancar">Avançar</string>
-    <string name="textview_datepicker_cadastrodatanascimento">Selecione uma data</string>
+    <string name="textview_datepicker_cadastrodatanascimento">Clique aqui</string>
 
     <!-- CadastroGeneroActivity -->
     <string name="title_activity_cadastrogenero">Criar conta</string>
@@ -317,7 +311,7 @@
     <string name="textview_cadastronome_nome">Como você gostaria de ser chamado?</string>
     <string name="textview_cadastronome_nome_complemento">Isso vai aparecer no seu perfil do Partiu</string>
     <string name="textview_cadastronome_termosepoliticas_part1">Ao criar uma conta, você concorda com os Termos de Serviços do Partiu.</string>
-    <string name="textview_cadastronome_termosepoliticas_part2">Para saber mais sob re o Partiu coleta, utiliza, compartilha, e proteje os seus dados pessoais, leia a politica de privacidade do Partiu</string>
+    <string name="textview_cadastronome_termosepoliticas_part2">Para saber mais sobre o Partiu coleta, utiliza, compartilha, e proteje os seus dados pessoais, leia a politica de privacidade do Partiu</string>
     <string name="button_cadastronome_criar">Criar</string>
     <string name="title_activity_main_cliente">MainClienteActivity</string>
     <string name="title_activity_main_garcom">MainGarcomActivity</string>
@@ -379,7 +373,7 @@
 
 
     <!-- FormasPagamentoActivity -->
-    <string name="textview_formaspagamento_titulopagina">Formas de pagamento</string>
+    <string name="textview_formaspagamento_titulopage">Formas de pagamento</string>
     <string name="textview_formaspagamento_cartaocredito">Cartao de crédito</string>
     <string name="textview_formaspagamento_cartaodebito">Cartao de débito</string>
     <string name="textview_formaspagamento_outros">Outros</string>
@@ -420,5 +414,36 @@
     <string name="textview_recomendacaodiasemana_descricao">recomendações do dia</string>
     <string name="textview_recomendacaorestauranteavaliado1">Parecido com você</string>
     <string name="textview_recomendacaorestauranteavaliado_descricao1">baseado no seu perfil</string>
+
+
+
+    <!-- ComandaMesaCliente -->
+    <string name="textview_comandamesacliente_titulopage">Comanda</string>
+    <string name="textView_comandamesacliente_meuconsumo">Total da comanda</string>
+
+
+
+    <!-- FinalizarPedidoCliente -->
+    <string name="textview_finalizarpedidocliente_titulopage">Meu consumo</string>
+
+
+
+    <!-- ItemComandaDetalhCliente -->
+    <string name="textView_itemDetalhesCliente_tituloPagina">Detalhes do item</string>
+    <string name="textView_itemDetalhesCliente_selecionar">Não Selecionado</string>
+    <string name="textView_itemDetalhesCliente_deselecionar">Selecionado</string>
+    <string name="textView_itemDetalhesCliente_titulolista">Item selecionado por</string>
+
+
+
+    <!-- PagamentoConfirmadd -->
+    <string name="textview_pagamentoConfirmado_titulopage">Pagamento confirmado</string>
+    <string name="textview_pagamentoconfirmado_descritivo">Pagamento efetuado com sucesso ;)</string>
+
+
+
+    <!-- Perfil -->
+    <string name="textview_perfilcliente_titulopage">Perfil</string>
+    <string name="textview_perfilcliente_buttonsair">Sair</string>
 
 </resources>
