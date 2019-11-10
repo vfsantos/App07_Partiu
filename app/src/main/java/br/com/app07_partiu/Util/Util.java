@@ -212,4 +212,26 @@ public class Util {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
+    public static void comandaFechada(final Context context){
+        AlertDialog.Builder builder
+                = new AlertDialog
+                .Builder(context);
+
+        builder.setTitle("Comanda Fechada");
+        builder.setMessage("Essa comanda não pode ser alterada pois já se encontra fechada.");
+
+        builder.setCancelable(true);
+
+        builder.setNegativeButton("Ok, entendi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 }

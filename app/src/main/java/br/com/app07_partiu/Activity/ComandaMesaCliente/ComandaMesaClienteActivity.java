@@ -143,6 +143,13 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
             textViewTotalSelecionadoComanda.setText(doubleToReal(0));
         }
 
+        if(comanda.getStatus().equals("F")){
+
+            Util.comandaFechada(context);
+            constraintLayoutMeuConsumo.setEnabled(false);
+            constraintLayoutMeuConsumo.setBackground(getDrawable(R.color.cinza_100));
+        }
+
         setReloadInterval();
 
     }

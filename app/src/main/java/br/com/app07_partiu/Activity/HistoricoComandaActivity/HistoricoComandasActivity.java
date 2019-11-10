@@ -215,6 +215,13 @@ public class HistoricoComandasActivity extends AppCompatActivity {
                 int idComanda = comandaCV.getId();
                 Log.d("TESTES", "Carregando comanda de id: " + idComanda);
                 visualizarComanda(idComanda);
+                /*
+                if(comandaCV.getStatus().equals("F")){
+                    Util.comandaFechada(context);
+                } else {
+                    visualizarComanda(idComanda);
+                }*/
+
 
             }
 
