@@ -296,7 +296,7 @@
     <string name="title_activity_cadastrodatanascimento">Criar conta</string>
     <string name="textview_cadastrodatanascimento_datanascimento">Qual é a sua data de nascimento?</string>
     <string name="button_cadastrodatanascimento_avancar">Avançar</string>
-    <string name="textview_datepicker_cadastrodatanascimento">Clique aqui</string>
+    <string name="textview_datepicker_cadastrodatanascimento">___/___/_____</string>
 
     <!-- CadastroGeneroActivity -->
     <string name="title_activity_cadastrogenero">Criar conta</string>

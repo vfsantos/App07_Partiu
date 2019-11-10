@@ -62,6 +62,7 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_senha);
         implementarComponentes();
 
+        editTextSenha.setText("123456789");
         editTextSenha.addTextChangedListener(senhaTextWatcher);
         buttonAvancar.setEnabled(false);
         buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));

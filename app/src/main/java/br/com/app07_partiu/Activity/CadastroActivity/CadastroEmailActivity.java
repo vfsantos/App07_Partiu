@@ -65,6 +65,7 @@ public class CadastroEmailActivity extends AppCompatActivity {
         implementarComponentes();
 
         editTextEmail.addTextChangedListener(emailTextWatcher);
+        editTextEmail.setText("victoor@gmail.com");
     }
 
 

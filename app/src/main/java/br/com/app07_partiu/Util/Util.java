@@ -234,4 +234,27 @@ public class Util {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
+    public static void dataNascimentoInvalida(final Context context){
+        AlertDialog.Builder builder
+                = new AlertDialog
+                .Builder(context);
+
+        builder.setTitle("Data de nascimento inválida");
+        builder.setMessage("A data de nascimento não pode ser maior que a atual. Por favor informe " +
+                "uma data de nascimento válida pra continuar.");
+
+        builder.setCancelable(true);
+
+        builder.setNegativeButton("Ok, entendi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 }
