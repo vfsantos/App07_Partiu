@@ -7,25 +7,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.Usuario;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class UsuarioNetwork {
-
-//                {
-//                    "id": 1,
-//                        "tipo": "garcom",
-//                        "cpf": 57731434885,
-//                        "nome": "Benjamin Bento Isaac Ramos",
-//                        "dta_nascimento": "08/09/1997",
-//                        "email": "benjamin@gmail.com",
-//                        "ddd": 11,
-//                        "telefone": 27171119,
-//                        "genero": "M",
-//                        "senha": "123"
-//                }
 
     public static Usuario login(String url, String email, String senha) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
@@ -40,6 +28,7 @@ public class UsuarioNetwork {
         JSONObject objeto = new JSONObject(resultado);
 
         Usuario usuario = new Usuario();
+        Endereco endereco = new Endereco();
 
         try {
 
@@ -90,6 +79,55 @@ public class UsuarioNetwork {
             Log.d("TESTES", "Não acho usuario Login");
         }
         return false;
+
+    }
+
+
+    public static Usuario getUsuarioComEndereco(String url, String variavel, String valor) throws IOException, JSONException {
+        OkHttpClient client = new OkHttpClient();
+        url += "/getUsuario?variavel=" + variavel + "&valor=" + valor;
+
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String resultado = response.body().string();
+        JSONObject objeto = new JSONObject(resultado);
+
+        Usuario usuario = new Usuario();
+        Endereco endereco = new Endereco();
+
+        try {
+
+            usuario.setId(objeto.getInt("id"));
+            usuario.setTipo(objeto.getString("tipo"));
+            usuario.setCpf(objeto.getString("cpf"));
+            usuario.setNome(objeto.getString("nome"));
+            usuario.setDta_nascimento(objeto.getString("dta_nascimento"));
+            usuario.setEmail(objeto.getString("email"));
+            usuario.setDdd(objeto.getInt("ddd"));
+            usuario.setTelefone(objeto.getInt("telefone"));
+            usuario.setGenero((objeto.getString("genero").charAt(0)));
+            usuario.setSenha(objeto.getString("senha"));
+            usuario.setEndereco(endereco);
+            endereco.setId(objeto.getJSONObject("endereco").getInt("id"));
+            endereco.setLogradouro(objeto.getJSONObject("endereco").getString("logradouro"));
+            endereco.setNumero(objeto.getJSONObject("endereco").getString("numero"));
+            endereco.setComplemento(objeto.getJSONObject("endereco").getString("complemento"));
+            endereco.setBairro(objeto.getJSONObject("endereco").getString("bairro"));
+            endereco.setCidade(objeto.getJSONObject("endereco").getString("cidade"));
+            endereco.setUf(objeto.getJSONObject("endereco").getString("uf"));
+            endereco.setCep(objeto.getJSONObject("endereco").getString("cep"));
+
+
+            return usuario;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
 
     }
 

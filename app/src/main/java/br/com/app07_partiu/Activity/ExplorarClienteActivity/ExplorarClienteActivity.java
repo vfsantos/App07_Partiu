@@ -31,6 +31,7 @@ import br.com.app07_partiu.Activity.HomeGarcomActivity.HomeGarcomActivity;
 import br.com.app07_partiu.Activity.LoginClienteActivity;
 import br.com.app07_partiu.Activity.PerfilClienteActivity;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.Item;
 import br.com.app07_partiu.Model.Restaurante;
 import br.com.app07_partiu.Model.Usuario;
@@ -46,6 +47,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
 
     public static final String EXPLORARUSUARIO = "br.com.app07_partiu.Activity.ExplorarClienteActivity.Cliente";
     public static final String EXPLORARCOMANDA = "br.com.app07_partiu.Activity.ExplorarClienteActivity.Comanda";
+    public static final String EXPLORARENERECO = "br.com.app07_partiu.Activity.ExplorarClienteActivity.Endereco";
 
 
 
@@ -127,6 +129,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     //Objetos
     public Usuario cliente;
     public Comanda[] comandas;
+    public Usuario usuario;
 
 
     //Context
@@ -137,6 +140,7 @@ public class ExplorarClienteActivity extends AppCompatActivity {
     public Intent intent;
     public Intent intentRecomendacaoDetalhe;
     public Intent intentComanda;
+    public Intent intentPefil;
 
 
     //Snackbar
@@ -179,11 +183,13 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                         //startActivity(a);
                         break;
                     case R.id.menu_perfil:
-                        Intent b = new Intent(ExplorarClienteActivity.this, PerfilClienteActivity.class);
-                        b.putExtra(EXPLORARUSUARIO, cliente);
-                        b.putExtra(EXPLORARCOMANDA, comandas);
-                        b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(b);
+                        getDadosusuario(cliente.getId());
+
+                        //Intent b = new Intent(ExplorarClienteActivity.this, PerfilClienteActivity.class);
+                        //b.putExtra(EXPLORARUSUARIO, cliente);
+                        //b.putExtra(EXPLORARCOMANDA, comandas);
+                        //b.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        //startActivity(b);
                         //Util.showManutencaoDialog(context);
                         break;
                 }
@@ -194,6 +200,52 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         getRecomendacoes();
 
     }
+
+    public void getDadosusuario(final int id) {
+        intentPefil = new Intent(context, PerfilClienteActivity.class);
+        final String valor = String.valueOf(id);
+        final String variavel = "id";
+
+        if (Connection.isConnected(this, viewSnackbar)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        usuario = new Usuario();
+                        usuario = UsuarioNetwork.getUsuarioComEndereco(Connection.URL, variavel,valor);
+                        System.out.println("teste id: " + usuario.getNome());
+
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              intentPefil.putExtra(EXPLORARCOMANDA, comandas);
+                                              intentPefil.putExtra(EXPLORARUSUARIO, usuario);
+                                              intentPefil.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                              startActivityForResult(intentPefil, 0);
+                                          }
+                                      }
+                        );
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("TESTES", "ExplorarCliente: IOException visualizarHistoricoComanda");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Thread.sleep(1000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+    }
+
 
     //ver comanda
     public void visualizarHistoricoComanda(final String cpf) {

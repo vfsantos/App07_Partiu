@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -25,9 +26,11 @@ import br.com.app07_partiu.Activity.CadastroActivity.CadastroEnderecoActivity;
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity;
 import br.com.app07_partiu.Model.Comanda;
+import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
+import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
 import br.com.app07_partiu.Util.Util;
 
@@ -38,6 +41,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
     public static final String USUARIO = "br.com.app07_partiu.Activity.PerfilClienteActivity.Cliente";
+    public static final String ENDERECO = "br.com.app07_partiu.Activity.PerfilClienteActivity.Enderco";
 
 
     //ConstraintLayout
@@ -74,6 +78,9 @@ public class PerfilClienteActivity extends AppCompatActivity {
     //Objetos
     public Usuario cliente;
     public Comanda[] comandas;
+    public Endereco endereco;
+    public Usuario usuarioComEndereco;
+    public Usuario usuario;
 
 
     //Context
@@ -112,6 +119,9 @@ public class PerfilClienteActivity extends AppCompatActivity {
         textViewTelefone.setText("Telefone: " + String.valueOf(cliente.getTelefone()));
 
 
+        usuario = new Usuario();
+
+
         bottomNavigationView = findViewById(R.id.bottomNavegation);
         bottomNavigationView.setSelectedItemId(R.id.menu_perfil);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -120,7 +130,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_explorar:
                         Intent a = new Intent(PerfilClienteActivity.this, ExplorarClienteActivity.class);
-                        a.putExtra(USUARIO, cliente);
+                        a.putExtra(USUARIO, usuario);
                         a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(a);
                     case R.id.menu_comanda:
@@ -134,6 +144,10 @@ public class PerfilClienteActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
 
     public void visualizarHistoricoComanda(final String cpf) {
         intentComanda = new Intent(context, HistoricoComandasActivity.class);
@@ -182,7 +196,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
     public void onClickEditarPerfil(View view){
         intentToEditarPerfil = new Intent(this, EditPerfilCliente.class);
-       // intentToCadastroEndereco.putExtra(CADASTROGENERO, cadastroCliente);
+        intentToEditarPerfil.putExtra(USUARIO, cliente);
         startActivity(intentToEditarPerfil);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }

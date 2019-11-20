@@ -2,6 +2,7 @@ package br.com.app07_partiu.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,9 @@ import com.bumptech.glide.util.ByteBufferUtil;
 
 import org.w3c.dom.Text;
 
+import br.com.app07_partiu.Activity.CadastroActivity.CadastroEmailActivity;
+import br.com.app07_partiu.Model.Endereco;
+import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
 
 public class EditPerfilCliente extends AppCompatActivity {
@@ -96,12 +100,69 @@ public class EditPerfilCliente extends AppCompatActivity {
     private Context context;
 
 
+    //Intent
+    private Intent intentPerfilCliente;
+
+
+    //Objetos
+    private Usuario usuario;
+    private Endereco endereco;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_perfil_cliente);
         implementarComponentes();
         context = this;
+
+        intentPerfilCliente = getIntent();
+        usuario = new Usuario();
+        endereco = new Endereco();
+        usuario.setEndereco(endereco);
+        usuario = (Usuario) intentPerfilCliente.getSerializableExtra(PerfilClienteActivity.USUARIO);
+        System.out.println("DADOS DO USUÁRIO ---> "+
+                "\n "+usuario.getTipo()+
+                "\n "+usuario.getNome()+
+                "\n "+usuario.getEmail()+
+                "\n "+usuario.getSenha()+
+                "\n "+usuario.getCpf()+
+                "\n "+usuario.getTelefone()+
+                "\n "+usuario.getGenero()+
+                "\n "+usuario.getDta_nascimento());
+
+        System.out.println("DADOS DO ENDEREÇO ---> "+
+                "\n "+usuario.getEndereco().getCep()+
+                "\n "+usuario.getEndereco().getCep()+
+                "\n "+usuario.getEndereco().getLogradouro()+
+                "\n "+usuario.getEndereco().getNumero()+
+                "\n "+usuario.getEndereco().getComplemento()+
+                "\n "+usuario.getEndereco().getBairro()+
+                "\n "+usuario.getEndereco().getCidade()+
+                "\n "+usuario.getEndereco().getUf());
+
+        retornaDadosNaTelas(usuario);
+    }
+
+
+    public void retornaDadosNaTelas(Usuario usuario){
+        //dados do usuário
+        editTextNome.setText(usuario.getNome());
+        editTextEmail.setText(usuario.getEmail());
+        editTextSenha.setText(usuario.getSenha());
+        //genero
+        editTextDataNascimento.setText(usuario.getDta_nascimento());
+        editTextCPF.setText(usuario.getCpf());
+        editTextTelefone.setText(usuario.getTelefone());
+
+        //dados do endereço
+        editTextLogradrouro.setText(usuario.getEndereco().getLogradouro());
+        editTextNumero.setText(usuario.getEndereco().getNumero());
+        editTextCEP.setText(usuario.getEndereco().getCep());
+        editTextComplemento.setText(usuario.getEndereco().getComplemento());
+        editTextBairro.setText(usuario.getEndereco().getBairro());
+        editTextCidade.setText(usuario.getEndereco().getCidade());
+        editTextEstado.setText(usuario.getEndereco().getUf());
     }
 
 
