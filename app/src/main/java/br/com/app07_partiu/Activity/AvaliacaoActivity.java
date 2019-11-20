@@ -132,15 +132,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
 
     public int getAvalicaoGarcom() {
-        ratingBarGarcom.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                avaliacaoGarcom = rating;
-                System.out.println("----------> getAvaliacao: " + rating);
-                System.out.println("----------> getAvaliacao: " + avaliacaoGarcom);
-            }
-        });
-        return (int) avaliacaoGarcom;
+        return (int) ratingBarGarcom.getRating();
     }
 
 
@@ -151,15 +143,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
 
     public int getAvalicaoEstabelecimento() {
-        ratingBarEstabelecimento.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                avaliacaoEstabelecimento = rating;
-                System.out.println("getAvaliacao: " + rating);
-                System.out.println("getAvaliacao: " + avaliacaoEstabelecimento);
-            }
-        });
-        return (int) avaliacaoEstabelecimento;
+        return (int) ratingBarEstabelecimento.getRating();
     }
 
 
@@ -172,6 +156,8 @@ public class AvaliacaoActivity extends AppCompatActivity {
     public void enviarFeedback(final int idCliente, final int idComanda, final int avEstabelecimento, final int avFuncionario,
                                final String descEstabelecimento, final String descFuncionario) {
 
+        System.out.println("enviarFeedback: " + avEstabelecimento);
+        System.out.println("enviarFeedback: " + avFuncionario);
         new Thread(
                 new Runnable() {
                     @Override
@@ -182,11 +168,6 @@ public class AvaliacaoActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            Thread.sleep(000);
-                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
 
@@ -215,13 +196,13 @@ public class AvaliacaoActivity extends AppCompatActivity {
         idCliente           = usuario.getId();
         idComanda           = comanda.getId();
 
-        avGarcom            =  ratingBarEstabelecimento.getNumStars();
-        avEstabelecimento   =  ratingBarGarcom.getNumStars();
+        avGarcom            =  getAvalicaoGarcom();
+        avEstabelecimento   =  getAvalicaoEstabelecimento();
         descGarcom          =  getComentarioGarcom();
         descEstabelecimento =  getComentarioEstabelecimento();
 
 
-        //teste feedback
+        //ok
         System.out.println("idCliente: "+idCliente);
         System.out.println("idComanda: "+idComanda);
         System.out.println("avGarcom: "+avGarcom);
@@ -230,7 +211,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
         System.out.println("descGarcom: "+descEstabelecimento);
 
 
-        enviarFeedback(idCliente, idComanda, getAvalicaoEstabelecimento(), getAvalicaoGarcom(), descGarcom, descEstabelecimento);
+        enviarFeedback(idCliente, idComanda, avEstabelecimento, avGarcom, descEstabelecimento, descGarcom);
         setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();

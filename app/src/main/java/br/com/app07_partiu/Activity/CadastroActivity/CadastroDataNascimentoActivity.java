@@ -116,6 +116,12 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
 
+
+                System.out.println("pega a variável year: " + year);
+                System.out.println("pega a variável month: " + month);
+                System.out.println("pega a variável dayOfMonth: " + dayOfMonth);
+
+
                 try {
                     Calendar cal = Calendar.getInstance();
                     System.out.println("Teste captura do ano: variável ano: " +year);
@@ -123,11 +129,17 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
 
 
                     //verfica se o ano é maior que o de hoje
-                    if (year >= cal.get(Calendar.YEAR)){
+                    if (year > cal.get(Calendar.YEAR)){
                         if (month<10){
+                            System.out.println("teste do primeri if: " +year);
+
                             editTextDatePikerDataDeNascimento.setText(dayOfMonth+"/0"+month+"/"+year);
                             cadastroCliente.setDta_nascimento(dayOfMonth+"/0"+month+"/"+year);
+                            buttonAvancar.setEnabled(false);
+                            buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
+                            buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
                         }else {
+                            System.out.println("teste do primeri else: " +year);
                             editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
                             cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
                             buttonAvancar.setEnabled(false);
@@ -142,6 +154,9 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                             if (month<10){
                                 editTextDatePikerDataDeNascimento.setText(dayOfMonth+"/0"+month+"/"+year);
                                 cadastroCliente.setDta_nascimento(dayOfMonth+"/0"+month+"/"+year);
+                                buttonAvancar.setEnabled(false);
+                                buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
+                                buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
                             }else {
                                 editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
                                 cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
@@ -152,10 +167,15 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                         } else {
 
                             //verifica se o dia é maior que o de hoje
+
+
                             if (dayOfMonth > cal.get(Calendar.DAY_OF_MONTH)) {
                                 if (month<10){
                                     editTextDatePikerDataDeNascimento.setText(dayOfMonth+"/0"+month+"/"+year);
                                     cadastroCliente.setDta_nascimento(dayOfMonth+"/0"+month+"/"+year);
+                                    buttonAvancar.setEnabled(false);
+                                    buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
+                                    buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
                                 }else {
                                     editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
                                     cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
