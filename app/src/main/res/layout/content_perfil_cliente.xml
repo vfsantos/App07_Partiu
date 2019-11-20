@@ -71,6 +71,41 @@
 
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_perfilcliente_editarPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/branco_100"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_perfilcliente_imagemperfil"
+        android:onClick="onClickEditarPerfil"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/textView_perfilcliente_editarPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/textview_perfilcliente_editarperfil"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:textColor="@color/rosa_100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_perfilcliente_editarperfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_edit_pink_24dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout_perfilcliente_infocliente"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -78,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_perfilcliente_imagemperfil">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <TextView
             android:id="@+id/textView_perfilcliente_nome"
@@ -159,23 +194,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/branco_100">
 
         <Button
             android:id="@+id/button_perfilcliente_sair"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/button_preto_outline"
+            android:onClick="onClickPerfilClienteSair"
             android:text="@string/textview_perfilcliente_buttonsair"
             android:textAllCaps="false"
             android:textColor="@color/preto"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:onClick="onClickPerfilClienteSair"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -183,6 +219,7 @@
 
 
     </android.support.constraint.ConstraintLayout>
+
 
 
 

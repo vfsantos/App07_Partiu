@@ -127,17 +127,20 @@ public class AvaliacaoActivity extends AppCompatActivity {
         System.out.println("idCliente: "+usuario.getId());
         System.out.println("idComanda: "+comanda.getId());
 
+
     }
 
 
-    public double getAvalicaoGarcom() {
+    public int getAvalicaoGarcom() {
         ratingBarGarcom.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 avaliacaoGarcom = rating;
+                System.out.println("----------> getAvaliacao: " + rating);
+                System.out.println("----------> getAvaliacao: " + avaliacaoGarcom);
             }
         });
-        return avaliacaoGarcom;
+        return (int) avaliacaoGarcom;
     }
 
 
@@ -147,14 +150,16 @@ public class AvaliacaoActivity extends AppCompatActivity {
     }
 
 
-    public double getAvalicaoEstabelecimento() {
+    public int getAvalicaoEstabelecimento() {
         ratingBarEstabelecimento.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 avaliacaoEstabelecimento = rating;
+                System.out.println("getAvaliacao: " + rating);
+                System.out.println("getAvaliacao: " + avaliacaoEstabelecimento);
             }
         });
-        return avaliacaoEstabelecimento;
+        return (int) avaliacaoEstabelecimento;
     }
 
 
@@ -210,10 +215,10 @@ public class AvaliacaoActivity extends AppCompatActivity {
         idCliente           = usuario.getId();
         idComanda           = comanda.getId();
 
-        avGarcom            = (int) getAvalicaoGarcom();
-        avEstabelecimento   = (int) getAvalicaoEstabelecimento();
-        descGarcom          = (String) getComentarioGarcom();
-        descEstabelecimento = (String) getComentarioEstabelecimento();
+        avGarcom            =  ratingBarEstabelecimento.getNumStars();
+        avEstabelecimento   =  ratingBarGarcom.getNumStars();
+        descGarcom          =  getComentarioGarcom();
+        descEstabelecimento =  getComentarioEstabelecimento();
 
 
         //teste feedback
@@ -225,7 +230,7 @@ public class AvaliacaoActivity extends AppCompatActivity {
         System.out.println("descGarcom: "+descEstabelecimento);
 
 
-        enviarFeedback(idCliente, idComanda, avGarcom, avEstabelecimento, descGarcom, descEstabelecimento);
+        enviarFeedback(idCliente, idComanda, getAvalicaoEstabelecimento(), getAvalicaoGarcom(), descGarcom, descEstabelecimento);
         setResult(ComandaMesaClienteActivity.RESULT_PEDIDOSFINALIZADOS);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();

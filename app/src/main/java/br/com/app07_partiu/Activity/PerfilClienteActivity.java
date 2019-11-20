@@ -1,6 +1,7 @@
 package br.com.app07_partiu.Activity;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,8 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
+import br.com.app07_partiu.Activity.CadastroActivity.CadastroEnderecoActivity;
 import br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity;
 import br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity;
 import br.com.app07_partiu.Model.Comanda;
@@ -41,10 +45,12 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private ConstraintLayout constraintLayoutImagemPerfil;
     private ConstraintLayout constraintLayoutInfoCliente;
     private ConstraintLayout constraintLayoutButtonSair;
+    private ConstraintLayout constraintLayoutEditarPerfil;
 
 
     //ImageView
     private ImageView imageViewPerfil;
+    private ImageView imageViewEditar;
 
 
     //TextView
@@ -54,6 +60,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private TextView textViewdataNascimento;
     private TextView textViewEmail;
     private TextView textViewTelefone;
+    private TextView textViewEditarPerfil;
 
 
     //Button
@@ -76,7 +83,10 @@ public class PerfilClienteActivity extends AppCompatActivity {
     //Intent
     private Intent intent;
     private Intent intentComanda;
+    private Intent intentToEditarPerfil;
 
+
+    //Snackbar
     private View viewSnackbar;
 
 
@@ -170,6 +180,14 @@ public class PerfilClienteActivity extends AppCompatActivity {
     }
 
 
+    public void onClickEditarPerfil(View view){
+        intentToEditarPerfil = new Intent(this, EditPerfilCliente.class);
+       // intentToCadastroEndereco.putExtra(CADASTROGENERO, cadastroCliente);
+        startActivity(intentToEditarPerfil);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
+
+
 
     private void implementarComponentes() {
         //ConstraintLayout
@@ -177,10 +195,12 @@ public class PerfilClienteActivity extends AppCompatActivity {
         constraintLayoutImagemPerfil = (ConstraintLayout) findViewById(R.id.constraintLayout_perfilcliente_imagemperfil);
         constraintLayoutInfoCliente  = (ConstraintLayout) findViewById(R.id.constraintLayout_perfilcliente_infocliente);
         constraintLayoutButtonSair   = (ConstraintLayout) findViewById(R.id.constraintLayout_perfilcliente_botaosair);
+        constraintLayoutEditarPerfil = (ConstraintLayout) findViewById(R.id.constraintLayout_perfilcliente_editarPerfil);
 
 
         //ImageView
         imageViewPerfil              = (ImageView) findViewById(R.id.imageView_perfilcliente_imagemperfil);
+        imageViewEditar              = (ImageView) findViewById(R.id.imageView_perfilcliente_editarperfil);
 
 
         //TextView
@@ -190,6 +210,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         textViewdataNascimento       = (TextView) findViewById(R.id.textView_perfilcliente_datanascimento);
         textViewEmail                = (TextView) findViewById(R.id.textView_perfilcliente_email);
         textViewTelefone             = (TextView) findViewById(R.id.textView_perfilcliente_telefone);
+        textViewEditarPerfil         = (TextView) findViewById(R.id.textView_perfilcliente_editarPerfil);
 
 
         //Button

@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.EditPerfilCliente"
+    tools:showIn="@layout/activity_edit_perfil_cliente"
+    android:background="@color/preto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- Header -->
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_editarperfil_voltar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="onClickVoltarEditarPerfil"
+            app:layout_constraintEnd_toStartOf="@+id/textView_editarPerfil_titulo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/imageview_editarperfil_voltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_white" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textView_editarPerfil_titulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="48dp"
+            android:text="@string/title_activity_edit_perfil_cliente"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/branco_100"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_editarPerfil_contentseusdados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_titulo">
+
+
+            <TextView
+                android:id="@+id/textView_editarPerfil_contentmeusdados"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/textview_perfileditar_contentmeusdados"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!-- Nome -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_nome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_contentmeusdados">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_nome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_nome"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_nome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_nome"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_nome" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Email -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_nome">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_email"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_email"
+                    android:inputType="textEmailAddress"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_email" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Senha -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_senha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_email">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_senha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_senha"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_senha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_senha"
+                    android:inputType="textPassword"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_senha" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!-- genero -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarPerfil_genero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_senha">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_genero"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_genero"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout_editarperfil_genero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_genero">
+
+                    <Button
+                        android:id="@+id/button_editarPerfil_masculino"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/button_select_branco_outline"
+                        android:onClick="onClickSelectMasculinoEditarPerfil"
+                        android:text="@string/checkbox_cadastrogenero_masculino"
+                        android:textAllCaps="false"
+                        android:textColor="@color/branco_100"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/button_editarPerfil_feminino"
+                        app:layout_constraintHorizontal_bias="0.024"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <Button
+                        android:id="@+id/button_editarPerfil_feminino"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@drawable/button_select_branco_outline"
+                        android:onClick="onClickSelectFemininoEditarPerfil"
+                        android:text="@string/checkbox_cadastrogenero_feminino"
+                        android:textAllCaps="false"
+                        android:textColor="@color/branco_100"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/button_editarperfil_naobinario"
+                        app:layout_constraintStart_toEndOf="@+id/button_editarPerfil_masculino"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <Button
+                        android:id="@+id/button_editarperfil_naobinario"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/button_select_branco_outline"
+                        android:onClick="onClickSelectNaoBinarioEditarPerfil"
+                        android:text="@string/checkbox_cadastrogenero_naobinario"
+                        android:textAllCaps="false"
+                        android:textColor="@color/branco_100"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/button_editarPerfil_feminino"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!-- Data de nascimento -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarPerfil_datanascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarPerfil_genero">
+
+                <TextView
+                    android:id="@+id/textview_editarperfil_datanascimento"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/textview_editarperfil_datanascimento"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/edittext_editarperfil_datadenascimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/edittext_branco"
+                    android:hint="@string/textview_datepicker_cadastrodatanascimento"
+                    android:inputType="date"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_editarperfil_datanascimento" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- cpf -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarPerfil_datanascimento">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_cpf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_cpf"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_cpf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_cpf"
+                    android:inputType="number"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_cpf" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Telefone -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_telefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_cpf">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_telefone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_telefone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_telefone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_telefone"
+                    android:inputType="phone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_telefone" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_editarPerfil_contentendereco"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarPerfil_contentseusdados">
+
+
+            <TextView
+                android:id="@+id/textView_editarPerfil_contentendereco"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/textview_perfileditar_contentendereco"
+                android:textColor="@color/branco_100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!-- CEP -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_cep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_contentendereco">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_cep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_cep"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_cep"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_cep"
+                    android:inputType="number"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_cep" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Loogradouro -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_logradouro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_cep">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_logradouro"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_logradouro"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_logradrouro"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_logradouro"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_logradouro" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Numero -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_numero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_logradouro">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_numero"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_numero"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_numero"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_numero"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_numero" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!-- Complemento -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_complemento"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_numero">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_complemento"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_complemento"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_complemento"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:hint="@string/textview_perfileditar_hint_complemento"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_complemento" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!-- Bairro -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_bairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_complemento">
+
+                <TextView
+                    android:id="@+id/textview_editarperfil_bairro"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/textview_perfileditar_bairro"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/edittext_editarperfil_bairro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/edittext_branco"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_editarperfil_bairro" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Cidade -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_bairro">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_cidade"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_cidade"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_cidade"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_cidade" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <!-- Estado -->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_editarperfil_estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_cidade">
+
+                <TextView
+                    android:id="@+id/textView_editarPerfil_telefone_estado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview_perfileditar_estado"
+                    android:textAllCaps="false"
+                    android:textColor="@color/branco_100"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_editPerfil_estado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_branco"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/preto"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_telefone_estado" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
+
+        <!--
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_editarperfil_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="652dp">
+
+
+            <Button
+                android:id="@+id/button_editarPerfil_salvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="Button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+-->
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
+
+
+
+
+

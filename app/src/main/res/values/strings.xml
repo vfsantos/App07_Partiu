@@ -46,7 +46,6 @@
     <string name="btn_editaritemgarcom_remover">Remover</string>
 
 
-
     <!-- ExplorarClienteDetalheActivity -->
     <string name="textview_explorarclientedetalhes_titulopagina">Detalhes do Estabelecimento</string>
     <string name="textview_explorarclientedetalhes_detalhe">Detalhe</string>
@@ -398,7 +397,6 @@
     <string name="textview_hitoricoComanda_titulopage">Minhas comandas</string>
 
 
-
     <!-- ExplorarClienteActivity -->
     <string name="title_activity_explorar_cliente">Explorar</string>
     <string name="textview_explorecliente_nomecliente">Partiu</string>
@@ -416,16 +414,13 @@
     <string name="textview_recomendacaorestauranteavaliado_descricao1">baseado no seu perfil</string>
 
 
-
     <!-- ComandaMesaCliente -->
     <string name="textview_comandamesacliente_titulopage">Comanda</string>
     <string name="textView_comandamesacliente_meuconsumo">Total da comanda</string>
 
 
-
     <!-- FinalizarPedidoCliente -->
     <string name="textview_finalizarpedidocliente_titulopage">Meu consumo</string>
-
 
 
     <!-- ItemComandaDetalhCliente -->
@@ -435,15 +430,46 @@
     <string name="textView_itemDetalhesCliente_titulolista">Item selecionado por</string>
 
 
-
     <!-- PagamentoConfirmadd -->
     <string name="textview_pagamentoConfirmado_titulopage">Pagamento confirmado</string>
     <string name="textview_pagamentoconfirmado_descritivo">Pagamento efetuado com sucesso ;)</string>
 
 
-
     <!-- Perfil -->
     <string name="textview_perfilcliente_titulopage">Perfil</string>
     <string name="textview_perfilcliente_buttonsair">Sair</string>
+    <string name="title_activity_edit_perfil_cliente">Editar Perfil</string>
+    <string name="textview_perfilcliente_editarperfil">Editar perfil</string>
+
+    <string name="textview_perfileditar_contentmeusdados">Meus dados</string>
+    <string name="textview_perfileditar_nome">Nome</string>
+    <string name="textview_perfileditar_email">E-mail</string>
+    <string name="textview_perfileditar_senha">Senha</string>
+    <string name="textview_perfileditar_genero">Genero</string>
+    <string name="textview_editarperfil_datanascimento">Data de Nascimento</string>
+    <string name="textview_perfileditar_cpf">CPF</string>
+    <string name="textview_perfileditar_telefone">Telefone</string>
+
+    <string name="textview_perfileditar_contentendereco">Endereço</string>
+    <string name="textview_perfileditar_logradouro">Logradouro</string>
+    <string name="textview_perfileditar_numero">Numero</string>
+    <string name="textview_perfileditar_complemento">Complemento</string>
+    <string name="textview_perfileditar_cep">CEP</string>
+    <string name="textview_perfileditar_bairro">Bairro</string>
+    <string name="textview_perfileditar_cidade">Cidade</string>
+    <string name="textview_perfileditar_estado">Estado</string>
+
+
+    <string name="textview_perfileditar_hint_nome">Digite seu nome</string>
+    <string name="textview_perfileditar_hint_email">Digite seu e-mail</string>
+    <string name="textview_perfileditar_hint_senha">Digite seu senha</string>
+
+    <string name="textview_perfileditar_hint_logradouro">av. interlagos</string>
+    <string name="textview_perfileditar_hint_numero">000000</string>
+    <string name="textview_perfileditar_hint_complemento">Casa / Apto / etc...</string>
+    <string name="textview_perfileditar_hint_cep">00000-000</string>
+    <string name="textview_perfileditar_hint_cpf">000.000.000-00</string>
+    <string name="textview_perfileditar_hint_telefone">(00)00000-0000</string>
+
 
 </resources>
