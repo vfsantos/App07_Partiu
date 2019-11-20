@@ -74,6 +74,7 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
     //Double
     private double valorTotalComanda = 0.0;
+    private double valorMeuConsumo = 0.0;
 
 
     //Intent
@@ -101,10 +102,25 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
 
         textViewNomeRestaurante.setText("Comanda " + comanda.getCodigoComanda());
-        textViewEnderecoRestaurante.setText("Valor total R$ " + doubleToReal(valorTotalComanda));
+        textViewEnderecoRestaurante.setText("Valor total R$ " + doubleToReal(calculaMeuConsumo(itens)));
 
-        carregarItens();
+        if (itens != null) {
+            carregarItens();
+        } else {
+            textViewEnderecoRestaurante.setText(doubleToReal(0));
+        }
 
+
+
+    }
+
+    public double calculaMeuConsumo(Item[] itens) {
+        for(int cont = 0; cont <= itens.length-1; cont++) {
+            valorMeuConsumo = valorMeuConsumo + itens[cont].getValor();
+            System.out.println("item" + cont + ":" + valorMeuConsumo);
+        }
+        System.out.println("Meu consumo: " + valorMeuConsumo);
+        return valorMeuConsumo;
     }
 
 

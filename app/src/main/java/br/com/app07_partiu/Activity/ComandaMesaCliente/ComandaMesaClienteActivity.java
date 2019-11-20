@@ -66,6 +66,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     private TextView textViewTitulo;
     private TextView textViewMeuConsumo;
     private TextView textViewTotalSelecionadoComanda;
+    private TextView textViewValorTotalMeuConsumo;
 
 
     //ImageView
@@ -92,26 +93,40 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     //Array
     public Item[] itens;
     public Item[] itensFormatados;
+    private Item[] pedidosFinalizarCliente;
+    private int[] idUsuario;
 
+
+    //Context
     private Context context;
+
+
+    //Double
     private double valorTotalComanda = 0.0;
     private double valorPagoComanda = 0.0;
+    private double valorMeuConsumo = 0.0;
 
-    private int[] idUsuario;
+
+    //Objetos
     private Item itemDetalhe;
-
     private Usuario clienteLogado;
 
-    private Item[] pedidosFinalizarCliente;
 
+    //Button
     private Button btnFinalizarPedidos;
 
+
+    //Time
     private Timer timerAtualizacao;
-    String dataAtualizacao;
+
+
+    //String
+    private String dataAtualizacao;
 
 
     //Snackbar
     private View viewSnackbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,13 +149,14 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
         //Carrega número da comanda no header
         textViewTitulo.setText("Comanda " + comanda.getCodigoComanda());
+        textViewValorTotalMeuConsumo.setText("R$ " + doubleToReal(calculaMeuConsumo(itens)));
 
 
         //Carraga listView de itens da comanda
         if (itens != null) {
             carregarItens();
         } else {
-            textViewTotalSelecionadoComanda.setText(doubleToReal(0));
+            textViewValorTotalMeuConsumo.setText(doubleToReal(0));
         }
 
         if(comanda.getStatus().equals("F")){
@@ -152,6 +168,16 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
         setReloadInterval();
 
+    }
+
+
+    public double calculaMeuConsumo(Item[] itens) {
+        for(int cont = 0; cont <= itens.length-1; cont++) {
+            valorMeuConsumo = valorMeuConsumo + itens[cont].getValor();
+            System.out.println("item" + cont + ":" + valorMeuConsumo);
+        }
+        System.out.println("Meu consumo: " + valorMeuConsumo);
+        return valorMeuConsumo;
     }
 
 
@@ -181,7 +207,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
     private void carregarItens() {
         itensFormatados = Util.formatItens(itens);
         getTotalComanda();
-        textViewTotalSelecionadoComanda.setText(doubleToReal(valorTotalComanda));
+        //textViewTotalSelecionadoComanda.setText(doubleToReal(valorTotalComanda));
 
         //Listview com itens da comanda selecionada
         listViewItensComanda = findViewById(R.id.listView_comandaMesaCliente_itensDaComanda);
@@ -455,7 +481,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         //TextView
         textViewTitulo                  = (TextView) findViewById(R.id.textView_comandamesacliente_tituloPagina);
         textViewMeuConsumo              = (TextView) findViewById(R.id.textView_comandamesacliente_meuconsumo);
-        textViewTotalSelecionadoComanda = (TextView) findViewById(R.id.textView_comandamesacliente_valortotal);
+        //textViewTotalSelecionadoComanda = (TextView) findViewById(R.id.textView_comandamesacliente_valortotal);
+        textViewValorTotalMeuConsumo    = (TextView) findViewById(R.id.textView_comandamesacliente_valortotalmeuconsumo);
 
 
         //ImageView

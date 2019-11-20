@@ -416,7 +416,7 @@
 
     <!-- ComandaMesaCliente -->
     <string name="textview_comandamesacliente_titulopage">Comanda</string>
-    <string name="textView_comandamesacliente_meuconsumo">Total da comanda</string>
+    <string name="textView_comandamesacliente_meuconsumo">Meu consumo</string>
 
 
     <!-- FinalizarPedidoCliente -->
