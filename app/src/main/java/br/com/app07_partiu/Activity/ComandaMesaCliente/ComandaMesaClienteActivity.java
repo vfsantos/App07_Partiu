@@ -172,7 +172,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
 
     public double calculaMeuConsumo(Item[] itens) {
-        for(int cont = 0; cont <= itens.length-1; cont++) {
+        for(int cont = 0; cont < itens.length; cont++) {
             valorMeuConsumo = valorMeuConsumo + itens[cont].getValor();
             System.out.println("item" + cont + ":" + valorMeuConsumo);
         }
@@ -180,14 +180,14 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
         return valorMeuConsumo;
     }
 
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), LoginClienteActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
-    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(getApplicationContext(), LoginClienteActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.putExtra("EXIT", true);
+//        startActivity(intent);
+//    }
 
     @Override
     protected void onRestart() {

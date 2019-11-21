@@ -12,8 +12,9 @@ import br.com.app07_partiu.Util.Util;
 public class Connection {
 
     //public static final String URL = "http://172.20.10.2:8080/partiu";
-//    public static final String URL = "http://localhost:8080/partiu";
-    public static final String URL = "http://10.0.2.2:8080/partiu";
+    public static final String URL = "http://192.168.15.120:8080/partiu";
+//    public static final String URL = "http://10.0.2.2:8080/partiu";
+
 //    public static final String URL = "http://192.168.43.121:8080/partiu";
 
     public static boolean isConnected(Context context, View viewSnackbar) {

@@ -140,8 +140,19 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
-                it.setDetalhe(item.getString("detalhe"));
-                it.setObsPedido(item.getString("observacao"));
+                try{
+                    it.setDetalhe(item.getString("detalhe"));
+
+                }catch(Exception e){
+                    it.setDetalhe("");
+
+                }
+                try {
+                    it.setObsPedido(item.getString("observacao"));
+
+                }catch(Exception e) {
+                    it.setObsPedido("");
+                }
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -266,8 +277,19 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
-                it.setDetalhe(item.getString("detalhe"));
+                try{
+                    it.setDetalhe(item.getString("detalhe"));
+
+                }catch(Exception e){
+                    it.setDetalhe("");
+
+                }
+                try {
                 it.setObsPedido(item.getString("observacao"));
+
+                }catch(Exception e) {
+                    it.setObsPedido("");
+                }
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -324,8 +346,19 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
-                it.setDetalhe(item.getString("detalhe"));
-                it.setObsPedido(item.getString("observacao"));
+                try{
+                    it.setDetalhe(item.getString("detalhe"));
+
+                }catch(Exception e){
+                    it.setDetalhe("");
+
+                }
+                try {
+                    it.setObsPedido(item.getString("observacao"));
+
+                }catch(Exception e) {
+                    it.setObsPedido("");
+                }
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -494,8 +527,20 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
-                it.setDetalhe(item.getString("detalhe"));
-                it.setObsPedido(item.getString("observacao"));
+                try{
+                    it.setDetalhe(item.getString("detalhe"));
+
+                }catch(Exception e){
+                    it.setDetalhe("");
+
+                }
+                try {
+                    it.setObsPedido(item.getString("observacao"));
+
+                }catch(Exception e) {
+                    it.setObsPedido("");
+                }
+
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -547,8 +592,19 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
-                it.setDetalhe(item.getString("detalhe"));
-                it.setObsPedido(item.getString("observacao"));
+                try{
+                    it.setDetalhe(item.getString("detalhe"));
+
+                }catch(Exception e){
+                    it.setDetalhe("");
+
+                }
+                try {
+                    it.setObsPedido(item.getString("observacao"));
+
+                }catch(Exception e) {
+                    it.setObsPedido("");
+                }
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));
@@ -602,8 +658,20 @@ public class ComandaNetwork {
                 it.setPorc_desconto(item.getInt("porc_desconto"));
                 it.setData(item.getString("data"));
                 it.setStatusPedido(item.getString("statusPedido"));
-                it.setDetalhe(item.getString("detalhe"));
-                it.setObsPedido(item.getString("observacao"));
+                try{
+                    it.setDetalhe(item.getString("detalhe"));
+
+                }catch(Exception e){
+                    it.setDetalhe("");
+
+                }
+                try {
+                    it.setObsPedido(item.getString("observacao"));
+
+                }catch(Exception e) {
+                    it.setObsPedido("");
+                }
+
                 try {
                     it.setIdUsuario(item.getInt("idUsuario"));
                     it.setNomeUsuario(item.getString("nomeUsuario"));

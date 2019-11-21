@@ -112,16 +112,26 @@ public class UsuarioNetwork {
             usuario.setTelefone(objeto.getInt("telefone"));
             usuario.setGenero((objeto.getString("genero").charAt(0)));
             usuario.setSenha(objeto.getString("senha"));
-            usuario.setEndereco(endereco);
+            try{
+
+
             endereco.setId(objeto.getJSONObject("endereco").getInt("id"));
             endereco.setLogradouro(objeto.getJSONObject("endereco").getString("logradouro"));
             endereco.setNumero(objeto.getJSONObject("endereco").getString("numero"));
-            endereco.setComplemento(objeto.getJSONObject("endereco").getString("complemento"));
+            try{
+                endereco.setComplemento(objeto.getJSONObject("endereco").getString("complemento"));
+            }catch(Exception e){
+                Log.d("NETWORK", "Complemento vazio");
+                endereco.setComplemento("");
+            }
             endereco.setBairro(objeto.getJSONObject("endereco").getString("bairro"));
             endereco.setCidade(objeto.getJSONObject("endereco").getString("cidade"));
             endereco.setUf(objeto.getJSONObject("endereco").getString("uf"));
             endereco.setCep(objeto.getJSONObject("endereco").getString("cep"));
-
+            }catch(Exception e){
+                Log.d("NETOWORK", "Endereco Vazio");
+            }
+            usuario.setEndereco(endereco);
 
             return usuario;
 

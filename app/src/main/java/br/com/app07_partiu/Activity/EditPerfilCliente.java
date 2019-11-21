@@ -210,16 +210,22 @@ public class EditPerfilCliente extends AppCompatActivity {
         }
         editTextDataNascimento.setText(usuario.getDta_nascimento());
         editTextCPF.setText(usuario.getCpf());
-       // editTextTelefone.setText(usuario.getDdd()+usuario.getTelefone());
-
+        Log.d("TESTE", usuario.getDdd()+""+usuario.getTelefone());
+        editTextTelefone.setText(usuario.getDdd()+""+usuario.getTelefone());
+//editTextTelefone.setText("0000");
         //dados do endereço
-        editTextLogradrouro.setText(usuario.getEndereco().getLogradouro());
-        editTextNumero.setText(usuario.getEndereco().getNumero());
-        editTextCEP.setText(usuario.getEndereco().getCep());
-        editTextComplemento.setText(usuario.getEndereco().getComplemento());
-        editTextBairro.setText(usuario.getEndereco().getBairro());
-        editTextCidade.setText(usuario.getEndereco().getCidade());
-        editTextEstado.setText(usuario.getEndereco().getUf());
+        try{
+            editTextLogradrouro.setText(usuario.getEndereco().getLogradouro());
+            editTextNumero.setText(usuario.getEndereco().getNumero());
+            editTextCEP.setText(usuario.getEndereco().getCep());
+            editTextComplemento.setText(usuario.getEndereco().getComplemento());
+            editTextBairro.setText(usuario.getEndereco().getBairro());
+            editTextCidade.setText(usuario.getEndereco().getCidade());
+            editTextEstado.setText(usuario.getEndereco().getUf());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -336,11 +342,11 @@ public class EditPerfilCliente extends AppCompatActivity {
 
 
         String telefoneCompleto = editTextTelefone.getText().toString();
-        //String ddd         = telefoneCompleto.substring(0,2);
-        //String telefone    = telefoneCompleto.substring(2,11);
+        String ddd         = telefoneCompleto.substring(0,2);
+        String telefone    = telefoneCompleto.substring(2,11);
 
-        String ddd         = "";
-        String telefone    = "";
+//        String ddd         = "";
+//        String telefone    = "";
 
 
 

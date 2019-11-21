@@ -305,7 +305,7 @@ public class HistoricoComandasActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-//                    listViewComandas.setEnabled(true);
+                    listViewComandas.setEnabled(true);
                 }
             }).start();
         }else listViewComandas.setEnabled(true);

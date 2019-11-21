@@ -81,68 +81,72 @@ public class Util {
         List<Item> itensAll = new ArrayList<>(); //selecionados e nao selecionados
         List<Item> itensFim = new ArrayList<>(); //pagos
 
-        for (Item i : itens) {
+        try {
+            for (Item i : itens) {
 
-            //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
-            if (idPedidos.contains(i.getIdPedido())) {
-                //pega o item que tem idPedido ==
-                for (Item item : itensAll) {
-                    if (item.getIdPedido() == i.getIdPedido()) {
-                        List<Usuario> us = item.getUsuariosPedido();
-                        //adciona usuario e devolve ao item
+                //se existir idPedido no set, é necessario adcionar o novo usuario ao usuariosPedido do item correspondente
+                if (idPedidos.contains(i.getIdPedido())) {
+                    //pega o item que tem idPedido ==
+                    for (Item item : itensAll) {
+                        if (item.getIdPedido() == i.getIdPedido()) {
+                            List<Usuario> us = item.getUsuariosPedido();
+                            //adciona usuario e devolve ao item
+                            Usuario u = new Usuario();
+                            u.setId(i.getIdUsuario());
+                            u.setNome(i.getNomeUsuario());
+                            u.setEmail(i.getEmailUsuario());
+                            u.setPorcPedido(i.getPorcPaga());
+                            u.setStatusPedido(i.getStatusPedidoUsuario());
+                            us.add(u);
+                            item.setUsuariosPedido(us);
+                        }
+                    }
+                    for (Item item : itensFim) {
+                        if (item.getIdPedido() == i.getIdPedido()) {
+                            List<Usuario> us = item.getUsuariosPedido();
+                            //adciona usuario e devolve ao item
+                            Usuario u = new Usuario();
+                            u.setId(i.getIdUsuario());
+                            u.setNome(i.getNomeUsuario());
+                            u.setEmail(i.getEmailUsuario());
+                            u.setPorcPedido(i.getPorcPaga());
+                            u.setStatusPedido(i.getStatusPedidoUsuario());
+                            us.add(u);
+                            item.setUsuariosPedido(us);
+                        }
+                    }
+
+                    // Se não existir idPedido, adciona direto na lista
+                } else {
+                    idPedidos.add(i.getIdPedido());
+                    if (i.getNomeUsuario() != null) {
                         Usuario u = new Usuario();
                         u.setId(i.getIdUsuario());
                         u.setNome(i.getNomeUsuario());
                         u.setEmail(i.getEmailUsuario());
                         u.setPorcPedido(i.getPorcPaga());
                         u.setStatusPedido(i.getStatusPedidoUsuario());
-                        us.add(u);
-                        item.setUsuariosPedido(us);
+                        List<Usuario> temp = new ArrayList<Usuario>();
+                        temp.add(u);
+                        i.setUsuariosPedido(temp);
+
+                    } else {
+
+                        i.setUsuariosPedido(new ArrayList<Usuario>());
                     }
-                }
-                for (Item item : itensFim) {
-                    if (item.getIdPedido() == i.getIdPedido()) {
-                        List<Usuario> us = item.getUsuariosPedido();
-                        //adciona usuario e devolve ao item
-                        Usuario u = new Usuario();
-                        u.setId(i.getIdUsuario());
-                        u.setNome(i.getNomeUsuario());
-                        u.setEmail(i.getEmailUsuario());
-                        u.setPorcPedido(i.getPorcPaga());
-                        u.setStatusPedido(i.getStatusPedidoUsuario());
-                        us.add(u);
-                        item.setUsuariosPedido(us);
+                    if (i.getStatusPedido().equals("P")) {
+                        itensFim.add(i);
+                    } else {
+                        itensAll.add(i);
                     }
-                }
-
-                // Se não existir idPedido, adciona direto na lista
-            } else {
-                idPedidos.add(i.getIdPedido());
-                if (i.getNomeUsuario() != null) {
-                    Usuario u = new Usuario();
-                    u.setId(i.getIdUsuario());
-                    u.setNome(i.getNomeUsuario());
-                    u.setEmail(i.getEmailUsuario());
-                    u.setPorcPedido(i.getPorcPaga());
-                    u.setStatusPedido(i.getStatusPedidoUsuario());
-                    List<Usuario> temp = new ArrayList<Usuario>();
-                    temp.add(u);
-                    i.setUsuariosPedido(temp);
-
-                }else{
-
-                    i.setUsuariosPedido(new ArrayList<Usuario>());
-                }
-                if (i.getStatusPedido().equals("P")){
-                    itensFim.add(i);
-                }else {
-                    itensAll.add(i);
-                }
 
 //                itensF.add(i);
 
-            }
+                }
 
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
         itensAll.addAll(itensFim);
