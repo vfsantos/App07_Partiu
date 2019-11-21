@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 import br.com.app07_partiu.Model.Usuario;
@@ -101,10 +102,10 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                 int mes = cal.get(Calendar.MONTH);
                 int dia = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        CadastroDataNascimentoActivity.this,
+                DatePickerDialog dialog = new DatePickerDialog(                        CadastroDataNascimentoActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         datePikerDataDeNascimento, ano, mes, dia);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -124,10 +125,19 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
 
                 try {
                     Calendar cal = Calendar.getInstance();
-                    System.out.println("Teste captura do ano: variável ano: " +year);
-                    System.out.println("Texte captuira de ano: variável cal: "+ cal.get(Calendar.YEAR) );
+                    System.out.println("Teste captura do ano: variável ano: " + year);
+                    System.out.println("Texte captuira de ano: variável cal: " + cal.get(Calendar.YEAR));
 
 
+
+                        editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
+                        cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
+                        buttonAvancar.setEnabled(true);
+                        buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                        buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
+
+
+/*
                     //verfica se o ano é maior que o de hoje
                     if (year > cal.get(Calendar.YEAR)){
                         if (month<10){
@@ -139,13 +149,11 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                             buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
                             buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
                         }else {
-                            System.out.println("teste do primeri else: " +year);
                             editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
                             cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
-                            buttonAvancar.setEnabled(false);
-                            buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
-                            buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
-
+                            buttonAvancar.setEnabled(true);
+                            buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                            buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
                         }
                     } else {
 
@@ -160,9 +168,9 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                             }else {
                                 editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
                                 cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
-                                buttonAvancar.setEnabled(false);
-                                buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
-                                buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
+                                buttonAvancar.setEnabled(true);
+                                buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                                buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
                             }
                         } else {
 
@@ -179,9 +187,9 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
                                 }else {
                                     editTextDatePikerDataDeNascimento.setText(dayOfMonth + "/" + month + "/" + year);
                                     cadastroCliente.setDta_nascimento(dayOfMonth + "/" + month + "/" + year);
-                                    buttonAvancar.setEnabled(false);
-                                    buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
-                                    buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
+                                    buttonAvancar.setEnabled(true);
+                                    buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
+                                    buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
                                 }
                             } else {
 
@@ -198,8 +206,11 @@ public class CadastroDataNascimentoActivity extends AppCompatActivity {
 
                             }
                         }
+                        }
+                        */
 
-                    }
+
+
                 } catch (Exception e) {
                     Log.e("TESTES", "CadatroDataNascimento: Exception data de nacimento inválida'");
                     //Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
