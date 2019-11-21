@@ -132,7 +132,9 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
 
     public int getAvalicaoGarcom() {
-        return (int) ratingBarGarcom.getRating();
+        int rating = (int) ratingBarGarcom.getRating();
+        if (rating<1) return 1;
+        else return rating;
     }
 
 
@@ -143,7 +145,10 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
 
     public int getAvalicaoEstabelecimento() {
-        return (int) ratingBarEstabelecimento.getRating();
+        int rating = (int) ratingBarEstabelecimento.getRating();
+        if (rating<1) return 1;
+        else return rating;
+
     }
 
 
@@ -252,8 +257,9 @@ public class AvaliacaoActivity extends AppCompatActivity {
 
         //RatingBar
         ratingBarGarcom                     = (RatingBar) findViewById(R.id.ratingBar_avaliacao_garcom);
+        ratingBarGarcom.setStepSize(1);
         ratingBarEstabelecimento            = (RatingBar) findViewById(R.id.ratingBar_avaliacao_estabelecimento);
-
+        ratingBarEstabelecimento.setStepSize(1);
 
         //EditText
         editTextGarcomComentario            = (EditText) findViewById(R.id.editText_avaliacao_garcom);

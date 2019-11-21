@@ -5,6 +5,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -112,14 +113,9 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
         viewSnackbar = findViewById(R.id.explorarClienteActivityView);
 
-        textViewNome.setText(cliente.getNome());
-        textViewCpf.setText("CPF: " + String.valueOf(cliente.getCpf()));
-        textViewdataNascimento.setText("Data de nascimento: " + cliente.getDta_nascimento());
-        textViewEmail.setText("E-mail: " + cliente.getEmail());
-        textViewTelefone.setText("Telefone: " + String.valueOf(cliente.getTelefone()));
+setTexts();
 
-
-        usuario = new Usuario();
+//        usuario = new Usuario();
 
 
         bottomNavigationView = findViewById(R.id.bottomNavegation);
@@ -130,7 +126,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_explorar:
                         Intent a = new Intent(PerfilClienteActivity.this, ExplorarClienteActivity.class);
-                        a.putExtra(USUARIO, usuario);
+//                        a.putExtra(USUARIO, usuario);
                         a.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(a);
                     case R.id.menu_comanda:
@@ -145,7 +141,13 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
     }
 
-
+    private void setTexts(){
+        textViewNome.setText(cliente.getNome());
+        textViewCpf.setText("CPF: " + cliente.getCpf());
+        textViewdataNascimento.setText("Data de nascimento: " + cliente.getDta_nascimento());
+        textViewEmail.setText("E-mail: " + cliente.getEmail());
+        textViewTelefone.setText("Telefone: " + String.valueOf(cliente.getTelefone()));
+    }
 
 
 
@@ -197,8 +199,22 @@ public class PerfilClienteActivity extends AppCompatActivity {
     public void onClickEditarPerfil(View view){
         intentToEditarPerfil = new Intent(this, EditPerfilCliente.class);
         intentToEditarPerfil.putExtra(USUARIO, cliente);
-        startActivity(intentToEditarPerfil);
+        startActivityForResult(intentToEditarPerfil, 0);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == 1234){
+            cliente = (Usuario) data.getSerializableExtra("USUARIATUALIZADO");
+            setTexts();
+
+        }
+
+
+
     }
 
 

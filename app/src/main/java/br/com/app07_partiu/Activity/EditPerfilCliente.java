@@ -136,6 +136,8 @@ public class EditPerfilCliente extends AppCompatActivity {
 
     private String newDataNascimento;
 
+    private Usuario usuarioAtualizado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -411,7 +413,7 @@ public class EditPerfilCliente extends AppCompatActivity {
             return;
         }
         String ddd         = telefoneCompleto.substring(0,2);
-        String telefone    = telefoneCompleto.substring(2,11);
+        String telefone    = telefoneCompleto.substring(2);
 
 //        String ddd         = "";
 //        String telefone    = "";
@@ -472,12 +474,15 @@ public class EditPerfilCliente extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                       UsuarioNetwork.updateUsuario(Connection.URL, id, idEndereco, tipo, cpf, nome, dta_nascimento, email, ddd, telefone,
+                       usuarioAtualizado = UsuarioNetwork.updateUsuario(Connection.URL, id, idEndereco, tipo, cpf, nome, dta_nascimento, email, ddd, telefone,
                        genero, senha, logradouro, numero, complemento, bairro, cidade, uf, cep);
 
                         runOnUiThread(new Runnable() {
                                           @Override
                                           public void run() {
+                                              Intent intent = new Intent();
+                                              intent.putExtra("USUARIATUALIZADO", usuarioAtualizado);
+                                              setResult(1234, intent);
                                               finish();
                                           }
                                       }
