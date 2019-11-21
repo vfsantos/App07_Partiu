@@ -470,6 +470,7 @@
     <string name="textview_perfileditar_hint_cep">00000-000</string>
     <string name="textview_perfileditar_hint_cpf">000.000.000-00</string>
     <string name="textview_perfileditar_hint_telefone">(00)00000-0000</string>
+    <string name="button_editarperfil_salvar">Salvar</string>
 
 
 </resources>

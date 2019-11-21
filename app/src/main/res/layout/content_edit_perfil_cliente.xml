@@ -391,7 +391,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edittext_branco"
-                    android:ems="10"
                     android:hint="@string/textview_perfileditar_hint_cpf"
                     android:inputType="number"
                     android:textAllCaps="false"
@@ -435,9 +434,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_branco"
-                    android:ems="10"
                     android:hint="@string/textview_perfileditar_hint_telefone"
-                    android:inputType="phone"
+                    android:inputType="text"
                     android:textAllCaps="false"
                     android:textColor="@color/preto"
                     android:textSize="14sp"
@@ -503,7 +501,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edittext_branco"
-                    android:ems="10"
                     android:hint="@string/textview_perfileditar_hint_cep"
                     android:inputType="number"
                     android:textAllCaps="false"
@@ -548,7 +545,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edittext_branco"
-                    android:ems="10"
                     android:hint="@string/textview_perfileditar_hint_logradouro"
                     android:inputType="text"
                     android:textAllCaps="false"
@@ -593,7 +589,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edittext_branco"
-                    android:ems="10"
                     android:hint="@string/textview_perfileditar_hint_numero"
                     android:inputType="text"
                     android:textAllCaps="false"
@@ -785,41 +780,37 @@
         </android.support.constraint.ConstraintLayout>
 
 
-
-
-
-
-
-
-        <!--
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout_editarperfil_salvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="652dp">
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarPerfil_contentendereco">
 
 
             <Button
                 android:id="@+id/button_editarPerfil_salvar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="Button"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/button_degrade_rosa_amarelo"
+                android:onClick="onClickUpdateDados"
+                android:text="@string/button_editarperfil_salvar"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/branco_100"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_cadastrarendereco_municipio"/>
 
         </android.support.constraint.ConstraintLayout>
-
--->
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
-
-
-
-
-

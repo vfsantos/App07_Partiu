@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +19,23 @@ import android.widget.TextView;
 
 import com.bumptech.glide.util.ByteBufferUtil;
 
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+
 import br.com.app07_partiu.Activity.CadastroActivity.CadastroEmailActivity;
+import br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity;
 import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.Usuario;
+import br.com.app07_partiu.Network.ComandaNetwork;
+import br.com.app07_partiu.Network.Connection;
+import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
+
+import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.EXPLORARCOMANDA;
+import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.EXPLORARUSUARIO;
 
 public class EditPerfilCliente extends AppCompatActivity {
 
@@ -109,12 +121,18 @@ public class EditPerfilCliente extends AppCompatActivity {
     private Endereco endereco;
 
 
+    //Snackbar
+    private View viewSnackbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_perfil_cliente);
         implementarComponentes();
         context = this;
+
+        viewSnackbar = findViewById(R.id.edit_perfil_activity);
 
         intentPerfilCliente = getIntent();
         usuario = new Usuario();
@@ -150,10 +168,49 @@ public class EditPerfilCliente extends AppCompatActivity {
         editTextNome.setText(usuario.getNome());
         editTextEmail.setText(usuario.getEmail());
         editTextSenha.setText(usuario.getSenha());
-        //genero
+        if(usuario.getGenero()=='F'){
+            buttonSelectMasculino.setPressed(false);
+            buttonSelectMasculino.setEnabled(true);
+            buttonSelectFeminino.setPressed(true);
+            buttonSelectFeminino.setEnabled(true);
+            buttonSelectNaoBinario.setPressed(false);
+            buttonSelectNaoBinario.setEnabled(true);
+            buttonSelectMasculino.setBackground(getDrawable(R.drawable.button_select_branco_outline));
+            buttonSelectFeminino.setBackground(getDrawable(R.drawable.button_select_branco_solid));
+            buttonSelectNaoBinario.setBackground(getDrawable(R.drawable.button_select_branco_outline));
+            buttonSelectMasculino.setTextColor(getResources().getColor(R.color.branco_100));
+            buttonSelectFeminino.setTextColor(getResources().getColor(R.color.rosa_100));
+            buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.branco_100));
+        } else if (usuario.getGenero()=='M'){
+            buttonSelectMasculino.setPressed(true);
+            buttonSelectMasculino.setEnabled(true);
+            buttonSelectFeminino.setPressed(false);
+            buttonSelectFeminino.setEnabled(true);
+            buttonSelectNaoBinario.setPressed(false);
+            buttonSelectNaoBinario.setEnabled(true);
+            buttonSelectMasculino.setBackground(getDrawable(R.drawable.button_select_branco_solid));
+            buttonSelectFeminino.setBackground(getDrawable(R.drawable.button_select_branco_outline));
+            buttonSelectNaoBinario.setBackground(getDrawable(R.drawable.button_select_branco_outline));
+            buttonSelectMasculino.setTextColor(getResources().getColor(R.color.rosa_100));
+            buttonSelectFeminino.setTextColor(getResources().getColor(R.color.branco_100));
+            buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.branco_100));
+        } else {
+            buttonSelectMasculino.setPressed(false);
+            buttonSelectMasculino.setEnabled(true);
+            buttonSelectFeminino.setPressed(false);
+            buttonSelectFeminino.setEnabled(true);
+            buttonSelectNaoBinario.setPressed(true);
+            buttonSelectNaoBinario.setEnabled(true);
+            buttonSelectMasculino.setBackground(getDrawable(R.drawable.button_select_branco_outline));
+            buttonSelectFeminino.setBackground(getDrawable(R.drawable.button_select_branco_outline));
+            buttonSelectNaoBinario.setBackground(getDrawable(R.drawable.button_select_branco_solid));
+            buttonSelectMasculino.setTextColor(getResources().getColor(R.color.branco_100));
+            buttonSelectFeminino.setTextColor(getResources().getColor(R.color.branco_100));
+            buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.rosa_100));
+        }
         editTextDataNascimento.setText(usuario.getDta_nascimento());
         editTextCPF.setText(usuario.getCpf());
-        editTextTelefone.setText(usuario.getTelefone());
+       // editTextTelefone.setText(usuario.getDdd()+usuario.getTelefone());
 
         //dados do endereço
         editTextLogradrouro.setText(usuario.getEndereco().getLogradouro());
@@ -187,7 +244,8 @@ public class EditPerfilCliente extends AppCompatActivity {
             buttonSelectMasculino.setTextColor(getResources().getColor(R.color.rosa_100));
             buttonSelectFeminino.setTextColor(getResources().getColor(R.color.branco_100));
             buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.branco_100));
-            //cadastroCliente.setGenero('m');
+
+            usuario.setGenero('m');
 
 
         } else if(generoMasc == false && generoFemi == true && generoNaoB == false) {
@@ -203,7 +261,7 @@ public class EditPerfilCliente extends AppCompatActivity {
             buttonSelectMasculino.setTextColor(getResources().getColor(R.color.branco_100));
             buttonSelectFeminino.setTextColor(getResources().getColor(R.color.rosa_100));
             buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.branco_100));
-           // cadastroCliente.setGenero('f');
+            usuario.setGenero('f');
 
         } else if(generoMasc == false && generoFemi == false && generoNaoB == true){
             buttonSelectMasculino.setPressed(false);
@@ -218,7 +276,7 @@ public class EditPerfilCliente extends AppCompatActivity {
             buttonSelectMasculino.setTextColor(getResources().getColor(R.color.branco_100));
             buttonSelectFeminino.setTextColor(getResources().getColor(R.color.branco_100));
             buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.rosa_100));
-           // cadastroCliente.setGenero('n');
+            usuario.setGenero('n');
         } else {
 
         }
@@ -266,6 +324,82 @@ public class EditPerfilCliente extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public void onClickUpdateDados (View view) {
+
+        String id = String.valueOf(usuario.getId());
+        String idEndereco = String.valueOf(usuario.getEndereco().getId());
+        String tipo = usuario.getTipo();
+        String cpf = editTextCPF.getText().toString();
+        String nome = editTextNome.getText().toString();
+        String dta_nascimento = editTextDataNascimento.getText().toString();
+        String email = editTextEmail.getText().toString();
+
+
+        String telefoneCompleto = editTextTelefone.getText().toString();
+        //String ddd         = telefoneCompleto.substring(0,2);
+        //String telefone    = telefoneCompleto.substring(2,11);
+
+        String ddd         = "";
+        String telefone    = "";
+
+
+
+        String genero = String.valueOf(usuario.getGenero());
+        String senha = editTextSenha.getText().toString();
+        String logradouro = editTextLogradrouro.getText().toString();
+        String numero = editTextNumero.getText().toString();
+        String complemento = editTextComplemento.getText().toString();
+        String bairro = editTextBairro.getText().toString();
+        String cidade = editTextCidade.getText().toString();
+        String estado = editTextEstado.getText().toString();
+        String cep = editTextCEP.getText().toString();
+        String cnpj = "";
+        String status = usuario.getStatusPedido();
+        updateDados(id, idEndereco, tipo, cpf, nome, dta_nascimento, email, ddd, telefone, genero, senha, logradouro, numero,
+        complemento, bairro, cidade, estado, cep, cnpj,status);
+
+    }
+
+
+    public void updateDados(final String id,final String idEndereco,final String tipo,final String cpf,final String nome,final String dta_nascimento,final String email,final String ddd, final
+                            String telefone,final String genero,final String senha,final String logradouro,final String numero,final String complemento, final
+                            String bairro, final String cidade,final String uf,final String cep,final String cnpj,final String status) {
+
+        if (Connection.isConnected(this, viewSnackbar)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                       UsuarioNetwork.updateUsuario(Connection.URL, id, idEndereco, tipo, cpf, nome, dta_nascimento, email, ddd, telefone,
+                       genero, senha, logradouro, numero, complemento, bairro, cidade, uf, cep, cnpj, status);
+
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              finish();
+                                          }
+                                      }
+                        );
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("TESTES", "ExplorarCliente: IOException visualizarHistoricoComanda");
+                        Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Thread.sleep(1000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+    }
 
     private void implementarComponentes() {
 
