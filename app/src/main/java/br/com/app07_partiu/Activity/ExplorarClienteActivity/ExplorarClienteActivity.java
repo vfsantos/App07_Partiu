@@ -268,7 +268,6 @@ public class ExplorarClienteActivity extends AppCompatActivity {
                                       }
                         );
 
-
                     } catch (IOException e) {
                         e.printStackTrace();
                         Log.d("TESTES", "ExplorarCliente: IOException visualizarHistoricoComanda");
@@ -285,7 +284,6 @@ public class ExplorarClienteActivity extends AppCompatActivity {
         }
 
     }
-
 
     private void popularRecomendacoes() {
         //RecomendacaoDiaSemanda

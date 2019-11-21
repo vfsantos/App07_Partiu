@@ -2,6 +2,7 @@ package br.com.app07_partiu.Network;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -94,7 +95,7 @@ public class UsuarioNetwork {
 
         Response response = client.newCall(request).execute();
         String resultado = response.body().string();
-        JSONObject objeto = new JSONObject(resultado);
+        JSONObject objeto = new JSONArray(resultado).getJSONObject(0);
 
         Usuario usuario = new Usuario();
         Endereco endereco = new Endereco();
