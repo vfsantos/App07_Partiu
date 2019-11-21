@@ -32,6 +32,7 @@ import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.RestauranteNetwork;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.MaskEditUtil;
 import br.com.app07_partiu.Util.Util;
 
 public class CadastroCPFActivity extends AppCompatActivity {
@@ -79,6 +80,9 @@ public class CadastroCPFActivity extends AppCompatActivity {
     private boolean telefonePreenchido;
     private boolean cpfPreenchido;
 
+    //Snackbar
+    private View viewSnackbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,10 @@ public class CadastroCPFActivity extends AppCompatActivity {
 
         editTextCPF.addTextChangedListener(cpfTextWatcher );
         editTextTelefone.addTextChangedListener(tefelefoneTextWatcher);
+
+        viewSnackbar = findViewById(R.id.cadastroCpfTelActivity);
+
+
 
         intentCadastroCliente = getIntent();
         cadastroCliente = new Usuario();
@@ -171,14 +179,23 @@ public class CadastroCPFActivity extends AppCompatActivity {
     }
 
     public void onClickToNome(View view) {
-        String telefoneCompleto = editTextTelefone.getText().toString();
-        String telefoneInput    = telefoneCompleto.substring(2,11);
+        String telefoneCompleto = editTextTelefone.getText().toString().replace("(", "").replace("-","").replace(")","");
+        if (telefoneCompleto.matches("") || telefoneCompleto.length()<10 || telefoneCompleto.length()>11 ) {
+            Util.showSnackbar(viewSnackbar, "Erro no campo TELEFONE!");
+            return;
+        }
+        String telefoneInput    = telefoneCompleto.substring(2);
         String dddInput         = telefoneCompleto.substring(0,2);
 
         System.out.println(">-------- telefonecompleto: " + editTextTelefone.getText().toString());
         System.out.println(">-------- ddd: " + dddInput);
         System.out.println(">-------- telefone: " + telefoneInput);
-        cadastroCliente.setCpf(editTextCPF.getText().toString());
+        String  cpf = editTextCPF.getText().toString().replace(".", "").replace("-","");
+        if (!Util.isCPF(cpf)){
+            Util.showSnackbar(viewSnackbar, "O CPF inserido não é valido!");
+            return;
+        }
+        cadastroCliente.setCpf(cpf);
         Log.i("XXXXXX", cadastroCliente.getCpf());
         cadastroCliente.setDdd(Integer.parseInt(dddInput));
         cadastroCliente.setTelefone(Integer.parseInt(telefoneInput));
@@ -225,7 +242,11 @@ public class CadastroCPFActivity extends AppCompatActivity {
 
         //EditText
         editTextCPF = (EditText) findViewById(R.id.edittext_cadastrarcpf_cpf);
+
+        editTextCPF.addTextChangedListener(MaskEditUtil.mask(editTextCPF, MaskEditUtil.FORMAT_CPF));
         editTextTelefone = (EditText) findViewById(R.id.edittext_cadastrarcpf_telefone);
+
+        editTextTelefone.addTextChangedListener(MaskEditUtil.mask(editTextTelefone, MaskEditUtil.FORMAT_FONE));
 
 
         //Button

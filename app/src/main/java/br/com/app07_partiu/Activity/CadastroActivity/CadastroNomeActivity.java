@@ -68,6 +68,7 @@ public class CadastroNomeActivity extends AppCompatActivity {
     Endereco enderecoCliente;
     Usuario usuario;
 
+    private View viewSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,8 @@ public class CadastroNomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_nome);
 
         implementarComponentes();
+
+        viewSnackbar = findViewById(R.id.activityCadastrarNome);
 
         editTextNome.addTextChangedListener(nomeTextWatcher);
 
@@ -134,6 +137,10 @@ public class CadastroNomeActivity extends AppCompatActivity {
 
     public void onClickCriarConta(View view) {
         String nomeInput = editTextNome.getText().toString();
+        if (nomeInput.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo LOGRADOURO é obrigatório!");
+            return;
+        }
         cadastroCliente.setNome(nomeInput);
         cadastroCliente.setTipo("cliente");
         Log.d("TESTI", "clickcriarcont");

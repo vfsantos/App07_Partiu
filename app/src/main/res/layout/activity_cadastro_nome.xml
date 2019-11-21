@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.CadastroActivity.CadastroNomeActivity"
-    android:background="@color/preto">
+    android:background="@color/preto"
+    android:id="@+id/activityCadastrarNome">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

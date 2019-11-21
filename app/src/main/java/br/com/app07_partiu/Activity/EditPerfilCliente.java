@@ -1,8 +1,11 @@
 package br.com.app07_partiu.Activity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +27,10 @@ import org.json.JSONException;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
+import br.com.app07_partiu.Activity.CadastroActivity.CadastroDataNascimentoActivity;
 import br.com.app07_partiu.Activity.CadastroActivity.CadastroEmailActivity;
 import br.com.app07_partiu.Activity.HistoricoComandaActivity.HistoricoComandasActivity;
 import br.com.app07_partiu.Model.Endereco;
@@ -32,6 +39,7 @@ import br.com.app07_partiu.Network.ComandaNetwork;
 import br.com.app07_partiu.Network.Connection;
 import br.com.app07_partiu.Network.UsuarioNetwork;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.MaskEditUtil;
 import br.com.app07_partiu.Util.Util;
 
 import static br.com.app07_partiu.Activity.ExplorarClienteActivity.ExplorarClienteActivity.EXPLORARCOMANDA;
@@ -124,6 +132,9 @@ public class EditPerfilCliente extends AppCompatActivity {
     //Snackbar
     private View viewSnackbar;
 
+    private DatePickerDialog.OnDateSetListener datePikerDataDeNascimento;
+
+    private String newDataNascimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +144,8 @@ public class EditPerfilCliente extends AppCompatActivity {
         context = this;
 
         viewSnackbar = findViewById(R.id.edit_perfil_activity);
+
+
 
         intentPerfilCliente = getIntent();
         usuario = new Usuario();
@@ -151,7 +164,6 @@ public class EditPerfilCliente extends AppCompatActivity {
 
         System.out.println("DADOS DO ENDEREÇO ---> "+
                 "\n "+usuario.getEndereco().getCep()+
-                "\n "+usuario.getEndereco().getCep()+
                 "\n "+usuario.getEndereco().getLogradouro()+
                 "\n "+usuario.getEndereco().getNumero()+
                 "\n "+usuario.getEndereco().getComplemento()+
@@ -160,6 +172,46 @@ public class EditPerfilCliente extends AppCompatActivity {
                 "\n "+usuario.getEndereco().getUf());
 
         retornaDadosNaTelas(usuario);
+
+        editTextDataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int ano = cal.get(Calendar.YEAR);
+                int mes = cal.get(Calendar.MONTH);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(context,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        datePikerDataDeNascimento, ano, mes, dia);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        datePikerDataDeNascimento = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+
+                try {
+                    Calendar cal = Calendar.getInstance();
+
+                    editTextDataNascimento.setText(dayOfMonth + "/" + month + "/" + year);
+                    newDataNascimento= (dayOfMonth + "/" + month + "/" + year);
+
+                } catch (Exception e) {
+                    Log.e("TESTES", "CadatroDataNascimento: Exception data de nacimento inválida'");
+                    //Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        };
+
     }
 
 
@@ -209,6 +261,7 @@ public class EditPerfilCliente extends AppCompatActivity {
             buttonSelectNaoBinario.setTextColor(getResources().getColor(R.color.rosa_100));
         }
         editTextDataNascimento.setText(usuario.getDta_nascimento());
+        newDataNascimento = usuario.getDta_nascimento();
         editTextCPF.setText(usuario.getCpf());
         Log.d("TESTE", usuario.getDdd()+""+usuario.getTelefone());
         editTextTelefone.setText(usuario.getDdd()+""+usuario.getTelefone());
@@ -291,11 +344,9 @@ public class EditPerfilCliente extends AppCompatActivity {
     public void onClickSelectMasculinoEditarPerfil(View view) {
         selectGenero(true, false, false);
     }
-
     public void onClickSelectFemininoEditarPerfil(View view) {
         selectGenero(false, true, false);
     }
-
     public void onClickSelectNaoBinarioEditarPerfil(View view) {
         selectGenero(false, false, true);
     }
@@ -335,13 +386,30 @@ public class EditPerfilCliente extends AppCompatActivity {
         String id = String.valueOf(usuario.getId());
         String idEndereco = String.valueOf(usuario.getEndereco().getId());
         String tipo = usuario.getTipo();
-        String cpf = editTextCPF.getText().toString();
+        String cpf = editTextCPF.getText().toString().replace(".", "").replace("-","");
+        if (!Util.isCPF(cpf)){
+            Util.showSnackbar(viewSnackbar, "O CPF inserido não é valido!");
+            return;
+        }
         String nome = editTextNome.getText().toString();
-        String dta_nascimento = editTextDataNascimento.getText().toString();
+
+        if (nome.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo NOME é obrigatório!");
+            return;
+        }
+        String dta_nascimento = newDataNascimento;
         String email = editTextEmail.getText().toString();
+        if (email.matches("") || !email.contains("@")) {
+            Util.showSnackbar(viewSnackbar, "Erro no campo EMAIL!");
+            return;
+        }
 
 
-        String telefoneCompleto = editTextTelefone.getText().toString();
+        String telefoneCompleto = editTextTelefone.getText().toString().replace("(", "").replace("-","").replace(")","");
+        if (telefoneCompleto.matches("") || telefoneCompleto.length()<10 || telefoneCompleto.length()>11 ) {
+            Util.showSnackbar(viewSnackbar, "Erro no campo TELEFONE!");
+            return;
+        }
         String ddd         = telefoneCompleto.substring(0,2);
         String telefone    = telefoneCompleto.substring(2,11);
 
@@ -352,24 +420,52 @@ public class EditPerfilCliente extends AppCompatActivity {
 
         String genero = String.valueOf(usuario.getGenero());
         String senha = editTextSenha.getText().toString();
+        if (senha.length()<8) {
+            Util.showSnackbar(viewSnackbar, "A SENHA deve conter no mínimo 8 caracteres!");
+            return;
+        }
         String logradouro = editTextLogradrouro.getText().toString();
+        if (logradouro.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo LOGRADOURO é obrigatório!");
+            return;
+        }
         String numero = editTextNumero.getText().toString();
+        if (numero.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo NÚMERO é obrigatório!");
+            return;
+        }
         String complemento = editTextComplemento.getText().toString();
+
         String bairro = editTextBairro.getText().toString();
+        if (bairro.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo BAIRRO é obrigatório!");
+            return;
+        }
         String cidade = editTextCidade.getText().toString();
+        if (cidade.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo CIDADE é obrigatório!");
+            return;
+        }
         String estado = editTextEstado.getText().toString();
-        String cep = editTextCEP.getText().toString();
-        String cnpj = "";
-        String status = usuario.getStatusPedido();
+        if (estado.length()!=2) {
+            Util.showSnackbar(viewSnackbar, "O campo ESTADO é obrigatório e deve ser uma sigla (ex: SP)!");
+            return;
+        }
+        String cep = editTextCEP.getText().toString().replace(".", "").replace("-","");
+        if (cep.length()!=8) {
+            Util.showSnackbar(viewSnackbar, "O campo CEP é obrigatório e deve possuir 8 digitos!");
+            return;
+        }
+
         updateDados(id, idEndereco, tipo, cpf, nome, dta_nascimento, email, ddd, telefone, genero, senha, logradouro, numero,
-        complemento, bairro, cidade, estado, cep, cnpj,status);
+        complemento, bairro, cidade, estado, cep);
 
     }
 
 
     public void updateDados(final String id,final String idEndereco,final String tipo,final String cpf,final String nome,final String dta_nascimento,final String email,final String ddd, final
                             String telefone,final String genero,final String senha,final String logradouro,final String numero,final String complemento, final
-                            String bairro, final String cidade,final String uf,final String cep,final String cnpj,final String status) {
+                            String bairro, final String cidade,final String uf,final String cep) {
 
         if (Connection.isConnected(this, viewSnackbar)) {
             new Thread(new Runnable() {
@@ -377,7 +473,7 @@ public class EditPerfilCliente extends AppCompatActivity {
                 public void run() {
                     try {
                        UsuarioNetwork.updateUsuario(Connection.URL, id, idEndereco, tipo, cpf, nome, dta_nascimento, email, ddd, telefone,
-                       genero, senha, logradouro, numero, complemento, bairro, cidade, uf, cep, cnpj, status);
+                       genero, senha, logradouro, numero, complemento, bairro, cidade, uf, cep);
 
                         runOnUiThread(new Runnable() {
                                           @Override
@@ -464,12 +560,16 @@ public class EditPerfilCliente extends AppCompatActivity {
         editTextSenha                   = (EditText) findViewById(R.id.editText_editPerfil_senha);
         editTextEmail                   = (EditText) findViewById(R.id.editText_editPerfil_email);
         editTextTelefone                = (EditText) findViewById(R.id.editText_editPerfil_telefone);
+        editTextTelefone.addTextChangedListener(MaskEditUtil.mask(editTextTelefone, MaskEditUtil.FORMAT_FONE));
+
         editTextCPF                     = (EditText) findViewById(R.id.editText_editPerfil_cpf);
+        editTextCPF.addTextChangedListener(MaskEditUtil.mask(editTextCPF, MaskEditUtil.FORMAT_CPF));
         editTextDataNascimento          = (EditText) findViewById(R.id.edittext_editarperfil_datadenascimento);
 
 
         //EditText contentendereco
         editTextCEP                     = (EditText) findViewById(R.id.editText_editPerfil_cep);
+        editTextCEP.addTextChangedListener(MaskEditUtil.mask(editTextCEP, MaskEditUtil.FORMAT_CEP));
         editTextLogradrouro             = (EditText) findViewById(R.id.editText_editPerfil_logradrouro);
         editTextNumero                  = (EditText) findViewById(R.id.editText_editPerfil_numero);
         editTextComplemento             = (EditText) findViewById(R.id.editText_editPerfil_complemento);

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.Util;
 
 public class CadastroEmailActivity extends AppCompatActivity {
 
@@ -63,6 +64,9 @@ public class CadastroEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_email);
         implementarComponentes();
+        context = this;
+
+        viewSnackbar = findViewById(R.id.cadastroEmailActivity);
 
         editTextEmail.addTextChangedListener(emailTextWatcher);
         editTextEmail.setText("victoor@gmail.com");
@@ -86,6 +90,7 @@ public class CadastroEmailActivity extends AppCompatActivity {
                 buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
             } else{
                 buttonAvancar.setEnabled(false);
+                buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
                 buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
 
             }
@@ -107,6 +112,10 @@ public class CadastroEmailActivity extends AppCompatActivity {
     public void onClickAvancarToCadastroSenha(View view) {
         cadastroCliente = new Usuario();
         String emailInput = editTextEmail.getText().toString();
+        if (emailInput.matches("") || !emailInput.contains("@")){
+            Util.showSnackbar(viewSnackbar, R.string.snackbar_erro_backend);
+            return;
+        }
         cadastroCliente.setEmail(emailInput);
         cadastroCliente.setTipo("cliente");
         intentToCadastroSenha = new Intent(CadastroEmailActivity.this, CadastroSenhaActivity.class);

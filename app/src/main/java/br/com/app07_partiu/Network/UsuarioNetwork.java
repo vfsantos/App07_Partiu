@@ -162,11 +162,11 @@ public class UsuarioNetwork {
 
     public static void updateUsuario(String url, String id, String idEndereco, String tipo, String cpf, String nome, String dta_nascimento, String email, String ddd,
                               String telefone, String genero, String senha, String logradouro, String numero, String complemento,
-                              String bairro, String cidade, String uf, String cep, String cnpj, String status) throws IOException, JSONException {
+                              String bairro, String cidade, String uf, String cep) throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
         url += "/updateUsuario?id=" + id + "&idEndereco=" + idEndereco + "&tipo=" + tipo + "&cpf=" + cpf + "&nome=" + nome + "&dta_nascimento=" + dta_nascimento +
                 "&email=" + email + "&ddd=" + ddd + "&telefone=" + telefone + "&genero=" + genero + "&senha=" + senha + "&logradouro=" + logradouro + "&numero=" + numero +
-                "&complemento=" + complemento + "&bairro=" + bairro + "&cidade=" + cidade + "&uf=" + uf + "&cep=" + cep + "&cnpj=" + cnpj + "&status=" + status;
+                "&complemento=" + complemento + "&bairro=" + bairro + "&cidade=" + cidade + "&uf=" + uf + "&cep=" + cep;
         Log.d("TESTI",url);
         Request request = new Request.Builder()
                 .url(url)

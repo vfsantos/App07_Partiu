@@ -64,6 +64,9 @@ public class CadastroGeneroActivity extends AppCompatActivity {
                 "\n "+cadastroCliente.getDta_nascimento());
 
         cadastroCliente.setGenero('m');
+
+        buttonAvancar.setEnabled(false);
+
     }
 
     public void selectGenero(boolean generoMasc, boolean generoFemi, boolean generoNaoB) {
@@ -119,18 +122,21 @@ public class CadastroGeneroActivity extends AppCompatActivity {
 
     public void onClickSelectMasculino(View view) {
         selectGenero(true, false, false);
+        buttonAvancar.setEnabled(true);
         buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
         buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
     }
 
     public void onClickSelectFeminino(View view) {
         selectGenero(false, true, false);
+        buttonAvancar.setEnabled(true);
         buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
         buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
     }
 
     public void onClickSelectNaoBinario(View view) {
       selectGenero(false, false, true);
+        buttonAvancar.setEnabled(true);
         buttonAvancar.setBackground(getDrawable(R.drawable.button_degrade_rosa_amarelo));
         buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
     }

@@ -65,6 +65,7 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         editTextSenha.setText("123456789");
         editTextSenha.addTextChangedListener(senhaTextWatcher);
         buttonAvancar.setEnabled(false);
+        buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
         buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
 
 
@@ -93,6 +94,7 @@ public class CadastroSenhaActivity extends AppCompatActivity {
                 buttonAvancar.setTextColor(getResources().getColor(R.color.branco_100));
             } else {
                 buttonAvancar.setEnabled(false);
+                buttonAvancar.setBackground(getDrawable(R.drawable.button_branco_solid));
                 buttonAvancar.setTextColor(getResources().getColor(R.color.cinza_100));
 
             }

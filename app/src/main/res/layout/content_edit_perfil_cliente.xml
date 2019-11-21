@@ -368,6 +368,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarPerfil_datanascimento">
@@ -381,6 +382,7 @@
                     android:textColor="@color/branco_100"
                     android:textSize="16sp"
                     android:textStyle="bold"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -397,6 +399,7 @@
                     android:textColor="@color/preto"
                     android:textSize="14sp"
                     android:textStyle="normal"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_cpf" />
@@ -435,11 +438,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_branco"
                     android:hint="@string/textview_perfileditar_hint_telefone"
-                    android:inputType="text"
                     android:textAllCaps="false"
                     android:textColor="@color/preto"
                     android:textSize="14sp"
                     android:textStyle="normal"
+                    android:inputType="number"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_telefone" />
@@ -479,6 +483,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_contentendereco">
@@ -502,11 +507,12 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edittext_branco"
                     android:hint="@string/textview_perfileditar_hint_cep"
-                    android:inputType="number"
                     android:textAllCaps="false"
                     android:textColor="@color/preto"
                     android:textSize="14sp"
                     android:textStyle="normal"
+                    android:inputType="number"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_cep" />
@@ -566,6 +572,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout_editarperfil_logradouro">
@@ -590,11 +597,12 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edittext_branco"
                     android:hint="@string/textview_perfileditar_hint_numero"
-                    android:inputType="text"
                     android:textAllCaps="false"
                     android:textColor="@color/preto"
                     android:textSize="14sp"
                     android:textStyle="normal"
+                    android:inputType="number"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_editarPerfil_numero" />
@@ -756,6 +764,7 @@
                     android:textColor="@color/branco_100"
                     android:textSize="16sp"
                     android:textStyle="bold"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

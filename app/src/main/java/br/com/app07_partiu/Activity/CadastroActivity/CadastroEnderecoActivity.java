@@ -17,6 +17,8 @@ import android.widget.TextView;
 import br.com.app07_partiu.Model.Endereco;
 import br.com.app07_partiu.Model.Usuario;
 import br.com.app07_partiu.R;
+import br.com.app07_partiu.Util.MaskEditUtil;
+import br.com.app07_partiu.Util.Util;
 
 public class CadastroEnderecoActivity extends AppCompatActivity {
 
@@ -76,6 +78,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     public Usuario cadastroCliente;
     public Endereco enderecoCliente;
 
+    private View viewSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_endereco);
 
         implementarComponentes();
+
+        viewSnackbar = findViewById(R.id.activityCadastrarEndereco);
 
         intentCadastroCliente = getIntent();
         cadastroCliente = new Usuario();
@@ -113,6 +118,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
         editTextEndereco.setText("Rua antonina");
         editTextMunicipio.setText("Guarulhos");
         editTextUF.setText("SP");
+        editTextNumero.setText("121");
 
 
     }
@@ -202,13 +208,37 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     }
 
     public void onClickAvancarToCadastroCPF(View view) {
-        String cepInput         = editTextCEP.getText().toString();
+        String cepInput         = editTextCEP.getText().toString().replace(".", "").replace("-","");
+        if (cepInput.length()!=8) {
+            Util.showSnackbar(viewSnackbar, "O campo CEP é obrigatório e deve possuir 8 digitos!");
+            return;
+        }
         String enderecoInput    = editTextEndereco.getText().toString();
+        if (enderecoInput.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo LOGRADOURO é obrigatório!");
+            return;
+        }
         String numeroInput      = editTextNumero.getText().toString();
+        if (numeroInput.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo NÚMERO é obrigatório!");
+            return;
+        }
         String complementoInput = editTextComplemento.getText().toString();
         String bairroInput      = editTextBairro.getText().toString();
+        if (bairroInput.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo NÚMERO é obrigatório!");
+            return;
+        }
         String cidadeInput      = editTextMunicipio.getText().toString();
+        if (cidadeInput.matches("")) {
+            Util.showSnackbar(viewSnackbar, "O campo NÚMERO é obrigatório!");
+            return;
+        }
         String ufInput          = editTextUF.getText().toString();
+        if (ufInput.length()!=2) {
+            Util.showSnackbar(viewSnackbar, "O campo ESTADO é obrigatório e deve ser uma sigla (ex: SP)!");
+            return;
+        }
         enderecoCliente.setCep(cepInput);
         enderecoCliente.setLogradouro(enderecoInput);
         enderecoCliente.setNumero(numeroInput);
@@ -260,6 +290,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
         //EditText
         editTextCEP                 = (EditText) findViewById(R.id.edittext_cadastrarendereco_cep);
+
+        editTextCEP.addTextChangedListener(MaskEditUtil.mask(editTextCEP, MaskEditUtil.FORMAT_CEP));
         editTextEndereco            = (EditText) findViewById(R.id.edittext_cadastrarendereco_endereco);
         editTextNumero              = (EditText) findViewById(R.id.edittext_cadastrarendereco_numero);
         editTextComplemento         = (EditText) findViewById(R.id.edittext_cadastrarendereco_complemento);

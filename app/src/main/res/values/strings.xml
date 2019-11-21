@@ -464,8 +464,8 @@
     <string name="textview_perfileditar_hint_email">Digite seu e-mail</string>
     <string name="textview_perfileditar_hint_senha">Digite seu senha</string>
 
-    <string name="textview_perfileditar_hint_logradouro">av. interlagos</string>
-    <string name="textview_perfileditar_hint_numero">000000</string>
+    <string name="textview_perfileditar_hint_logradouro">Av. Interlagos</string>
+    <string name="textview_perfileditar_hint_numero">000</string>
     <string name="textview_perfileditar_hint_complemento">Casa / Apto / etc...</string>
     <string name="textview_perfileditar_hint_cep">00000-000</string>
     <string name="textview_perfileditar_hint_cpf">000.000.000-00</string>
