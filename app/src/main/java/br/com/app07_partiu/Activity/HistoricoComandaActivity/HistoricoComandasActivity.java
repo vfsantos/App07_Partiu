@@ -210,7 +210,7 @@ public class HistoricoComandasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                listViewComandas.setEnabled(false);
+//                listViewComandas.setEnabled(false);
                 Comanda comandaCV = (Comanda) adapter.getItem(position);
                 int idComanda = comandaCV.getId();
                 Log.d("TESTES", "Carregando comanda de id: " + idComanda);
