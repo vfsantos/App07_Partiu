@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -163,6 +167,7 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
 
             Util.comandaFechada(context);
             constraintLayoutMeuConsumo.setEnabled(false);
+            listViewItensComanda.setEnabled(false);
             constraintLayoutMeuConsumo.setBackground(getDrawable(R.color.cinza_100));
         }
 
@@ -352,6 +357,8 @@ public class ComandaMesaClienteActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                               @Override
                                               public void run() {
+
+
                                                   Intent intentFinalizarPedidos = new Intent(context, FinalizarPedidoClienteActivity.class);
                                                   intentFinalizarPedidos.putExtra(CLIENTE_LOGADO, clienteLogado);
                                                   intentFinalizarPedidos.putExtra(COMANDA, comanda);

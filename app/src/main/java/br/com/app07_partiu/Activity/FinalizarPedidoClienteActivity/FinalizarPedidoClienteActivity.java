@@ -100,7 +100,6 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
         comanda       = (Comanda) intent.getSerializableExtra(ComandaMesaClienteActivity.COMANDA);
         itens         = (Item[]) intent.getSerializableExtra(ComandaMesaClienteActivity.ITENS_FINALIZAR);
 
-
         textViewNomeRestaurante.setText("Comanda " + comanda.getCodigoComanda());
         textViewEnderecoRestaurante.setText("Valor total R$ " + doubleToReal(calculaMeuConsumo(itens)));
 
@@ -116,7 +115,7 @@ public class FinalizarPedidoClienteActivity extends AppCompatActivity {
 
     public double calculaMeuConsumo(Item[] itens) {
         for(int cont = 0; cont <= itens.length-1; cont++) {
-            valorMeuConsumo = valorMeuConsumo + itens[cont].getValor();
+            valorMeuConsumo = valorMeuConsumo + (itens[cont].getValor()*itens[cont].getPorcPaga()/100);
             System.out.println("item" + cont + ":" + valorMeuConsumo);
         }
         System.out.println("Meu consumo: " + valorMeuConsumo);
