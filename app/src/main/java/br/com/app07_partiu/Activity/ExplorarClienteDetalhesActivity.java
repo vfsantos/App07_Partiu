@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +35,7 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
     private TextView textViewRecomendacaoDetalheDetalheValor;
     private TextView textViewRecomendacaoDetalheEndereco;
     private TextView textViewRecomendacaoDetalheEnderecoValor;
+    private RatingBar ratingBarRecomendacaoDetalhe;
 
 
     //ImageView
@@ -73,6 +75,7 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         textViewRecomendacaoDetalheNomeRestaurante.setText(restaurante.getNomeFantasia());
         textViewRecomendacaoDetalheDetalheValor.setText(restaurante.getDescricao());
         textViewRecomendacaoDetalheEnderecoValor.setText(restaurante.getEndereco().toString());
+        ratingBarRecomendacaoDetalhe.setRating((float) restaurante.getAvaliacao());
 
         Glide.with(this).load(restaurante.getLogo()).into(imageViewRecomendacaoDetalheLogo);
     }
@@ -122,6 +125,8 @@ public class ExplorarClienteDetalhesActivity extends AppCompatActivity {
         textViewRecomendacaoDetalheDetalheValor              = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_detalheValor);
         textViewRecomendacaoDetalheEndereco                  = (TextView) findViewById(R.id.textView_recomendcaoDetalhe_endereco);
         textViewRecomendacaoDetalheEnderecoValor             = (TextView) findViewById(R.id.textView_recomendacaoDetalhe_enderecoValor);
+
+        ratingBarRecomendacaoDetalhe                         = (RatingBar) findViewById(R.id.ratingBar_recomendacaoDetalhe);
 
 
     }

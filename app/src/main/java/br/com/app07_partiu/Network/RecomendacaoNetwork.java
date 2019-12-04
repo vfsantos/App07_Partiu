@@ -38,6 +38,7 @@ public class RecomendacaoNetwork {
 //        url += "/recomendacao/getRecomendacaoEspecialidadeUsuario?idUsuario="+idUsuario;
         return getRestaurantes(url);
     }
+
     public static Restaurante[] getRecomendacaoRestauranteAvaliado(String url) throws IOException {
         url += "/recomendacao/getRecomendacaoRestauranteAvaliado";
         return getRestaurantes(url);
