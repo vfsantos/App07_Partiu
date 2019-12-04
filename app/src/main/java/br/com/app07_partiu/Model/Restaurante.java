@@ -16,7 +16,7 @@ public class Restaurante implements Serializable {
     private String hrEntrada;
     private String hrFim;
     private String especialidade;
-    private String avaliacao;
+    private double avaliacao;
     private Endereco endereco;
 
     public String getEspecialidade() {
@@ -98,11 +98,11 @@ public class Restaurante implements Serializable {
         this.status = status;
     }
 
-    public String getAvaliacao() {
+    public double getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(String avaliacao) {
+    public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
 

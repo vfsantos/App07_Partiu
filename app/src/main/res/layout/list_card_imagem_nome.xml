@@ -3,13 +3,15 @@
     android:layout_width="148dp"
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:adjustViewBounds="true">
+    android:adjustViewBounds="true"
+    >
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
+        android:paddingBottom="8dp"
         >
 
         <ImageView
@@ -18,17 +20,37 @@
             android:id="@+id/imageView_logoRestaurante"
             android:background="@drawable/img_recomendacao" />
 
+        <RatingBar
+            android:id="@+id/ratingBar_avaliacao_explorar"
+            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView_logoRestaurante"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:maxHeight="50dp"
+            android:progressTint="@color/amarelo_100"
+            android:progressBackgroundTint="@color/cinza_60"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:layout_centerHorizontal="true"
+            android:isIndicator="true" />
+
+
+
         <TextView
             android:id="@+id/textView_nomeRestaurante"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView_logoRestaurante"
+            android:layout_below="@id/ratingBar_avaliacao_explorar"
             android:paddingTop="8dp"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/branco_100"
             android:textSize="14sp"/>
+
+
 
 
     </RelativeLayout>

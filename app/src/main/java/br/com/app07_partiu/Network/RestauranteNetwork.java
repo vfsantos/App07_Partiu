@@ -84,7 +84,7 @@ public class RestauranteNetwork {
                 restaurante.setCnpj(item.getString("cnpj"));
                 restaurante.setNomeFantasia(item.getString("nomeFantasia"));
                 restaurante.setLogo(null);
-                restaurante.setAvaliacao(item.getString("avaliacao"));
+                restaurante.setAvaliacao(item.getDouble("avaliacao"));
                 restaurante.setDescricao(item.getString("descricao"));
                 endereco.setId(item.getJSONObject("endereco").getInt("id"));
                 endereco.setLogradouro(item.getJSONObject("endereco").getString("logradouro"));

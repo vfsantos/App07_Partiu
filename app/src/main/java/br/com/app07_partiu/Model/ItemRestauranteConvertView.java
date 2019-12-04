@@ -15,7 +15,7 @@ public class ItemRestauranteConvertView implements Serializable {
     private String hrEntrada;
     private String hrFim;
     private String especialidade;
-    private String avaliacao;
+    private double avaliacao;
     private Endereco endereco;
 
     public String getNome() {
@@ -106,11 +106,11 @@ public class ItemRestauranteConvertView implements Serializable {
         this.especialidade = especialidade;
     }
 
-    public String getAvaliacao() {
+    public double getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(String avaliacao) {
+    public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
 

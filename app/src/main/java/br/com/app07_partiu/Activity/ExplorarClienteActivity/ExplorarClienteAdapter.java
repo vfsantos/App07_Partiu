@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
@@ -46,6 +47,8 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
     public void onBindViewHolder(final ExplorarClienteAdapter.MyViewHolder viewHolder, int i){
         viewHolder.textViewNomeRestaurante.setText(restauranteConvertViewsList.get(i).getNomeFantasia());
         String poster = restauranteConvertViewsList.get(i).getLogo();
+//        Log.d("XAXA", ""+restauranteConvertViewsList.get(i).getAvaliacao());
+        viewHolder.ratingBarEstabelecimento.setRating((float) restauranteConvertViewsList.get(i).getAvaliacao());
         Glide.with(context)
                 .load(poster)
                 .placeholder(R.drawable.ic_load)
@@ -84,11 +87,13 @@ public class ExplorarClienteAdapter extends RecyclerView.Adapter<ExplorarCliente
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageViewLogoRestaurante;
         public TextView textViewNomeRestaurante;
+        public RatingBar ratingBarEstabelecimento;
 
         public MyViewHolder(View view){
             super(view);
             textViewNomeRestaurante = (TextView) view.findViewById(R.id.textView_nomeRestaurante);
             imageViewLogoRestaurante = (ImageView) view.findViewById(R.id.imageView_logoRestaurante);
+            ratingBarEstabelecimento = (RatingBar) view.findViewById(R.id.ratingBar_avaliacao_explorar);
 
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
