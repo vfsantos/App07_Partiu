@@ -88,7 +88,7 @@ public class RecomendacaoNetwork {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            throw new IOException(e);
+//            throw new IOException(e);
         }
 
         return restaurantes.toArray(new Restaurante[0]);
