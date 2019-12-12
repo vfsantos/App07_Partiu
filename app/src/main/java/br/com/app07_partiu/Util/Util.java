@@ -194,7 +194,7 @@ public class Util {
                 .Builder(context);
 
         builder.setTitle("Sair");
-        builder.setMessage("Deseja realmente saiar?");
+        builder.setMessage("Deseja realmente sair?");
 
         builder.setCancelable(true);
 

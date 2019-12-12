@@ -110,7 +110,7 @@ public class CodigoComandaClienteActivity extends AppCompatActivity{
                 "\n "+cliente.getEmail()+
                 "\n "+cliente.getSenha());
 
-        editTextCodigoComanda.setText("OAF01");
+        editTextCodigoComanda.setText("OAF03");
 
     }
 

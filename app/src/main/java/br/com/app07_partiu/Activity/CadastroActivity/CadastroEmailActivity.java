@@ -69,7 +69,7 @@ public class CadastroEmailActivity extends AppCompatActivity {
         viewSnackbar = findViewById(R.id.cadastroEmailActivity);
 
         editTextEmail.addTextChangedListener(emailTextWatcher);
-        editTextEmail.setText("victoor@gmail.com");
+        editTextEmail.setText("alex@gmail.com");
     }
 
 

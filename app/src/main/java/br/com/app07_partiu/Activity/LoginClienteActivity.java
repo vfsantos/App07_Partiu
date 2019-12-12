@@ -147,7 +147,7 @@ public class LoginClienteActivity extends AppCompatActivity {
         if (testeCliente){
             editTextEmail.setText("brenda.mariah@gmail.com");
         }
-        editTextSenha.setText("123");
+        editTextSenha.setText("12341234");
 
 
     }

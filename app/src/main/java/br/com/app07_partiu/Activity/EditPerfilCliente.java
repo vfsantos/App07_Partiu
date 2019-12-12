@@ -360,7 +360,7 @@ public class EditPerfilCliente extends AppCompatActivity {
                 .Builder(context);
 
         builder.setTitle("Sair");
-        builder.setMessage("Todas as alteração serão perdidas. Deseja realmente saiar?");
+        builder.setMessage("Todas as alteração serão perdidas. Deseja realmente sair?");
 
         builder.setCancelable(true);
 
